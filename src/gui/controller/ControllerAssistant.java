@@ -24,7 +24,7 @@ public class ControllerAssistant {
         this.borderPane = borderPane;
     }
 
-    private void loadCenter(String file) throws IOException {
+    public void loadCenter(String file) throws IOException {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/gui/view/" + file));
         BorderPane newScene = loader.load();
@@ -32,7 +32,7 @@ public class ControllerAssistant {
         borderPane.setCenter(newScene);
     }
 
-    private void loadTop(String file) throws IOException{
+    public void loadTop(String file) throws IOException{
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/gui/view/" + file));
         BorderPane newScene = loader.load();
@@ -40,7 +40,7 @@ public class ControllerAssistant {
         borderPane.setTop(newScene);
     }
 
-    private void loadBottom(String file) throws IOException {
+    public void loadBottom(String file) throws IOException {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/gui/view/" + file));
         BorderPane newScene = loader.load();
@@ -48,7 +48,7 @@ public class ControllerAssistant {
         borderPane.setBottom(newScene);
     }
 
-    private void loadLeft(String file) throws IOException {
+    public void loadLeft(String file) throws IOException {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/gui/view/" + file));
         BorderPane newScene = loader.load();
@@ -56,7 +56,7 @@ public class ControllerAssistant {
         borderPane.setLeft(newScene);
     }
 
-    private void loadRight(String file) throws IOException {
+    public void loadRight(String file) throws IOException {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/gui/view/" + file));
         BorderPane newScene = loader.load();
