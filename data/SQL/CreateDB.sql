@@ -58,7 +58,7 @@ CREATE TABLE Event_(
     Event_ID                    INT IDENTITY(1,1)                       NOT NULL,
     Event_TIttle                NVARCHAR(250)                           NOT NULL,
     Event_Location              NVARCHAR(250)                           NOT NULL,
-    Event_Event_Cordinator_ID   INT                                     NOT NULL,  --FK 2 cordinator
+    Event_Event_Cordinator_ID   INT                                     NOT NULL,
     Evnet_Authors               NVARCHAR(250)                           NOT NULL,
     Event_Date                  DATE                                    NOT NULL,
     Event_Start_Time            TIME                                    NOT NULL,
@@ -77,7 +77,7 @@ GO
 
 CREATE TABLE Ticket_(
     Ticket_Content_ID           INT IDENTITY(1,1)                       NOT NULL,
-    Ticket_Event_ID             INT                                     NOT NULL, --FK 2 Event_
+    Ticket_Event_ID             INT                                     NOT NULL,
     Ticket_Contains             NVARCHAR(100)                           NOT NULL,
 
     CONSTRAINT PK_TICKET_CONTENT_ID PRIMARY KEY(Ticket_Content_ID),
