@@ -1,5 +1,6 @@
 package dal;
 
+import be.Administrator;
 import com.microsoft.sqlserver.jdbc.SQLServerDataSource;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 
@@ -8,6 +9,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Properties;
 
 //Singleton Class
@@ -34,12 +36,18 @@ public class DBConnector {
         dataSource.setPassword(password);
         dataSource.setTrustServerCertificate(true);
     }
-    public static DBConnector getInstance() throws IOException {
-        if (dbConnector == null){
-            dbConnector = new DBConnector();
+
+    public static DBConnector getInstance() {
+        try {
+            if (dbConnector == null) {
+                dbConnector = new DBConnector();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
         return dbConnector;
     }
+
     public Connection getConnection() throws SQLServerException {
         return dataSource.getConnection();
     }
@@ -50,6 +58,11 @@ public class DBConnector {
 
         try (Connection connection = databaseConnector.getConnection()) {
             System.out.println("Is it open? " + !connection.isClosed());
+
+            AdminDAO adminDAO = new AdminDAO();
+            List<Administrator> admins = adminDAO.getAllAdministrators();
+
+
         } //Connection gets closed here
     }
 }
