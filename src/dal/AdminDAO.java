@@ -59,12 +59,13 @@ public class AdminDAO implements IAdministratorDAO {
     }
 
     @Override
-    public void createEventCoordinator(EventCoordinator eventCoordinator) {
-
+    public int createAdministrator(EventCoordinator eventCoordinator) {
+        return 0;
     }
 
     @Override
-    public void deleteEvent(Event eventToDelete) {
+    public void deleteAdministrator(Event eventToDelete) {
 
     }
+
 }
