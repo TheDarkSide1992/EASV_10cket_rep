@@ -1,10 +1,131 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<<<<<<< Updated upstream
 <?import javafx.scene.layout.*?>
+=======
+<?import com.gluonhq.charm.glisten.control.ExpansionPanel?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+>>>>>>> Stashed changes
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="gui.controller.CustomerViewController"
-            prefHeight="400.0" prefWidth="600.0">
 
-</AnchorPane>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+   <top>
+      <HBox prefHeight="65.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fitHeight="69.0" fitWidth="118.0" pickOnBounds="true" preserveRatio="true" />
+            <Button alignment="BOTTOM_LEFT" mnemonicParsing="false" text="Upcoming Events">
+               <HBox.margin>
+                  <Insets top="40.0" />
+               </HBox.margin>
+            </Button>
+            <Button mnemonicParsing="false" text="All Events">
+               <HBox.margin>
+                  <Insets top="40.0" />
+               </HBox.margin>
+            </Button>
+            <Button mnemonicParsing="false" text="Calendar">
+               <HBox.margin>
+                  <Insets top="40.0" />
+               </HBox.margin>
+            </Button>
+            <Button mnemonicParsing="false" text="Contact">
+               <HBox.margin>
+                  <Insets top="40.0" />
+               </HBox.margin>
+            </Button>
+            <ImageView fitHeight="70.0" fitWidth="109.0" pickOnBounds="true" preserveRatio="true" />
+         </children>
+      </HBox>
+   </top>
+   <center>
+      <ScrollPane fitToHeight="true" fitToWidth="true" BorderPane.alignment="CENTER">
+         <content>
+            <VBox>
+               <children>
+                  <Pane prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                        <ExpansionPanel id="expPane" layoutX="95.0" layoutY="5.0" prefHeight="100.0" style="-fx-border-color: F3DADA;">
+                           <collapsedContent>
+                              <Pane minHeight="100.0" minWidth="490.0">
+                                 <children>
+                                    <ImageView fitHeight="90.0" fitWidth="100.0" layoutX="5.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true" />
+                                    <Label alignment="CENTER" contentDisplay="CENTER" prefWidth="490.0" text="Open Mic Night" textAlignment="CENTER" />
+                                    <Label alignment="CENTER" contentDisplay="CENTER" layoutY="15.0" prefWidth="490.0" text="20:00" textAlignment="CENTER" />
+                                    <Label alignment="CENTER" contentDisplay="CENTER" layoutY="30.0" prefWidth="490.0" text="The Basement" textAlignment="CENTER" />
+                                 </children>
+                              </Pane>
+                           </collapsedContent>
+                        </ExpansionPanel>
+                        <Label layoutX="15.0" layoutY="30.0" text="14">
+                           <font>
+                              <Font size="36.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="55.0" layoutY="40.0" text="MAR" />
+                        <Label layoutX="55.0" layoutY="55.0" text="2023" />
+                        <Button layoutX="500.0" layoutY="41.0" mnemonicParsing="false" text="Buy Ticket" />
+                     </children>
+                  </Pane>
+                  <Pane prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                        <ExpansionPanel layoutX="95.0" layoutY="5.0" minHeight="100.0" minWidth="490.0" prefHeight="100.0" style="-fx-border-color: F3DADA;">
+                           <collapsedContent>
+                              <Pane minHeight="100.0" minWidth="490.0" prefHeight="100.0">
+                                 <children>
+                                    <ImageView fitHeight="90.0" fitWidth="100.0" layoutX="5.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true" />
+                                    <Label alignment="CENTER" prefWidth="490.0" text="Singer/Songwriter: Jesus" />
+                                    <Label alignment="CENTER" layoutY="15.0" prefWidth="490.0" text="19:00" />
+                                    <Label alignment="CENTER" layoutY="30.0" prefWidth="490.0" text="The Basement" />
+                                 </children>
+                              </Pane>
+                           </collapsedContent>
+                        </ExpansionPanel>
+                        <Label layoutX="15.0" layoutY="30.0" text="18">
+                           <font>
+                              <Font size="36.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="55.0" layoutY="40.0" text="MAR" />
+                        <Label layoutX="55.0" layoutY="55.0" text="2023" />
+                        <Button layoutX="498.0" layoutY="41.0" mnemonicParsing="false" text="Buy Ticket" />
+                     </children>
+                  </Pane>
+                  <Pane prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                        <ExpansionPanel layoutX="95.0" layoutY="5.0" minHeight="100.0" minWidth="490.0" prefHeight="100.0" prefWidth="490.0" style="-fx-border-color: F3DADA;">
+                           <collapsedContent>
+                              <Pane minHeight="100.0" minWidth="490.0" prefHeight="100.0">
+                                 <children>
+                                    <ImageView fitHeight="90.0" fitWidth="100.0" layoutX="5.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true" />
+                                    <Label alignment="CENTER" contentDisplay="CENTER" graphicTextGap="2.0" prefWidth="490.0" text="Game Night" textAlignment="CENTER" />
+                                    <Label alignment="CENTER" contentDisplay="CENTER" graphicTextGap="2.0" layoutY="15.0" prefWidth="490.0" text="20:00" textAlignment="CENTER" />
+                                    <Label alignment="CENTER" contentDisplay="CENTER" graphicTextGap="2.0" layoutY="30.0" prefWidth="490.0" text="The Basement" textAlignment="CENTER" />
+                                 </children>
+                              </Pane>
+                           </collapsedContent>
+                        </ExpansionPanel>
+                        <Label layoutX="15.0" layoutY="30.0" text="20">
+                           <font>
+                              <Font size="36.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="55.0" layoutY="40.0" text="MAR" />
+                        <Label layoutX="55.0" layoutY="55.0" text="2023" />
+                        <Button layoutX="498.0" layoutY="41.0" mnemonicParsing="false" text="Buy Ticket" />
+                     </children>
+                  </Pane>
+               </children>
+            </VBox>
+         </content>
+      </ScrollPane>
+   </center>
+</BorderPane>
