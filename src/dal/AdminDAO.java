@@ -10,6 +10,7 @@ import dal.interfaces.IAdministratorDAO;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
@@ -36,26 +37,32 @@ public class AdminDAO implements IAdministratorDAO {
     }
 
     @Override
-    public List<Administrator> getAllAdministrators() {
+    public List<Administrator> getAllAdministrators() throws Exception{
+        ArrayList<Administrator> adminList = new ArrayList<>();
+
         try (Connection conn = dbConnector.getConnection()) {
             //Extract all administrators
-            String sql = "SELECT * FROM Administrator;";
+            String sql = "SELECT * FROM User_ WHERE User_Type = " +
+                        "(sELECT User_Type_ID FROM User_Type WHERE USER_TYPE_TYPE = 'Event Kordinator')";
             Statement stmt = conn.createStatement();
 
             //Execute the update to the DB
             ResultSet rs = stmt.executeQuery(sql);
 
-            int i = 1;
             while (rs.next()){
-                String username = rs.getString("AdminUsername");
-                String password = rs.getString("AdminPassword");
-                System.out.println(i + "# Administrator: " + username + "\t password: " + password);
-            }
+                int id = rs.getInt("User_ID");
+                String userName = rs.getString("User_Name");
+                String userFirstName = rs.getString("User_First_Name");
+                int userType = rs.getInt("User_Type");
+                String userEmil = rs.getString("User_Email");
+                String tlfNumber = rs.getString("User_tlf");
 
-        } catch (Exception e) {
+                adminList.add(new Administrator(id,userName,userFirstName,userType,userEmil,tlfNumber));
+
+            }
         }
 
-        return null;
+        return adminList;
     }
 
     @Override

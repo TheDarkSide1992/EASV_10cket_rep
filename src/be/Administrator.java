@@ -10,9 +10,13 @@ public class Administrator {
     private String userPhone;
     String password;
 
-    public Administrator(String username, String password){
+    public Administrator(int id, String username, String name, int userType, String userEmail, String userPhone){
+        this.adminID = id;
         this.userName = username;
-        this.password = password;
+        this.name = name;
+        this.userType = userType;
+        this.userEmail = userEmail;
+        this.userPhone = userPhone;
     }
     public boolean validPassword(String password){
         String specialChars = "!,.:;<>\\/()#%=+?'*";

@@ -10,6 +10,15 @@ public class EventCoordinator {
 
     String password;
 
+    public EventCoordinator(int id, String username, String name, int userType, String userEmail, String userPhone){
+        this.eventCoordinatorID = id;
+        this.userName = username;
+        this.name = name;
+        this.userType = userType;
+        this.userEmail = userEmail;
+        this.userPhone = userPhone;
+    }
+
     public boolean validPassword(String password){
         String specialChars = "!,.:;<>\\/()#%=+?'*";
         if (password.length()>8){
