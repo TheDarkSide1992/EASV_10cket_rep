@@ -5,7 +5,7 @@ import be.EventCoordinator;
 
 import java.util.List;
 
-public interface IEventCoordinator {
+public interface IEventCoordinatorDAO{
     public List<EventCoordinator> getAllEventCoordinators();
     public void createEvent(Event eventToCreate);
     public void requestToDeleteEvent(Event eventToBeDeleted);

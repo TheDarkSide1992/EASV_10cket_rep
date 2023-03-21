@@ -10,7 +10,24 @@ public class EventCoordinator {
 
     String password;
 
-
+    public boolean validPassword(String password){
+        String specialChars = "!,.:;<>\\/()#%=+?'*";
+        if (password.length()>8){
+            for (int i = 0; i < password.length(); i++) {
+                for (int j = 0; j< specialChars.length(); i++){
+                    if(password.charAt(i) == specialChars.charAt(j)){
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+    public void setPassword(String password){
+        if (!validPassword(password)){
+            this.password = password;
+        }
+    }
     public int getAdminID() {
         return eventCoordinatorID;
     }
