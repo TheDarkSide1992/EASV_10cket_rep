@@ -2,9 +2,11 @@ package gui.controller;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.Pane;
 
 import java.io.IOException;
 
@@ -14,6 +16,7 @@ public class ControllerAssistant {
     private static ControllerAssistant controllerAssistant;
 
     private ControllerAssistant() {
+
     }
 
     public static ControllerAssistant getInstance(){
@@ -29,7 +32,7 @@ public class ControllerAssistant {
     public void loadCenter(String file) throws IOException {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/gui/view/" + file));
-        BorderPane newScene = loader.load();
+        ScrollPane newScene = loader.load();
 
         borderPane.setCenter(newScene);
     }
@@ -37,7 +40,7 @@ public class ControllerAssistant {
     public void loadTop(String file) throws IOException{
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/gui/view/" + file));
-        BorderPane newScene = loader.load();
+        Pane newScene = loader.load();
 
         borderPane.setTop(newScene);
     }
@@ -45,7 +48,7 @@ public class ControllerAssistant {
     public void loadBottom(String file) throws IOException {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/gui/view/" + file));
-        BorderPane newScene = loader.load();
+        Pane newScene = loader.load();
 
         borderPane.setBottom(newScene);
     }

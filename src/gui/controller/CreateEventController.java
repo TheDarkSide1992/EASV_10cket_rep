@@ -5,10 +5,7 @@ import gui.model.Model;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 
 import java.net.URL;
@@ -31,6 +28,9 @@ public class CreateEventController implements Initializable {
     @FXML
     private DatePicker datePicker;
 
+    @FXML
+    private CheckBox cbIsActive;
+
     Model model;
 
     @Override
@@ -46,7 +46,7 @@ public class CreateEventController implements Initializable {
                         Time.valueOf(txtEventStartTime.getText()),
                         txtLocation.getText(),
                         txtEventDescription.getText(),
-                        true);
+                        cbIsActive.isSelected());
         try {
             model.createEvent(event1);
         } catch (Exception e) {

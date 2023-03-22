@@ -5,94 +5,94 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="824.0" prefWidth="1440.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
-   <center>
-      <ScrollPane fitToHeight="true" fitToWidth="true" BorderPane.alignment="CENTER">
-         <content>
-            <VBox>
+
+<ScrollPane fitToHeight="true" fitToWidth="true" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.CustomerViewController">
+   <content>
+      <VBox>
+         <children>
+            <Pane minHeight="200.0">
                <children>
-                  <Pane minHeight="200.0">
-                     <children>
-                        <ExpansionPanel id="expPane" layoutX="200.0" layoutY="25.0" prefHeight="150.0" prefWidth="1200.0" style="-fx-border-color: F3DADA;">
-                           <collapsedContent>
-                              <Pane minHeight="100.0" minWidth="490.0">
-                                 <children>
-                                    <ImageView fitHeight="140.0" fitWidth="210.0" layoutX="5.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true" />
-                                    <Label alignment="CENTER" contentDisplay="CENTER" prefWidth="1200.0" text="Open Mic Night" textAlignment="CENTER">
-                                       <font>
-                                          <Font size="40.0" />
-                                       </font></Label>
-                                    <Label alignment="CENTER" contentDisplay="CENTER" layoutY="45.0" prefWidth="1200.0" text="20:00" textAlignment="CENTER">
-                                       <font>
-                                          <Font size="40.0" />
-                                       </font></Label>
-                                    <Label alignment="CENTER" contentDisplay="CENTER" layoutY="90.0" prefWidth="1200.0" text="The Basement" textAlignment="CENTER">
-                                       <font>
-                                          <Font size="40.0" />
-                                       </font></Label>
-                                    <Button layoutX="950.0" layoutY="50.0" minHeight="50.0" minWidth="172.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="172.0" text="Buy Ticket" />
-                                 </children>
-                              </Pane>
-                           </collapsedContent>
-                        </ExpansionPanel>
-                        <Label alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" layoutX="20.0" layoutY="50.0" minHeight="100.0" minWidth="100.0" prefHeight="100.0" text="14" textAlignment="CENTER" wrapText="true">
-                           <font>
-                              <Font size="70.0" />
-                           </font>
-                        </Label>
-                        <Label layoutX="113.0" layoutY="67.0" maxHeight="80.0" maxWidth="80.0" prefHeight="70.0" prefWidth="70.0" text="MAR 2023" wrapText="true">
-                           <font>
-                              <Font size="23.0" />
-                           </font></Label>
-                     </children>
-                  </Pane>
-                  <Pane prefHeight="200.0" prefWidth="200.0">
-                     <children>
-                        <Label alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" layoutX="20.0" layoutY="50.0" minHeight="100.0" minWidth="100.0" prefHeight="100.0" text="18" textAlignment="CENTER" wrapText="true">
-                           <font>
-                              <Font size="70.0" />
-                           </font>
-                        </Label>
-                        <Label layoutX="113.0" layoutY="67.0" maxHeight="80.0" maxWidth="80.0" prefHeight="70.0" prefWidth="70.0" text="MAR 2023" wrapText="true">
-                           <font>
-                              <Font size="23.0" />
-                           </font>
-                        </Label>
-                        <ExpansionPanel id="expPane" layoutX="200.0" layoutY="25.0" prefHeight="150.0" prefWidth="1200.0" style="-fx-border-color: F3DADA;">
-                           <collapsedContent>
-                              <Pane minHeight="100.0" minWidth="490.0">
-                                 <children>
-                                    <ImageView fitHeight="140.0" fitWidth="210.0" layoutX="5.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true" />
-                                    <Label alignment="CENTER" contentDisplay="CENTER" prefWidth="1200.0" text="Singer/Songwriter: Jesus" textAlignment="CENTER">
-                                       <font>
-                                          <Font size="40.0" />
-                                       </font>
-                                    </Label>
-                                    <Label alignment="CENTER" contentDisplay="CENTER" layoutY="45.0" prefWidth="1200.0" text="19:00" textAlignment="CENTER">
-                                       <font>
-                                          <Font size="40.0" />
-                                       </font>
-                                    </Label>
-                                    <Label alignment="CENTER" contentDisplay="CENTER" layoutY="90.0" prefWidth="1200.0" text="The Basement" textAlignment="CENTER">
-                                       <font>
-                                          <Font size="40.0" />
-                                       </font>
-                                    </Label>
-                                    <Button layoutX="950.0" layoutY="50.0" minHeight="50.0" minWidth="172.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="172.0" text="Buy Ticket" />
-                                 </children>
-                              </Pane>
-                           </collapsedContent>
-                        </ExpansionPanel>
-                     </children>
-                  </Pane>
+                  <ExpansionPanel id="expPane" layoutX="200.0" layoutY="25.0" prefHeight="150.0" prefWidth="1200.0" style="-fx-border-color: F3DADA;">
+                     <collapsedContent>
+                        <Pane minHeight="100.0" minWidth="490.0">
+                           <children>
+                              <ImageView fitHeight="140.0" fitWidth="210.0" layoutX="5.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true" />
+                              <Label alignment="CENTER" contentDisplay="CENTER" prefWidth="1200.0" text="Open Mic Night" textAlignment="CENTER">
+                                 <font>
+                                    <Font size="40.0" />
+                                 </font>
+                              </Label>
+                              <Label alignment="CENTER" contentDisplay="CENTER" layoutY="45.0" prefWidth="1200.0" text="20:00" textAlignment="CENTER">
+                                 <font>
+                                    <Font size="40.0" />
+                                 </font>
+                              </Label>
+                              <Label alignment="CENTER" contentDisplay="CENTER" layoutY="90.0" prefWidth="1200.0" text="The Basement" textAlignment="CENTER">
+                                 <font>
+                                    <Font size="40.0" />
+                                 </font>
+                              </Label>
+                              <Button layoutX="950.0" layoutY="50.0" minHeight="50.0" minWidth="172.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="172.0" text="Buy Ticket" />
+                           </children>
+                        </Pane>
+                     </collapsedContent>
+                  </ExpansionPanel>
+                  <Label alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" layoutX="20.0" layoutY="50.0" minHeight="100.0" minWidth="100.0" prefHeight="100.0" text="14" textAlignment="CENTER" wrapText="true">
+                     <font>
+                        <Font size="70.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="113.0" layoutY="67.0" maxHeight="80.0" maxWidth="80.0" prefHeight="70.0" prefWidth="70.0" text="MAR 2023" wrapText="true">
+                     <font>
+                        <Font size="23.0" />
+                     </font>
+                  </Label>
                </children>
-            </VBox>
-         </content>
-      </ScrollPane>
-   </center>
-</BorderPane>
+            </Pane>
+            <Pane prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <Label alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" layoutX="20.0" layoutY="50.0" minHeight="100.0" minWidth="100.0" prefHeight="100.0" text="18" textAlignment="CENTER" wrapText="true">
+                     <font>
+                        <Font size="70.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="113.0" layoutY="67.0" maxHeight="80.0" maxWidth="80.0" prefHeight="70.0" prefWidth="70.0" text="MAR 2023" wrapText="true">
+                     <font>
+                        <Font size="23.0" />
+                     </font>
+                  </Label>
+                  <ExpansionPanel id="expPane" layoutX="200.0" layoutY="25.0" prefHeight="150.0" prefWidth="1200.0" style="-fx-border-color: F3DADA;">
+                     <collapsedContent>
+                        <Pane minHeight="100.0" minWidth="490.0">
+                           <children>
+                              <ImageView fitHeight="140.0" fitWidth="210.0" layoutX="5.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true" />
+                              <Label alignment="CENTER" contentDisplay="CENTER" prefWidth="1200.0" text="Singer/Songwriter: Jesus" textAlignment="CENTER">
+                                 <font>
+                                    <Font size="40.0" />
+                                 </font>
+                              </Label>
+                              <Label alignment="CENTER" contentDisplay="CENTER" layoutY="45.0" prefWidth="1200.0" text="19:00" textAlignment="CENTER">
+                                 <font>
+                                    <Font size="40.0" />
+                                 </font>
+                              </Label>
+                              <Label alignment="CENTER" contentDisplay="CENTER" layoutY="90.0" prefWidth="1200.0" text="The Basement" textAlignment="CENTER">
+                                 <font>
+                                    <Font size="40.0" />
+                                 </font>
+                              </Label>
+                              <Button layoutX="950.0" layoutY="50.0" minHeight="50.0" minWidth="172.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="172.0" text="Buy Ticket" />
+                           </children>
+                        </Pane>
+                     </collapsedContent>
+                  </ExpansionPanel>
+               </children>
+            </Pane>
+         </children>
+      </VBox>
+   </content>
+</ScrollPane>
