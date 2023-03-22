@@ -2,6 +2,7 @@ package gui.controller;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.Parent;
@@ -67,5 +68,21 @@ public class ControllerAssistant {
         BorderPane newScene = loader.load();
 
         borderPane.setRight(newScene);
+    }
+
+    public void openNewWindow(String s)  {
+        try {
+            loadCenter(s);
+        } catch (IOException e) {
+            displayError(e);
+        }
+    }
+
+    private void displayError(Throwable t)
+    {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("!!ERROR!!");
+        alert.setHeaderText("Something went wrong, \n ERROR:      " + t.getMessage());
+        alert.showAndWait();
     }
 }
