@@ -7,61 +7,69 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
 
-<HBox maxHeight="0.0" maxWidth="0.0" minHeight="200.0" minWidth="1440.0" prefHeight="200.0" prefWidth="1440.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.CustomerTopViewController">
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="228.0" prefWidth="1445.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <ImageView fitHeight="150.0" fitWidth="320.0" pickOnBounds="true" preserveRatio="true">
-         <HBox.margin>
-            <Insets left="25.0" top="25.0" />
-         </HBox.margin>
-      </ImageView>
-      <Button maxHeight="49.0" maxWidth="160.0" minHeight="49.0" minWidth="160.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="160.0" text="Upcoming Events">
-         <HBox.margin>
-            <Insets left="50.0" top="150.0" />
-         </HBox.margin>
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Button>
-      <Button maxHeight="49.0" maxWidth="160.0" minHeight="49.0" minWidth="160.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="160.0" text="All Events">
-         <HBox.margin>
-            <Insets top="150.0" />
-         </HBox.margin>
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Button>
-      <Button maxHeight="49.0" maxWidth="160.0" minHeight="49.0" minWidth="160.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="160.0" text="Calendar">
-         <HBox.margin>
-            <Insets top="150.0" />
-         </HBox.margin>
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Button>
-      <Button layoutX="775.0" layoutY="160.0" maxHeight="49.0" maxWidth="160.0" minHeight="49.0" minWidth="160.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="160.0" text="Prices">
-         <HBox.margin>
-            <Insets top="150.0" />
-         </HBox.margin>
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Button>
-      <Button maxHeight="49.0" maxWidth="160.0" minHeight="49.0" minWidth="160.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="160.0" text="Contact">
-         <HBox.margin>
-            <Insets top="150.0" />
-         </HBox.margin>
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Button>
-      <Label alignment="CENTER" maxHeight="100.0" maxWidth="200.0" minHeight="100.0" minWidth="200.0" prefHeight="100.0" prefWidth="200.0" text="Sign In" textAlignment="CENTER" underline="true">
-         <HBox.margin>
-            <Insets left="25.0" top="50.0" />
-         </HBox.margin>
-         <font>
-            <Font size="48.0" />
-         </font>
-      </Label>
+      <HBox layoutX="10.0" layoutY="10.0" maxHeight="0.0" maxWidth="0.0" minHeight="200.0" minWidth="1440.0" prefHeight="200.0" prefWidth="1440.0">
+         <children>
+            <ImageView fitHeight="150.0" fitWidth="320.0" pickOnBounds="true" preserveRatio="true">
+               <HBox.margin>
+                  <Insets left="25.0" top="25.0" />
+               </HBox.margin>
+            </ImageView>
+            <Button maxHeight="49.0" maxWidth="160.0" minHeight="49.0" minWidth="160.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="160.0" text="Upcoming Events">
+               <HBox.margin>
+                  <Insets left="50.0" top="150.0" />
+               </HBox.margin>
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
+            <Button maxHeight="49.0" maxWidth="160.0" minHeight="49.0" minWidth="160.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="160.0" text="All Events">
+               <HBox.margin>
+                  <Insets top="150.0" />
+               </HBox.margin>
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
+            <Button maxHeight="49.0" maxWidth="160.0" minHeight="49.0" minWidth="160.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="160.0" text="Calendar">
+               <HBox.margin>
+                  <Insets top="150.0" />
+               </HBox.margin>
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
+            <Button layoutX="775.0" layoutY="160.0" maxHeight="49.0" maxWidth="160.0" minHeight="49.0" minWidth="160.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="160.0" text="Prices">
+               <HBox.margin>
+                  <Insets top="150.0" />
+               </HBox.margin>
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
+            <Button maxHeight="49.0" maxWidth="160.0" minHeight="49.0" minWidth="160.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="160.0" text="Contact">
+               <HBox.margin>
+                  <Insets top="150.0" />
+               </HBox.margin>
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
+            <Label alignment="CENTER" maxHeight="100.0" maxWidth="200.0" minHeight="100.0" minWidth="200.0" prefHeight="100.0" prefWidth="200.0" text="Sign In" textAlignment="CENTER" underline="true">
+               <HBox.margin>
+                  <Insets left="25.0" top="50.0" />
+               </HBox.margin>
+               <font>
+                  <Font size="48.0" />
+               </font>
+            </Label>
+            <Pane prefHeight="200.0" prefWidth="200.0" />
+         </children>
+      </HBox>
    </children>
-</HBox>
+</Pane>

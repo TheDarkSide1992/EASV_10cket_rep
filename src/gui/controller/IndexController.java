@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
 
 import java.io.IOException;
 import java.net.URL;
@@ -17,14 +18,32 @@ public class IndexController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        controllerAssistant = ControllerAssistant.getInstance();
-        controllerAssistant.setBorderPane(borderPane);
+        //controllerAssistant = ControllerAssistant.getInstance();
+        //controllerAssistant.setBorderPane(borderPane);
         try {
-            controllerAssistant.loadTop("CustomerTopView.fxml");
-            controllerAssistant.loadCenter("CustomerView.fxml");
+            setCenter();
+            setTop();
+            //  controllerAssistant.loadTop("CustomerTopView.fxml");
+            //  controllerAssistant.loadCenter("CustomerView.fxml");
         } catch (Exception e) {
             displayError(e);
         }
+    }
+
+    private void setTop() throws IOException {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/gui/view/CustomerTopView.fxml"));
+        Pane newScene = loader.load();
+
+        borderPane.setTop(newScene);
+    }
+
+    private void setCenter() throws IOException {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/gui/view/CustomerView.fxml"));
+        Pane newScene = loader.load();
+
+        borderPane.setCenter(newScene);
     }
 
     private void displayError(Throwable t)
