@@ -20,7 +20,7 @@ public class DBConnector {
     private SQLServerDataSource dataSource; //variable for creating a connection to the DB
 
 
-    private DBConnector() throws IOException {
+    protected DBConnector() throws IOException {
         Properties databaseProperties = new Properties();
         databaseProperties.load(new FileInputStream(PROP_FILE));
 
