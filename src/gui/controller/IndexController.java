@@ -20,7 +20,7 @@ public class IndexController implements Initializable {
         controllerAssistant = ControllerAssistant.getInstance();
         controllerAssistant.setBorderPane(borderPane);
         try {
-            //controllerAssistant.loadCenter("CustomerView.fxml");
+            controllerAssistant.loadCenter("CustomerView.fxml");
         } catch (Exception e) {
             displayError(e);
         }
