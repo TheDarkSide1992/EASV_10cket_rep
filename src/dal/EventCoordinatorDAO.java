@@ -1,9 +1,10 @@
-package dal.interfaces;
+package dal;
 
 import be.Administrator;
 import be.Event;
 import be.EventCoordinator;
 import dal.DBConnector;
+import dal.interfaces.IEventCoordinator;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -48,12 +49,12 @@ public class EventCoordinatorDAO implements IEventCoordinator {
     }
 
     @Override
-    public int createEvent(Event eventToCreate) throws Exception {
+    public int createEventCoordinator(Event eventToCreate) throws Exception {
         return 0;
     }
 
     @Override
-    public boolean requestToDeleteEvent(Event eventToBeDeleted) throws Exception {
+    public boolean requestToDeleteEventCoordinator(Event eventToBeDeleted) throws Exception {
         return false;
     }
 

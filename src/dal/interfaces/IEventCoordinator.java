@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface IEventCoordinator {
     List<EventCoordinator> getAllEventCoordinators() throws Exception;
-    int createEvent(Event eventToCreate) throws Exception;
-    boolean requestToDeleteEvent(Event eventToBeDeleted) throws Exception;
+    int createEventCoordinator(Event eventToCreate) throws Exception;
+    boolean requestToDeleteEventCoordinator(Event eventToBeDeleted) throws Exception;
     void deleteEventCoordinator(int id)throws Exception ;
 }
