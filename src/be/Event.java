@@ -6,12 +6,13 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class Event {
-    public Event(String eventTitle, LocalDate eventDate, Time eventStartTime, String eventLocation, String eventDescription) {
+    public Event(String eventTitle, LocalDate eventDate, Time eventStartTime, String eventLocation, String eventDescription, boolean eventIsActive) {
         this.eventTitle = eventTitle;
         this.eventDate = eventDate;
         this.eventStartTime = eventStartTime;
         this.eventLocation = eventLocation;
         this.eventDescription = eventDescription;
+        this.eventIsActive = eventIsActive;
     }
 
     private int eventID;
@@ -21,6 +22,8 @@ public class Event {
     private String eventLocation;
     private String eventDescription;
     private int eventTicketAmount;
+
+    private boolean eventIsActive;
 
 
     public int getEventID() {
@@ -77,5 +80,13 @@ public class Event {
 
     public void setEventTicketAmount(int eventTicketAmount) {
         this.eventTicketAmount = eventTicketAmount;
+    }
+
+    public boolean isEventIsActive() {
+        return eventIsActive;
+    }
+
+    public void setEventIsActive(boolean eventIsActive) {
+        this.eventIsActive = eventIsActive;
     }
 }

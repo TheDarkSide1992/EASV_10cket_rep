@@ -1,13 +1,13 @@
 USE master;
 GO
 
-DROP DATABASE IF EXISTS EASV_10cket_X;
+DROP DATABASE IF EXISTS EASV_10cket_4;
 GO
 
-CREATE DATABASE EASV_10cket_X;
+CREATE DATABASE EASV_10cket_4;
 GO
 
-USE EASV_10cket_X;
+USE EASV_10cket_4;
 GO
 
 CREATE TABLE User_Type(
@@ -33,9 +33,9 @@ CREATE TABLE User_(
 )
 GO
 
-CREATE TABLE User_Paswords_(
+CREATE TABLE User_Passwords(
     User_User_ID                INT                                     NOT NULL,
-    Users_Pasword_              Binary(500)                             NOT NULL,
+    Users_Password              Binary(500)                             NOT NULL,
 
     CONSTRAINT FK_USER_USER_ID FOREIGN KEY(User_User_ID)
     REFERENCES User_(User_ID)
@@ -56,21 +56,21 @@ GO
 
 CREATE TABLE Event_(
     Event_ID                    INT IDENTITY(1,1)                       NOT NULL,
-    Event_TIttle                NVARCHAR(250)                           NOT NULL,
+    Event_Title                 NVARCHAR(250)                           NOT NULL,
     Event_Location              NVARCHAR(250)                           NOT NULL,
-    Event_Event_Cordinator_ID   INT                                     NOT NULL,
-    Evnet_Authors               NVARCHAR(250)                           NOT NULL,
+    Event_Event_Coordinator_ID  INT                                     NOT NULL,
+    Event_Authors               NVARCHAR(250)
     Event_Date                  DATE                                    NOT NULL,
     Event_Start_Time            TIME                                    NOT NULL,
     Event_Description           NVARCHAR(750),
-    Event_Ticket_Total          INT                                     NOT NULL,
-    Event_Tickett_Sold          INT                                     NOT NULL,
-    Event_Is_Actrtive           BIT                                     NOT NULL,
-    Event_Img_                  VARBINARY(MAX),
+    Event_Ticket_Total          INT
+    Event_Ticket_Sold           INT
+    Event_Is_Active             BIT                                     NOT NULL,
+    Event_Img                   VARBINARY(MAX),
 
     CONSTRAINT PK_EVENT_ID PRIMARY KEY(Event_ID),
 
-    CONSTRAINT FK_EVENT_EVENT_CORDINATOR_ID FOREIGN KEY(Event_Event_Cordinator_ID)
+    CONSTRAINT FK_EVENT_EVENT_COORDINATOR_ID FOREIGN KEY(Event_Event_Coordinator_ID)
     REFERENCES User_(User_ID)
 )
 GO
@@ -87,7 +87,7 @@ CREATE TABLE Ticket_(
 )
 GO
 
-CREATE TABLE Ticket_Customer_Realation(
+CREATE TABLE Ticket_Customer_Relation(
     TCR_Customer_ID             INT                                     NOT NULL,
     TCR_Ticket_ID               INT                                     NOT NULL,
 

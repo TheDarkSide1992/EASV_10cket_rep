@@ -12,11 +12,12 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 
 import java.net.URL;
+import java.sql.Time;
 import java.util.ResourceBundle;
 
 public class CreateEventController implements Initializable {
     @FXML
-    private TextField txtTitleOfEvent, txtLocation, txtEventOwner, txtEventCollaborator;
+    private TextField txtTitleOfEvent, txtLocation, txtEventOwner, txtEventCollaborator, txtEventStartTime;
 
     @FXML
     private TextArea txtEventDescription;
@@ -42,9 +43,10 @@ public class CreateEventController implements Initializable {
         Event event1 = new Event(
                         txtTitleOfEvent.getText(),
                         datePicker.getValue(),
-                        null,
+                        Time.valueOf(txtEventStartTime.getText()),
                         txtLocation.getText(),
-                        txtEventDescription.getText());
+                        txtEventDescription.getText(),
+                        true);
         try {
             model.createEvent(event1);
         } catch (Exception e) {
