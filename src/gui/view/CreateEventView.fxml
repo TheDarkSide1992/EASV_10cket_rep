@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="824.0" prefWidth="1440.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.CreateEventController">
+<AnchorPane prefHeight="824.0" prefWidth="1440.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.IndexController">
    <children>
       <Label layoutX="50.0" layoutY="50.0" text="Create Event" underline="true">
          <font>
@@ -47,7 +47,7 @@
             <Font name="Verdana" size="24.0" />
          </font>
       </TextField>
-      <Button fx:id="btnSaveEvent" layoutX="1080.0" layoutY="700.0" minHeight="60.0" minWidth="260.0" mnemonicParsing="false" onAction="#handleSaveEvent" text="Save Event">
+      <Button fx:id="btnSaveEvent" layoutX="1080.0" layoutY="700.0" minHeight="60.0" minWidth="260.0" mnemonicParsing="false" text="Save Event">
          <font>
             <Font name="Verdana" size="24.0" />
          </font>
