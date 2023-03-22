@@ -2,12 +2,21 @@ package be;
 
 import java.sql.Date;
 import java.sql.Time;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class Event {
+    public Event(String eventTitle, LocalDate eventDate, Time eventStartTime, String eventLocation, String eventDescription) {
+        this.eventTitle = eventTitle;
+        this.eventDate = eventDate;
+        this.eventStartTime = eventStartTime;
+        this.eventLocation = eventLocation;
+        this.eventDescription = eventDescription;
+    }
 
     private int eventID;
     private String eventTitle;
-    private Date eventDate;
+    private LocalDate eventDate;
     private Time eventStartTime;
     private String eventLocation;
     private String eventDescription;
@@ -30,11 +39,11 @@ public class Event {
         this.eventTitle = eventTitle;
     }
 
-    public Date getEventDate() {
+    public LocalDate getEventDate() {
         return eventDate;
     }
 
-    public void setEventDate(Date eventDate) {
+    public void setEventDate(LocalDate eventDate) {
         this.eventDate = eventDate;
     }
 
