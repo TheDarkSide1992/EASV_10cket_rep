@@ -16,7 +16,7 @@ public class Main extends Application {
         primaryStage.setTitle("10cket_System");
 
         primaryStage.setScene(new Scene(root));
-        primaryStage.setResizable(false);
+        primaryStage.setResizable(true);
         primaryStage.setOnCloseRequest(event -> System.exit(0));
         primaryStage.show();
     }
