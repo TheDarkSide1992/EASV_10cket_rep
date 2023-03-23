@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="1440.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.CustomerTopViewController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="1440.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.CustomerTopViewController" styleClass="scrollPane" stylesheets="@Main.css">
    <children>
       <HBox maxHeight="0.0" maxWidth="0.0" minHeight="200.0" minWidth="1440.0" prefHeight="200.0" prefWidth="1440.0">
          <children>
@@ -17,7 +17,7 @@
                   <Insets left="25.0" top="25.0" />
                </HBox.margin>
             </ImageView>
-            <Button fx:id="btnUpcomingEvents" maxHeight="49.0" maxWidth="160.0" minHeight="49.0" minWidth="160.0" mnemonicParsing="false" onAction="#handleUpcomingEvents" prefHeight="49.0" prefWidth="160.0" text="Upcoming Events">
+            <Button fx:id="btnUpcomingEvents" maxHeight="49.0" maxWidth="160.0" minHeight="49.0" minWidth="160.0" mnemonicParsing="false" onAction="#handleUpcomingEvents" prefHeight="49.0" prefWidth="160.0" text="Upcoming Events" styleClass="btnTopButtons">
                <HBox.margin>
                   <Insets left="50.0" top="150.0" />
                </HBox.margin>
@@ -25,7 +25,7 @@
                   <Font size="14.0" />
                </font>
             </Button>
-            <Button fx:id="btnAllEvents" maxHeight="49.0" maxWidth="160.0" minHeight="49.0" minWidth="160.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="160.0" text="All Events">
+            <Button fx:id="btnAllEvents" maxHeight="49.0" maxWidth="160.0" minHeight="49.0" minWidth="160.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="160.0" text="All Events" styleClass="btnTopButtons">
                <HBox.margin>
                   <Insets top="150.0" />
                </HBox.margin>
@@ -33,7 +33,7 @@
                   <Font size="14.0" />
                </font>
             </Button>
-            <Button fx:id="btnCalendar" maxHeight="49.0" maxWidth="160.0" minHeight="49.0" minWidth="160.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="160.0" text="Calendar">
+            <Button fx:id="btnCalendar" maxHeight="49.0" maxWidth="160.0" minHeight="49.0" minWidth="160.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="160.0" text="Calendar" styleClass="btnTopButtons">
                <HBox.margin>
                   <Insets top="150.0" />
                </HBox.margin>
@@ -41,7 +41,7 @@
                   <Font size="14.0" />
                </font>
             </Button>
-            <Button fx:id="btnNewEvent" layoutX="775.0" layoutY="160.0" maxHeight="49.0" maxWidth="160.0" minHeight="49.0" minWidth="160.0" mnemonicParsing="false" onAction="#handleNewEvent" prefHeight="49.0" prefWidth="160.0" text="New Event">
+            <Button fx:id="btnNewEvent" layoutX="775.0" layoutY="160.0" maxHeight="49.0" maxWidth="160.0" minHeight="49.0" minWidth="160.0" mnemonicParsing="false" onAction="#handleNewEvent" prefHeight="49.0" prefWidth="160.0" text="New Event" styleClass="btnTopButtons">
                <HBox.margin>
                   <Insets top="150.0" />
                </HBox.margin>
@@ -49,7 +49,7 @@
                   <Font size="14.0" />
                </font>
             </Button>
-            <Button fx:id="btnContact" maxHeight="49.0" maxWidth="160.0" minHeight="49.0" minWidth="160.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="160.0" text="Contact">
+            <Button fx:id="btnContact" maxHeight="49.0" maxWidth="160.0" minHeight="49.0" minWidth="160.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="160.0" text="Contact" styleClass="btnTopButtons">
                <HBox.margin>
                   <Insets top="150.0" />
                </HBox.margin>
@@ -57,7 +57,7 @@
                   <Font size="14.0" />
                </font>
             </Button>
-            <Label alignment="CENTER" maxHeight="100.0" maxWidth="200.0" minHeight="100.0" minWidth="200.0" prefHeight="100.0" prefWidth="200.0" text="Sign In" textAlignment="CENTER" underline="true">
+            <Label fx:id="lblSignIn" alignment="CENTER" maxHeight="100.0" maxWidth="200.0" minHeight="100.0" minWidth="200.0" prefHeight="100.0" prefWidth="200.0" text="Sign In" textAlignment="CENTER" underline="true" styleClass="lblSignIn">
                <HBox.margin>
                   <Insets left="25.0" top="50.0" />
                </HBox.margin>

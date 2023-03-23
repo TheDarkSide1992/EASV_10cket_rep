@@ -1,5 +1,5 @@
 .outerPane{
-
+    -fx-background: transparent;
 }
 
 .expansionPanel {
@@ -9,7 +9,7 @@
 }
 
 .innerPane {
-
+    -fx-background: transparent;
 }
 
 
@@ -36,12 +36,94 @@
     -fx-font-size: 40;
     -fx-font-weight: bold;
     -fx-text-fill: rgba(243,218,218,1);
-
-
 }
 
 .lblLocation {
     -fx-font-size: 40;
     -fx-font-weight: bold;
     -fx-text-fill: rgba(243,218,218,1);
+}
+
+.txtEventDescription  {
+    -fx-background-radius: 15;
+    -fx-border-radius: 15;
+}
+.txtEventDescription > .scroll-pane {
+    -fx-background-color: transparent;
+}
+.txtEventDescription > .scroll-pane .viewport{
+    -fx-background-color: transparent;
+}
+.txtEventDescription > .scroll-pane .content{
+    -fx-background-color: transparent;
+}
+
+.btnChooseImage {
+    -fx-background-radius: 15px;
+}
+
+.btnSaveEvent {
+    -fx-background-radius: 15px;
+}
+
+.lblCreateEvent {
+    -fx-font-size: 48;
+    -fx-font-weight: bold;
+    -fx-text-fill: rgba(243,218,218,1);
+}
+
+.txtTitleOfEvent  {
+    -fx-background-radius: 15;
+    -fx-border-radius: 15;
+}
+
+.txtEventStartTime {
+    -fx-background-radius: 15;
+    -fx-border-radius: 15;
+}
+
+.txtLocation {
+    -fx-background-radius: 15;
+    -fx-border-radius: 15;
+}
+
+.txtEventOwner {
+    -fx-background-radius: 15;
+    -fx-border-radius: 15;
+}
+
+.txtEventCollaborator {
+    -fx-background-radius: 15;
+    -fx-border-radius: 15;
+}
+
+.datePicker {
+    -fx-font-size: 25;
+}
+
+.cbIsActive {
+    -fx-font-size: 25;
+    -fx-font-weight: bold;
+    -fx-text-fill: rgba(243,218,218,1);
+}
+
+.scrollPane {
+    -fx-background: transparent;
+    -fx-background-color: transparent;
+}
+#indexBackground {
+    fx-background-color: rgba(52,40,72,1);
+}
+
+.lblSignIn {
+    -fx-font-weight: bold;
+    -fx-text-fill: rgba(243,218,218,1);
+}
+
+.btnTopButtons {
+    -fx-border-radius: 20 20 0 0;
+    -fx-background-radius: 22 22 0 0;
+    -fx-background-color: rgba(243,218,218,1);
+    -fx-border-color: black;
+    -fx-border-width: 3;
 }

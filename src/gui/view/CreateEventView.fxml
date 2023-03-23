@@ -11,58 +11,58 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<ScrollPane xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.CreateEventController">
+<ScrollPane xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.CreateEventController" styleClass="scrollPane" stylesheets="@Main.css">
    <content>
-      <AnchorPane prefHeight="824.0" prefWidth="1440.0">
+      <AnchorPane prefHeight="824.0" prefWidth="1440.0" styleClass="scrollPane">
          <children>
-            <Label layoutX="50.0" layoutY="50.0" text="Create Event" underline="true">
+            <Label fx:id="lblCreateEvent" layoutX="50.0" layoutY="50.0" text="Create Event" underline="true" styleClass="lblCreateEvent">
                <font>
                   <Font name="Verdana Bold" size="48.0" />
                </font>
             </Label>
-            <TextField fx:id="txtTitleOfEvent" layoutX="51.0" layoutY="160.0" minHeight="60.0" minWidth="500.0" promptText="Title of Event...">
+            <TextField fx:id="txtTitleOfEvent" layoutX="51.0" layoutY="160.0" minHeight="60.0" minWidth="500.0" promptText="Title of Event..." styleClass="txtTitleOfEvent">
                <font>
                   <Font name="Verdana" size="24.0" />
                </font>
             </TextField>
-            <TextField fx:id="txtLocation" layoutX="51.0" layoutY="360.0" minHeight="60.0" minWidth="500.0" promptText="Location...">
+            <TextField fx:id="txtLocation" layoutX="51.0" layoutY="360.0" minHeight="60.0" minWidth="500.0" promptText="Location..." styleClass="txtLocation">
                <font>
                   <Font name="Verdana" size="24.0" />
                </font>
             </TextField>
-            <TextArea fx:id="txtEventDescription" layoutX="50.0" layoutY="460.0" prefHeight="300.0" prefWidth="600.0" promptText="Event Description...">
+            <TextArea fx:id="txtEventDescription" layoutX="50.0" layoutY="460.0" prefHeight="300.0" prefWidth="600.0" promptText="Event Description..." styleClass="txtEventDescription">
                <font>
                   <Font name="Verdana" size="24.0" />
                </font>
             </TextArea>
             <ImageView fx:id="imgEventImage" fitHeight="280.0" fitWidth="420.0" layoutX="880.0" layoutY="80.0" pickOnBounds="true" preserveRatio="true" />
-            <Button fx:id="btnChooseImage" layoutX="960.0" layoutY="400.0" minHeight="60.0" minWidth="260.0" mnemonicParsing="false" onAction="#handleChooseImage" onKeyReleased="#handleChooseImage" text="Choose Image">
+            <Button fx:id="btnChooseImage" layoutX="960.0" layoutY="400.0" minHeight="60.0" minWidth="260.0" mnemonicParsing="false" onAction="#handleChooseImage" onKeyReleased="#handleChooseImage" text="Choose Image" styleClass="btnChooseImage">
                <font>
                   <Font name="Verdana" size="24.0" />
                </font>
             </Button>
-            <TextField fx:id="txtEventOwner" layoutX="840.0" layoutY="500.0" minHeight="60.0" minWidth="500.0" promptText="Event Owner...">
+            <TextField fx:id="txtEventOwner" layoutX="840.0" layoutY="500.0" minHeight="60.0" minWidth="500.0" promptText="Event Owner..."  styleClass="txtEventOwner">
                <font>
                   <Font name="Verdana" size="24.0" />
                </font>
             </TextField>
-            <TextField fx:id="txtEventCollaborator" layoutX="840.0" layoutY="600.0" minHeight="60.0" minWidth="500.0" promptText="Event Collaborator...">
+            <TextField fx:id="txtEventCollaborator" layoutX="840.0" layoutY="600.0" minHeight="60.0" minWidth="500.0" promptText="Event Collaborator..." styleClass="txtEventCollaborator">
                <font>
                   <Font name="Verdana" size="24.0" />
                </font>
             </TextField>
-            <Button fx:id="btnSaveEvent" layoutX="1080.0" layoutY="700.0" minHeight="60.0" minWidth="260.0" mnemonicParsing="false" onAction="#handleSaveEvent" onKeyPressed="#handleSaveEvent" text="Save Event">
+            <Button fx:id="btnSaveEvent" layoutX="1080.0" layoutY="700.0" minHeight="60.0" minWidth="260.0" mnemonicParsing="false" onAction="#handleSaveEvent" onKeyPressed="#handleSaveEvent" text="Save Event" styleClass="btnSaveEvent">
                <font>
                   <Font name="Verdana" size="24.0" />
                </font>
             </Button>
-            <DatePicker fx:id="datePicker" layoutX="50.0" layoutY="260.0" minHeight="60.0" minWidth="225.0" prefHeight="60.0" prefWidth="241.0" showWeekNumbers="true" />
-            <TextField fx:id="txtEventStartTime" layoutX="325.0" layoutY="260.0" minHeight="60.0" minWidth="225.0" prefHeight="60.0" prefWidth="225.0" promptText="HH:MM">
+            <DatePicker fx:id="datePicker" layoutX="50.0" layoutY="260.0" minHeight="60.0" minWidth="225.0" prefHeight="60.0" prefWidth="241.0" showWeekNumbers="true" styleClass="datePicker"/>
+            <TextField fx:id="txtEventStartTime" layoutX="325.0" layoutY="260.0" minHeight="60.0" minWidth="225.0" prefHeight="60.0" prefWidth="225.0" promptText="HH:MM" styleClass="txtEventStartTime">
                <font>
                   <Font name="Verdana" size="24.0" />
                </font>
             </TextField>
-            <CheckBox fx:id="cbIsActive" layoutX="840.0" layoutY="713.0" mnemonicParsing="false" selected="true" text="Active Event?">
+            <CheckBox fx:id="cbIsActive" layoutX="840.0" layoutY="713.0" mnemonicParsing="false" selected="true" text="Active Event?" styleClass="cbIsActive">
                <font>
                   <Font size="24.0" />
                </font>

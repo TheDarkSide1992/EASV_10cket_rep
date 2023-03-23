@@ -6,8 +6,10 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -18,6 +20,8 @@ import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 public class CreateEventController implements Initializable {
+    @FXML
+    private Label lblCreateEvent;
     @FXML
     private TextField txtTitleOfEvent, txtLocation, txtEventOwner, txtEventCollaborator, txtEventStartTime;
 
@@ -45,6 +49,7 @@ public class CreateEventController implements Initializable {
         } catch (Exception e) {
             displayError(e);
         }
+        labelStyling();
 
         btnSaveEvent.setDisable(true);
 
@@ -54,6 +59,12 @@ public class CreateEventController implements Initializable {
         txtEventDescription.textProperty().addListener(observable -> isEmpty());
         txtEventOwner.textProperty().addListener(observable -> isEmpty());
         txtEventCollaborator.textProperty().addListener(observable -> isEmpty());
+    }
+
+    private void labelStyling() {
+        DropShadow shadow = new DropShadow(0,4,4, Color.color(0,0,0,0.25));
+        lblCreateEvent.setEffect(shadow);
+        cbIsActive.setEffect(shadow);
     }
 
     private void displayError(Throwable t)
