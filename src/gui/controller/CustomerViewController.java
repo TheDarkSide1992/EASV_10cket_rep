@@ -10,8 +10,10 @@ import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 
 import java.io.IOException;
 import java.net.URL;
@@ -80,13 +82,18 @@ public class CustomerViewController implements Initializable {
                 month.getStyleClass().add("lblMonthAndYear");
                 year.getStyleClass().add("lblMonthAndYear");
 
+                DropShadow shadow = new DropShadow(0,4,4, Color.color(0,0,0,0.25));
+
+                day.setEffect(shadow);
                 day.setLayoutX(30);
                 day.setLayoutY(50);
                 day.minHeight(100);
                 day.minWidth(100);
                 day.setAlignment(Pos.CENTER);
+                month.setEffect(shadow);
                 month.setLayoutX(110);
                 month.setLayoutY(70);
+                year.setEffect(shadow);
                 year.setLayoutX(110);
                 year.setLayoutY(95);
                 expPanel.setLayoutX(200);
@@ -94,13 +101,16 @@ public class CustomerViewController implements Initializable {
                 outerPane.setMinHeight(200);
                 innerPane.prefHeight(200);
                 innerPane.prefWidth(1200);
+                title.setEffect(shadow);
                 title.setAlignment(Pos.CENTER);
                 title.setMinWidth(1200);
                 title.setMinHeight(60);
+                startTime.setEffect(shadow);
                 startTime.setAlignment(Pos.CENTER);
                 startTime.setLayoutY(45);
                 startTime.setMinWidth(1200);
                 startTime.setMinHeight(60);
+                location.setEffect(shadow);
                 location.setLayoutY(90);
                 location.setAlignment(Pos.CENTER);
                 location.setMinWidth(1200);

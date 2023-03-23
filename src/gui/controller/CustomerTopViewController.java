@@ -1,5 +1,6 @@
 package gui.controller;
 
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -15,6 +16,8 @@ import java.util.ResourceBundle;
 
 public class CustomerTopViewController implements Initializable {
 
+    private String url = "/data/Images/10cketshort";
+
     @FXML
     private ImageView imgLogo;
     @FXML
@@ -27,6 +30,8 @@ public class CustomerTopViewController implements Initializable {
     }
 
     private void setLogo() {
+        Image logo = new Image(url);
+        imgLogo.setImage(logo);
 
     }
 

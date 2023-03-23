@@ -15,21 +15,33 @@
 
 .lblEventTitle {
     -fx-font-size: 40;
+    -fx-font-weight: bold;
+    -fx-text-fill: rgba(243,218,218,1);
+
 }
 
 .lblEventDay {
    -fx-font-size: 70;
+   -fx-font-weight: bold;
+   -fx-text-fill: rgba(243,218,218,1);
 }
 
 .lblMonthAndYear {
     -fx-font-size: 23;
+    -fx-font-weight: bold;
+    -fx-text-fill: rgba(243,218,218,1);
 }
 
 .lblStartTime {
     -fx-font-size: 40;
+    -fx-font-weight: bold;
+    -fx-text-fill: rgba(243,218,218,1);
+
 
 }
 
 .lblLocation {
     -fx-font-size: 40;
+    -fx-font-weight: bold;
+    -fx-text-fill: rgba(243,218,218,1);
 }
