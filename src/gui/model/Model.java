@@ -16,7 +16,8 @@ public class Model {
 
 
     public void createEvent(Event event) throws Exception {
-        eventManager.createEvent(event);
+        event.setEventID(eventManager.createEvent(event));
+        //activeEvents.add(event);
     }
 
     public ObservableList<Event> getActiveEvents() { return activeEvents;}

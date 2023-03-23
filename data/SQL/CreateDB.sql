@@ -1,13 +1,13 @@
 USE master;
 GO
 
-DROP DATABASE IF EXISTS EASV_10cket_4;
+DROP DATABASE IF EXISTS EASV_10cket_x;
 GO
 
-CREATE DATABASE EASV_10cket_4;
+CREATE DATABASE EASV_10cket_x;
 GO
 
-USE EASV_10cket_4;
+USE EASV_10cket_x;
 GO
 
 CREATE TABLE User_Type(
@@ -54,17 +54,17 @@ CREATE TABLE Customer(
 )
 GO
 
-CREATE TABLE Event_(
+CREATE TABLE Event(
     Event_ID                    INT IDENTITY(1,1)                       NOT NULL,
     Event_Title                 NVARCHAR(250)                           NOT NULL,
     Event_Location              NVARCHAR(250)                           NOT NULL,
     Event_Event_Coordinator_ID  INT                                     NOT NULL,
-    Event_Authors               NVARCHAR(250)
+    Event_Authors               NVARCHAR(250),
     Event_Date                  DATE                                    NOT NULL,
     Event_Start_Time            TIME                                    NOT NULL,
     Event_Description           NVARCHAR(750),
-    Event_Ticket_Total          INT
-    Event_Ticket_Sold           INT
+    Event_Ticket_Total          INT,
+    Event_Ticket_Sold           INT,
     Event_Is_Active             BIT                                     NOT NULL,
     Event_Img                   VARBINARY(MAX),
 
@@ -75,7 +75,7 @@ CREATE TABLE Event_(
 )
 GO
 
-CREATE TABLE Ticket_(
+CREATE TABLE Ticket(
     Ticket_Content_ID           INT IDENTITY(1,1)                       NOT NULL,
     Ticket_Event_ID             INT                                     NOT NULL,
     Ticket_Contains             NVARCHAR(100)                           NOT NULL,
@@ -83,7 +83,7 @@ CREATE TABLE Ticket_(
     CONSTRAINT PK_TICKET_CONTENT_ID PRIMARY KEY(Ticket_Content_ID),
 
     CONSTRAINT FK_TICKET_EVENT_ID FOREIGN KEY(Ticket_Event_ID)
-    REFERENCES Event_(Event_ID)
+    REFERENCES Event(Event_ID)
 )
 GO
 
@@ -95,7 +95,7 @@ CREATE TABLE Ticket_Customer_Relation(
     REFERENCES Customer(Customer_ID),
 
     CONSTRAINT FK_TCR_TICKET_ID FOREIGN KEY(TCR_Ticket_ID)
-    REFERENCES Ticket_(Ticket_Content_ID)
+    REFERENCES Ticket(Ticket_Content_ID)
 )
 GO
 

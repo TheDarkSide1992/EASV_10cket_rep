@@ -52,7 +52,7 @@
                   <Font name="Verdana" size="24.0" />
                </font>
             </TextField>
-            <Button fx:id="btnSaveEvent" layoutX="1080.0" layoutY="700.0" minHeight="60.0" minWidth="260.0" mnemonicParsing="false" text="Save Event">
+            <Button fx:id="btnSaveEvent" onAction="#handleSaveEvent" layoutX="1080.0" layoutY="700.0" minHeight="60.0" minWidth="260.0" mnemonicParsing="false" text="Save Event">
                <font>
                   <Font name="Verdana" size="24.0" />
                </font>

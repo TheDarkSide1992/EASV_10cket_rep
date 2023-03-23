@@ -43,11 +43,12 @@ public class CreateEventController implements Initializable {
         Event event1 = new Event(
                         txtTitleOfEvent.getText(),
                         datePicker.getValue(),
-                        Time.valueOf(txtEventStartTime.getText()),
+                        Time.valueOf(txtEventStartTime.getText()+ ":00"),
                         txtLocation.getText(),
                         txtEventDescription.getText(),
                         cbIsActive.isSelected());
         try {
+            model = new Model();
             model.createEvent(event1);
         } catch (Exception e) {
             e.printStackTrace();

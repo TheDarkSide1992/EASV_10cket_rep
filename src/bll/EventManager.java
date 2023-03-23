@@ -1,22 +1,25 @@
 package bll;
 
 import be.Event;
+import dal.EventDAO;
 import dal.interfaces.IEventDAO;
 
 import java.util.List;
 
 public class EventManager {
 
-    IEventDAO EventDAO;
+    IEventDAO eventDAO;
     public EventManager() {
     }
 
     public List<Event> getAllEvents() throws Exception {
-        return EventDAO.getAllEvents();
+        eventDAO = new EventDAO();
+        return eventDAO.getAllEvents();
     }
 
-    public void createEvent(Event event) throws Exception {
-        EventDAO.createEvent(event);
+    public int createEvent(Event event) throws Exception {
+        eventDAO = new EventDAO();
+        return eventDAO.createEvent(event);
     }
 
 
