@@ -44,6 +44,7 @@
     -fx-text-fill: rgba(243,218,218,1);
 }
 
+
 .txtEventDescription  {
     -fx-background-radius: 15;
     -fx-border-radius: 15;
@@ -67,10 +68,14 @@
 }
 
 .lblCreateEvent {
-    -fx-font-size: 48;
     -fx-font-weight: bold;
     -fx-text-fill: rgba(243,218,218,1);
 }
+.lblSignIn {
+    -fx-font-size: 48;
+    -fx-font-weight: bold;
+    -fx-text-fill: rgba(243,218,218,1);
+
 
 .txtTitleOfEvent  {
     -fx-background-radius: 15;
@@ -127,3 +132,4 @@
     -fx-border-color: black;
     -fx-border-width: 3;
 }
+

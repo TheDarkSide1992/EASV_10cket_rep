@@ -32,7 +32,16 @@ public class CustomerTopViewController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
        //setLogo();
         setStyles();
+        signInLabelStyling();
 
+
+
+    }
+
+    private void signInLabelStyling() {
+        DropShadow shadow = new DropShadow(0,4,4, Color.color(0,0,0,0.25));
+        lblSignIn.setEffect(shadow);
+        lblSignIn.getStyleClass().add("lblSignIn");
     }
 
     private void setStyles() {
