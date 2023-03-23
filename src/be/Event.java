@@ -1,9 +1,7 @@
 package be;
 
-import java.sql.Date;
 import java.sql.Time;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 public class Event {
     public Event(String eventTitle, LocalDate eventDate, Time eventStartTime, String eventLocation, String eventDescription, boolean eventIsActive) {
@@ -89,4 +87,5 @@ public class Event {
     public void setEventIsActive(boolean eventIsActive) {
         this.eventIsActive = eventIsActive;
     }
+
 }
