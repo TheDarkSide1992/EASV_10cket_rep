@@ -13,7 +13,7 @@ public class CustomerViewController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
-            //model = new Model();
+            model = new Model();
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
