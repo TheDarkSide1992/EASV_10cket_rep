@@ -10,15 +10,21 @@ public class Model {
     EventManager eventManager;
 
     public Model() throws Exception {
+
         eventManager = new EventManager();
         activeEvents = FXCollections.observableArrayList();
-        activeEvents.addAll(eventManager.getAllEvents());
+
     }
 
+    public void getAllEvens() throws Exception {
+        eventManager.getAllEvents();
+    }
 
     public void createEvent(Event event) throws Exception {
         eventManager.createEvent(event);
     }
 
-    public ObservableList<Event> getActiveEvents() { return activeEvents;}
+    public ObservableList<Event> getActiveEvents() throws Exception {
+        return activeEvents;
+    }
 }
