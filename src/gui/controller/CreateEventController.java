@@ -108,24 +108,19 @@ public class CreateEventController implements Initializable {
 
     private boolean checkData(){
         if(txtTitleOfEvent.getText() == null || txtTitleOfEvent.getText().isEmpty()){
-            System.out.println(1);
             displayAlert("Missing tittle");
             return false;
         } else if (datePicker.getValue() == null || datePicker.getValue().isBefore(LocalDate.now())){
-            System.out.println(2);
             displayAlert("Date is either missing or not valid");
             return false;
         } else if (!txtEventStartTime.getText().contains(":") || !txtEventStartTime.getText().contains("  ") || Time.valueOf(txtEventStartTime.getText()+ ":00") == null) {
-            System.out.println(3);
             displayAlert("Start time is missing or not valid");
             return false;
         } else if (txtLocation.getText() == null || txtLocation.getText().isEmpty()) {
             displayAlert("Missing a Location");
-            System.out.println(4);
             return false;
         } else if (txtEventDescription.getText() == null || txtEventDescription.getText().isEmpty()){
             displayAlert("Missing a Description");
-            System.out.println(5);
             return false;
         }
         btnSaveEvent.setDisable(false);
