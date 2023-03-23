@@ -32,7 +32,7 @@ public class EventManager {
     }
 
     public void deleteEvent(Event event) throws Exception {
-        EventDAO.deleteEvent(event);
+        eventDAO.deleteEvent(event);
     }
 
 
