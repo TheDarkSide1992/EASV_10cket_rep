@@ -59,12 +59,12 @@ CREATE TABLE Event_(
     Event_Title                 NVARCHAR(250)                           NOT NULL,
     Event_Location              NVARCHAR(250)                           NOT NULL,
     Event_Event_Coordinator_ID  INT                                     NOT NULL,
-    Event_Authors               NVARCHAR(250)
+    Event_Authors               NVARCHAR(250),
     Event_Date                  DATE                                    NOT NULL,
     Event_Start_Time            TIME                                    NOT NULL,
     Event_Description           NVARCHAR(750),
-    Event_Ticket_Total          INT
-    Event_Ticket_Sold           INT
+    Event_Ticket_Total          INT,
+    Event_Ticket_Sold           INT,
     Event_Is_Active             BIT                                     NOT NULL,
     Event_Img                   VARBINARY(MAX),
 
@@ -98,4 +98,3 @@ CREATE TABLE Ticket_Customer_Relation(
     REFERENCES Ticket_(Ticket_Content_ID)
 )
 GO
-
