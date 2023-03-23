@@ -94,6 +94,7 @@ public class CreateEventController implements Initializable {
         } catch (Exception e) {
             displayError(e);
         }
+
     }
 
     private void displayAlert(String message){
@@ -113,7 +114,7 @@ public class CreateEventController implements Initializable {
         } else if (datePicker.getValue() == null || datePicker.getValue().isBefore(LocalDate.now())){
             displayAlert("Date is either missing or not valid");
             return false;
-        } else if (!txtEventStartTime.getText().contains(":") || !txtEventStartTime.getText().contains("  ") || Time.valueOf(txtEventStartTime.getText()+ ":00") == null) {
+        } else if (!txtEventStartTime.getText().contains(":") || txtEventStartTime.getText().contains(" ") || Time.valueOf(txtEventStartTime.getText()+ ":00") == null) {
             displayAlert("Start time is missing or not valid");
             return false;
         } else if (txtLocation.getText() == null || txtLocation.getText().isEmpty()) {
@@ -144,6 +145,11 @@ public class CreateEventController implements Initializable {
         } catch (Exception e) {
             displayError(e);
         }
+
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Success");
+        alert.setHeaderText("Event Successfully created");
+        alert.showAndWait();
     }
 
 }
