@@ -22,7 +22,6 @@ public class EventManager {
     }
 
     public List<Event> getAllEvents() throws Exception {
-        eventDAO = new EventDAO();
         return eventDAO.getAllEvents();
     }
 
@@ -32,7 +31,7 @@ public class EventManager {
     }
 
     public void deleteEvent(Event event) throws Exception {
-        EventDAO.deleteEvent(event);
+        eventDAO.deleteEvent(event);
     }
 
 

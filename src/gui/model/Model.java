@@ -22,7 +22,7 @@ public class Model {
 
     public void createEvent(Event event) throws Exception {
         event.setEventID(eventManager.createEvent(event));
-        //activeEvents.add(event);
+        activeEvents.add(event);
     }
 
     public void deleteEvent(Event event) throws Exception {

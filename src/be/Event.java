@@ -89,4 +89,5 @@ public class Event {
     public void setEventIsActive(boolean eventIsActive) {
         this.eventIsActive = eventIsActive;
     }
+
 }
