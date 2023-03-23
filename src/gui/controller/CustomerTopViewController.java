@@ -7,6 +7,9 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -19,14 +22,12 @@ public class CustomerTopViewController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        setLogo();
+       //setLogo();
 
     }
 
     private void setLogo() {
-        String url = "/data/Images/10cketshort.png";
-        Image logo = new Image(url);
-        imgLogo.setImage(logo);
+
     }
 
     public void handleNewEvent(ActionEvent actionEvent) {
