@@ -9,7 +9,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EventDAO implements IEventDAO {
+public class EventDAO implements IEventDAO{
     private DBConnector db;
 
     public EventDAO() throws IOException {

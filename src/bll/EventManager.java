@@ -22,7 +22,6 @@ public class EventManager {
     }
 
     public List<Event> getAllEvents() throws Exception {
-        eventDAO = new EventDAO();
         return eventDAO.getAllEvents();
     }
 
