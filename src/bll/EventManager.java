@@ -19,5 +19,9 @@ public class EventManager {
         EventDAO.createEvent(event);
     }
 
+    public void deleteEvent(Event event) throws Exception {
+        EventDAO.deleteEvent(event);
+    }
+
 
 }

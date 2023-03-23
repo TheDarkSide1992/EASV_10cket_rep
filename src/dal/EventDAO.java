@@ -51,8 +51,20 @@ public class EventDAO implements IEventDAO {
     }
 
     @Override
-    public boolean deleteEvent(int id) throws Exception {
-        return false;
+    public void deleteEvent(Event event) throws Exception {
+        int id = event.getEventID();
+
+        String sql = "DELETE FROM Events WHERE Id = " + id + ";";
+
+        try (Connection conn = db.getConnection()) {
+
+            //Statements are prepared SQL statements
+            PreparedStatement ps = conn.prepareStatement(sql);
+
+            //Execute the update which removes the link between song and playlist first, then remove the song from the DB
+            ps.executeUpdate();
+        }
+
     }
 
     @Override

@@ -19,5 +19,9 @@ public class Model {
         eventManager.createEvent(event);
     }
 
+    public void deleteEvent(Event event) throws Exception {
+        eventManager.deleteEvent(event);
+    }
+
     public ObservableList<Event> getActiveEvents() { return activeEvents;}
 }
