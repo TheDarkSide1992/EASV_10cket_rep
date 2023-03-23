@@ -81,7 +81,7 @@ public class CreateEventController implements Initializable {
     public void handleChooseImage(ActionEvent actionEvent) {
         try {
             FileChooser fileChooser = new FileChooser();
-            fileChooser.setTitle("Select song");
+            fileChooser.setTitle("Select Image");
             fileChooser.getExtensionFilters().add(
                     new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.gif"));
             Stage stage = (Stage) btnChooseImage.getScene().getWindow();
