@@ -13,7 +13,7 @@
 
 <ScrollPane xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.CreateEventController" styleClass="scrollPane" stylesheets="@Main.css">
    <content>
-      <AnchorPane prefHeight="824.0" prefWidth="1440.0" styleClass="scrollPane">
+      <AnchorPane prefHeight="824.0" prefWidth="1440.0" styleClass="scrollPane" stylesheets="@Main.css">
          <children>
             <Label fx:id="lblCreateEvent" layoutX="50.0" layoutY="50.0" text="Create Event" underline="true" styleClass="lblCreateEvent">
                <font>
