@@ -62,7 +62,7 @@
                   <Font name="Verdana" size="24.0" />
                </font>
             </TextField>
-            <CheckBox fx:id="cbIsActive" layoutX="840.0" layoutY="713.0" mnemonicParsing="false" text="Active Event?">
+            <CheckBox fx:id="cbIsActive" layoutX="840.0" layoutY="713.0" mnemonicParsing="false" selected="true" text="Active Event?">
                <font>
                   <Font size="24.0" />
                </font>
