@@ -1,11 +1,22 @@
 package be;
 
+import javafx.scene.image.Image;
+
 import java.sql.Date;
 import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class Event {
+    private int eventID;
+    private String eventTitle;
+    private LocalDate eventDate;
+    private Time eventStartTime;
+    private String eventLocation;
+    private String eventDescription;
+    private int eventTicketAmount;
+    private boolean eventIsActive;
+    private Image eventImage;
     public Event(String eventTitle, LocalDate eventDate, Time eventStartTime, String eventLocation, String eventDescription, boolean eventIsActive) {
         this.eventTitle = eventTitle;
         this.eventDate = eventDate;
@@ -14,16 +25,6 @@ public class Event {
         this.eventDescription = eventDescription;
         this.eventIsActive = eventIsActive;
     }
-
-    private int eventID;
-    private String eventTitle;
-    private LocalDate eventDate;
-    private Time eventStartTime;
-    private String eventLocation;
-    private String eventDescription;
-    private int eventTicketAmount;
-
-    private boolean eventIsActive;
 
 
     public int getEventID() {
@@ -90,4 +91,10 @@ public class Event {
         this.eventIsActive = eventIsActive;
     }
 
+    public Image getEventImage() {
+        return eventImage;
+    }
+    public void setEventImage(Image eventImage) {
+        this.eventImage = eventImage;
+    }
 }

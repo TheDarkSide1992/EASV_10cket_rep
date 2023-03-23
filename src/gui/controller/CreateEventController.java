@@ -138,7 +138,7 @@ public class CreateEventController implements Initializable {
                 txtEventDescription.getText(),
                 cbIsActive.isSelected());
         if (imgEventImage != null){
-            //TODO SAVE AN IMAGE ON EVENT
+            event1.setEventImage(imgEventImage.getImage());
         }
         try {
             model.createEvent(event1);
