@@ -7,18 +7,25 @@ import javafx.collections.ObservableList;
 
 public class Model {
     private ObservableList<Event> activeEvents;
-    EventManager eventManager = new EventManager();
+    EventManager eventManager;
 
     public Model() throws Exception {
+
+        eventManager = new EventManager();
         activeEvents = FXCollections.observableArrayList();
-        activeEvents.addAll(eventManager.getAllEvents());
+
     }
 
+    public void getAllEvens() throws Exception {
+        eventManager.getAllEvents();
+    }
 
     public void createEvent(Event event) throws Exception {
         event.setEventID(eventManager.createEvent(event));
         //activeEvents.add(event);
     }
 
-    public ObservableList<Event> getActiveEvents() { return activeEvents;}
+    public ObservableList<Event> getActiveEvents() throws Exception {
+        return activeEvents;
+    }
 }

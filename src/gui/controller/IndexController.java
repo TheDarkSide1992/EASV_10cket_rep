@@ -1,5 +1,6 @@
 package gui.controller;
 
+import gui.model.Model;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -25,10 +26,12 @@ public class IndexController implements Initializable {
         try {
             //setCenter();
             //setTop();
+            Model model = new Model();
             controllerAssistant.loadTop("CustomerTopView.fxml");
             controllerAssistant.loadCenter("CustomerView.fxml");
         } catch (Exception e) {
             displayError(e);
+            e.printStackTrace();
         }
     }
 

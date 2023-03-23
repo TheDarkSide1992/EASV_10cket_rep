@@ -10,12 +10,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EventDAO implements IEventDAO {
+    private DBConnector db;
 
     public EventDAO() throws IOException {
         db = new DBConnector();
     }
 
-    private DBConnector db;
 
     @Override
     public List<Event> getAllEvents() throws Exception {

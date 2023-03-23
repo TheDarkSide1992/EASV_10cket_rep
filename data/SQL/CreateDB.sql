@@ -98,4 +98,3 @@ CREATE TABLE Ticket_Customer_Relation(
     REFERENCES Ticket(Ticket_Content_ID)
 )
 GO
-
