@@ -16,16 +16,17 @@ public class Model {
 
     }
 
-    public void getAllEvens() throws Exception {
+    public void getAllEvents() throws Exception {
         eventManager.getAllEvents();
     }
 
     public void createEvent(Event event) throws Exception {
         event.setEventID(eventManager.createEvent(event));
-        //activeEvents.add(event);
+        activeEvents.add(event);
     }
 
     public ObservableList<Event> getActiveEvents() throws Exception {
+        activeEvents.addAll(eventManager.getAllEvents());
         return activeEvents;
     }
 }

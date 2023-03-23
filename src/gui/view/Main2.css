@@ -1,0 +1,65 @@
+.outerPane{
+    minHeight:"200.0";
+}
+
+.expansionPanel {
+    layoutX:"200.0";
+    layoutY:"25.0";
+    prefHeight:"150.0";
+    prefWidth:"1200.0";
+    -fx-border-color: F3DADA;
+    -fx-background-color: rgba(71,158,224,1);
+
+}
+
+.innerPane {
+    layoutX:"2.0";
+    layoutY:"2.0";
+}
+
+
+.lblEventTitle {
+    -fx-font-size: 40;
+}
+
+.lblEventDay {
+   -fx-font-size: 70;
+   -fx-alignment: CENTER;
+   contentDisplay:"CENTER"
+   layoutX:"20.0"
+   layoutY:"50.0"
+   minHeight:"100.0"
+   minWidth:"100.0"
+   prefHeight:"100.0"
+   -fx-textAlignment: CENTER;
+   wrapText:"true"
+}
+
+.lblMonthAndYear {
+    layoutX:"113.0"
+    layoutY:"67.0"
+    maxHeight:"80.0"
+    maxWidth:"80.0"
+    prefHeight:"70.0"
+    prefWidth:"70.0"
+    wrapText:"true"
+    -fx-font-size: 23
+}
+
+.lblStartTime {
+    -fx-alignment: CENTER;
+    contentDisplay:"CENTER"
+    layoutY:"45.0"
+    prefWidth:"1200.0"
+    -fx-textAlignment: CENTER;
+    -fx-font-size: 40;
+}
+
+.lblLocation {
+    -fx-alignment: CENTER;
+    contentDisplay:"CENTER"
+    layoutY:"90.0"
+    prefWidth:"1200.0"
+    -fx-textAlignment: CENTER;
+    -fx-font-size: 40;
+}
