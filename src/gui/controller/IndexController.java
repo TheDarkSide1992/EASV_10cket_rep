@@ -29,6 +29,7 @@ public class IndexController implements Initializable {
             controllerAssistant.loadCenter("CustomerView.fxml");
         } catch (Exception e) {
             displayError(e);
+            e.printStackTrace();
         }
     }
 

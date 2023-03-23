@@ -9,8 +9,14 @@ import java.util.ResourceBundle;
 
 public class CustomerViewController implements Initializable {
 
+    private Model model;
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        try {
+            model = new Model();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
 
     }
 }

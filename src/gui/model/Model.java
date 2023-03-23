@@ -7,9 +7,10 @@ import javafx.collections.ObservableList;
 
 public class Model {
     private ObservableList<Event> activeEvents;
-    EventManager eventManager = new EventManager();
+    EventManager eventManager;
 
     public Model() throws Exception {
+        eventManager = new EventManager();
         activeEvents = FXCollections.observableArrayList();
         activeEvents.addAll(eventManager.getAllEvents());
     }
