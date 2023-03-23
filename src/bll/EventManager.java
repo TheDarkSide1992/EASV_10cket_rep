@@ -22,13 +22,16 @@ public class EventManager {
     }
 
     public List<Event> getAllEvents() throws Exception {
-        eventDAO = new EventDAO();
         return eventDAO.getAllEvents();
     }
 
 
     public int createEvent(Event event) throws Exception {
         return eventDAO.createEvent(event);
+    }
+
+    public void deleteEvent(Event event) throws Exception {
+        eventDAO.deleteEvent(event);
     }
 
 

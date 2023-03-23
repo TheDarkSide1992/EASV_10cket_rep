@@ -11,8 +11,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<ScrollPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.CreateEventController">
+<ScrollPane xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.CreateEventController">
    <content>
       <AnchorPane prefHeight="824.0" prefWidth="1440.0">
          <children>
@@ -21,12 +20,12 @@
                   <Font name="Verdana Bold" size="48.0" />
                </font>
             </Label>
-            <TextField fx:id="txtTitleOfEvent" layoutX="50.0" layoutY="160.0" minHeight="60.0" minWidth="500.0" promptText="Title of Event...">
+            <TextField fx:id="txtTitleOfEvent" layoutX="51.0" layoutY="160.0" minHeight="60.0" minWidth="500.0" promptText="Title of Event...">
                <font>
                   <Font name="Verdana" size="24.0" />
                </font>
             </TextField>
-            <TextField fx:id="txtLocation" layoutX="50.0" layoutY="360.0" minHeight="60.0" minWidth="500.0" promptText="Location...">
+            <TextField fx:id="txtLocation" layoutX="51.0" layoutY="360.0" minHeight="60.0" minWidth="500.0" promptText="Location...">
                <font>
                   <Font name="Verdana" size="24.0" />
                </font>
@@ -37,7 +36,7 @@
                </font>
             </TextArea>
             <ImageView fx:id="imgEventImage" fitHeight="280.0" fitWidth="420.0" layoutX="880.0" layoutY="80.0" pickOnBounds="true" preserveRatio="true" />
-            <Button fx:id="btnChooseImage" layoutX="960.0" layoutY="400.0" minHeight="60.0" minWidth="260.0" mnemonicParsing="false" text="Choose Image">
+            <Button fx:id="btnChooseImage" layoutX="960.0" layoutY="400.0" minHeight="60.0" minWidth="260.0" mnemonicParsing="false" onAction="#handleChooseImage" onKeyReleased="#handleChooseImage" text="Choose Image">
                <font>
                   <Font name="Verdana" size="24.0" />
                </font>
@@ -52,7 +51,7 @@
                   <Font name="Verdana" size="24.0" />
                </font>
             </TextField>
-            <Button fx:id="btnSaveEvent" onAction="#handleSaveEvent" layoutX="1080.0" layoutY="700.0" minHeight="60.0" minWidth="260.0" mnemonicParsing="false" text="Save Event">
+            <Button fx:id="btnSaveEvent" layoutX="1080.0" layoutY="700.0" minHeight="60.0" minWidth="260.0" mnemonicParsing="false" onAction="#handleSaveEvent" onKeyPressed="#handleSaveEvent" text="Save Event">
                <font>
                   <Font name="Verdana" size="24.0" />
                </font>
@@ -63,7 +62,7 @@
                   <Font name="Verdana" size="24.0" />
                </font>
             </TextField>
-            <CheckBox fx:id="cbIsActive" layoutX="840.0" layoutY="713.0" mnemonicParsing="false" selected="true" text="Active Event?">
+            <CheckBox fx:id="cbIsActive" layoutX="840.0" layoutY="713.0" mnemonicParsing="false" text="Active Event?">
                <font>
                   <Font size="24.0" />
                </font>

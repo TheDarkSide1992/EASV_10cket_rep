@@ -9,7 +9,7 @@ public interface IEventDAO {
 
     int createEvent (Event event) throws Exception;
 
-    boolean deleteEvent(int id) throws Exception;
+    void deleteEvent(Event event) throws Exception;
 
     boolean cancelEvent(int id) throws Exception;
 
