@@ -14,6 +14,7 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.net.URL;
 import java.sql.Time;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 public class CreateEventController implements Initializable {
@@ -46,6 +47,13 @@ public class CreateEventController implements Initializable {
         }
 
         btnSaveEvent.setDisable(true);
+
+        txtTitleOfEvent.textProperty().addListener(observable -> isEmpty());
+        txtEventDescription.textProperty().addListener(observable -> isEmpty());
+        txtEventStartTime.textProperty().addListener(observable -> isEmpty());
+        txtEventDescription.textProperty().addListener(observable -> isEmpty());
+        txtEventOwner.textProperty().addListener(observable -> isEmpty());
+        txtEventCollaborator.textProperty().addListener(observable -> isEmpty());
     }
 
     private void displayError(Throwable t)
@@ -56,6 +64,18 @@ public class CreateEventController implements Initializable {
         alert.showAndWait();
 
         t.printStackTrace();
+    }
+
+    private void isEmpty(){
+        if (txtTitleOfEvent.getText().isEmpty())  return;
+
+        if (datePicker.getValue() == null) return;
+
+        if (txtEventStartTime.getText() == null) return;
+
+        if (txtEventDescription.getText() == null || txtEventDescription.getText().isEmpty()) return;
+
+        btnSaveEvent.setDisable(false);
     }
 
     public void handleChooseImage(ActionEvent actionEvent) {
@@ -76,12 +96,44 @@ public class CreateEventController implements Initializable {
         }
     }
 
+    private void displayAlert(String message){
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("!!Invaid!!");
+        alert.setHeaderText("Something went wrong, \n" + message);
+        alert.showAndWait();
+    }
     public void handleSaveEvent(ActionEvent event) {
+        if (checkData()) saveEvent();
+    }
 
+    private boolean checkData(){
+        if(txtTitleOfEvent.getText() == null || txtTitleOfEvent.getText().isEmpty()){
+            System.out.println(1);
+            displayAlert("Missing tittle");
+            return false;
+        } else if (datePicker.getValue() == null || datePicker.getValue().isBefore(LocalDate.now())){
+            System.out.println(2);
+            displayAlert("Date is either missing or not valid");
+            return false;
+        } else if (!txtEventStartTime.getText().contains(":") || !txtEventStartTime.getText().contains("  ") || Time.valueOf(txtEventStartTime.getText()+ ":00") == null) {
+            System.out.println(3);
+            displayAlert("Start time is missing or not valid");
+            return false;
+        } else if (txtLocation.getText() == null || txtLocation.getText().isEmpty()) {
+            displayAlert("Missing a Location");
+            System.out.println(4);
+            return false;
+        } else if (txtEventDescription.getText() == null || txtEventDescription.getText().isEmpty()){
+            displayAlert("Missing a Description");
+            System.out.println(5);
+            return false;
+        }
+        btnSaveEvent.setDisable(false);
+        return true;
 
     }
 
-    private void SaveEvent(){
+    private void saveEvent(){
         Event event1 = new Event(
                 txtTitleOfEvent.getText(),
                 datePicker.getValue(),
@@ -89,12 +141,14 @@ public class CreateEventController implements Initializable {
                 txtLocation.getText(),
                 txtEventDescription.getText(),
                 cbIsActive.isSelected());
+        if (imgEventImage != null){
+            //TODO SAVE AN IMAGE ON EVENT
+        }
         try {
             model.createEvent(event1);
         } catch (Exception e) {
             displayError(e);
         }
     }
-
 
 }

@@ -25,7 +25,7 @@
                   <Font name="Verdana" size="24.0" />
                </font>
             </TextField>
-            <TextField fx:id="txtLocation" layoutX="50.0" layoutY="360.0" minHeight="60.0" minWidth="500.0" promptText="Location...">
+            <TextField fx:id="txtLocation" layoutX="51.0" layoutY="360.0" minHeight="60.0" minWidth="500.0" promptText="Location...">
                <font>
                   <Font name="Verdana" size="24.0" />
                </font>
@@ -62,7 +62,7 @@
                   <Font name="Verdana" size="24.0" />
                </font>
             </TextField>
-            <CheckBox fx:id="cbIsActive" layoutX="840.0" layoutY="713.0" mnemonicParsing="false" selected="true" text="Active Event?">
+            <CheckBox fx:id="cbIsActive" layoutX="840.0" layoutY="713.0" mnemonicParsing="false" text="Active Event?">
                <font>
                   <Font size="24.0" />
                </font>
