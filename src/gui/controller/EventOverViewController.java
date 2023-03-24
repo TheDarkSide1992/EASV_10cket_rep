@@ -4,7 +4,6 @@ import be.Event;
 import com.gluonhq.charm.glisten.control.ExpansionPanel;
 import gui.model.Model;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
@@ -12,16 +11,18 @@ import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.effect.DropShadow;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
-import java.beans.EventHandler;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.net.URL;
-import java.security.Key;
 import java.util.ResourceBundle;
 import java.util.function.Consumer;
-import java.util.prefs.Preferences;
 
 public class EventOverViewController implements Initializable {
     @FXML
@@ -31,7 +32,13 @@ public class EventOverViewController implements Initializable {
     public static int prefs = 0;
 
     @FXML
-    private Button btn;
+    private ImageView imageCxl,imageEdit,imageEvent;
+
+    private String cxlURL = "data/Images/Cancel.png";
+
+    private String editURL = "data/Images/Edit.png";
+
+    private String eventURL = "data/Images/Event.png";
 
 
     @Override
@@ -54,7 +61,9 @@ public class EventOverViewController implements Initializable {
                 Label day = new Label();
                 Label month = new Label();
                 Label year = new Label();
-                btn = new Button(); //TODO change to an image of a cancel sign and place the right place
+                imageEvent = new ImageView();
+                imageCxl = new ImageView();
+                imageEdit = new ImageView();//TODO change to an image of a cancel sign and place the right place
                 Label title = new Label();
                 Label startTime = new Label();
                 Label location = new Label();
@@ -130,13 +139,35 @@ public class EventOverViewController implements Initializable {
                 outerPane.getChildren().add(month);
                 outerPane.getChildren().add(year);
 
-                btn.setText("Cancel");
-                btn.setOnAction(event -> cancelEvent());
 
+
+                imageCxl.setOnMouseClicked(event -> cancelEvent(title.getText(),startTime.getText(),day.getText(),month.getText(),year.getText()));
+                //imageEdit.setOnMouseClicked(event -> cancelEvent());
+                imageCxl.setImage(loadImages(cxlURL));
+                imageEdit.setImage(loadImages(editURL));
+                imageEvent.setImage(loadImages(cxlURL));
+                imageCxl.setScaleX(0.8);
+                imageCxl.setScaleY(0.8);
+                imageEdit.setScaleX(0.8);
+                imageEdit.setScaleY(0.8);
+
+
+                imageCxl.setX(1000);
+                imageCxl.setY(10);
+                imageEdit.setX(900);
+                imageEdit.setY(10);
+                imageEvent.setX(5);
+                imageEvent.setY(10);
+                imageCxl.setEffect(shadow);
+                imageEdit.setEffect(shadow);
+
+                innerPane.getChildren().add(imageEvent);
                 innerPane.getChildren().add(title);
                 innerPane.getChildren().add(startTime);
                 innerPane.getChildren().add(location);
-                innerPane.getChildren().add(btn);
+
+                innerPane.getChildren().add(imageCxl);
+                innerPane.getChildren().add(imageEdit);
 
 
                 expPanel.setCollapsedContent(innerPane);
@@ -151,9 +182,24 @@ public class EventOverViewController implements Initializable {
             alert.showAndWait();
         }
     }
-    private void cancelEvent(){
+
+    private Image loadImages(String url) {
+        Image image = null;
+        try {
+            InputStream img = new FileInputStream(url);
+            image = new Image(img);
+        } catch (FileNotFoundException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR,"Could not load an image, following error occurred:\n"+ e, ButtonType.CANCEL);
+            alert.showAndWait();
+        }
+        return image;
+
+    }
+
+    private void cancelEvent(String eventName,String startTime, String day, String month, String year){
+
         Alert alert = createAlertWithOptOut(Alert.AlertType.CONFIRMATION, "Cancel Event?", "Cancel Event?",
-                "Are you sure you want to cancel:\n" +"'"+"EVENTNAME"+"'\n"+"'"+"DATE"+"'\n"+"'"+"STARTTIME"+"'", "Submit for deletion",
+                "Are you sure you want to cancel:\n" +"'"+eventName+"'\n"+"'"+day+"-"+month+"-"+year+" "+startTime+"'", "Submit for deletion",
                 param -> prefs = 1, ButtonType.YES, ButtonType.NO);
         if (alert.showAndWait().filter(t -> t == ButtonType.YES).isPresent()) {
             System.out.println("Works");;
