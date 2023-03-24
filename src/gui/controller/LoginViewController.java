@@ -1,8 +1,19 @@
 package gui.controller;
 
 import javafx.event.ActionEvent;
+import javafx.fxml.Initializable;
 
-public class LoginViewController {
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class LoginViewController implements Initializable {
+    private ControllerAssistant controllerAssistant;
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+
+    }
+
     public void handleLogIn(ActionEvent actionEvent) {
     }
 
