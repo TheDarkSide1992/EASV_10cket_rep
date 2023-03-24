@@ -7,6 +7,7 @@
 <?import javafx.scene.text.Font?>
 
 
+<?import javafx.scene.control.PasswordField?>
 <ScrollPane prefHeight="600.0" prefWidth="1440.0" styleClass="scrollPane" stylesheets="@Main.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.LoginViewController">
    <content>
       <Pane prefHeight="598.0" prefWidth="1438.0">
@@ -21,11 +22,11 @@
                   <Font size="24.0" />
                </font>
             </TextField>
-            <TextField fx:id="txtPassword" layoutX="420.0" layoutY="300.0" minHeight="60.0" minWidth="600.0" promptText="Password" styleClass="txtLogIn">
+            <PasswordField fx:id="txtPassword" layoutX="420.0" layoutY="300.0" minHeight="60.0" minWidth="600.0" promptText="Password" styleClass="txtLogIn">
                <font>
                   <Font size="24.0" />
                </font>
-            </TextField>
+            </PasswordField>
             <Button fx:id="btnCancel" layoutX="760.0" layoutY="400.0" minHeight="60.0" minWidth="260.0" mnemonicParsing="false" onAction="#handleCancel" text="Cancel" styleClass="btnLogin">
                <font>
                   <Font size="24.0" />
