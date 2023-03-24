@@ -57,8 +57,7 @@ public class AdminDAO implements IAdministratorDAO {
                 String userEmil = rs.getString("User_Email");
                 String tlfNumber = rs.getString("User_tlf");
 
-                adminList.add(new Administrator(id,userName,userFirstName,userType,userEmil,tlfNumber));
-
+                adminList.add(new Administrator(id,userName,userFirstName,userEmil,tlfNumber,userType));
             }
         }
 

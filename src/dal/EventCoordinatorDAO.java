@@ -40,8 +40,7 @@ public class EventCoordinatorDAO implements IEventCoordinator {
                 String userEmil = rs.getString("User_Email");
                 String tlfNumber = rs.getString("User_tlf");
 
-                adminList.add(new EventCoordinator(id,userName,userFirstName,userType,userEmil,tlfNumber));
-
+                adminList.add(new EventCoordinator(id,userName,userFirstName,userEmil,tlfNumber,userType));
             }
         }
 
