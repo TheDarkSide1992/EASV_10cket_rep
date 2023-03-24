@@ -11,17 +11,14 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class CustomerTopViewController implements Initializable {
+public class TopViewController implements Initializable {
 
     @FXML
     private Label lblSignIn;
-    private String url = "/data/Images/10cketshort";
+    private String url = "data/Images/10cketshort.png";
 
     @FXML
     private ImageView imgLogo;
@@ -30,7 +27,7 @@ public class CustomerTopViewController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-       //setLogo();
+        //setLogo();
         setStyles();
         signInLabelStyling();
 
@@ -62,6 +59,6 @@ public class CustomerTopViewController implements Initializable {
 
     public void handleUpcomingEvents(ActionEvent actionEvent) {
         ControllerAssistant controllerAssistant = ControllerAssistant.getInstance();
-        controllerAssistant.openNewWindow("CustomerView.fxml");
+        controllerAssistant.openNewWindow("EventOverView.fxml");
     }
 }

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.VBox?>
+
+<ScrollPane fitToHeight="true" fitToWidth="true" style="-fx-background-color: transparent" styleClass="scrollPane" stylesheets="@Main.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.EventOverViewController">
+   <content>
+      <VBox fx:id="vBoxCustomerView" styleClass="scrollPane" />
+   </content>
+</ScrollPane>

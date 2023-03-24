@@ -27,8 +27,8 @@ public class IndexController implements Initializable {
             //setCenter();
             //setTop();
             Model model = new Model();
-            controllerAssistant.loadTop("CustomerTopView.fxml");
-            controllerAssistant.loadCenter("CustomerView.fxml");
+            controllerAssistant.loadTop("TopView.fxml");
+            controllerAssistant.loadCenter("EventOverView.fxml");
         } catch (Exception e) {
             displayError(e);
             e.printStackTrace();
@@ -37,7 +37,7 @@ public class IndexController implements Initializable {
 
     private void setTop() throws IOException {
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/gui/view/CustomerTopView.fxml"));
+        loader.setLocation(getClass().getResource("/gui/view/TopView.fxml"));
         Pane newScene = loader.load();
 
         borderPane.setTop(newScene);
@@ -45,7 +45,7 @@ public class IndexController implements Initializable {
 
     private void setCenter() throws IOException {
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/gui/view/CustomerView.fxml"));
+        loader.setLocation(getClass().getResource("/gui/view/EventOverView.fxml"));
         Pane newScene = loader.load();
 
         borderPane.setCenter(newScene);
