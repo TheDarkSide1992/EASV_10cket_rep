@@ -9,7 +9,7 @@
 <?import javafx.scene.text.Font?>
 
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="1440.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.CustomerTopViewController" styleClass="scrollPane" stylesheets="@Main.css">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="1440.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.TopViewController" styleClass="scrollPane" stylesheets="@Main.css">
    <children>
       <HBox maxHeight="0.0" maxWidth="0.0" minHeight="200.0" minWidth="1440.0" prefHeight="200.0" prefWidth="1440.0">
          <children>
