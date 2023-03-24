@@ -4,23 +4,35 @@ import be.Event;
 import com.gluonhq.charm.glisten.control.ExpansionPanel;
 import gui.model.Model;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Label;
+import javafx.scene.Group;
+import javafx.scene.Node;
+import javafx.scene.control.*;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
+import java.beans.EventHandler;
 import java.net.URL;
+import java.security.Key;
 import java.util.ResourceBundle;
+import java.util.function.Consumer;
+import java.util.prefs.Preferences;
 
 public class EventOverViewController implements Initializable {
     @FXML
     private VBox vBoxCustomerView;
     private Model model;
+    
+    public static int prefs = 0;
+
+    @FXML
+    private Button btn;
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -30,19 +42,19 @@ public class EventOverViewController implements Initializable {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+        System.out.println(prefs);
     }
-
     private void displayActiveEvents() {
         try {
 
             ObservableList<Event> activeEvents = model.getActiveEvents();
-            for (Event event: activeEvents)
+            for (Event events: activeEvents)
             {
                 String day1 = "";
                 Label day = new Label();
                 Label month = new Label();
                 Label year = new Label();
-
+                btn = new Button();
                 Label title = new Label();
                 Label startTime = new Label();
                 Label location = new Label();
@@ -51,22 +63,22 @@ public class EventOverViewController implements Initializable {
                 ExpansionPanel expPanel = new ExpansionPanel();
                 Pane innerPane = new Pane();
 
-                day.setText(String.valueOf(event.getEventDate().getDayOfMonth()));
-                if(event.getEventDate().getDayOfMonth() <= 9) {
+                day.setText(String.valueOf(events.getEventDate().getDayOfMonth()));
+                if(events.getEventDate().getDayOfMonth() <= 9) {
                     day1 = "0" + day.getText();
                     day.setText(day1);
                 }
 
 
-                month.setText(String.valueOf(event.getEventDate().getMonth()).substring(0,3));
-                year.setText(String.valueOf(event.getEventDate().getYear()));
+                month.setText(String.valueOf(events.getEventDate().getMonth()).substring(0,3));
+                year.setText(String.valueOf(events.getEventDate().getYear()));
 
 
 
-                title.setText(event.getEventTitle());
+                title.setText(events.getEventTitle());
 
-                startTime.setText(event.getEventStartTime().toString().substring(0,5));
-                location.setText(event.getEventLocation());
+                startTime.setText(events.getEventStartTime().toString().substring(0,5));
+                location.setText(events.getEventLocation());
 
 
                 outerPane.getStylesheets().add(getClass().getResource("/gui/view/Main.css").toExternalForm());
@@ -118,9 +130,13 @@ public class EventOverViewController implements Initializable {
                 outerPane.getChildren().add(month);
                 outerPane.getChildren().add(year);
 
+                btn.setText("Cancel");
+                btn.setOnAction(event -> cancelEvent());
+
                 innerPane.getChildren().add(title);
                 innerPane.getChildren().add(startTime);
                 innerPane.getChildren().add(location);
+                innerPane.getChildren().add(btn);
 
 
                 expPanel.setCollapsedContent(innerPane);
@@ -135,4 +151,47 @@ public class EventOverViewController implements Initializable {
             alert.showAndWait();
         }
     }
+    private void cancelEvent(){
+        Alert alert = createAlertWithOptOut(Alert.AlertType.CONFIRMATION, "Cancel Event?", "Cancel Event?",
+                "Are you sure you want to cancel:\n" +"'"+"EVENTNAME"+"'\n"+"'"+"DATE"+"'\n"+"'"+"STARTTIME"+"'", "Submit for deletion",
+                param -> prefs = 1, ButtonType.YES, ButtonType.NO);
+        if (alert.showAndWait().filter(t -> t == ButtonType.YES).isPresent()) {
+            System.out.println("Works");;
+            System.out.println(prefs); //TODO replace EVENTNAME, DATE & STARTTIME with actual data and make event inactive
+        }
+    }
+
+    public static Alert createAlertWithOptOut(Alert.AlertType type, String title, String headerText,
+                                              String message, String deletionMessage, Consumer<Boolean> deletionAction,
+                                              ButtonType... buttonTypes) {
+        Alert alert = new Alert(type);
+        // Need to force the alert to layout in order to grab the graphic,
+        // as we are replacing the dialog pane with a custom pane
+        alert.getDialogPane().applyCss();
+        Node graphic = alert.getDialogPane().getGraphic();
+        // Create a new dialog pane that has a checkbox instead of the hide/show details button
+        // Use the supplied callback for the action of the checkbox
+        alert.setDialogPane(new DialogPane() {
+            @Override
+            protected Node createDetailsButton() {
+                CheckBox delete = new CheckBox();
+                delete.setText(deletionMessage);
+                delete.setOnAction(e -> deletionAction.accept(delete.isSelected()));
+                return delete;
+            }
+        });
+        alert.getDialogPane().getButtonTypes().addAll(buttonTypes);
+        alert.getDialogPane().setContentText(message);
+        // Fool the dialog into thinking there is some expandable content
+        // a Group won't take up any space if it has no children
+        alert.getDialogPane().setExpandableContent(new Group());
+        alert.getDialogPane().setExpanded(true);
+        // Reset the dialog graphic using the default style
+        alert.getDialogPane().setGraphic(graphic);
+        alert.setTitle(title);
+        alert.setHeaderText(headerText);
+        return alert;
+    }
+  
+    
 }
