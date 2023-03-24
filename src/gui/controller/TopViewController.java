@@ -25,12 +25,14 @@ public class TopViewController implements Initializable {
     private ImageView imgLogo;
     @FXML
     private Button btnUpcomingEvents,btnAllEvents,btnCalendar,btnNewEvent,btnContact;
+    private ControllerAssistant controllerAssistant;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         //setLogo();
         setStyles();
         signInLabelStyling();
+        controllerAssistant = ControllerAssistant.getInstance();
 
 
 
@@ -54,15 +56,14 @@ public class TopViewController implements Initializable {
     }
 
     public void handleNewEvent(ActionEvent actionEvent) {
-        ControllerAssistant controllerAssistant = ControllerAssistant.getInstance();
         controllerAssistant.openNewWindow("CreateEventView.fxml");
     }
 
     public void handleUpcomingEvents(ActionEvent actionEvent) {
-        ControllerAssistant controllerAssistant = ControllerAssistant.getInstance();
         controllerAssistant.openNewWindow("EventOverView.fxml");
     }
 
     public void handleSignIn(MouseEvent mouseEvent) {
+        controllerAssistant.openNewWindow("LoginView.fxml");
     }
 }
