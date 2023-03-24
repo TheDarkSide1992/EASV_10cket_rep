@@ -9,6 +9,7 @@ import javafx.scene.control.Label;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 
 import java.net.URL;
@@ -60,5 +61,8 @@ public class TopViewController implements Initializable {
     public void handleUpcomingEvents(ActionEvent actionEvent) {
         ControllerAssistant controllerAssistant = ControllerAssistant.getInstance();
         controllerAssistant.openNewWindow("EventOverView.fxml");
+    }
+
+    public void handleSignIn(MouseEvent mouseEvent) {
     }
 }
