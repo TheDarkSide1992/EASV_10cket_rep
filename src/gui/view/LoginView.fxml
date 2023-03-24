@@ -11,22 +11,22 @@
    <content>
       <Pane prefHeight="598.0" prefWidth="1438.0">
          <children>
-            <Button fx:id="btnLogIn" layoutX="420.0" layoutY="400.0" minHeight="60.0" minWidth="260.0" mnemonicParsing="false" onAction="#handleLogIn" text="Log In">
+            <Button fx:id="btnLogIn" layoutX="420.0" layoutY="400.0" minHeight="60.0" minWidth="260.0" mnemonicParsing="false" onAction="#handleLogIn" text="Log In" styleClass="btnLogin">
                <font>
                   <Font size="24.0" />
                </font>
             </Button>
-            <TextField fx:id="txtUserName" layoutX="420.0" layoutY="170.0" minHeight="60.0" minWidth="600.0" promptText="Username">
+            <TextField fx:id="txtUserName" layoutX="420.0" layoutY="170.0" minHeight="60.0" minWidth="600.0" promptText="Username" styleClass="txtLogIn">
                <font>
                   <Font size="24.0" />
                </font>
             </TextField>
-            <TextField fx:id="txtPassword" layoutX="420.0" layoutY="300.0" minHeight="60.0" minWidth="600.0" promptText="Password">
+            <TextField fx:id="txtPassword" layoutX="420.0" layoutY="300.0" minHeight="60.0" minWidth="600.0" promptText="Password" styleClass="txtLogIn">
                <font>
                   <Font size="24.0" />
                </font>
             </TextField>
-            <Button fx:id="btnCancel" layoutX="760.0" layoutY="400.0" minHeight="60.0" minWidth="260.0" mnemonicParsing="false" onAction="#handleCancel" text="Cancel">
+            <Button fx:id="btnCancel" layoutX="760.0" layoutY="400.0" minHeight="60.0" minWidth="260.0" mnemonicParsing="false" onAction="#handleCancel" text="Cancel" styleClass="btnLogin">
                <font>
                   <Font size="24.0" />
                </font>
