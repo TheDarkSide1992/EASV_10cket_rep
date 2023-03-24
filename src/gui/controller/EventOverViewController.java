@@ -54,7 +54,7 @@ public class EventOverViewController implements Initializable {
                 Label day = new Label();
                 Label month = new Label();
                 Label year = new Label();
-                btn = new Button();
+                btn = new Button(); //TODO change to an image of a cancel sign and place the right place
                 Label title = new Label();
                 Label startTime = new Label();
                 Label location = new Label();
