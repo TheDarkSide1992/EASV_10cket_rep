@@ -66,4 +66,10 @@ public class TopViewController implements Initializable {
     public void handleSignIn(MouseEvent mouseEvent) {
         controllerAssistant.openNewWindow("LoginView.fxml");
     }
+
+    public void handleCalendar(ActionEvent actionEvent) { controllerAssistant.openNewWindow("CalendarView.fxml"); }
+
+    public void handleContact(ActionEvent actionEvent) { controllerAssistant.openNewWindow("ContactView.fxml"); }
+
+    public void handleAllEvents(ActionEvent actionEvent) { controllerAssistant.openNewWindow("AllEventView.fxml"); }
 }
