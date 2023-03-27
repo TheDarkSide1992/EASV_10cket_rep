@@ -148,3 +148,20 @@
     -fx-background-radius: 15;
     -fx-border-radius: 15;
 }
+
+.alertPane {
+    -fx-font-weight: bold;
+    -fx-font-size: 25;
+    -fx-text-fill: rgba(243,218,218,1);
+    -fx-background-color: rgba(52,40,72,1);
+
+}
+.alertPane > .content {
+    -fx-alignment: CENTER;
+    -fx-text-alignment: CENTER;
+    -fx-text-fill: rgba(243,218,218,1);
+}
+
+.alertPane > .content > .button-bar > .button {
+    -fx-background-radius: 15;
+}

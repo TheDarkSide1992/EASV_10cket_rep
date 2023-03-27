@@ -200,22 +200,25 @@ public class EventOverViewController implements Initializable {
     }
 
     private void cancelEvent(String eventName,String startTime, String day, String month, String year){
-
-        Alert alert = createAlertWithOptOut(Alert.AlertType.CONFIRMATION, "", "Cancel Event?",
+        Alert alert = createAlertWithDelete(Alert.AlertType.CONFIRMATION, "Cancel Event?", null,
                 "Are you sure you want to cancel:\n" +"'"+eventName+"'\n"+"'"+day+"-"+month+"-"+year+" "+startTime+"'", "Submit for deletion",
                 param -> submitForDeletion = true, ButtonType.YES, ButtonType.NO);
+
+        alert.getDialogPane().getStylesheets().add("/gui/view/Main.css");
+        alert.getDialogPane().getStyleClass().add("alertPane");
         if (alert.showAndWait().filter(t -> t == ButtonType.YES).isPresent()) {
             System.out.println(submitForDeletion); //TODO Make event inactive
         }
     }
 
-    public static Alert createAlertWithOptOut(Alert.AlertType type, String title, String headerText,
+    public static Alert createAlertWithDelete(Alert.AlertType type, String title, String headerText,
                                               String message, String deletionMessage, Consumer<Boolean> deletionAction,
                                               ButtonType... buttonTypes) {
         Alert alert = new Alert(type);
         // Need to force the alert to layout in order to grab the graphic,
         // as we are replacing the dialog pane with a custom pane
-        alert.getDialogPane().applyCss();
+        alert.getDialogPane().getStylesheets().add("/gui/view/Main.css");
+        alert.getDialogPane().getStyleClass().add("alertPane");
         Node graphic = alert.getDialogPane().getGraphic();
         // Create a new dialog pane that has a checkbox instead of the hide/show details button
         // Use the supplied callback for the action of the checkbox
@@ -225,6 +228,8 @@ public class EventOverViewController implements Initializable {
                 CheckBox delete = new CheckBox();
                 delete.setText(deletionMessage);
                 delete.setOnAction(e -> deletionAction.accept(delete.isSelected()));
+                delete.getStylesheets().add("/gui/view/Main.css");
+                delete.getStyleClass().add("alertPane");
                 return delete;
             }
         });
