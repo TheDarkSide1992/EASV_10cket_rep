@@ -44,7 +44,7 @@ public class TopViewAllUsersController implements Initializable {
             btnHolderHBox.getChildren().add(btn);
             ObservableList<Node> hBox = btnHolderHBox.getChildren();
             btnHolderHBox.getChildren().clear();
-            btnHolderHBox.getChildren().add(btnHolderHBox.si);
+            btnHolderHBox.getChildren().add(btnHolderHBox);
         }
     }
 
