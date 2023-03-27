@@ -6,9 +6,11 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
+<ScrollPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
-            fx:controller="gui.view.ContactView"
-            prefHeight="400.0" prefWidth="600.0">
+            fx:controller="gui.controller.ContactController"
+            prefHeight="600.0" prefWidth="1440.0"
+            stylesheets="@Main.css"
+            styleClass="scrollPane">
 
-</AnchorPane>
+</ScrollPane>

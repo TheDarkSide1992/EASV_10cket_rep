@@ -9,6 +9,7 @@ import javafx.scene.control.*;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -20,6 +21,8 @@ import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 public class CreateEventController implements Initializable {
+    @FXML
+    private Pane imagePane;
     @FXML
     private Label lblCreateEvent;
     @FXML
@@ -59,6 +62,7 @@ public class CreateEventController implements Initializable {
         txtEventDescription.textProperty().addListener(observable -> isEmpty());
         txtEventOwner.textProperty().addListener(observable -> isEmpty());
         txtEventCollaborator.textProperty().addListener(observable -> isEmpty());
+        imgEventImage.imageProperty().addListener(observable -> imageChosen());
     }
 
     private void labelStyling() {
@@ -114,10 +118,10 @@ public class CreateEventController implements Initializable {
         alert.setHeaderText("Something went wrong, \n" + message);
         alert.showAndWait();
     }
+
     public void handleSaveEvent(ActionEvent event) {
         if (checkData()) saveEvent();
     }
-
     private boolean checkData(){
         if(txtTitleOfEvent.getText() == null || txtTitleOfEvent.getText().isEmpty()){
             displayAlert("Missing tittle");
@@ -163,4 +167,10 @@ public class CreateEventController implements Initializable {
         alert.showAndWait();
     }
 
+
+    private void imageChosen() {
+        if (!imgEventImage.imageProperty().isBound()) {
+            imagePane.setBorder(null);
+        }
+    }
 }

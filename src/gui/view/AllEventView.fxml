@@ -8,7 +8,7 @@
 
 <ScrollPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
-            fx:controller="gui.controller.CalendarController"
+            fx:controller="gui.controller.AllEventController"
             prefHeight="600.0" prefWidth="1440.0"
             stylesheets="@Main.css"
             styleClass="scrollPane">
