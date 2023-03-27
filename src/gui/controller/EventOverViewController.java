@@ -26,10 +26,12 @@ import java.util.function.Consumer;
 
 public class EventOverViewController implements Initializable {
     @FXML
+    private ScrollPane scrollPane;
+    @FXML
     private VBox vBoxCustomerView;
     private Model model;
     
-    public static int prefs = 0;
+    public static boolean submitForDeletion = false;
 
     @FXML
     private ImageView imageCxl,imageEdit,imageEvent;
@@ -46,10 +48,11 @@ public class EventOverViewController implements Initializable {
         try {
             model = new Model();
             displayActiveEvents();
+            scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-        System.out.println(prefs);
+        System.out.println(submitForDeletion);
     }
     private void displayActiveEvents() {
         try {
@@ -63,7 +66,7 @@ public class EventOverViewController implements Initializable {
                 Label year = new Label();
                 imageEvent = new ImageView();
                 imageCxl = new ImageView();
-                imageEdit = new ImageView();//TODO change to an image of a cancel sign and place the right place
+                imageEdit = new ImageView();
                 Label title = new Label();
                 Label startTime = new Label();
                 Label location = new Label();
@@ -148,13 +151,13 @@ public class EventOverViewController implements Initializable {
                 imageEvent.setImage(loadImages(cxlURL));
                 imageCxl.setScaleX(0.8);
                 imageCxl.setScaleY(0.8);
-                imageEdit.setScaleX(0.8);
-                imageEdit.setScaleY(0.8);
+                imageEdit.setScaleX(0.68);
+                imageEdit.setScaleY(0.68);
 
 
-                imageCxl.setX(1000);
+                imageCxl.setX(1100);
                 imageCxl.setY(10);
-                imageEdit.setX(900);
+                imageEdit.setX(1030);
                 imageEdit.setY(10);
                 imageEvent.setX(5);
                 imageEvent.setY(10);
@@ -198,12 +201,11 @@ public class EventOverViewController implements Initializable {
 
     private void cancelEvent(String eventName,String startTime, String day, String month, String year){
 
-        Alert alert = createAlertWithOptOut(Alert.AlertType.CONFIRMATION, "Cancel Event?", "Cancel Event?",
+        Alert alert = createAlertWithOptOut(Alert.AlertType.CONFIRMATION, "", "Cancel Event?",
                 "Are you sure you want to cancel:\n" +"'"+eventName+"'\n"+"'"+day+"-"+month+"-"+year+" "+startTime+"'", "Submit for deletion",
-                param -> prefs = 1, ButtonType.YES, ButtonType.NO);
+                param -> submitForDeletion = true, ButtonType.YES, ButtonType.NO);
         if (alert.showAndWait().filter(t -> t == ButtonType.YES).isPresent()) {
-            System.out.println("Works");;
-            System.out.println(prefs); //TODO replace EVENTNAME, DATE & STARTTIME with actual data and make event inactive
+            System.out.println(submitForDeletion); //TODO Make event inactive
         }
     }
 
