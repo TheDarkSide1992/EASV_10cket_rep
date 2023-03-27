@@ -133,6 +133,8 @@
 }
 
 .btnTopButtons {
+    -fx-min-height: 50;
+    -fx-min-width: 160;
     -fx-border-radius: 20 20 0 0;
     -fx-background-radius: 22 22 0 0;
     -fx-background-color: rgba(243,218,218,1);

@@ -27,7 +27,7 @@ public class IndexController implements Initializable {
             //setCenter();
             //setTop();
             Model model = new Model();
-            controllerAssistant.loadTop("TopView.fxml");
+            controllerAssistant.loadTop("TopViewAllUsers.fxml");
             controllerAssistant.loadCenter("EventOverView.fxml");
         } catch (Exception e) {
             displayError(e);

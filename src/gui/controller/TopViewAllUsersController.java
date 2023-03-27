@@ -4,6 +4,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -13,6 +14,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -40,11 +43,21 @@ public class TopViewAllUsersController implements Initializable {
     private void addButtons(ArrayList<String> btnsToCreate) {
         for (String name: btnsToCreate) {
             Button btn = new Button(name);
+            //Style the btns
             btn.getStyleClass().add("btnTopButtons");
+            //btn.setMinSize(160,50);
+            Font font = Font.font("Courier New", FontWeight.BOLD, 14);
+            btn.setFont(font);
             btnHolderHBox.getChildren().add(btn);
-            ObservableList<Node> hBox = btnHolderHBox.getChildren();
-            btnHolderHBox.getChildren().clear();
-            btnHolderHBox.getChildren().add(btnHolderHBox.si);
+
+            //Spacing between each element
+            btnHolderHBox.setSpacing(10);
+            //Position in BOX
+            btnHolderHBox.setAlignment(Pos.BOTTOM_CENTER);
+
+            //ObservableList<Node> hBox = btnHolderHBox.getChildren();
+            //hBox.add(btn);
+            //btnHolderHBox.getChildren().add(3,btn);
         }
     }
 
@@ -81,6 +94,7 @@ public class TopViewAllUsersController implements Initializable {
         DropShadow shadow = new DropShadow(0,4,4, Color.color(0,0,0,0.25));
         lblSignIn.setEffect(shadow);
         lblSignIn.getStyleClass().add("lblSignIn");
+        //btnHolderHBox.getChildren().add(lblSignIn);
     }
 
     private void setStyles() {
