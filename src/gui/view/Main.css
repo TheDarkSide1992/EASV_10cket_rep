@@ -74,6 +74,7 @@
 .lblSignIn {
     -fx-font-size: 48;
     -fx-font-weight: bold;
+    -fx-min-height: 150;
     -fx-text-fill: rgba(243,218,218,1);
 
 }
@@ -129,6 +130,7 @@
 
 .lblSignIn {
     -fx-font-weight: bold;
+    -fx-underline: true;
     -fx-text-fill: rgba(243,218,218,1);
 }
 

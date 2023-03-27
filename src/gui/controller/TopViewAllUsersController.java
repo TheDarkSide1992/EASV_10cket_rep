@@ -23,7 +23,6 @@ import java.util.ResourceBundle;
 
 public class TopViewAllUsersController implements Initializable {
     @FXML private HBox btnHolderHBox;
-    @FXML private Label lblSignIn;
     @FXML
     private ImageView imgLogo;
 
@@ -31,11 +30,12 @@ public class TopViewAllUsersController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        String user = "Event Coordinator";
+        //String user = "Event Coordinator";
+        //String user = "Administrator";
+        String user = null;
         ArrayList<String> btnsToCreate = setAllButtons(user);
         addButtons(btnsToCreate);
         //setLogo();
-        setStyles();
         signInLabelStyling();
 
     }
@@ -54,10 +54,6 @@ public class TopViewAllUsersController implements Initializable {
             btnHolderHBox.setSpacing(10);
             //Position in BOX
             btnHolderHBox.setAlignment(Pos.BOTTOM_CENTER);
-
-            //ObservableList<Node> hBox = btnHolderHBox.getChildren();
-            //hBox.add(btn);
-            //btnHolderHBox.getChildren().add(3,btn);
         }
     }
 
@@ -92,14 +88,17 @@ public class TopViewAllUsersController implements Initializable {
 
     private void signInLabelStyling() {
         DropShadow shadow = new DropShadow(0,4,4, Color.color(0,0,0,0.25));
-        lblSignIn.setEffect(shadow);
-        lblSignIn.getStyleClass().add("lblSignIn");
-        //btnHolderHBox.getChildren().add(lblSignIn);
-    }
+        Label signInLbl = new Label();
+        signInLbl.setEffect(shadow);
+        signInLbl.setText("Sig Up");
 
-    private void setStyles() {
-        DropShadow shadow = new DropShadow(0,4,4, Color.color(0,0,0,0.25));
-        lblSignIn.setEffect(shadow);
+
+        //Add a listener to label
+        signInLbl.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+            handleSignIn(event);
+        });
+        signInLbl.getStyleClass().add("lblSignIn");
+        btnHolderHBox.getChildren().add(signInLbl);
     }
 
     private void setLogo() {
@@ -119,6 +118,7 @@ public class TopViewAllUsersController implements Initializable {
     }
 
     public void handleSignIn(MouseEvent mouseEvent) {
+        System.out.println("Yay");
     }
 
 }
