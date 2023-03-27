@@ -123,8 +123,8 @@
     -fx-background: transparent;
     -fx-background-color: transparent;
 }
-#indexBackground {
-    fx-background-color: rgba(52,40,72,1);
+.indexBackground {
+    -fx-background-color: radial-gradient(focus-angle 45deg, focus-distance 10%, center 50% 50%, radius 100%, reflect, rgba(52,40,72,1), rgba(76,64,96,1));
 }
 
 .lblSignIn {
