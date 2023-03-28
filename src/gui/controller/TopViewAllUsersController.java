@@ -33,13 +33,21 @@ public class TopViewAllUsersController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        String user = "Event Coordinator";
-        //String user = "Administrator";
-        //String user = null;
+        //String userREAL = "Event Coordinator";
+        //String userREAL = "Administrator";
+        String user = null;
+        if (new LoginViewController().getUserREAL() != null) {
+            //user = new LoginViewController().indexController.getUser();
+            user = new LoginViewController().getUserREAL();
+        }
+
+        System.out.println("user is:  " + user);
         Button[] buttons = assignButtonsToUsers(user);
         addButtons(buttons);
         setLogo();
-        signInLabelStyling();
+        if (user == null) {
+            signInLabelStyling();
+        }
         controllerAssistant = ControllerAssistant.getInstance();
     }
 
