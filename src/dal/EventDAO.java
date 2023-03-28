@@ -83,7 +83,7 @@ public class EventDAO implements IEventDAO{
     public void deleteEvent(Event event) throws Exception {
         int id = event.getEventID();
 
-        String sql = "DELETE FROM Events WHERE Id = " + id + ";";
+        String sql = "DELETE FROM Event_ WHERE Id = " + id + ";";
 
         try (Connection conn = db.getConnection()) {
 
