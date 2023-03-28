@@ -1,6 +1,7 @@
 package dal;
 
 import be.Event;
+import com.microsoft.sqlserver.jdbc.SQLServerException;
 import dal.interfaces.IEventDAO;
 
 import java.io.IOException;
@@ -21,19 +22,25 @@ public class EventDAO implements IEventDAO{
     public List<Event> getAllEvents() throws Exception {
         ArrayList<Event> allActiveEvents = new ArrayList<>();
         try (Connection conn = db.getConnection()) {
-            String sql = "SELECT * FROM Event WHERE Event_Is_Active = 1;";
+            String sql = "SELECT * FROM Event_";
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
 
             while (rs.next()) {
+                int id = rs.getInt("Event_ID");
                 String title = rs.getString("Event_Title");
                 String location = rs.getString("Event_Location");
                 LocalDate date = rs.getDate("Event_Date").toLocalDate();
                 Time startTime = rs.getTime("Event_Start_Time");
                 String description = rs.getString("Event_Description");
                 boolean isActive = true;
+                switch (rs.getInt("Event_Is_Active")) {
+                    case 0:
+                        isActive = false;
+                }
 
-                Event event = new Event(title, date, startTime, location, description, isActive);
+
+                Event event = new Event(id, title, date, startTime, location, description, isActive);
                 allActiveEvents.add(event);
 
             }
@@ -49,7 +56,7 @@ public class EventDAO implements IEventDAO{
     public int createEvent(Event event) throws Exception {
         int id = 0;
         try (Connection conn = db.getConnection()) {
-            String sql = "INSERT INTO Event (Event_Title, Event_Location, Event_Event_Coordinator_ID, Event_Date, Event_Start_Time, Event_Description, Event_Ticket_Total, Event_Ticket_Sold, Event_Is_Active) Values(?,?,?,?,?,?,?,?,?);";
+            String sql = "INSERT INTO Event_ (Event_Title, Event_Location, Event_Event_Coordinator_ID, Event_Date, Event_Start_Time, Event_Description, Event_Ticket_Total, Event_Ticket_Sold, Event_Is_Active) Values(?,?,?,?,?,?,?,?,?);";
 
 
             PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -79,10 +86,9 @@ public class EventDAO implements IEventDAO{
     }
 
     @Override
-    public void deleteEvent(Event event) throws Exception {
-        int id = event.getEventID();
+    public void deleteEvent(int id) throws SQLException {
 
-        String sql = "DELETE FROM Events WHERE Id = " + id + ";";
+        String sql = "DELETE FROM Event_ WHERE Event_ID = " + id + ";";
 
         try (Connection conn = db.getConnection()) {
 
@@ -96,7 +102,19 @@ public class EventDAO implements IEventDAO{
     }
 
     @Override
-    public boolean cancelEvent(int id) throws Exception {
-        return false;
+    public void cancelEvent(int id) throws SQLException{
+
+        String sql = "UPDATE Event_ SET Event_Is_Active = '0' WHERE Event_ID = " + id + ";";
+
+        try (Connection conn = db.getConnection()) {
+
+            //Statements are prepared SQL statements
+            PreparedStatement ps = conn.prepareStatement(sql);
+
+            //Execute the update which removes the link between song and playlist first, then remove the song from the DB
+            ps.executeUpdate();
+
+        }
+
     }
 }

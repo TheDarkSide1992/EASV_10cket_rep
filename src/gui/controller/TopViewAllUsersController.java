@@ -93,6 +93,7 @@ public class TopViewAllUsersController implements Initializable {
             btnHolderHBox.getChildren().add(btn);
             //Position in BOX
             btnHolderHBox.setAlignment(Pos.BOTTOM_CENTER);
+
         }
     }
 

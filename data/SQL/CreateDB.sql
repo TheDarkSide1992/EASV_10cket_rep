@@ -1,20 +1,20 @@
 USE master;
 GO
 
-DROP DATABASE IF EXISTS EASV_10cket_x;
+DROP DATABASE IF EXISTS EASV_10cket_X;
 GO
 
-CREATE DATABASE EASV_10cket_x;
+CREATE DATABASE EASV_10cket_X;
 GO
 
-USE EASV_10cket_x;
+USE EASV_10cket_X;
 GO
 
 CREATE TABLE User_Type(
-    User_Type_ID                INT IDENTITY(1,1)                       NOT NULL,
-    USER_TYPE_TYPE              NVARCHAR(60)                            NOT NULL,
+User_Type_ID                INT IDENTITY(1,1)                       NOT NULL,
+USER_TYPE_TYPE              NVARCHAR(60)                            NOT NULL,
 
-    CONSTRAINT PK_USER_TYPE PRIMARY KEY(User_Type_ID)
+CONSTRAINT PK_USER_TYPE PRIMARY KEY(User_Type_ID)
 )
 GO
 
@@ -54,7 +54,7 @@ CREATE TABLE Customer(
 )
 GO
 
-CREATE TABLE Event(
+CREATE TABLE Event_(
     Event_ID                    INT IDENTITY(1,1)                       NOT NULL,
     Event_Title                 NVARCHAR(250)                           NOT NULL,
     Event_Location              NVARCHAR(250)                           NOT NULL,
@@ -83,7 +83,7 @@ CREATE TABLE Ticket(
     CONSTRAINT PK_TICKET_CONTENT_ID PRIMARY KEY(Ticket_Content_ID),
 
     CONSTRAINT FK_TICKET_EVENT_ID FOREIGN KEY(Ticket_Event_ID)
-    REFERENCES Event(Event_ID)
+    REFERENCES Event_(Event_ID)
 )
 GO
 
@@ -96,5 +96,16 @@ CREATE TABLE Ticket_Customer_Relation(
 
     CONSTRAINT FK_TCR_TICKET_ID FOREIGN KEY(TCR_Ticket_ID)
     REFERENCES Ticket(Ticket_Content_ID)
+)
+GO
+
+CREATE TABLE Submitted_For_Deletion(
+    Submit_Delete_ID          INT IDENTITY(1,1)                       NOT NULL,
+    Submit_Delete_Event       INT                                     NOT NULL,
+
+    CONSTRAINT PK_SD_ID PRIMARY KEY(Submit_Delete_ID),
+
+    CONSTRAINT FK_SD_Event_ID FOREIGN KEY(Submit_Delete_Event)
+    REFERENCES Event_(Event_ID)
 )
 GO
