@@ -1,20 +1,20 @@
 USE master;
 GO
 
-DROP DATABASE IF EXISTS EASV_10cket_X;
+DROP DATABASE IF EXISTS EASV_10cket_x;
 GO
 
-CREATE DATABASE EASV_10cket_X;
+CREATE DATABASE EASV_10cket_x;
 GO
 
-USE EASV_10cket_X;
+USE EASV_10cket_x;
 GO
 
 CREATE TABLE User_Type(
-User_Type_ID                INT IDENTITY(1,1)                       NOT NULL,
-USER_TYPE_TYPE              NVARCHAR(60)                            NOT NULL,
+    User_Type_ID                INT IDENTITY(1,1)                       NOT NULL,
+    USER_TYPE_TYPE              NVARCHAR(60)                            NOT NULL,
 
-CONSTRAINT PK_USER_TYPE PRIMARY KEY(User_Type_ID)
+    CONSTRAINT PK_USER_TYPE PRIMARY KEY(User_Type_ID)
 )
 GO
 
@@ -35,7 +35,8 @@ GO
 
 CREATE TABLE User_Passwords(
     User_User_ID                INT                                     NOT NULL,
-    Users_Password              Binary(500)                             NOT NULL,
+    --Users_Password              Binary(500)                             NOT NULL,
+    Users_Password              NVARCHAR(MAX)                           NOT NULL,
 
     CONSTRAINT FK_USER_USER_ID FOREIGN KEY(User_User_ID)
     REFERENCES User_(User_ID)
@@ -48,6 +49,7 @@ CREATE TABLE Customer(
     Customer_Mail               NVARCHAR(250)                           NOT NULL,
     Customer_tlf                NVARCHAR(50)                            NOT NULL,
     Customer_Ticket_Bought      INT                                     NOT NULL,
+
     Customer_Monet_Spend        INT                                     NOT NULL,
 
     CONSTRAINT PK_CUSTOMER_ID PRIMARY KEY(Customer_ID)
@@ -71,6 +73,7 @@ CREATE TABLE Event_(
     CONSTRAINT PK_EVENT_ID PRIMARY KEY(Event_ID),
 
     CONSTRAINT FK_EVENT_EVENT_COORDINATOR_ID FOREIGN KEY(Event_Event_Coordinator_ID)
+
     REFERENCES User_(User_ID)
 )
 GO

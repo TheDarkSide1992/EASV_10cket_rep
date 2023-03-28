@@ -1,5 +1,7 @@
 package gui.controller;
 
+import be.User;
+import gui.model.Model;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -15,10 +17,18 @@ public class LoginViewController implements Initializable {
     @FXML private TextField txtUserName, txtPassword;
 
     private ControllerAssistant controllerAssistant;
+    private Model model;
+    private User user;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        controllerAssistant = ControllerAssistant.getInstance();
+        try {
+            controllerAssistant = ControllerAssistant.getInstance();
+            model = new Model();
+        } catch (Exception e) {
+            displayError(e);
+            e.printStackTrace();
+        }
     }
     private void displayError(Throwable t)
     {
@@ -43,8 +53,19 @@ public class LoginViewController implements Initializable {
 
         if (!validPassword(txtPassword.getText())) displayAlert("password contain illegal characters");
 
-        String pasword = String.valueOf(txtPassword.getText().getBytes());
-        System.out.println(pasword);
+        String password = txtPassword.getText().trim();
+        System.out.println(password);
+
+        String userName = txtUserName.getText().trim();
+
+        try {
+            user = model.checkLogIn(userName, password);
+            controllerAssistant.setLoggedInUser(user);
+        } catch (Exception e){
+            displayError(e);
+            e.printStackTrace();
+        }
+
 
     }
 

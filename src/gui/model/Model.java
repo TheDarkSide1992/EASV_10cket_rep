@@ -1,7 +1,9 @@
 package gui.model;
 
 import be.Event;
+import be.User;
 import bll.EventManager;
+import bll.UserManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -10,10 +12,12 @@ import java.sql.SQLException;
 public class Model {
     private ObservableList<Event> activeEvents;
     EventManager eventManager;
+    UserManager userManager;
 
     public Model() throws Exception {
 
         eventManager = new EventManager();
+        userManager = new UserManager();
         activeEvents = FXCollections.observableArrayList();
 
     }
@@ -40,6 +44,10 @@ public class Model {
 
     public void cancelEvent(int eventID) throws SQLException {
         eventManager.cancelEvent(eventID);
+    }
+
+    public User checkLogIn(String userName, String password) throws Exception{
+        return userManager.getIfLongedInUSer(userName,password);
     }
 }
 

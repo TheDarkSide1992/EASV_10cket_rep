@@ -1,12 +1,11 @@
 package gui.controller;
 
+import be.User;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 
 import java.io.IOException;
@@ -15,6 +14,7 @@ public class ControllerAssistant {
     @FXML
     private static BorderPane borderPane;
     private static ControllerAssistant controllerAssistant;
+    private static User setLoggedInUser;
 
     private ControllerAssistant() {
 
@@ -29,6 +29,8 @@ public class ControllerAssistant {
     public void setBorderPane(BorderPane borderPane){
         this.borderPane = borderPane;
     }
+    public void setLoggedInUser(User longedInUser){this.setLoggedInUser = longedInUser;}
+    public User getLoggedInUser(User longedInUser){return this.setLoggedInUser;}
 
     public void loadCenter(String file) throws IOException {
         FXMLLoader loader = new FXMLLoader();

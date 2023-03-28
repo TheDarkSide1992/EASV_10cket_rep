@@ -22,7 +22,7 @@ public class EventDAO implements IEventDAO{
     public List<Event> getAllEvents() throws Exception {
         ArrayList<Event> allActiveEvents = new ArrayList<>();
         try (Connection conn = db.getConnection()) {
-            String sql = "SELECT * FROM Event";
+            String sql = "SELECT * FROM Event_";
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
 
