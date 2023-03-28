@@ -39,8 +39,6 @@ public class TopViewController implements Initializable {
         setStyles();
         signInLabelStyling();
         controllerAssistant = ControllerAssistant.getInstance();
-
-
     }
 
     private void signInLabelStyling() {
@@ -91,3 +89,5 @@ public class TopViewController implements Initializable {
         controllerAssistant.openNewWindow("AllEventView.fxml");
     }
 }
+
+

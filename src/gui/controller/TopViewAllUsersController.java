@@ -1,11 +1,9 @@
 package gui.controller;
 
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.effect.DropShadow;
@@ -17,6 +15,9 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -26,64 +27,73 @@ public class TopViewAllUsersController implements Initializable {
     @FXML
     private ImageView imgLogo;
 
+    private ControllerAssistant controllerAssistant;
+
     private String url = "data/Images/10cketshort.png";
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        //String user = "Event Coordinator";
+        String user = "Event Coordinator";
         //String user = "Administrator";
-        String user = null;
-        ArrayList<String> btnsToCreate = setAllButtons(user);
-        addButtons(btnsToCreate);
-        //setLogo();
+        //String user = null;
+        Button[] buttons = assignButtonsToUsers(user);
+        addButtons(buttons);
+        setLogo();
         signInLabelStyling();
-
+        controllerAssistant = ControllerAssistant.getInstance();
     }
 
-    private void addButtons(ArrayList<String> btnsToCreate) {
-        for (String name: btnsToCreate) {
-            Button btn = new Button(name);
-            //Style the btns
+    private Button[] assignButtonsToUsers(String user) {
+        //Define ALL buttons possible having in the topView
+        Button upcomingEvents   = new Button("Upcoming Events");
+        Button allEvents        = new Button("All Events");
+        Button calender         = new Button("Calender");
+        Button contact          = new Button("Contact");
+        Button prices           = new Button("Prices");
+        Button createEvent      = new Button("Create Event");
+        Button manageTickets    = new Button("Manage Tickets");
+        Button makeCoordinator  = new Button("Create Event Coordinator");
+
+        //Give the buttons action listeners
+        upcomingEvents.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> upcomingEvents());
+        allEvents.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> allEvents());
+        calender.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> calender());
+        contact.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> contact());
+        prices.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> prices());
+        createEvent.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> createEvent());
+        manageTickets.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> manageTickets());
+        makeCoordinator.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> createCoordinators());
+
+
+        //AssignButtons to all different users
+        Button[] eventCoordinator   = {upcomingEvents, allEvents, calender, contact, prices, createEvent, manageTickets};
+        Button[] administrator      = {upcomingEvents, allEvents, calender, contact, prices, makeCoordinator};
+        Button[] costumer           = {upcomingEvents, allEvents, calender, contact, prices};
+        if (user == null){
+            return costumer;
+        }else if (user.equals("Event Coordinator")) {
+            return eventCoordinator;
+        }else if (user.equals("Administrator")){
+            return administrator;
+        }else{
+            return costumer;
+        }
+    }
+
+    /**
+     * Adds buttons to GUI
+     * @param btnsToCreate
+     */
+    private void addButtons(Button[] btnsToCreate) {
+        for (Button btn: btnsToCreate) {
+            //Style the buttons
             btn.getStyleClass().add("btnTopButtons");
-            //btn.setMinSize(160,50);
             Font font = Font.font("Courier New", FontWeight.BOLD, 14);
             btn.setFont(font);
             btnHolderHBox.getChildren().add(btn);
-
-            //Spacing between each element
-            btnHolderHBox.setSpacing(10);
             //Position in BOX
             btnHolderHBox.setAlignment(Pos.BOTTOM_CENTER);
         }
-    }
-
-    private ArrayList<String> setAllButtons(String user) {
-        ArrayList<String> btns = new ArrayList<>();
-        if (user == "Event Coordinator") {
-            btns.add("Upcoming Events");
-            btns.add("All Events");
-            btns.add("Calender");
-            btns.add("Contact");
-            btns.add("Prices");
-            btns.add("Create Event");
-            btns.add("Manage Tickets");
-        }
-        else if (user == "Administrator"){
-            btns.add("Upcoming Events");
-            btns.add("All Events");
-            btns.add("Calender");
-            btns.add("Contact");
-            btns.add("Prices");
-            btns.add("Create Event Coordinator");
-        }
-        else {
-            btns.add("Upcoming Events");
-            btns.add("All Events");
-            btns.add("Calender");
-            btns.add("Contact");
-            btns.add("Prices");
-        }
-        return btns;
     }
 
     private void signInLabelStyling() {
@@ -91,7 +101,7 @@ public class TopViewAllUsersController implements Initializable {
         Label signInLbl = new Label();
         signInLbl.setEffect(shadow);
         signInLbl.setText("Sig Up");
-
+        signInLbl.setAlignment(Pos.CENTER_RIGHT);
 
         //Add a listener to label
         signInLbl.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
@@ -102,23 +112,50 @@ public class TopViewAllUsersController implements Initializable {
     }
 
     private void setLogo() {
-        Image logo = new Image(url);
-        imgLogo.setImage(logo);
-
-    }
-
-    public void handleNewEvent(ActionEvent actionEvent) {
-        ControllerAssistant controllerAssistant = ControllerAssistant.getInstance();
-        controllerAssistant.openNewWindow("CreateEventView.fxml");
-    }
-
-    public void handleUpcomingEvents(ActionEvent actionEvent) {
-        ControllerAssistant controllerAssistant = ControllerAssistant.getInstance();
-        controllerAssistant.openNewWindow("EventOverView.fxml");
+        try {
+            InputStream stream = null;
+            stream = new FileInputStream(url);
+            Image logo = new Image(stream);
+            imgLogo.setImage(logo);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     public void handleSignIn(MouseEvent mouseEvent) {
-        System.out.println("Yay");
+        controllerAssistant.openNewWindow("LoginView.fxml");
+    }
+
+    public void upcomingEvents() {
+        controllerAssistant.openNewWindow("EventOverView.fxml");
+    }
+
+    private void allEvents() {
+        controllerAssistant.openNewWindow("AllEventView.fxml");
+    }
+
+    private void calender() {
+        controllerAssistant.openNewWindow("CalendarView.fxml");
+    }
+
+    private void contact() {
+        controllerAssistant.openNewWindow("ContactView.fxml");
+    }
+
+    private void prices() {
+        controllerAssistant.openNewWindow("PriceView.fxml");
+    }
+
+    private void createEvent() {
+        controllerAssistant.openNewWindow("CreateEventView.fxml");
+    }
+
+    private void manageTickets() {
+        controllerAssistant.openNewWindow("");
+    }
+
+    private void createCoordinators() {
+        controllerAssistant.openNewWindow("");
     }
 
 }
