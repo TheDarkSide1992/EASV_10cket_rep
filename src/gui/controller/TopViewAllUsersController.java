@@ -124,7 +124,6 @@ public class TopViewAllUsersController implements Initializable {
     }
 
     void logoutLabel() {
-
         DropShadow shadow = new DropShadow(0, 4, 4, Color.color(0, 0, 0, 0.25));
         Label logout = new Label();
         logout.setEffect(shadow);
@@ -140,6 +139,7 @@ public class TopViewAllUsersController implements Initializable {
             Button[] buttons = assignButtonsToUsers(null);
             addButtons(buttons);
             signInLabelStyling();
+            upcomingEvents();
         });
         logout.getStyleClass().add("lblSignIn");
         btnHolderHBox.getChildren().add(logout);

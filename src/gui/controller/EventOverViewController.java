@@ -178,6 +178,10 @@ public class EventOverViewController implements Initializable {
 
 
                 expPanel.setCollapsedContent(innerPane);
+                Pane expandedPane = new Pane();
+                //Add to the expanded panel
+                expandedPane.setMinHeight(200);
+                expPanel.setExpandedContent(expandedPane);
 
                 if (!events.isEventIsActive()) {
                     outerPane.setOpacity(0.5);
