@@ -2,6 +2,7 @@ package dal.interfaces;
 
 import be.Event;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public interface IEventDAO {
@@ -9,8 +10,8 @@ public interface IEventDAO {
 
     int createEvent (Event event) throws Exception;
 
-    void deleteEvent(Event event) throws Exception;
+    void deleteEvent(int id) throws SQLException;
 
-    boolean cancelEvent(int id) throws Exception;
+    void cancelEvent(int id) throws SQLException;
 
 }

@@ -7,6 +7,7 @@ import dal.EventDAO;
 import dal.interfaces.IEventDAO;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
 
 public class EventManager {
@@ -30,9 +31,12 @@ public class EventManager {
         return eventDAO.createEvent(event);
     }
 
-    public void deleteEvent(Event event) throws Exception {
-        eventDAO.deleteEvent(event);
+    public void deleteEvent(int id) throws SQLException {
+        eventDAO.deleteEvent(id);
     }
 
 
+    public void cancelEvent(int eventID) throws SQLException {
+        eventDAO.cancelEvent(eventID);
+    }
 }

@@ -5,6 +5,8 @@ import bll.EventManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import java.sql.SQLException;
+
 public class Model {
     private ObservableList<Event> activeEvents;
     EventManager eventManager;
@@ -31,9 +33,13 @@ public class Model {
         return activeEvents;
     }
 
-    public void deleteEvent(Event event) throws Exception {
-        eventManager.deleteEvent(event);
+    public void deleteEvent(int id) throws SQLException {
+        eventManager.deleteEvent(id);
 
+    }
+
+    public void cancelEvent(int eventID) throws SQLException {
+        eventManager.cancelEvent(eventID);
     }
 }
 

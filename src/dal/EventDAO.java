@@ -1,6 +1,7 @@
 package dal;
 
 import be.Event;
+import com.microsoft.sqlserver.jdbc.SQLServerException;
 import dal.interfaces.IEventDAO;
 
 import java.io.IOException;
@@ -21,7 +22,7 @@ public class EventDAO implements IEventDAO{
     public List<Event> getAllEvents() throws Exception {
         ArrayList<Event> allActiveEvents = new ArrayList<>();
         try (Connection conn = db.getConnection()) {
-            String sql = "SELECT * FROM Event_ WHERE Event_Is_Active = 1;";
+            String sql = "SELECT * FROM Event_";
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
 
@@ -33,6 +34,11 @@ public class EventDAO implements IEventDAO{
                 Time startTime = rs.getTime("Event_Start_Time");
                 String description = rs.getString("Event_Description");
                 boolean isActive = true;
+                switch (rs.getInt("Event_Is_Active")) {
+                    case 0:
+                        isActive = false;
+                }
+
 
                 Event event = new Event(id, title, date, startTime, location, description, isActive);
                 allActiveEvents.add(event);
@@ -80,10 +86,9 @@ public class EventDAO implements IEventDAO{
     }
 
     @Override
-    public void deleteEvent(Event event) throws Exception {
-        int id = event.getEventID();
+    public void deleteEvent(int id) throws SQLException {
 
-        String sql = "DELETE FROM Event_ WHERE Id = " + id + ";";
+        String sql = "DELETE FROM Event_ WHERE Event_ID = " + id + ";";
 
         try (Connection conn = db.getConnection()) {
 
@@ -97,7 +102,19 @@ public class EventDAO implements IEventDAO{
     }
 
     @Override
-    public boolean cancelEvent(int id) throws Exception {
-        return false;
+    public void cancelEvent(int id) throws SQLException{
+
+        String sql = "UPDATE Event_ SET Event_Is_Active = '0' WHERE Event_ID = " + id + ";";
+
+        try (Connection conn = db.getConnection()) {
+
+            //Statements are prepared SQL statements
+            PreparedStatement ps = conn.prepareStatement(sql);
+
+            //Execute the update which removes the link between song and playlist first, then remove the song from the DB
+            ps.executeUpdate();
+
+        }
+
     }
 }
