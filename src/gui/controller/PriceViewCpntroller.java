@@ -1,2 +1,4 @@
-package gui.view;public class PriceViewCpntroller {
+package gui.controller;
+
+public class PriceViewCpntroller {
 }
