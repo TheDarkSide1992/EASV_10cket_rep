@@ -16,7 +16,8 @@ public class Event {
     private int eventTicketAmount;
     private boolean eventIsActive;
     private Image eventImage;
-    public Event(String eventTitle, LocalDate eventDate, Time eventStartTime, String eventLocation, String eventDescription, boolean eventIsActive) {
+    public Event(int eventID, String eventTitle, LocalDate eventDate, Time eventStartTime, String eventLocation, String eventDescription, boolean eventIsActive) {
+        this.eventID = eventID;
         this.eventTitle = eventTitle;
         this.eventDate = eventDate;
         this.eventStartTime = eventStartTime;
@@ -25,6 +26,14 @@ public class Event {
         this.eventIsActive = eventIsActive;
     }
 
+    public Event(String eventTitle, LocalDate eventDate, Time eventStartTime, String eventLocation, String eventDescription, boolean eventIsActive) {
+        this.eventTitle = eventTitle;
+        this.eventDate = eventDate;
+        this.eventStartTime = eventStartTime;
+        this.eventLocation = eventLocation;
+        this.eventDescription = eventDescription;
+        this.eventIsActive = eventIsActive;
+    }
 
     public int getEventID() {
         return eventID;
