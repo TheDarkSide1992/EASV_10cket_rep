@@ -49,13 +49,15 @@ public class EventDAO implements IEventDAO{
                     event.setImageWithByte(data);
                 }
 
-                allActiveEvents.add(event);
+                allEvents.add(event);
 
             }
 
         } catch (SQLException ex) {
             ex.printStackTrace();
             throw new SQLException("Could not get events from database");
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
         return allEvents;
     }
