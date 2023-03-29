@@ -19,6 +19,7 @@ public class LoginViewController implements Initializable {
 
     private ControllerAssistant controllerAssistant;
     private Model model;
+    private String user;
     private static String userREAL = null;
     public static IndexController indexController;
 
@@ -76,6 +77,21 @@ public class LoginViewController implements Initializable {
         System.out.println(password);
 
         String userName = txtUserName.getText().trim();
+
+        try {
+            user = model.checkLogIn(userName, password);
+            controllerAssistant.setLoggedInUser(user);
+
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Success");
+            alert.setHeaderText("Successfully login to " + user.getUserFirstName());
+            alert.showAndWait();
+
+        } catch (Exception e){
+            displayError(e);
+            e.printStackTrace();
+        }
+
     }
 
     public boolean validPassword(String password){
