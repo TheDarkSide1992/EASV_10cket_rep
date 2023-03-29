@@ -20,7 +20,7 @@ public class EventDAO implements IEventDAO{
 
     @Override
     public List<Event> getAllEvents() throws SQLException {
-        ArrayList<Event> allActiveEvents = new ArrayList<>();
+        ArrayList<Event> allEvents = new ArrayList<>();
         try (Connection conn = db.getConnection()) {
             String sql = "SELECT * FROM Event_";
             Statement stmt = conn.createStatement();
@@ -41,7 +41,7 @@ public class EventDAO implements IEventDAO{
 
 
                 Event event = new Event(id, title, date, startTime, location, description, isActive);
-                allActiveEvents.add(event);
+                allEvents.add(event);
 
             }
 
@@ -49,7 +49,7 @@ public class EventDAO implements IEventDAO{
             ex.printStackTrace();
             throw new SQLException("Could not get events from database");
         }
-        return allActiveEvents;
+        return allEvents;
     }
 
     @Override
