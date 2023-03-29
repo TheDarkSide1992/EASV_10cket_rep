@@ -32,7 +32,7 @@ public class AllEventController implements Initializable {
     @FXML
     public VBox vBoxCustomerView;
     private Model model;
-    private static ObservableList<Event> inactiveAndActiveEvents;
+    private static ObservableList<Event> allEvents;
 
     public static boolean submitForDeletion = false;
 
@@ -47,8 +47,8 @@ public class AllEventController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         try {
             model = new Model();
-            inactiveAndActiveEvents = FXCollections.observableArrayList();
-            inactiveAndActiveEvents.addAll(model.getActiveEvents());
+            allEvents = FXCollections.observableArrayList();
+            allEvents.addAll(model.getAllEvents());
             displayEvents();
             allEventScrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         } catch (Exception e) {
@@ -139,7 +139,7 @@ public class AllEventController implements Initializable {
     private void displayEvents() {
         try{
 
-            for (Event events : inactiveEvents) {
+            for (Event events : allEvents) {
                 int id = events.getEventID();
                 String day1 = "";
                 Label day = new Label();
