@@ -11,6 +11,7 @@ import java.sql.SQLException;
 
 public class Model {
     private ObservableList<Event> activeEvents;
+    private ObservableList<Event> allEvents;
     EventManager eventManager;
     UserManager userManager;
 
@@ -22,8 +23,9 @@ public class Model {
 
     }
 
-    public void getAllEvents() throws Exception {
-        eventManager.getAllEvents();
+    public ObservableList<Event> getAllEvents() throws Exception {
+        allEvents.addAll(eventManager.getAllEvents());
+        return allEvents;
     }
 
     public void createEvent(Event event) throws Exception {
@@ -36,7 +38,6 @@ public class Model {
         activeEvents.addAll(eventManager.getAllEvents());
         return activeEvents;
     }
-
     public void deleteEvent(int id) throws SQLException {
         eventManager.deleteEvent(id);
 
