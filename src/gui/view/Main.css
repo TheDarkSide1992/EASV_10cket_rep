@@ -1,4 +1,4 @@
-.outerPane{
+.paneOuterPane{
     -fx-background: transparent;
 }
 
@@ -8,7 +8,11 @@
 
 }
 
-.innerPane {
+.paneCollapsedPane {
+    -fx-background: transparent;
+}
+
+.paneExpandedPane {
     -fx-background: transparent;
 }
 
@@ -26,7 +30,13 @@
    -fx-text-fill: rgba(243,218,218,1);
 }
 
-.lblMonthAndYear {
+.lblMonth {
+    -fx-font-size: 23;
+    -fx-font-weight: bold;
+    -fx-text-fill: rgba(243,218,218,1);
+}
+
+.lblYear {
     -fx-font-size: 23;
     -fx-font-weight: bold;
     -fx-text-fill: rgba(243,218,218,1);

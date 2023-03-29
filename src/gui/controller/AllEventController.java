@@ -120,8 +120,8 @@ public class AllEventController implements Initializable {
                 expandedPane.getStyleClass().add("innerPane");
                 expPanel.getStyleClass().add("expansionPanel");
                 day.getStyleClass().add("lblEventDay");
-                month.getStyleClass().add("lblMonthAndYear");
-                year.getStyleClass().add("lblMonthAndYear");
+                month.getStyleClass().add("lblMonth");
+                year.getStyleClass().add("lblYear");
                 eventDescription.getStyleClass().add("lblEventDescription");
 
                 DropShadow shadow = new DropShadow(0, 4, 4, Color.color(0, 0, 0, 0.25));
