@@ -15,7 +15,9 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Files;
 import java.sql.Time;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
@@ -43,7 +45,8 @@ public class CreateEventController implements Initializable {
     @FXML
     private CheckBox cbIsActive;
 
-    Model model;
+    private Model model;
+    private byte[] data;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -60,6 +63,7 @@ public class CreateEventController implements Initializable {
         txtEventDescription.textProperty().addListener(observable -> isEmpty());
         txtEventStartTime.textProperty().addListener(observable -> isEmpty());
         txtEventDescription.textProperty().addListener(observable -> isEmpty());
+        txtEventDescription.setWrapText(true);
         txtEventOwner.textProperty().addListener(observable -> isEmpty());
         txtEventCollaborator.textProperty().addListener(observable -> isEmpty());
         imgEventImage.imageProperty().addListener(observable -> imageChosen());
@@ -105,6 +109,12 @@ public class CreateEventController implements Initializable {
                     || selectedFile != null && selectedFile.getName().endsWith(".gif")) {
                 Image image = new Image(selectedFile.toURI().toString());
                 imgEventImage.setImage(image);
+
+                try {
+                    data = Files.readAllBytes(selectedFile.getAbsoluteFile().toPath());
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
             }
         } catch (Exception e) {
             displayError(e);
@@ -154,6 +164,7 @@ public class CreateEventController implements Initializable {
                 cbIsActive.isSelected());
         if (imgEventImage != null){
             event1.setEventImage(imgEventImage.getImage());
+            event1.setByteImage(data);
         }
         try {
             model.createEvent(event1);

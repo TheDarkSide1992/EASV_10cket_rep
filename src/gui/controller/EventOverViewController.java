@@ -7,6 +7,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Node;
@@ -38,7 +39,7 @@ public class EventOverViewController implements Initializable {
     public static boolean submitForDeletion = false;
 
     @FXML
-    private ImageView imageCxl, imageEdit, imageEvent;
+    private ImageView imageCxl, imageEdit, imageEvent, imageEventExpanded,imageCxlExpanded, imageEditExpanded;
 
     private String cxlURL = "data/Images/Cancel.png";
 
@@ -51,9 +52,7 @@ public class EventOverViewController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         try {
             model = new Model();
-            activeEvents = FXCollections.observableArrayList();
-            //Gets absolutely ALL events
-            activeEvents.addAll(model.getActiveEvents());
+            activeEvents = model.getActiveEvents();
             displayActiveEvents();
             scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         } catch (Exception e) {
@@ -76,10 +75,19 @@ public class EventOverViewController implements Initializable {
                 Label title = new Label();
                 Label startTime = new Label();
                 Label location = new Label();
+                imageEventExpanded = new ImageView();
+                imageCxlExpanded = new ImageView();
+                imageEditExpanded = new ImageView();
+                Label titleExpanded = new Label();
+                Label startTimeExpanded = new Label();
+                Label locationExpanded = new Label();
+                Label eventDescription = new Label();
+
 
                 Pane outerPane = new Pane();
                 ExpansionPanel expPanel = new ExpansionPanel();
-                Pane innerPane = new Pane();
+                Pane collapsedPane = new Pane();
+                Pane expandedPane = new Pane();
 
                 day.setText(String.valueOf(events.getEventDate().getDayOfMonth()));
                 if (events.getEventDate().getDayOfMonth() <= 9) {
@@ -93,9 +101,15 @@ public class EventOverViewController implements Initializable {
 
 
                 title.setText(events.getEventTitle());
+                titleExpanded.setText(events.getEventTitle());
 
                 startTime.setText(events.getEventStartTime().toString().substring(0, 5));
                 location.setText(events.getEventLocation());
+
+                startTimeExpanded.setText(events.getEventStartTime().toString().substring(0, 5));
+                locationExpanded.setText(events.getEventLocation());
+
+                eventDescription.setText(events.getEventDescription());
 
 
                 outerPane.getStylesheets().add(getClass().getResource("/gui/view/Main.css").toExternalForm());
@@ -103,11 +117,16 @@ public class EventOverViewController implements Initializable {
                 title.getStyleClass().add("lblEventTitle");
                 startTime.getStyleClass().add("lblStartTime");
                 location.getStyleClass().add("lblLocation");
-                innerPane.getStyleClass().add("innerPane");
+                collapsedPane.getStyleClass().add("innerPane");
+                titleExpanded.getStyleClass().add("lblEventTitle");
+                startTimeExpanded.getStyleClass().add("lblStartTime");
+                locationExpanded.getStyleClass().add("lblLocation");
+                expandedPane.getStyleClass().add("innerPane");
                 expPanel.getStyleClass().add("expansionPanel");
                 day.getStyleClass().add("lblEventDay");
                 month.getStyleClass().add("lblMonthAndYear");
                 year.getStyleClass().add("lblMonthAndYear");
+                eventDescription.getStyleClass().add("lblEventDescription");
 
                 DropShadow shadow = new DropShadow(0, 4, 4, Color.color(0, 0, 0, 0.25));
 
@@ -126,8 +145,22 @@ public class EventOverViewController implements Initializable {
                 expPanel.setLayoutX(200);
                 expPanel.setLayoutY(25);
                 outerPane.setMinHeight(200);
-                innerPane.prefHeight(200);
-                innerPane.prefWidth(1200);
+                collapsedPane.prefHeight(200);
+                collapsedPane.prefWidth(1200);
+                titleExpanded.setEffect(shadow);
+                titleExpanded.setAlignment(Pos.CENTER);
+                titleExpanded.setMinWidth(1200);
+                titleExpanded.setMinHeight(60);
+                startTimeExpanded.setEffect(shadow);
+                startTimeExpanded.setAlignment(Pos.CENTER);
+                startTimeExpanded.setLayoutY(45);
+                startTimeExpanded.setMinWidth(1200);
+                startTimeExpanded.setMinHeight(60);
+                locationExpanded.setEffect(shadow);
+                locationExpanded.setLayoutY(90);
+                locationExpanded.setAlignment(Pos.CENTER);
+                locationExpanded.setMinWidth(1200);
+                locationExpanded.setMinHeight(60);
                 title.setEffect(shadow);
                 title.setAlignment(Pos.CENTER);
                 title.setMinWidth(1200);
@@ -142,6 +175,12 @@ public class EventOverViewController implements Initializable {
                 location.setAlignment(Pos.CENTER);
                 location.setMinWidth(1200);
                 location.setMinHeight(60);
+                eventDescription.setLayoutY(200);
+                eventDescription.setLayoutX(20);
+                eventDescription.setWrapText(true);
+                eventDescription.setMaxWidth(500);
+                eventDescription.setMaxHeight(300);
+
 
                 outerPane.getChildren().add(day);
                 outerPane.getChildren().add(month);
@@ -152,11 +191,19 @@ public class EventOverViewController implements Initializable {
                 imageEdit.setOnMouseClicked(event -> deleteEvent(events));  //TODO change this image to a trashcan, and only visible if it is an Admin who logged in;
                 imageCxl.setImage(loadImages(cxlURL));
                 imageEdit.setImage(loadImages(editURL));
-                imageEvent.setImage(loadImages(cxlURL));
+                imageEvent.setImage(events.getEventImage());
                 imageCxl.setScaleX(0.8);
                 imageCxl.setScaleY(0.8);
                 imageEdit.setScaleX(0.68);
                 imageEdit.setScaleY(0.68);
+
+                imageCxlExpanded.setImage(loadImages(cxlURL));
+                imageEditExpanded.setImage(loadImages(editURL));
+                imageEventExpanded.setImage(loadImages(cxlURL));
+                imageCxlExpanded.setScaleX(0.8);
+                imageCxlExpanded.setScaleY(0.8);
+                imageEditExpanded.setScaleX(0.68);
+                imageEditExpanded.setScaleY(0.68);
 
 
                 imageCxl.setX(1100);
@@ -168,27 +215,43 @@ public class EventOverViewController implements Initializable {
                 imageCxl.setEffect(shadow);
                 imageEdit.setEffect(shadow);
 
+                imageCxlExpanded.setX(1100);
+                imageCxlExpanded.setY(10);
+                imageEditExpanded.setX(1030);
+                imageEditExpanded.setY(10);
+                imageEventExpanded.setX(5);
+                imageEventExpanded.setY(10);
+                imageCxlExpanded.setEffect(shadow);
+                imageEditExpanded.setEffect(shadow);
 
-                innerPane.getChildren().add(imageEvent);
-                innerPane.getChildren().add(title);
-                innerPane.getChildren().add(startTime);
-                innerPane.getChildren().add(location);
 
-                innerPane.getChildren().add(imageCxl);
-                innerPane.getChildren().add(imageEdit);
+                collapsedPane.getChildren().add(imageEvent);
+                collapsedPane.getChildren().add(title);
+                collapsedPane.getChildren().add(startTime);
+                collapsedPane.getChildren().add(location);
+
+                collapsedPane.getChildren().add(imageCxl);
+                collapsedPane.getChildren().add(imageEdit);
+
+                expandedPane.setMinHeight(400);
+                expandedPane.getChildren().add(imageEventExpanded);
+                expandedPane.getChildren().add(titleExpanded);
+                expandedPane.getChildren().add(startTimeExpanded);
+                expandedPane.getChildren().add(locationExpanded);
+                expandedPane.getChildren().add(eventDescription);
+
+                expandedPane.getChildren().add(imageCxlExpanded);
+                expandedPane.getChildren().add(imageEditExpanded);
 
 
-                expPanel.setCollapsedContent(innerPane);
-                Pane expandedPane = new Pane();
-                //Add to the expanded panel
-                expandedPane.setMinHeight(200);
+                expPanel.setCollapsedContent(collapsedPane);
                 expPanel.setExpandedContent(expandedPane);
 
-                if (!events.isEventIsActive()) {
-                    outerPane.setOpacity(0.5);
-                    outerPane.setStyle("-fx-background-color: Gray");
-                    expPanel.setStyle("-fx-background-color: Gray");
-                }
+
+                expPanel.setCollapsedContent(collapsedPane);
+                expPanel.setExpandedContent(expandedPane);
+
+
                 outerPane.getChildren().add(expPanel);
 
                 vBoxCustomerView.getChildren().add(outerPane);

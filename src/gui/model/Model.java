@@ -11,6 +11,7 @@ import java.sql.SQLException;
 
 public class Model {
     private ObservableList<Event> activeEvents;
+    private ObservableList<Event> allEvents;
     EventManager eventManager;
     UserManager userManager;
 
@@ -19,22 +20,23 @@ public class Model {
         eventManager = new EventManager();
         userManager = new UserManager();
         activeEvents = FXCollections.observableArrayList();
+        allEvents = FXCollections.observableArrayList();
 
     }
 
-    public void getAllEvents() throws Exception {
-        eventManager.getAllEvents();
+    public ObservableList<Event> getAllEvents() throws Exception {
+        allEvents.addAll(eventManager.getAllEvents());
+        return allEvents;
+    }
+
+    public ObservableList<Event> getActiveEvents() throws Exception {
+        activeEvents.addAll(eventManager.getActiveEvents());
+        return activeEvents;
     }
 
     public void createEvent(Event event) throws Exception {
         event.setEventID(eventManager.createEvent(event));
         activeEvents.add(event);
-    }
-
-
-    public ObservableList<Event> getActiveEvents() throws Exception {
-        activeEvents.addAll(eventManager.getAllEvents());
-        return activeEvents;
     }
 
     public void deleteEvent(int id) throws SQLException {

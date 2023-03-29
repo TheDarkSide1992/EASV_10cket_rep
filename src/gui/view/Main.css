@@ -44,6 +44,12 @@
     -fx-text-fill: rgba(243,218,218,1);
 }
 
+.lblEventDescription {
+    -fx-font-size: 25;
+    -fx-font-weight: bold;
+    -fx-text-fill: rgba(243,218,218,1);
+}
+
 
 .txtEventDescription  {
     -fx-background-radius: 15;
