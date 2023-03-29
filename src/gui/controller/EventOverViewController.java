@@ -151,7 +151,7 @@ public class EventOverViewController implements Initializable {
                 imageEdit.setOnMouseClicked(event -> deleteEvent(events));  //TODO change this image to a trashcan, and only visible if it is an Admin who logged in;
                 imageCxl.setImage(loadImages(cxlURL));
                 imageEdit.setImage(loadImages(editURL));
-                imageEvent.setImage(loadImages(cxlURL));
+                imageEvent.setImage(events.getEventImage());
                 imageCxl.setScaleX(0.8);
                 imageCxl.setScaleY(0.8);
                 imageEdit.setScaleX(0.68);
