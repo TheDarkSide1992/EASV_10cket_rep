@@ -55,14 +55,14 @@ public class TopViewAllUsersController implements Initializable {
 
     private Button[] assignButtonsToUsers(String user) {
         //Define ALL buttons possible having in the topView
-        Button upcomingEvents = new Button("Upcoming Events");
-        Button allEvents = new Button("All Events");
-        Button calender = new Button("Calender");
-        Button contact = new Button("Contact");
-        Button prices = new Button("Prices");
-        Button createEvent = new Button("Create Event");
-        Button manageTickets = new Button("Manage Tickets");
-        Button makeCoordinator = new Button("Create Event Coordinator");
+        Button upcomingEvents       = new Button("Upcoming Events");
+        Button allEvents            = new Button("All Events");
+        Button calender             = new Button("Calender");
+        Button contact              = new Button("Contact");
+        Button prices               = new Button("Prices");
+        Button createEvent          = new Button("Create Event");
+        Button manageTickets        = new Button("Manage Tickets");
+        Button makeCoordinator      = new Button("Create Event Coordinator");
 
         //Give the buttons action listeners
         upcomingEvents.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> upcomingEvents());
