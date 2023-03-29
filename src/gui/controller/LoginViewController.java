@@ -61,6 +61,12 @@ public class LoginViewController implements Initializable {
         try {
             user = model.checkLogIn(userName, password);
             controllerAssistant.setLoggedInUser(user);
+
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Success");
+            alert.setHeaderText("Successfully login to " + user.getUserFirstName());
+            alert.showAndWait();
+
         } catch (Exception e){
             displayError(e);
             e.printStackTrace();
