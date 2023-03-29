@@ -48,8 +48,7 @@ public class AllEventController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         try {
             model = new Model();
-            allEvents = FXCollections.observableArrayList();
-            allEvents.addAll(model.getAllEvents());
+            allEvents = model.getAllEvents();
             displayActiveEvents();
             allEventScrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         } catch (Exception e) {

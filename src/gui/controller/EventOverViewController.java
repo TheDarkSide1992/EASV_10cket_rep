@@ -52,8 +52,7 @@ public class EventOverViewController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         try {
             model = new Model();
-            activeEvents = FXCollections.observableArrayList();
-            activeEvents.addAll(model.getActiveEvents());
+            activeEvents = model.getActiveEvents();
             displayActiveEvents();
             scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         } catch (Exception e) {

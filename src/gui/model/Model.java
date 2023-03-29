@@ -20,6 +20,7 @@ public class Model {
         eventManager = new EventManager();
         userManager = new UserManager();
         activeEvents = FXCollections.observableArrayList();
+        allEvents = FXCollections.observableArrayList();
 
     }
 
