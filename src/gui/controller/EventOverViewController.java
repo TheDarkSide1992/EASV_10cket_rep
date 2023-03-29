@@ -82,6 +82,7 @@ public class EventOverViewController implements Initializable {
                 Label titleExpanded = new Label();
                 Label startTimeExpanded = new Label();
                 Label locationExpanded = new Label();
+                Label eventDescription = new Label();
 
 
                 Pane outerPane = new Pane();
@@ -109,6 +110,8 @@ public class EventOverViewController implements Initializable {
                 startTimeExpanded.setText(events.getEventStartTime().toString().substring(0, 5));
                 locationExpanded.setText(events.getEventLocation());
 
+                eventDescription.setText(events.getEventDescription());
+
 
                 outerPane.getStylesheets().add(getClass().getResource("/gui/view/Main.css").toExternalForm());
                 outerPane.getStyleClass().add("outerPane");
@@ -124,6 +127,7 @@ public class EventOverViewController implements Initializable {
                 day.getStyleClass().add("lblEventDay");
                 month.getStyleClass().add("lblMonthAndYear");
                 year.getStyleClass().add("lblMonthAndYear");
+                eventDescription.getStyleClass().add("lblEventDescription");
 
                 DropShadow shadow = new DropShadow(0, 4, 4, Color.color(0, 0, 0, 0.25));
 
@@ -172,6 +176,12 @@ public class EventOverViewController implements Initializable {
                 location.setAlignment(Pos.CENTER);
                 location.setMinWidth(1200);
                 location.setMinHeight(60);
+                eventDescription.setLayoutY(200);
+                eventDescription.setLayoutX(20);
+                eventDescription.setWrapText(true);
+                eventDescription.setMaxWidth(500);
+                eventDescription.setMaxHeight(300);
+
 
                 outerPane.getChildren().add(day);
                 outerPane.getChildren().add(month);
@@ -216,22 +226,23 @@ public class EventOverViewController implements Initializable {
                 imageEditExpanded.setEffect(shadow);
 
 
-                collapsedPane.getChildren().add(imageEventExpanded);
-                collapsedPane.getChildren().add(titleExpanded);
-                collapsedPane.getChildren().add(startTimeExpanded);
-                collapsedPane.getChildren().add(locationExpanded);
+                collapsedPane.getChildren().add(imageEvent);
+                collapsedPane.getChildren().add(title);
+                collapsedPane.getChildren().add(startTime);
+                collapsedPane.getChildren().add(location);
 
-                collapsedPane.getChildren().add(imageCxlExpanded);
-                collapsedPane.getChildren().add(imageEditExpanded);
+                collapsedPane.getChildren().add(imageCxl);
+                collapsedPane.getChildren().add(imageEdit);
 
                 expandedPane.setMinHeight(400);
-                expandedPane.getChildren().add(imageEvent);
-                expandedPane.getChildren().add(title);
-                expandedPane.getChildren().add(startTime);
-                expandedPane.getChildren().add(location);
+                expandedPane.getChildren().add(imageEventExpanded);
+                expandedPane.getChildren().add(titleExpanded);
+                expandedPane.getChildren().add(startTimeExpanded);
+                expandedPane.getChildren().add(locationExpanded);
+                expandedPane.getChildren().add(eventDescription);
 
-                expandedPane.getChildren().add(imageCxl);
-                expandedPane.getChildren().add(imageEdit);
+                expandedPane.getChildren().add(imageCxlExpanded);
+                expandedPane.getChildren().add(imageEditExpanded);
 
 
                 expPanel.setCollapsedContent(collapsedPane);
@@ -240,9 +251,9 @@ public class EventOverViewController implements Initializable {
 
 
                 if (!events.isEventIsActive()) {
-                    outerPane.setOpacity(0.5);
-                    outerPane.setStyle("-fx-background-color: Gray");
-                    expPanel.setStyle("-fx-background-color: Gray");
+                    outerPane.setOpacity(1);
+                    outerPane.setStyle("-fx-background-color: LightGray");
+                    expPanel.setStyle("-fx-background-color: LightGray");
                 }
                 outerPane.getChildren().add(expPanel);
 

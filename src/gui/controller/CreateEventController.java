@@ -60,6 +60,7 @@ public class CreateEventController implements Initializable {
         txtEventDescription.textProperty().addListener(observable -> isEmpty());
         txtEventStartTime.textProperty().addListener(observable -> isEmpty());
         txtEventDescription.textProperty().addListener(observable -> isEmpty());
+        txtEventDescription.setWrapText(true);
         txtEventOwner.textProperty().addListener(observable -> isEmpty());
         txtEventCollaborator.textProperty().addListener(observable -> isEmpty());
         imgEventImage.imageProperty().addListener(observable -> imageChosen());
