@@ -3,6 +3,11 @@ package be;
 import javafx.scene.image.Image;
 
 
+import javax.imageio.ImageIO;
+import javax.swing.*;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.sql.Time;
@@ -116,8 +121,9 @@ public class Event {
         imageBytes = byteImage;
     }
 
-    public void setImageWithByte(byte[] byteImage){
-
+    public void setImageWithByte(byte[] byteImage) throws Exception{
+        Image img = new Image(new ByteArrayInputStream(byteImage));
+        eventImage = img;
     }
 
 }

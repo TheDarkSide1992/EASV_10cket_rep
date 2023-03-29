@@ -33,6 +33,8 @@ public class EventDAO implements IEventDAO{
                 LocalDate date = rs.getDate("Event_Date").toLocalDate();
                 Time startTime = rs.getTime("Event_Start_Time");
                 String description = rs.getString("Event_Description");
+                byte[] data = rs.getBytes("Event_Img");
+
                 boolean isActive = true;
                 switch (rs.getInt("Event_Is_Active")) {
                     case 0:
@@ -41,6 +43,12 @@ public class EventDAO implements IEventDAO{
 
 
                 Event event = new Event(id, title, date, startTime, location, description, isActive);
+
+                if(data != null){
+                    event.setByteImage(data);
+                    event.setImageWithByte(data);
+                }
+
                 allActiveEvents.add(event);
 
             }
