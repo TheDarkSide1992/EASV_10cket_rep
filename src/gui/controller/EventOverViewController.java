@@ -7,6 +7,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Node;
@@ -38,7 +39,7 @@ public class EventOverViewController implements Initializable {
     public static boolean submitForDeletion = false;
 
     @FXML
-    private ImageView imageCxl, imageEdit, imageEvent;
+    private ImageView imageCxl, imageEdit, imageEvent, imageEventExpanded,imageCxlExpanded, imageEditExpanded;
 
     private String cxlURL = "data/Images/Cancel.png";
 
@@ -75,10 +76,18 @@ public class EventOverViewController implements Initializable {
                 Label title = new Label();
                 Label startTime = new Label();
                 Label location = new Label();
+                imageEventExpanded = new ImageView();
+                imageCxlExpanded = new ImageView();
+                imageEditExpanded = new ImageView();
+                Label titleExpanded = new Label();
+                Label startTimeExpanded = new Label();
+                Label locationExpanded = new Label();
+
 
                 Pane outerPane = new Pane();
                 ExpansionPanel expPanel = new ExpansionPanel();
-                Pane innerPane = new Pane();
+                Pane collapsedPane = new Pane();
+                Pane expandedPane = new Pane();
 
                 day.setText(String.valueOf(events.getEventDate().getDayOfMonth()));
                 if (events.getEventDate().getDayOfMonth() <= 9) {
@@ -92,9 +101,13 @@ public class EventOverViewController implements Initializable {
 
 
                 title.setText(events.getEventTitle());
+                titleExpanded.setText(events.getEventTitle());
 
                 startTime.setText(events.getEventStartTime().toString().substring(0, 5));
                 location.setText(events.getEventLocation());
+
+                startTimeExpanded.setText(events.getEventStartTime().toString().substring(0, 5));
+                locationExpanded.setText(events.getEventLocation());
 
 
                 outerPane.getStylesheets().add(getClass().getResource("/gui/view/Main.css").toExternalForm());
@@ -102,7 +115,11 @@ public class EventOverViewController implements Initializable {
                 title.getStyleClass().add("lblEventTitle");
                 startTime.getStyleClass().add("lblStartTime");
                 location.getStyleClass().add("lblLocation");
-                innerPane.getStyleClass().add("innerPane");
+                collapsedPane.getStyleClass().add("innerPane");
+                titleExpanded.getStyleClass().add("lblEventTitle");
+                startTimeExpanded.getStyleClass().add("lblStartTime");
+                locationExpanded.getStyleClass().add("lblLocation");
+                expandedPane.getStyleClass().add("innerPane");
                 expPanel.getStyleClass().add("expansionPanel");
                 day.getStyleClass().add("lblEventDay");
                 month.getStyleClass().add("lblMonthAndYear");
@@ -125,8 +142,22 @@ public class EventOverViewController implements Initializable {
                 expPanel.setLayoutX(200);
                 expPanel.setLayoutY(25);
                 outerPane.setMinHeight(200);
-                innerPane.prefHeight(200);
-                innerPane.prefWidth(1200);
+                collapsedPane.prefHeight(200);
+                collapsedPane.prefWidth(1200);
+                titleExpanded.setEffect(shadow);
+                titleExpanded.setAlignment(Pos.CENTER);
+                titleExpanded.setMinWidth(1200);
+                titleExpanded.setMinHeight(60);
+                startTimeExpanded.setEffect(shadow);
+                startTimeExpanded.setAlignment(Pos.CENTER);
+                startTimeExpanded.setLayoutY(45);
+                startTimeExpanded.setMinWidth(1200);
+                startTimeExpanded.setMinHeight(60);
+                locationExpanded.setEffect(shadow);
+                locationExpanded.setLayoutY(90);
+                locationExpanded.setAlignment(Pos.CENTER);
+                locationExpanded.setMinWidth(1200);
+                locationExpanded.setMinHeight(60);
                 title.setEffect(shadow);
                 title.setAlignment(Pos.CENTER);
                 title.setMinWidth(1200);
@@ -157,6 +188,14 @@ public class EventOverViewController implements Initializable {
                 imageEdit.setScaleX(0.68);
                 imageEdit.setScaleY(0.68);
 
+                imageCxlExpanded.setImage(loadImages(cxlURL));
+                imageEditExpanded.setImage(loadImages(editURL));
+                imageEventExpanded.setImage(loadImages(cxlURL));
+                imageCxlExpanded.setScaleX(0.8);
+                imageCxlExpanded.setScaleY(0.8);
+                imageEditExpanded.setScaleX(0.68);
+                imageEditExpanded.setScaleY(0.68);
+
 
                 imageCxl.setX(1100);
                 imageCxl.setY(10);
@@ -167,17 +206,38 @@ public class EventOverViewController implements Initializable {
                 imageCxl.setEffect(shadow);
                 imageEdit.setEffect(shadow);
 
+                imageCxlExpanded.setX(1100);
+                imageCxlExpanded.setY(10);
+                imageEditExpanded.setX(1030);
+                imageEditExpanded.setY(10);
+                imageEventExpanded.setX(5);
+                imageEventExpanded.setY(10);
+                imageCxlExpanded.setEffect(shadow);
+                imageEditExpanded.setEffect(shadow);
 
-                innerPane.getChildren().add(imageEvent);
-                innerPane.getChildren().add(title);
-                innerPane.getChildren().add(startTime);
-                innerPane.getChildren().add(location);
 
-                innerPane.getChildren().add(imageCxl);
-                innerPane.getChildren().add(imageEdit);
+                collapsedPane.getChildren().add(imageEventExpanded);
+                collapsedPane.getChildren().add(titleExpanded);
+                collapsedPane.getChildren().add(startTimeExpanded);
+                collapsedPane.getChildren().add(locationExpanded);
+
+                collapsedPane.getChildren().add(imageCxlExpanded);
+                collapsedPane.getChildren().add(imageEditExpanded);
+
+                expandedPane.setMinHeight(400);
+                expandedPane.getChildren().add(imageEvent);
+                expandedPane.getChildren().add(title);
+                expandedPane.getChildren().add(startTime);
+                expandedPane.getChildren().add(location);
+
+                expandedPane.getChildren().add(imageCxl);
+                expandedPane.getChildren().add(imageEdit);
 
 
-                expPanel.setCollapsedContent(innerPane);
+                expPanel.setCollapsedContent(collapsedPane);
+                expPanel.setExpandedContent(expandedPane);
+
+
 
                 if (!events.isEventIsActive()) {
                     outerPane.setOpacity(0.5);
