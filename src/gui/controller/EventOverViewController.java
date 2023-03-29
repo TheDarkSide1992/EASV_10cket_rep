@@ -252,11 +252,6 @@ public class EventOverViewController implements Initializable {
                 expPanel.setExpandedContent(expandedPane);
 
 
-                if (!events.isEventIsActive()) {
-                    outerPane.setOpacity(1);
-                    outerPane.setStyle("-fx-background-color: LightGray");
-                    expPanel.setStyle("-fx-background-color: LightGray");
-                }
                 outerPane.getChildren().add(expPanel);
 
                 vBoxCustomerView.getChildren().add(outerPane);
