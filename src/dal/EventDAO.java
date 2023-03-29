@@ -33,6 +33,8 @@ public class EventDAO implements IEventDAO{
                 LocalDate date = rs.getDate("Event_Date").toLocalDate();
                 Time startTime = rs.getTime("Event_Start_Time");
                 String description = rs.getString("Event_Description");
+                byte[] data = rs.getBytes("Event_Img");
+
                 boolean isActive = true;
                 switch (rs.getInt("Event_Is_Active")) {
                     case 0:
@@ -41,6 +43,12 @@ public class EventDAO implements IEventDAO{
 
 
                 Event event = new Event(id, title, date, startTime, location, description, isActive);
+
+                if(data != null){
+                    event.setByteImage(data);
+                    event.setImageWithByte(data);
+                }
+
                 allEvents.add(event);
 
             }
@@ -48,6 +56,8 @@ public class EventDAO implements IEventDAO{
         } catch (SQLException ex) {
             ex.printStackTrace();
             throw new SQLException("Could not get events from database");
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
         return allEvents;
     }
@@ -56,7 +66,8 @@ public class EventDAO implements IEventDAO{
     public int createEvent(Event event) throws Exception {
         int id = 0;
         try (Connection conn = db.getConnection()) {
-            String sql = "INSERT INTO Event_ (Event_Title, Event_Location, Event_Event_Coordinator_ID, Event_Date, Event_Start_Time, Event_Description, Event_Ticket_Total, Event_Ticket_Sold, Event_Is_Active) Values(?,?,?,?,?,?,?,?,?);";
+            //String sql = "INSERT INTO Event_ (Event_Title, Event_Location, Event_Event_Coordinator_ID, Event_Date, Event_Start_Time, Event_Description, Event_Ticket_Total, Event_Ticket_Sold, Event_Is_Active) Values(?,?,?,?,?,?,?,?,?);";
+            String sql = "INSERT INTO Event_ (Event_Title, Event_Location, Event_Event_Coordinator_ID, Event_Date, Event_Start_Time, Event_Description, Event_Ticket_Total, Event_Ticket_Sold, Event_Is_Active, Event_Img) Values(?,?,?,?,?,?,?,?,?,?);";
 
 
             PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -70,6 +81,7 @@ public class EventDAO implements IEventDAO{
             stmt.setInt(7, 0);
             stmt.setInt(8, 0);
             stmt.setBoolean(9, event.isEventIsActive());
+            stmt.setBytes(10, event.getImageByte());
 
             stmt.executeUpdate();
 
