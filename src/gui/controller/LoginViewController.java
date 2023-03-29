@@ -84,7 +84,9 @@ public class LoginViewController implements Initializable {
 
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Success");
-            alert.setHeaderText("Successfully login to " + user.getUserFirstName());
+            alert.setHeaderText("Successfully login to "
+                    //+ user.getUserFirstName()
+            );
             alert.showAndWait();
 
         } catch (Exception e){

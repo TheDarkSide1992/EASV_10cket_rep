@@ -2,9 +2,12 @@ package gui.controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.effect.DropShadow;
@@ -15,9 +18,11 @@ import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import javafx.stage.Stage;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.ArrayList;
@@ -51,18 +56,38 @@ public class TopViewAllUsersController implements Initializable {
             logoutLabel();
         }
         controllerAssistant = ControllerAssistant.getInstance();
+
+        //Opens a new view, if the admin is logged in
+        if (user != null && user.equals("Administrator")) {
+            Parent root;
+            try {
+                root = FXMLLoader.load(getClass().getClassLoader().getResource("gui/view/util/DeleteEventsView.fxml"), resources);
+                Stage stage = new Stage();
+                stage.setTitle("Not active events");
+                stage.setScene(new Scene(root));
+                stage.show();
+                // Hide this current window (if this is what you want)
+                //((Node)(event.getSource())).getScene().getWindow().hide();
+            }
+            catch (IOException e) {
+                e.printStackTrace();
+            }
+            System.out.println("Logged in as admin");
+        }
+
+
     }
 
     private Button[] assignButtonsToUsers(String user) {
         //Define ALL buttons possible having in the topView
-        Button upcomingEvents       = new Button("Upcoming Events");
-        Button allEvents            = new Button("All Events");
-        Button calender             = new Button("Calender");
-        Button contact              = new Button("Contact");
-        Button prices               = new Button("Prices");
-        Button createEvent          = new Button("Create Event");
-        Button manageTickets        = new Button("Manage Tickets");
-        Button makeCoordinator      = new Button("Create Event Coordinator");
+        Button upcomingEvents = new Button("Upcoming Events");
+        Button allEvents = new Button("All Events");
+        Button calender = new Button("Calender");
+        Button contact = new Button("Contact");
+        Button prices = new Button("Prices");
+        Button createEvent = new Button("Create Event");
+        Button manageTickets = new Button("Manage Tickets");
+        Button makeCoordinator = new Button("Create Event Coordinator");
 
         //Give the buttons action listeners
         upcomingEvents.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> upcomingEvents());
