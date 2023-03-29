@@ -249,6 +249,9 @@ public class EventOverViewController implements Initializable {
                 expPanel.setExpandedContent(expandedPane);
 
 
+                expPanel.setCollapsedContent(collapsedPane);
+                expPanel.setExpandedContent(expandedPane);
+
 
                 if (!events.isEventIsActive()) {
                     outerPane.setOpacity(1);

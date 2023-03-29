@@ -5,6 +5,6 @@
 
 <ScrollPane fx:id="scrollPane" fitToHeight="true" fitToWidth="true" style="-fx-background-color: transparent" styleClass="scrollPane" stylesheets="@Main.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.EventOverViewController">
    <content>
-      <VBox fx:id="vBoxCustomerView" styleClass="scrollPane" />
+      <VBox fx:id="vBoxCustomerView" spacing="10.0" styleClass="scrollPane" />
    </content>
 </ScrollPane>
