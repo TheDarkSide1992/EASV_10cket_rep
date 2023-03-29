@@ -3,6 +3,8 @@ package be;
 import javafx.scene.image.Image;
 
 
+import java.io.IOException;
+import java.nio.file.Files;
 import java.sql.Time;
 import java.time.LocalDate;
 
@@ -16,6 +18,7 @@ public class Event {
     private int eventTicketAmount;
     private boolean eventIsActive;
     private Image eventImage;
+    private byte[]  imageBytes;
     public Event(int eventID, String eventTitle, LocalDate eventDate, Time eventStartTime, String eventLocation, String eventDescription, boolean eventIsActive) {
         this.eventID = eventID;
         this.eventTitle = eventTitle;
@@ -104,6 +107,17 @@ public class Event {
     }
     public void setEventImage(Image eventImage) {
         this.eventImage = eventImage;
+    }
+    public byte[] getImageByte() throws Exception{
+        return imageBytes;
+    }
+
+    public void setByteImage(byte[] byteImage) {
+        imageBytes = byteImage;
+    }
+
+    public void setImageWithByte(byte[] byteImage){
+
     }
 
 }
