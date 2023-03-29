@@ -19,7 +19,7 @@ public class LoginViewController implements Initializable {
 
     private ControllerAssistant controllerAssistant;
     private Model model;
-    private String user;
+    private User user;
     private static String userREAL = null;
     public static IndexController indexController;
 
