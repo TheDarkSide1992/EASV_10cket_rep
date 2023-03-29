@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.sql.Time;
+import java.time.LocalDate;
 
 class EventDAOTest {
 
@@ -22,9 +23,7 @@ class EventDAOTest {
     void createEvent() {
 
         //Arrange
-        Time time = new Time(20, 0, 0);
-        java.sql.Date date = new java.sql.Date(2023,10,10);
-        Event event = new Event("test", date.toLocalDate(), time, "The Testment", "Test", true);
+        Event event = new Event("test", LocalDate.of(2023, 10,10), Time.valueOf("20:00"), "The Testment", "Test", true);
 
         try {
             EventDAO ed = new EventDAO();
