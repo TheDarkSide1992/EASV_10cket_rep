@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 public interface IEventDAO {
-    List<Event> getAllEvents() throws Exception;
+    List<Event> getAllEvents() throws SQLException;
 
     int createEvent (Event event) throws Exception;
 

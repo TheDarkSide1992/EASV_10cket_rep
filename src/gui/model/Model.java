@@ -28,16 +28,16 @@ public class Model {
         return allEvents;
     }
 
+    public ObservableList<Event> getActiveEvents() throws Exception {
+        activeEvents.addAll(eventManager.getActiveEvents());
+        return activeEvents;
+    }
+
     public void createEvent(Event event) throws Exception {
         event.setEventID(eventManager.createEvent(event));
         activeEvents.add(event);
     }
 
-
-    public ObservableList<Event> getActiveEvents() throws Exception {
-        activeEvents.addAll(eventManager.getAllEvents());
-        return activeEvents;
-    }
     public void deleteEvent(int id) throws SQLException {
         eventManager.deleteEvent(id);
 
