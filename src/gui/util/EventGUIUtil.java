@@ -42,12 +42,6 @@ public class EventGUIUtil {
         month.setLayoutY(70);
     }
 
-    public void setEventYearPlacement(Label year) {
-        year.setEffect(shadow);
-        year.setLayoutX(110);
-        year.setLayoutY(95);
-    }
-
     public void setEventTitlePlacement(Label... title) {
         for (Label l : title) {
             l.setEffect(shadow);
@@ -86,7 +80,6 @@ public class EventGUIUtil {
     }
 
     public void setExpandedPaneChildren(Pane expandedPane, Node... nodes) {
-        expandedPane.autosize();
         for (Node n : nodes) {
             expandedPane.getChildren().add(n);
         }
@@ -173,8 +166,6 @@ public class EventGUIUtil {
         expPanel.setLayoutY(25);
         expPanel.setCollapsedContent(collapsedPane);
         expPanel.setExpandedContent(expandedPane);
-        expPanel.getExpandedContent().autosize();
-        expPanel.autosize();
     }
 
     public void setOuterPanePlacementAndChildren(FlowPane outerPane, Label eventDay, Label monthAndYear, ExpansionPanel expPanel) {
