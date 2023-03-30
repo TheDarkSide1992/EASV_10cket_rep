@@ -33,16 +33,6 @@ CREATE TABLE User_(
 )
 GO
 
-CREATE TABLE User_Passwords(
-    User_User_ID                INT                                     NOT NULL,
-    --Users_Password              Binary(500)                             NOT NULL,
-    Users_Password              NVARCHAR(MAX)                           NOT NULL,
-
-    CONSTRAINT FK_USER_USER_ID FOREIGN KEY(User_User_ID)
-    REFERENCES User_(User_ID)
-)
-GO
-
 CREATE TABLE Customer(
     Customer_ID                 INT IDENTITY(1,1)                       NOT NULL,
     Customer_First_Name         NVARCHAR(250)                           NOT NULL,
@@ -53,6 +43,18 @@ CREATE TABLE Customer(
     Customer_Monet_Spend        INT                                     NOT NULL,
 
     CONSTRAINT PK_CUSTOMER_ID PRIMARY KEY(Customer_ID)
+)
+GO
+
+CREATE TABLE User_Passwords(
+    User_User_ID                INT                                     NOT NULL,
+    --Users_Password              Binary(500)                             NOT NULL,
+    User_User_Name              NVARCHAR(250)                           NOT NULL,
+    Users_Password              NVARCHAR(MAX)                           NOT NULL,
+
+    CONSTRAINT FK_USER_USER_ID FOREIGN KEY(User_User_ID)
+    REFERENCES User_(User_ID),
+
 )
 GO
 
