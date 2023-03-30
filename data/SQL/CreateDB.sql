@@ -25,6 +25,7 @@ CREATE TABLE User_(
     User_Type                   INT                                     NOT NULL,
     User_Email                  NVARCHAR(250)                           NOT NULL,
     User_tlf                    NVARCHAR(50)                            NOT NULL,
+    User_Img                    VARBINARY(MAX),
 
     CONSTRAINT PK_USER_ID PRIMARY KEY(User_ID),
 
