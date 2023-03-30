@@ -28,7 +28,7 @@ public class IndexController implements Initializable {
             //setTop();
             Model model = new Model();
             controllerAssistant.loadTop("TopViewAllUsers.fxml");
-            controllerAssistant.loadCenter("EventOverView.fxml");
+            controllerAssistant.loadCenter("UpcomingEventsView.fxml");
         } catch (Exception e) {
             displayError(e);
             e.printStackTrace();
@@ -45,7 +45,7 @@ public class IndexController implements Initializable {
 
     private void setCenter() throws IOException {
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/gui/view/EventOverView.fxml"));
+        loader.setLocation(getClass().getResource("/gui/view/UpcomingEventsView.fxml"));
         Pane newScene = loader.load();
 
         borderPane.setCenter(newScene);

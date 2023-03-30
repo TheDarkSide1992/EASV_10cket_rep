@@ -30,13 +30,7 @@
    -fx-text-fill: rgba(243,218,218,1);
 }
 
-.lblMonth {
-    -fx-font-size: 23;
-    -fx-font-weight: bold;
-    -fx-text-fill: rgba(243,218,218,1);
-}
-
-.lblYear {
+.lblMonthAndYear {
     -fx-font-size: 23;
     -fx-font-weight: bold;
     -fx-text-fill: rgba(243,218,218,1);

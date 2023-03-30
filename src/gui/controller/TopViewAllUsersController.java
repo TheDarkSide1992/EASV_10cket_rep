@@ -161,7 +161,7 @@ public class TopViewAllUsersController implements Initializable {
     }
 
     public void upcomingEvents() {
-        controllerAssistant.openNewWindow("EventOverView.fxml");
+        controllerAssistant.openNewWindow("UpcomingEventsView.fxml");
     }
 
     private void allEvents() {

@@ -12,6 +12,7 @@ import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
@@ -63,8 +64,7 @@ public class UpcomingEventsController implements Initializable {
                 EventGUIUtil egu = EventGUIUtil.getInstance();
 
                 Label eventDay = new Label();
-                Label month = new Label();
-                Label year = new Label();
+                Label monthAndYear = new Label();
                 Label title = new Label();
                 Label startTime = new Label();
                 Label location = new Label();
@@ -81,15 +81,14 @@ public class UpcomingEventsController implements Initializable {
                 imageEditExpanded = new ImageView();
 
                 ExpansionPanel expPanel = new ExpansionPanel();
-                Pane outerPane = new Pane();
+                FlowPane outerPane = new FlowPane();
                 Pane collapsedPane = new Pane();
                 Pane expandedPane = new Pane();
 
-                egu.setStyleSheetsAndClass(outerPane, title, startTime, location, collapsedPane, eventTitleExpanded, eventStartTimeExpanded, eventLocationExpanded, expandedPane, expPanel, eventDay, month, year, eventDescription);
-                egu.setTextInLabels(events, month, year, title, eventTitleExpanded, startTime, location, eventStartTimeExpanded, eventLocationExpanded, eventDescription, eventDay);
+                egu.setStyleSheetsAndClass(outerPane, title, startTime, location, collapsedPane, eventTitleExpanded, eventStartTimeExpanded, eventLocationExpanded, expandedPane, expPanel, eventDay, monthAndYear, eventDescription);
+                egu.setTextInLabels(events, monthAndYear, title, eventTitleExpanded, startTime, location, eventStartTimeExpanded, eventLocationExpanded, eventDescription, eventDay);
                 egu.setEventDayPlacement(eventDay);
-                egu.setEventMonthPlacement(month);
-                egu.setEventYearPlacement(year);
+                egu.setEventMonthAndYearPlacement(monthAndYear);
                 egu.setEventTitlePlacement(eventTitleExpanded, title);
                 egu.setEventStartTimePlacement(eventStartTimeExpanded, startTime);
                 egu.setEventLocationPlacement(location, eventLocationExpanded);
@@ -118,7 +117,7 @@ public class UpcomingEventsController implements Initializable {
                 egu.setCollapsedPaneChildren(collapsedPane, imageEvent, title, startTime, location, imageCxl, imageEdit);
                 egu.setExpandedPaneChildren(expandedPane, eventTitleExpanded, eventStartTimeExpanded, eventLocationExpanded, eventDescription, imageEventExpanded, imageCxlExpanded, imageEditExpanded);
                 egu.setExpPanelPlacementAndChildren(expPanel, collapsedPane, expandedPane);
-                egu.setOuterPanePlacementAndChildren(outerPane, eventDay, month, year, expPanel);
+                egu.setOuterPanePlacementAndChildren(outerPane, eventDay, monthAndYear, expPanel);
 
                 vBoxCustomerView.getChildren().add(outerPane);
             }
