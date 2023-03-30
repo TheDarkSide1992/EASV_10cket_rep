@@ -5,6 +5,8 @@
 .expansionPanel {
     -fx-border-color: rgba(243,218,218,1);
     -fx-background-color: rgba(71,158,224,1);
+    -fx-border-radius: 15;
+    -fx-background-radius: 15;
 
 }
 
