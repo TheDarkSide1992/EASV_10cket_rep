@@ -1,5 +1,9 @@
 package be;
 
+import javafx.scene.image.Image;
+
+import java.io.ByteArrayInputStream;
+
 public abstract class User {
     private int userID;
     private String userNAme;
@@ -8,6 +12,11 @@ public abstract class User {
     private String userTLF;
     private int userTypeId;
     private String userStringType;
+
+    private byte[]  imageBytes;
+
+    private Image profilePicture;
+
 
     public User(int userID, String userNAme, String userFirstName, String userEmail, String userTLF, int userTypeId, String userStringType) {
         this.userID = userID;
@@ -66,6 +75,35 @@ public abstract class User {
 
     public void setUserTypeId(int userTypeId) {
         this.userTypeId = userTypeId;
+    }
+
+    public String getUserStringType() {
+        return userStringType;
+    }
+
+    public void setUserStringType(String userStringType) {
+        this.userStringType = userStringType;
+    }
+
+    public byte[] getImageBytes() {
+        return imageBytes;
+    }
+
+    public void setImageBytes(byte[] imageBytes) {
+        this.imageBytes = imageBytes;
+    }
+
+    public javafx.scene.image.Image getProfilePicture() {
+        return profilePicture;
+    }
+
+    public void setProfilePicture(javafx.scene.image.Image profilePicture) {
+        this.profilePicture = profilePicture;
+    }
+
+    public void convertByteToImage() throws Exception{
+        javafx.scene.image.Image img = new javafx.scene.image.Image(new ByteArrayInputStream(imageBytes));
+        profilePicture = img;
     }
 
     @Override

@@ -21,7 +21,7 @@ public class EventCoordinatorDAO implements IEventCoordinator {
 
     @Override
     public ArrayList<EventCoordinator> getAllEventCoordinators() throws Exception {
-        ArrayList<EventCoordinator> adminList = new ArrayList<>();
+        ArrayList<EventCoordinator> eventCordList = new ArrayList<>();
 
         try (Connection conn = dbConnector.getConnection()) {
             //Extract all administrators
@@ -39,12 +39,20 @@ public class EventCoordinatorDAO implements IEventCoordinator {
                 int userType = rs.getInt("User_Type");
                 String userEmil = rs.getString("User_Email");
                 String tlfNumber = rs.getString("User_tlf");
+                byte[] data = rs.getBytes("User_Img");
 
-                adminList.add(new EventCoordinator(id,userName,userFirstName,userEmil,tlfNumber,userType));
+                EventCoordinator eventCoordinator = new EventCoordinator(id,userName,userFirstName,userEmil,tlfNumber,userType);
+
+                if(data != null){
+                    eventCoordinator.setImageBytes(data);
+                    eventCoordinator.convertByteToImage();
+                }
+
+                eventCordList.add(eventCoordinator);
             }
         }
 
-        return adminList;
+        return eventCordList;
     }
 
     @Override
