@@ -7,7 +7,11 @@ import bll.UserManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import java.sql.Date;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class Model {
     private ObservableList<Event> activeEvents;
@@ -23,8 +27,12 @@ public class Model {
         allEvents = FXCollections.observableArrayList();
 
     }
+    public void sortByDate() {
+        allEvents.sort((Comparator.comparing(Event::getEventDate)));
+    }
 
     public ObservableList<Event> getAllEvents() throws Exception {
+        sortByDate();
         allEvents.addAll(eventManager.getAllEvents());
         return allEvents;
     }

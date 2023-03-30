@@ -49,14 +49,14 @@ public class AllEventController implements Initializable {
         try {
             model = new Model();
             allEvents = model.getAllEvents();
-            displayActiveEvents();
+            displayAllEvents();
             allEventScrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
 
-    private void displayActiveEvents() {
+    private void displayAllEvents() {
         try {
 
             for (Event events : allEvents) {
