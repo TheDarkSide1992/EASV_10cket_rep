@@ -7,14 +7,17 @@ public abstract class User {
     private String userEmail;
     private String userTLF;
     private int userTypeId;
+    private String userStringType;
 
-    public User(int userID, String userNAme, String userFirstName, String userEmail, String userTLF, int userTypeId) {
+    public User(int userID, String userNAme, String userFirstName, String userEmail, String userTLF, int userTypeId, String userStringType) {
         this.userID = userID;
         this.userNAme = userNAme;
         this.userFirstName = userFirstName;
         this.userEmail = userEmail;
         this.userTLF = userTLF;
         this.userTypeId = userTypeId;
+        this.userStringType = userStringType;
+
     }
 
     public int getUserID() {
