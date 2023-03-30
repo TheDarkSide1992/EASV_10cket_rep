@@ -20,13 +20,13 @@ public class EventCoordinatorDAO implements IEventCoordinator {
     }
 
     @Override
-    public List<EventCoordinator> getAllEventCoordinators() throws Exception {
+    public ArrayList<EventCoordinator> getAllEventCoordinators() throws Exception {
         ArrayList<EventCoordinator> adminList = new ArrayList<>();
 
         try (Connection conn = dbConnector.getConnection()) {
             //Extract all administrators
             String sql = "SELECT * FROM User_ WHERE User_Type = " +
-                    "(sELECT User_Type_ID FROM User_Type WHERE USER_TYPE_TYPE = 'Administrator')";
+                    "(sELECT User_Type_ID FROM User_Type WHERE USER_TYPE_TYPE = 'Event Coordinator')";
             Statement stmt = conn.createStatement();
 
             //Execute the update to the DB

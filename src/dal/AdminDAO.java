@@ -37,13 +37,13 @@ public class AdminDAO implements IAdministratorDAO {
     }
 
     @Override
-    public List<Administrator> getAllAdministrators() throws Exception{
+    public ArrayList<Administrator> getAllAdministrators() throws Exception{
         ArrayList<Administrator> adminList = new ArrayList<>();
 
         try (Connection conn = dbConnector.getConnection()) {
             //Extract all administrators
             String sql = "SELECT * FROM User_ WHERE User_Type = " +
-                        "(sELECT User_Type_ID FROM User_Type WHERE USER_TYPE_TYPE = 'Event Kordinator')";
+                    "(sELECT User_Type_ID FROM User_Type WHERE USER_TYPE_TYPE = 'Administrator')";
             Statement stmt = conn.createStatement();
 
             //Execute the update to the DB
