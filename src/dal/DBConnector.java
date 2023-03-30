@@ -3,11 +3,16 @@ package dal;
 import be.Administrator;
 import com.microsoft.sqlserver.jdbc.SQLServerDataSource;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
+import javafx.scene.image.Image;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Properties;
@@ -64,5 +69,37 @@ public class DBConnector {
 
 
         } //Connection gets closed here
+
+        //To set a test image on ALL users outcome the line below and run the test Image Method.
+        //Recommend removal before release
+        //testImageCode(databaseConnector);
+
+    }
+
+    private static void testImageCode(DBConnector db) throws Exception {
+        byte[] data;
+
+        Path cxlURL = Path.of("data/Images/Cancel.png");
+
+        try {
+            data = Files.readAllBytes(cxlURL);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        try (Connection conn = db.getConnection()) {
+            String sql = "UPDATE User_ SET User_Img = ?";
+
+            PreparedStatement ps = conn.prepareStatement(sql);
+
+            ps.setBytes(1, data);
+
+            ps.execute();
+
+        }
+
+        System.out.println("uploaded image");
     }
 }
+
+

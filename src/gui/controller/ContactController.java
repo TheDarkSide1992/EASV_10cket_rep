@@ -8,6 +8,7 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -93,9 +94,14 @@ public class ContactController implements Initializable {
 
     private void setContactInfoAdmin() {
         for (Administrator admin: allAdmins){
+            ImageView profilePicture = new ImageView();
             Label name = new Label(admin.getUserFirstName());
             Label email = new Label(admin.getUserEmail());
             Label phoneNumber = new Label(admin.getUserTLF());
+
+            if (admin.getProfilePicture() != null) {
+                profilePicture.setImage(admin.getProfilePicture());
+            }
 
             FlowPane outerPane = new FlowPane();
 
@@ -108,6 +114,7 @@ public class ContactController implements Initializable {
             name.setLayoutX(100);
             email.setLayoutX(100);
             phoneNumber.setLayoutX(100);
+            profilePicture.setLayoutX(100);
 
             name.setPadding(new Insets(15,0,0,60));
             email.setPadding(new Insets(15,0,0,60));
@@ -116,6 +123,7 @@ public class ContactController implements Initializable {
             outerPane.getChildren().add(name);
             outerPane.getChildren().add(email);
             outerPane.getChildren().add(phoneNumber);
+            outerPane.getChildren().add(profilePicture);
 
             hBoxAdd.getChildren().add(outerPane);
 
@@ -124,10 +132,15 @@ public class ContactController implements Initializable {
 
     private void setContactInfoCord() {
         for (EventCoordinator cord: allCoordinators){
+            ImageView profilePicture = new ImageView();
             Label role = new Label("Event Coordinator");
             Label name = new Label(cord.getUserFirstName());
             Label email = new Label(cord.getUserEmail());
             Label phoneNumber = new Label(cord.getUserTLF());
+
+            if (cord.getProfilePicture() != null) {
+                profilePicture.setImage(cord.getProfilePicture());
+            }
 
             FlowPane outerPane = new FlowPane();
 
@@ -140,6 +153,8 @@ public class ContactController implements Initializable {
             name.setLayoutX(100);
             email.setLayoutX(100);
             phoneNumber.setLayoutX(100);
+            profilePicture.setLayoutX(100);
+
 
             name.setPadding(new Insets(15,0,0,60));
             email.setPadding(new Insets(15,0,0,60));
@@ -148,8 +163,7 @@ public class ContactController implements Initializable {
             outerPane.getChildren().add(name);
             outerPane.getChildren().add(email);
             outerPane.getChildren().add(phoneNumber);
-
-            hBoxAdd.getChildren().add(outerPane);
+            outerPane.getChildren().add(profilePicture);
 
             hBoxCord.getChildren().add(outerPane);
 
