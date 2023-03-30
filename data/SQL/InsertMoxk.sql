@@ -4,10 +4,12 @@ INSERT INTO User_Type VALUES ('Event Coordinator');
 GO
 
 INSERT INTO User_ VALUES('Def_EV_Cord', 'DEFAULT', (SELECT DISTINCT User_Type_ID FROM User_Type WHERE USER_TYPE_TYPE = 'Event Coordinator'), 'N/A@EASV.dk', 'TLF = N/A')
+INSERT INTO User_ VALUES('Def_EV_Adm', 'DEFAULT', (SELECT DISTINCT User_Type_ID FROM User_Type WHERE USER_TYPE_TYPE = 'Administrator'), 'N/A@EASV.dk', 'TLF = N/A')
 GO
 
 --INSERT INTO User_Passwords VALUES((SELECT DISTINCT User_ID FROM User_  WHERE User_Name = 'Def_EV_Cord'), 'Def_EV_Cord')
 INSERT INTO User_Passwords VALUES((SELECT DISTINCT User_ID FROM User_  WHERE User_Name = 'Def_EV_Cord'), '10Cket123456')
+INSERT INTO User_Passwords VALUES((SELECT DISTINCT User_ID FROM User_  WHERE User_Name = 'Def_EV_Adm'), '10Cket123456')
 GO
 
 INSERT INTO Event_(Event_Title, Event_Location, Event_Event_Coordinator_ID, Event_Authors, Event_Date, Event_Start_Time, Event_Description, Event_Ticket_Total, Event_Ticket_Sold, Event_Is_Active, Event_Img)
