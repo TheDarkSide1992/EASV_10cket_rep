@@ -4,10 +4,11 @@ import be.Administrator;
 import be.Event;
 import be.EventCoordinator;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public interface IAdministratorDAO {
-    List<Administrator> getAllAdministrators() throws Exception;
+    ArrayList<Administrator> getAllAdministrators() throws Exception;
 
     int createAdministrator(EventCoordinator eventCoordinator) throws Exception;
 

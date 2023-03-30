@@ -2,11 +2,13 @@ package gui.util;
 
 import be.Event;
 import com.gluonhq.charm.glisten.control.ExpansionPanel;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 
@@ -33,7 +35,7 @@ public class EventGUIUtil {
         eventDay.setAlignment(Pos.CENTER);
     }
 
-    public void setEventMonthPlacement(Label month) {
+    public void setEventMonthAndYearPlacement(Label month) {
         month.setEffect(shadow);
         month.setLayoutX(110);
         month.setLayoutY(70);
@@ -83,7 +85,7 @@ public class EventGUIUtil {
     }
 
     public void setExpandedPaneChildren(Pane expandedPane, Node... nodes) {
-        expandedPane.setMinHeight(400);
+        expandedPane.autosize();
         for (Node n : nodes) {
             expandedPane.getChildren().add(n);
         }
@@ -144,15 +146,14 @@ public class EventGUIUtil {
         imageEditExpanded.setEffect(shadow);
     }
 
-    public void setTextInLabels(Event events, Label month, Label year, Label title, Label eventTitleExpanded, Label startTime, Label location, Label eventStartTimeExpanded, Label eventLocationExpanded, Label eventDescription, Label eventDay) {
+    public void setTextInLabels(Event events, Label monthAndYear, Label title, Label eventTitleExpanded, Label startTime, Label location, Label eventStartTimeExpanded, Label eventLocationExpanded, Label eventDescription, Label eventDay) {
         String day1;
         eventDay.setText(String.valueOf(events.getEventDate().getDayOfMonth()));
         if (events.getEventDate().getDayOfMonth() <= 9) {
             day1 = "0" + eventDay.getText();
             eventDay.setText(day1);
         }
-        month.setText(String.valueOf(events.getEventDate().getMonth()).substring(0, 3));
-        year.setText(String.valueOf(events.getEventDate().getYear()));
+        monthAndYear.setText(String.valueOf(events.getEventDate().getMonth()).substring(0, 3)+"\n"+ events.getEventDate().getYear());
         title.setText(events.getEventTitle());
         eventTitleExpanded.setText(events.getEventTitle());
         startTime.setText(events.getEventStartTime().toString().substring(0, 5));
@@ -167,17 +168,29 @@ public class EventGUIUtil {
         expPanel.setLayoutY(25);
         expPanel.setCollapsedContent(collapsedPane);
         expPanel.setExpandedContent(expandedPane);
+        expPanel.getExpandedContent().autosize();
+        expPanel.autosize();
     }
 
-    public void setOuterPanePlacementAndChildren(Pane outerPane, Label eventDay, Label month, Label year, ExpansionPanel expPanel) {
-        outerPane.setMinHeight(200);
+    public void setOuterPanePlacementAndChildren(FlowPane outerPane, Label eventDay, Label monthAndYear, ExpansionPanel expPanel) {
+        outerPane.setPadding(new Insets(30,30,0,30));
+        monthAndYear.setPadding(new Insets(0,15,0,0));
         outerPane.getChildren().add(eventDay);
-        outerPane.getChildren().add(month);
-        outerPane.getChildren().add(year);
+        outerPane.getChildren().add(monthAndYear);
         outerPane.getChildren().add(expPanel);
+        outerPane.autosize();
+
+//        if (!expPanel.isExpanded()) {
+//            expPanel.setOnMouseClicked(event -> expPanel.setExpanded(true));
+//            expPanel.setOnMouseClicked(event -> outerPane.setMinHeight(400));
+//        }
+//        else {
+//            expPanel.setOnMouseClicked(event -> expPanel.setExpanded(false));
+//            expPanel.setOnMouseClicked(event -> outerPane.setMinHeight(200));
+//        }
     }
 
-    public void setStyleSheetsAndClass(Pane outerPane, Label title, Label startTime, Label location, Pane collapsedPane, Label eventTitleExpanded, Label eventStartTimeExpanded, Label eventLocationExpanded, Pane expandedPane, ExpansionPanel expPanel, Label eventDay, Label month, Label year, Label eventDescription) {
+    public void setStyleSheetsAndClass(FlowPane outerPane, Label title, Label startTime, Label location, Pane collapsedPane, Label eventTitleExpanded, Label eventStartTimeExpanded, Label eventLocationExpanded, Pane expandedPane, ExpansionPanel expPanel, Label eventDay, Label monthAndYear, Label eventDescription) {
         outerPane.getStylesheets().add(getClass().getResource("/gui/view/Main.css").toExternalForm());
         outerPane.getStyleClass().add("paneOuterPane");
         title.getStyleClass().add("lblEventTitle");
@@ -190,8 +203,7 @@ public class EventGUIUtil {
         expandedPane.getStyleClass().add("paneExpandedPane");
         expPanel.getStyleClass().add("expansionPanel");
         eventDay.getStyleClass().add("lblEventDay");
-        month.getStyleClass().add("lblMonth");
-        year.getStyleClass().add("lblYear");
+        monthAndYear.getStyleClass().add("lblMonthAndYear");
         eventDescription.getStyleClass().add("lblEventDescription");
     }
 }

@@ -112,7 +112,7 @@ public class LoginViewController implements Initializable {
     }
 
     public void handleCancel(ActionEvent actionEvent) {
-        controllerAssistant.openNewWindow("EventOverView.fxml");
+        controllerAssistant.openNewWindow("UpcomingEventsView.fxml");
     }
 
     public String getUserREAL() {

@@ -43,7 +43,7 @@ public class GeneralUserDAO implements IGeneralUser {
             /*String sql = "IF((SELECT User_User_ID FROM User_Passwords WHERE Users_Password = " +
                     "CAST(? AS VARBINARY(MAX))) = (SELECT User_ID FROM User_ Where [User_Name] = ?)) SELECT * FROM User_";*/
 
-            String sql = "SELECT * FROM User_ WHERE [User_Name] = ? AND User_ID = (SELECT DISTINCT User_User_ID FROM User_Passwords WHERE Users_Password = ?)";
+            String sql = "SELECT * FROM User_ WHERE User_ID = (SELECT User_User_ID FROM User_Passwords WHERE (User_User_Name = ?) AND (Users_Password = ?))";
 
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setString(1,username);
