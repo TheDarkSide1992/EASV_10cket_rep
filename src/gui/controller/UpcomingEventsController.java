@@ -15,6 +15,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.paint.Paint;
+import javafx.scene.shape.Rectangle;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -102,8 +105,10 @@ public class UpcomingEventsController implements Initializable {
                 imageEdit.setImage(loadImages(editURL));
                 egu.setImageEditPlacement(imageEdit);
 
+
                 imageEvent.setImage(events.getEventImage());
                 egu.setImageEventPlacement(imageEvent);
+
 
                 imageEditExpanded.setImage(loadImages(editURL));
                 egu.setImageEditExpandedPlacement(imageEditExpanded);

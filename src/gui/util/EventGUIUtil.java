@@ -12,6 +12,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 
+
 public class EventGUIUtil {
 
     DropShadow shadow = new DropShadow(0, 4, 4, Color.color(0, 0, 0, 0.25));
@@ -117,10 +118,14 @@ public class EventGUIUtil {
     }
 
     public void setImageEventPlacement(ImageView imageEvent) {
-        imageEvent.setX(5);
-        imageEvent.setY(10);
+        imageEvent.setX(15);
+        imageEvent.setY(5);
+        imageEvent.setFitHeight(140);
+        imageEvent.setFitWidth(210);
         imageEvent.maxHeight(140);
         imageEvent.maxWidth(210);
+
+
     }
 
     public void setImageCxlExpandedPlacement(ImageView imageCxlExpanded) {
@@ -178,16 +183,7 @@ public class EventGUIUtil {
         outerPane.getChildren().add(eventDay);
         outerPane.getChildren().add(monthAndYear);
         outerPane.getChildren().add(expPanel);
-        outerPane.autosize();
 
-//        if (!expPanel.isExpanded()) {
-//            expPanel.setOnMouseClicked(event -> expPanel.setExpanded(true));
-//            expPanel.setOnMouseClicked(event -> outerPane.setMinHeight(400));
-//        }
-//        else {
-//            expPanel.setOnMouseClicked(event -> expPanel.setExpanded(false));
-//            expPanel.setOnMouseClicked(event -> outerPane.setMinHeight(200));
-//        }
     }
 
     public void setStyleSheetsAndClass(FlowPane outerPane, Label title, Label startTime, Label location, Pane collapsedPane, Label eventTitleExpanded, Label eventStartTimeExpanded, Label eventLocationExpanded, Pane expandedPane, ExpansionPanel expPanel, Label eventDay, Label monthAndYear, Label eventDescription) {
