@@ -6,7 +6,7 @@ import java.io.ByteArrayInputStream;
 
 public abstract class User {
     private int userID;
-    private String userNAme;
+    private String userName;
     private String userFirstName;
     private String userEmail;
     private String userTLF;
@@ -20,7 +20,7 @@ public abstract class User {
 
     public User(int userID, String userNAme, String userFirstName, String userEmail, String userTLF, int userTypeId, String userStringType) {
         this.userID = userID;
-        this.userNAme = userNAme;
+        this.userName = userNAme;
         this.userFirstName = userFirstName;
         this.userEmail = userEmail;
         this.userTLF = userTLF;
@@ -37,12 +37,12 @@ public abstract class User {
         this.userID = userID;
     }
 
-    public String getUserNAme() {
-        return userNAme;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setUserNAme(String userNAme) {
-        this.userNAme = userNAme;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getUserFirstName() {
@@ -110,7 +110,7 @@ public abstract class User {
     public String toString() {
         return "User{" +
                 "userID=" + userID +
-                ", userNAme='" + userNAme + '\'' +
+                ", userNAme='" + userName + '\'' +
                 ", userFirstName='" + userFirstName + '\'' +
                 ", userEmail='" + userEmail + '\'' +
                 ", userTLF='" + userTLF + '\'' +

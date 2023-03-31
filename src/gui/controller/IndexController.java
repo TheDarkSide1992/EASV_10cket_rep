@@ -14,7 +14,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class IndexController implements Initializable {
-    public CheckBox cbIsActive;
+    @FXML private CheckBox cbIsActive;
     @FXML private BorderPane borderPane;
 
     private ControllerAssistant controllerAssistant;
@@ -24,8 +24,6 @@ public class IndexController implements Initializable {
         controllerAssistant = ControllerAssistant.getInstance();
         controllerAssistant.setBorderPane(borderPane);
         try {
-            //setCenter();
-            //setTop();
             Model model = new Model();
             controllerAssistant.loadTop("TopViewAllUsers.fxml");
             controllerAssistant.loadCenter("UpcomingEventsView.fxml");
@@ -33,22 +31,6 @@ public class IndexController implements Initializable {
             displayError(e);
             e.printStackTrace();
         }
-    }
-
-    private void setTop() throws IOException {
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/gui/view/TopView.fxml"));
-        Pane newScene = loader.load();
-
-        borderPane.setTop(newScene);
-    }
-
-    private void setCenter() throws IOException {
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/gui/view/UpcomingEventsView.fxml"));
-        Pane newScene = loader.load();
-
-        borderPane.setCenter(newScene);
     }
 
     private void displayError(Throwable t)

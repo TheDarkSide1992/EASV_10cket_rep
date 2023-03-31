@@ -29,8 +29,8 @@ public class ControllerAssistant {
     public void setBorderPane(BorderPane borderPane){
         this.borderPane = borderPane;
     }
-    public void setLoggedInUser(User longedInUser){this.setLoggedInUser = longedInUser;}
-    public User getLoggedInUser(User longedInUser){return this.setLoggedInUser;}
+    public void setLoggedInUser(User loggedInUser){this.setLoggedInUser = loggedInUser;}
+    public User getLoggedInUser(){return this.setLoggedInUser;}
 
     public void loadCenter(String file) throws IOException {
         FXMLLoader loader = new FXMLLoader();
@@ -76,15 +76,15 @@ public class ControllerAssistant {
         try {
             loadCenter(s);
         } catch (IOException e) {
-            displayError(e);
+            e.printStackTrace();
+            //displayError(e);
         }
     }
 
-    private void displayError(Throwable t)
-    {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("!!ERROR!!");
-        alert.setHeaderText("Something went wrong, \n ERROR:      " + t.getMessage());
-        alert.showAndWait();
-    }
+//    private void displayError(Throwable t) {
+//        Alert alert = new Alert(Alert.AlertType.ERROR);
+//        alert.setTitle("!!ERROR!!");
+//        alert.setHeaderText("Something went wrong, \n ERROR:      " + t.getMessage());
+//        alert.showAndWait();
+//    }
 }
