@@ -12,6 +12,7 @@ import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -38,11 +39,8 @@ public class TopViewAllUsersController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         controllerAssistant = ControllerAssistant.getInstance();
-        //String userREAL = "Event Coordinator";
-        //String userREAL = "Administrator";
 
         if (controllerAssistant.getLoggedInUser() != null) {
-            //user = new LoginViewController().indexController.getUser();
             loggedInUser = controllerAssistant.getLoggedInUser();
             userType = loggedInUser.getUserStringType();
         }
@@ -146,11 +144,17 @@ public class TopViewAllUsersController implements Initializable {
             upcomingEvents();
         });
         logout.getStyleClass().add("lblSignIn");
-        btnHolderHBox.getChildren().add(logout);
+
+        FlowPane logOutPane = new FlowPane();
+        logOutPane.getChildren().add(logout);
+        logOutPane.setAlignment(Pos.TOP_RIGHT);
+
+        btnHolderHBox.getChildren().add(logOutPane);
     }
 
     private void setUserName(){
         Label userName = new Label();
+        FlowPane namePane = new FlowPane();
         userName.setText(controllerAssistant.getLoggedInUser().getUserFirstName() + "\n"
                 + controllerAssistant.getLoggedInUser().getUserName());
         userName.setAlignment(Pos.BOTTOM_RIGHT);
@@ -158,8 +162,9 @@ public class TopViewAllUsersController implements Initializable {
         //TODO Dosent Display name posibly to to the size of other labels. fix later
         userName.getStyleClass().add("lblMonthAndYear");
         userName.setPadding(new Insets(60,100,1,2));
-        //userName.setLayoutX(-250);
-        btnHolderHBox.getChildren().add(userName);
+        namePane.getChildren().add(userName);
+        namePane.setAlignment(Pos.BOTTOM_RIGHT);
+        btnHolderHBox.getChildren().add(namePane);
     }
 
     private void setLogo() {
