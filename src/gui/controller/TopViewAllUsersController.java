@@ -52,6 +52,7 @@ public class TopViewAllUsersController implements Initializable {
             signInLabelStyling();
         } else {
             logoutLabel();
+            setUserName();
         }
     }
 
@@ -125,7 +126,7 @@ public class TopViewAllUsersController implements Initializable {
         btnHolderHBox.getChildren().add(signInLbl);
     }
 
-    void logoutLabel() {
+    private void logoutLabel() {
         DropShadow shadow = new DropShadow(0, 4, 4, Color.color(0, 0, 0, 0.25));
         Label logout = new Label();
         logout.setEffect(shadow);
@@ -145,6 +146,17 @@ public class TopViewAllUsersController implements Initializable {
         });
         logout.getStyleClass().add("lblSignIn");
         btnHolderHBox.getChildren().add(logout);
+    }
+
+    private void setUserName(){
+        Label userName = new Label();
+        userName.setText(controllerAssistant.getLoggedInUser().getUserFirstName() + "\n"
+                + controllerAssistant.getLoggedInUser().getUserName());
+        userName.setAlignment(Pos.TOP_CENTER);
+
+        //TODO Dosent Display name posibly to to the size of other labels. fix later
+
+        btnHolderHBox.getChildren().add(userName);
     }
 
     private void setLogo() {

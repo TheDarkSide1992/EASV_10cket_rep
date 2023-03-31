@@ -29,7 +29,7 @@ public class ControllerAssistant {
     public void setBorderPane(BorderPane borderPane){
         this.borderPane = borderPane;
     }
-    public void setLoggedInUser(User longedInUser){this.setLoggedInUser = longedInUser;}
+    public void setLoggedInUser(User loggedInUser){this.setLoggedInUser = loggedInUser;}
     public User getLoggedInUser(){return this.setLoggedInUser;}
 
     public void loadCenter(String file) throws IOException {
