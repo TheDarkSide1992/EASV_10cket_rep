@@ -7,7 +7,6 @@ INSERT INTO User_ VALUES('Def_EV_Cord', 'DEFAULT', (SELECT DISTINCT User_Type_ID
 INSERT INTO User_ VALUES('Def_EV_Adm', 'DEFAULT', (SELECT DISTINCT User_Type_ID FROM User_Type WHERE USER_TYPE_TYPE = 'Administrator'), 'N/A@EASV.dk', 'TLF = N/A', null)
 GO
 
---INSERT INTO User_Passwords VALUES((SELECT DISTINCT User_ID FROM User_  WHERE User_Name = 'Def_EV_Cord'), 'Def_EV_Cord')
 INSERT INTO User_Passwords VALUES((SELECT DISTINCT User_ID FROM User_  WHERE User_Name = 'Def_EV_Cord'),'Def_EV_Cord', '10Cket123456')
 INSERT INTO User_Passwords VALUES((SELECT DISTINCT User_ID FROM User_  WHERE User_Name = 'Def_EV_Adm'), 'Def_EV_Adm', '10Cket123456')
 GO
@@ -37,12 +36,6 @@ GO
 
 SELECT * FROM User_Passwords
 GO
-
---IF((SELECT User_User_ID FROM User_Passwords WHERE Users_Password =  '10Cket123456')) = (SELECT User_ID FROM User_ Where [User_Name] = 'Def_EV_Cord') SELECT * FROM User_
---GO
-
---SELECT * FROM User_ WHERE [User_Name] = 'Def_EV_Cord' AND User_ID = (SELECT User_User_ID FROM User_Passwords WHERE Users_Password = '10Cket123456')
---GO
 
 SELECT * FROM User_ WHERE User_ID = (SELECT User_User_ID FROM User_Passwords WHERE (User_User_Name = 'Def_EV_Cord') AND (Users_Password = '10Cket123456'))
 SELECT * FROM User_ WHERE User_ID = (SELECT User_User_ID FROM User_Passwords WHERE (User_User_Name = 'Def_EV_Adm') AND (Users_Password = '10Cket123456'))

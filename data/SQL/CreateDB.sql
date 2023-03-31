@@ -49,7 +49,6 @@ GO
 
 CREATE TABLE User_Passwords(
     User_User_ID                INT                                     NOT NULL,
-    --Users_Password              Binary(500)                             NOT NULL,
     User_User_Name              NVARCHAR(250)                           NOT NULL,
     Users_Password              NVARCHAR(MAX)                           NOT NULL,
 

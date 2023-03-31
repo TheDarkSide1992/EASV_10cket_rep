@@ -75,6 +75,8 @@ public class UpcomingEventsController implements Initializable {
                 Label eventStartTimeExpanded = new Label();
                 Label eventLocationExpanded = new Label();
                 Label eventDescription = new Label();
+                Label eventOwner = new Label();
+                Label eventCollaborator = new  Label();
 
                 imageEvent = new ImageView();
                 imageCxl = new ImageView();
