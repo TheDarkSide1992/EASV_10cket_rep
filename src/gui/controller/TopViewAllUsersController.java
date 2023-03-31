@@ -1,6 +1,6 @@
 package gui.controller;
 
-import javafx.event.ActionEvent;
+import be.User;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
@@ -20,7 +20,6 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class TopViewAllUsersController implements Initializable {
@@ -32,25 +31,28 @@ public class TopViewAllUsersController implements Initializable {
     private ControllerAssistant controllerAssistant;
 
     private String url = "data/Images/10cketshort.png";
+    private String userType = null;
+    private User loggedInUser = null;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        controllerAssistant = ControllerAssistant.getInstance();
         //String userREAL = "Event Coordinator";
         //String userREAL = "Administrator";
-        String user = null;
-        if (new LoginViewController().getUserREAL() != null) {
+
+        if (controllerAssistant.getLoggedInUser() != null) {
             //user = new LoginViewController().indexController.getUser();
-            user = new LoginViewController().getUserREAL();
+            loggedInUser = controllerAssistant.getLoggedInUser();
+            userType = loggedInUser.getUserStringType();
         }
-        Button[] buttons = assignButtonsToUsers(user);
+        Button[] buttons = assignButtonsToUsers(userType);
         addButtons(buttons);
         setLogo();
-        if (user == null) {
+        if (userType == null) {
             signInLabelStyling();
         } else {
             logoutLabel();
         }
-        controllerAssistant = ControllerAssistant.getInstance();
     }
 
     private Button[] assignButtonsToUsers(String user) {

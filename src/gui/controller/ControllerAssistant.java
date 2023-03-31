@@ -30,7 +30,7 @@ public class ControllerAssistant {
         this.borderPane = borderPane;
     }
     public void setLoggedInUser(User longedInUser){this.setLoggedInUser = longedInUser;}
-    public User getLoggedInUser(User longedInUser){return this.setLoggedInUser;}
+    public User getLoggedInUser(){return this.setLoggedInUser;}
 
     public void loadCenter(String file) throws IOException {
         FXMLLoader loader = new FXMLLoader();
