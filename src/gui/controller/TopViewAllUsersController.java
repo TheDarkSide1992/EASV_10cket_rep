@@ -51,8 +51,12 @@ public class TopViewAllUsersController implements Initializable {
         if (userType == null) {
             signInLabelStyling();
         } else {
-            logoutLabel();
-            setUserName();
+            FlowPane flowPane = new FlowPane();
+            flowPane.getChildren().add(logoutLabel());
+            flowPane.getChildren().add(setUserName());
+
+            flowPane.setAlignment(Pos.CENTER_RIGHT);
+            btnHolderHBox.getChildren().add(flowPane);
         }
     }
 
@@ -126,12 +130,13 @@ public class TopViewAllUsersController implements Initializable {
         btnHolderHBox.getChildren().add(signInLbl);
     }
 
-    private void logoutLabel() {
+    private Label logoutLabel() {
         DropShadow shadow = new DropShadow(0, 4, 4, Color.color(0, 0, 0, 0.25));
         Label logout = new Label();
         logout.setEffect(shadow);
         logout.setText("Log Out");
-        logout.setAlignment(Pos.TOP_RIGHT);
+        logout.setAlignment(Pos.CENTER_RIGHT);
+        logout.setPadding(new Insets(10,100,0,0));
 
         //Add a listener to label
         logout.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
@@ -146,26 +151,32 @@ public class TopViewAllUsersController implements Initializable {
         });
         logout.getStyleClass().add("lblSignIn");
 
+        return logout;
+        /*
         FlowPane logOutPane = new FlowPane();
         logOutPane.getChildren().add(logout);
         logOutPane.setAlignment(Pos.TOP_RIGHT);
 
-        btnHolderHBox.getChildren().add(logOutPane);
+        btnHolderHBox.getChildren().add(logOutPane);*/
     }
 
-    private void setUserName(){
+    private Label setUserName(){
         Label userName = new Label();
         FlowPane namePane = new FlowPane();
         userName.setText(controllerAssistant.getLoggedInUser().getUserFirstName() + "\n"
                 + controllerAssistant.getLoggedInUser().getUserName());
         userName.setAlignment(Pos.BOTTOM_RIGHT);
+        userName.setPadding(new Insets(0,150,0,0));
 
         //TODO Dosent Display name posibly to to the size of other labels. fix later
         userName.getStyleClass().add("lblMonthAndYear");
-        userName.setPadding(new Insets(60,100,1,2));
+
+        return userName;
+        /*
         namePane.getChildren().add(userName);
         namePane.setAlignment(Pos.BOTTOM_RIGHT);
         btnHolderHBox.getChildren().add(namePane);
+        */
     }
 
     private void setLogo() {
