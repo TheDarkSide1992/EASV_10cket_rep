@@ -5,17 +5,20 @@ import dal.EventDAO;
 
 
 import dal.interfaces.IEventDAO;
+import gui.util.DateComparator;
 
 import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class EventManager {
 
     private IEventDAO eventDAO;
-
+    private List<Event> events = new ArrayList<>();
     public EventManager() {
         try {
             this.eventDAO = new EventDAO();
@@ -25,7 +28,9 @@ public class EventManager {
     }
 
     public List<Event> getAllEvents() throws Exception {
-        return eventDAO.getAllEvents();
+        events.addAll(eventDAO.getAllEvents());
+        Collections.sort(events,new DateComparator());
+        return events;
     }
 
 
@@ -50,6 +55,7 @@ public class EventManager {
                 activeEvents.add(e);
             }
         }
+        Collections.sort(activeEvents,new DateComparator());
         return activeEvents;
     }
 }

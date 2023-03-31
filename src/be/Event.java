@@ -13,7 +13,7 @@ import java.nio.file.Files;
 import java.sql.Time;
 import java.time.LocalDate;
 
-public class Event {
+public class Event implements Comparable<Event>{
     private int eventID;
     private String eventTitle;
     private LocalDate eventDate;
@@ -126,4 +126,16 @@ public class Event {
         eventImage = img;
     }
 
+    @Override
+    public int compareTo(Event e) {
+        if(this.getEventDate().isBefore(e.getEventDate())){
+            return -1;
+        } else if (this.getEventDate().isEqual(e.getEventDate())) {
+            return 0;
+        }
+        else {
+            return 1;
+        }
+
+    }
 }

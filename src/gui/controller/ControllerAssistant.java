@@ -76,15 +76,15 @@ public class ControllerAssistant {
         try {
             loadCenter(s);
         } catch (IOException e) {
-            displayError(e);
+            e.printStackTrace();
+            //displayError(e);
         }
     }
 
-    private void displayError(Throwable t)
-    {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("!!ERROR!!");
-        alert.setHeaderText("Something went wrong, \n ERROR:      " + t.getMessage());
-        alert.showAndWait();
-    }
+//    private void displayError(Throwable t) {
+//        Alert alert = new Alert(Alert.AlertType.ERROR);
+//        alert.setTitle("!!ERROR!!");
+//        alert.setHeaderText("Something went wrong, \n ERROR:      " + t.getMessage());
+//        alert.showAndWait();
+//    }
 }
