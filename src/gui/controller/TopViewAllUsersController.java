@@ -148,6 +148,7 @@ public class TopViewAllUsersController implements Initializable {
             addButtons(buttons);
             signInLabelStyling();
             upcomingEvents();
+            controllerAssistant.setLoggedInUser(null);
         });
         logout.getStyleClass().add("lblSignIn");
 
