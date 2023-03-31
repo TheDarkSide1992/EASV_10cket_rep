@@ -51,8 +51,7 @@
 }
 
 .lblEventDescription {
-    -fx-font-size: 25;
-    -fx-font-weight: bold;
+    -fx-font-size: 18;
     -fx-text-fill: rgba(243,218,218,1);
 }
 
@@ -185,4 +184,16 @@
 
 .alertPane > .content > .button-bar > .button {
     -fx-background-radius: 15;
+}
+
+.lblOwnerAndCollaborator {
+    -fx-underline: true;
+    -fx-font-weight: bold;
+    -fx-font-size: 16;
+    -fx-text-fill: rgba(243,218,218,1);
+}
+
+.eventOwnerAndCollaborator {
+      -fx-font-size: 18;
+      -fx-text-fill: rgba(243,218,218,1);
 }

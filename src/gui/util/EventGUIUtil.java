@@ -4,18 +4,19 @@ import be.Event;
 import com.gluonhq.charm.glisten.control.ExpansionPanel;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+
+import javax.xml.stream.events.StartDocument;
 
 
 public class EventGUIUtil {
 
     DropShadow shadow = new DropShadow(0, 4, 4, Color.color(0, 0, 0, 0.25));
+    DropShadow shadow2 = new DropShadow(0, 2, 2, Color.color(0, 0, 0, 0.25));
 
     public static EventGUIUtil EGUInstance = null;
 
@@ -46,7 +47,6 @@ public class EventGUIUtil {
         for (Label l : title) {
             l.setEffect(shadow);
             l.setAlignment(Pos.CENTER);
-            l.setMinWidth(1200);
             l.setMinHeight(60);
         }
     }
@@ -55,8 +55,6 @@ public class EventGUIUtil {
         for (Label l : startTime) {
             l.setEffect(shadow);
             l.setAlignment(Pos.CENTER);
-            l.setLayoutY(45);
-            l.setMinWidth(1200);
             l.setMinHeight(60);
         }
     }
@@ -64,33 +62,66 @@ public class EventGUIUtil {
     public void setEventLocationPlacement(Label... location) {
         for (Label l : location) {
             l.setEffect(shadow);
-            l.setLayoutY(90);
             l.setAlignment(Pos.CENTER);
-            l.setMinWidth(1200);
             l.setMinHeight(60);
         }
     }
 
     public void setEventDescriptionPlacement(Label eventDescription) {
-        eventDescription.setLayoutY(200);
-        eventDescription.setLayoutX(20);
+        eventDescription.setEffect(shadow2);
         eventDescription.setWrapText(true);
-        eventDescription.setMaxWidth(500);
-        eventDescription.setMaxHeight(300);
+        eventDescription.setMaxWidth(300);
+        eventDescription.setPrefHeight(150);
     }
 
-    public void setExpandedPaneChildren(Pane expandedPane, Node... nodes) {
-        for (Node n : nodes) {
-            expandedPane.getChildren().add(n);
-        }
+    public void setExpandedPaneChildren(BorderPane expandedPane, Label eventTitleExpanded, Label eventStartTimeExpanded, Label eventLocationExpanded, Label eventDescription, ImageView imageEventExpanded, ImageView imageBuyTicketExpanded, Label eventOwner, Label eventCollaborator, Label lblOwner, Label lblCollaborator) {
+        BorderPane right = new BorderPane();
+        imageBuyTicketExpanded.setFitWidth(192);
+        imageBuyTicketExpanded.setFitHeight(75);
+        right.setCenter(imageBuyTicketExpanded);
+        expandedPane.setRight(right);
+        expandedPane.setPrefWidth(1200);
+        expandedPane.setLeft(imageEventExpanded);
+        BorderPane left = new BorderPane();
+        left.setCenter(imageEventExpanded);
+        expandedPane.setLeft(left);
+        BorderPane titlePane = new BorderPane();
+        BorderPane startTimePane = new BorderPane();
+        BorderPane locationPane = new BorderPane();
+        BorderPane eventDescriptionPane = new BorderPane();
+        titlePane.setCenter(eventTitleExpanded);
+        startTimePane.setCenter(eventStartTimeExpanded);
+        locationPane.setCenter(eventLocationExpanded);
+        eventDescriptionPane.setCenter(eventDescription);
+        Pane bufferPane = new Pane();
+        bufferPane.setPrefHeight(30);
+        VBox eventDescriptionPaneRight = new VBox(bufferPane, lblOwner,eventOwner,lblCollaborator,eventCollaborator);
+        eventDescriptionPane.setRight(eventDescriptionPaneRight);
+        eventDescriptionPane.setPadding(new Insets(10,0, 10,0));
+        VBox center = new VBox(titlePane,startTimePane,locationPane,eventDescriptionPane);
+        expandedPane.setCenter(center);
+
+
     }
 
-    public void setCollapsedPaneChildren(Pane collapsedPane, Node... nodes) {
-        collapsedPane.prefHeight(200);
-        collapsedPane.prefWidth(1200);
-        for (Node n : nodes) {
-            collapsedPane.getChildren().add(n);
-        }
+    public void setCollapsedPaneChildren(BorderPane collapsedPane, ImageView imageEvent, Label title, Label startTime, Label location, ImageView imageBuyTicket) {
+        BorderPane right = new BorderPane();
+        imageBuyTicket.setFitWidth(192);
+        imageBuyTicket.setFitHeight(75);
+        right.setCenter(imageBuyTicket);
+        collapsedPane.setRight(right);
+        collapsedPane.setPrefWidth(1200);
+        BorderPane left = new BorderPane();
+        left.setCenter(imageEvent);
+        collapsedPane.setLeft(left);
+        BorderPane titlePane = new BorderPane();
+        BorderPane startTimePane = new BorderPane();
+        BorderPane locationPane = new BorderPane();
+        titlePane.setCenter(title);
+        startTimePane.setCenter(startTime);
+        locationPane.setCenter(location);
+        VBox center = new VBox(titlePane,startTimePane,locationPane);
+        collapsedPane.setCenter(center);
     }
 
     public void setImageCxlPlacement(ImageView imageCxl) {
@@ -110,17 +141,6 @@ public class EventGUIUtil {
 
     }
 
-    public void setImageEventPlacement(ImageView imageEvent) {
-        imageEvent.setX(15);
-        imageEvent.setY(5);
-        imageEvent.setFitHeight(140);
-        imageEvent.setFitWidth(210);
-        imageEvent.maxHeight(140);
-        imageEvent.maxWidth(210);
-
-
-    }
-
     public void setImageCxlExpandedPlacement(ImageView imageCxlExpanded) {
         imageCxlExpanded.setScaleX(0.8);
         imageCxlExpanded.setScaleY(0.8);
@@ -132,8 +152,8 @@ public class EventGUIUtil {
     public void setImageEventExpandedPlacement(ImageView imageEventExpanded) {
         imageEventExpanded.setX(5);
         imageEventExpanded.setY(10);
-        imageEventExpanded.maxHeight(140);
-        imageEventExpanded.maxWidth(210);
+        imageEventExpanded.maxHeight(280);
+        imageEventExpanded.maxWidth(420);
     }
 
     public void setImageEditExpandedPlacement(ImageView imageEditExpanded) {
@@ -144,24 +164,8 @@ public class EventGUIUtil {
         imageEditExpanded.setEffect(shadow);
     }
 
-    public void setTextInLabels(Event events, Label monthAndYear, Label title, Label eventTitleExpanded, Label startTime, Label location, Label eventStartTimeExpanded, Label eventLocationExpanded, Label eventDescription, Label eventDay) {
-        String day1;
-        eventDay.setText(String.valueOf(events.getEventDate().getDayOfMonth()));
-        if (events.getEventDate().getDayOfMonth() <= 9) {
-            day1 = "0" + eventDay.getText();
-            eventDay.setText(day1);
-        }
-        monthAndYear.setText(String.valueOf(events.getEventDate().getMonth()).substring(0, 3)+"\n"+ events.getEventDate().getYear());
-        title.setText(events.getEventTitle());
-        eventTitleExpanded.setText(events.getEventTitle());
-        startTime.setText(events.getEventStartTime().toString().substring(0, 5));
-        location.setText(events.getEventLocation());
-        eventStartTimeExpanded.setText(events.getEventStartTime().toString().substring(0, 5));
-        eventLocationExpanded.setText(events.getEventLocation());
-        eventDescription.setText(events.getEventDescription());
-    }
 
-    public void setExpPanelPlacementAndChildren(ExpansionPanel expPanel, Pane collapsedPane, Pane expandedPane) {
+    public void setExpPanelPlacementAndChildren(ExpansionPanel expPanel, BorderPane collapsedPane, BorderPane expandedPane) {
         expPanel.setLayoutX(200);
         expPanel.setLayoutY(25);
         expPanel.setCollapsedContent(collapsedPane);
@@ -169,7 +173,7 @@ public class EventGUIUtil {
     }
 
     public void setOuterPanePlacementAndChildren(FlowPane outerPane, Label eventDay, Label monthAndYear, ExpansionPanel expPanel) {
-        outerPane.setPadding(new Insets(30,30,0,30));
+        outerPane.setPadding(new Insets(30,0,0,30));
         monthAndYear.setPadding(new Insets(0,15,0,0));
         outerPane.getChildren().add(eventDay);
         outerPane.getChildren().add(monthAndYear);
@@ -177,7 +181,7 @@ public class EventGUIUtil {
 
     }
 
-    public void setStyleSheetsAndClass(FlowPane outerPane, Label title, Label startTime, Label location, Pane collapsedPane, Label eventTitleExpanded, Label eventStartTimeExpanded, Label eventLocationExpanded, Pane expandedPane, ExpansionPanel expPanel, Label eventDay, Label monthAndYear, Label eventDescription) {
+    public void setStyleSheetsAndClass(FlowPane outerPane, Label title, Label startTime, Label location, BorderPane collapsedPane, Label eventTitleExpanded, Label eventStartTimeExpanded, Label eventLocationExpanded, BorderPane expandedPane, ExpansionPanel expPanel, Label eventDay, Label monthAndYear, Label eventDescription, Label lblOwner, Label lblCollaborator) {
         outerPane.getStylesheets().add(getClass().getResource("/gui/view/Main.css").toExternalForm());
         outerPane.getStyleClass().add("paneOuterPane");
         title.getStyleClass().add("lblEventTitle");
@@ -192,5 +196,19 @@ public class EventGUIUtil {
         eventDay.getStyleClass().add("lblEventDay");
         monthAndYear.getStyleClass().add("lblMonthAndYear");
         eventDescription.getStyleClass().add("lblEventDescription");
+    }
+
+    public void setBuyTicketPlacement(ImageView buyTicket) {
+    }
+
+    public void setOwnerAndCollaboratorStyling(Label lblOwner, Label lblCollaborator, Label eventOwner, Label eventCollaborator) {
+        lblOwner.getStyleClass().add("lblOwnerAndCollaborator");
+        lblCollaborator.getStyleClass().add("lblOwnerAndCollaborator");
+        lblCollaborator.setEffect(shadow2);
+        lblOwner.setEffect(shadow2);
+        eventOwner.setEffect(shadow2);
+        eventCollaborator.setEffect(shadow2);
+        eventOwner.getStyleClass().add("eventOwnerAndCollaborator");
+        eventCollaborator.getStyleClass().add("eventOwnerAndCollaborator");
     }
 }

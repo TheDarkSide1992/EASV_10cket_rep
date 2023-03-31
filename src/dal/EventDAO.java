@@ -22,17 +22,19 @@ public class EventDAO implements IEventDAO{
     public List<Event> getAllEvents() throws SQLException {
         ArrayList<Event> allEvents = new ArrayList<>();
         try (Connection conn = db.getConnection()) {
-            String sql = "SELECT * FROM Event_";
+            String sql = "SELECT * FROM Event_ JOIN User_ ON Event_Event_Coordinator_ID = User_ID;";
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
 
             while (rs.next()) {
                 int id = rs.getInt("Event_ID");
                 String title = rs.getString("Event_Title");
-                String location = rs.getString("Event_Location");
                 LocalDate date = rs.getDate("Event_Date").toLocalDate();
                 Time startTime = rs.getTime("Event_Start_Time");
+                String location = rs.getString("Event_Location");
                 String description = rs.getString("Event_Description");
+                String eventCollaborator = rs.getString("Event_Authors");
+                String eventCoordinator = rs.getString("User_Name");
                 byte[] data = rs.getBytes("Event_Img");
 
                 boolean isActive = true;
@@ -42,7 +44,7 @@ public class EventDAO implements IEventDAO{
                 }
 
 
-                Event event = new Event(id, title, date, startTime, location, description, isActive);
+                Event event = new Event(id, title, date, startTime, location, description, isActive, eventCollaborator, eventCoordinator);
 
                 if(data != null){
                     event.setByteImage(data);

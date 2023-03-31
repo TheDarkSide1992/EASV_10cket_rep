@@ -20,17 +20,23 @@ public class Event {
     private Time eventStartTime;
     private String eventLocation;
     private String eventDescription;
+
+    private String eventCollaborator;
+
+    private String eventCoordinator;
     private int eventTicketAmount;
     private boolean eventIsActive;
     private Image eventImage;
     private byte[]  imageBytes;
-    public Event(int eventID, String eventTitle, LocalDate eventDate, Time eventStartTime, String eventLocation, String eventDescription, boolean eventIsActive) {
+    public Event(int eventID, String eventTitle, LocalDate eventDate, Time eventStartTime, String eventLocation, String eventDescription, boolean eventIsActive, String eventCollaborator, String eventCoordinator) {
         this.eventID = eventID;
         this.eventTitle = eventTitle;
         this.eventDate = eventDate;
         this.eventStartTime = eventStartTime;
         this.eventLocation = eventLocation;
         this.eventDescription = eventDescription;
+        this.eventCollaborator = eventCollaborator;
+        this.eventCoordinator = eventCoordinator;
         this.eventIsActive = eventIsActive;
     }
 
@@ -126,4 +132,19 @@ public class Event {
         eventImage = img;
     }
 
+    public String getEventCollaborator() {
+        return eventCollaborator;
+    }
+
+    public void setEventCollaborator(String eventCollaborator) {
+        this.eventCollaborator = eventCollaborator;
+    }
+
+    public String getEventCoordinator() {
+        return eventCoordinator;
+    }
+
+    public void setEventCoordinator(String eventCoordinator) {
+        this.eventCoordinator = eventCoordinator;
+    }
 }

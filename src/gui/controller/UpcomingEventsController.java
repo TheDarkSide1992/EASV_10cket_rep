@@ -12,6 +12,7 @@ import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -40,13 +41,15 @@ public class UpcomingEventsController implements Initializable {
     public static boolean submitForDeletion = false;
 
     @FXML
-    private ImageView imageCxl, imageEdit, imageEvent, imageEventExpanded, imageCxlExpanded, imageEditExpanded;
+    private ImageView imageCxl, imageEdit, imageEvent, imageBuyTicket, imageEventExpanded, imageCxlExpanded, imageEditExpanded, imageBuyTicketExpanded;
 
     private String cxlURL = "data/Images/Cancel.png";
 
     private String editURL = "data/Images/Edit.png";
 
     private String eventURL = "data/Images/Event.png";
+
+    private String buyTicket = "data/Images/Buy Ticket.png";
 
 
     @Override
@@ -65,39 +68,48 @@ public class UpcomingEventsController implements Initializable {
         try {
             for (Event events : activeEvents) {
                 EventGUIUtil egu = EventGUIUtil.getInstance();
-
                 Label eventDay = new Label();
-                Label monthAndYear = new Label();
-                Label title = new Label();
-                Label startTime = new Label();
-                Label location = new Label();
-                Label eventTitleExpanded = new Label();
-                Label eventStartTimeExpanded = new Label();
-                Label eventLocationExpanded = new Label();
-                Label eventDescription = new Label();
-                Label eventOwner = new Label();
-                Label eventCollaborator = new  Label();
+                String day1;
+                eventDay.setText(String.valueOf(events.getEventDate().getDayOfMonth()));
+                if (events.getEventDate().getDayOfMonth() <= 9) {
+                    day1 = "0" + eventDay.getText();
+                    eventDay.setText(day1);
+                }
+                Label monthAndYear = new Label(String.valueOf(events.getEventDate().getMonth()).substring(0, 3)+"\n"+ events.getEventDate().getYear());
+                Label title = new Label(events.getEventTitle());
+                Label startTime = new Label(events.getEventStartTime().toString().substring(0, 5));
+                Label location = new Label(events.getEventLocation());
+                Label eventTitleExpanded = new Label(events.getEventTitle());
+                Label eventStartTimeExpanded = new Label(events.getEventStartTime().toString().substring(0, 5));
+                Label eventLocationExpanded = new Label(events.getEventLocation());
+                Label eventDescription = new Label(events.getEventDescription());
+                Label lblOwner = new Label("Event Coordinator:");
+                Label lblCollaborator = new Label("Event Collaborator:");
+                Label eventOwner = new Label(events.getEventCoordinator());
+                Label eventCollaborator = new  Label(events.getEventCollaborator());
 
                 imageEvent = new ImageView();
                 imageCxl = new ImageView();
                 imageEdit = new ImageView();
+                imageBuyTicket = new ImageView();
                 imageEventExpanded = new ImageView();
                 imageCxlExpanded = new ImageView();
                 imageEditExpanded = new ImageView();
+                imageBuyTicketExpanded = new ImageView();
 
                 ExpansionPanel expPanel = new ExpansionPanel();
                 FlowPane outerPane = new FlowPane();
-                Pane collapsedPane = new Pane();
-                Pane expandedPane = new Pane();
+                BorderPane collapsedPane = new BorderPane();
+                BorderPane expandedPane = new BorderPane();
 
-                egu.setStyleSheetsAndClass(outerPane, title, startTime, location, collapsedPane, eventTitleExpanded, eventStartTimeExpanded, eventLocationExpanded, expandedPane, expPanel, eventDay, monthAndYear, eventDescription);
-                egu.setTextInLabels(events, monthAndYear, title, eventTitleExpanded, startTime, location, eventStartTimeExpanded, eventLocationExpanded, eventDescription, eventDay);
+                egu.setStyleSheetsAndClass(outerPane, title, startTime, location, collapsedPane, eventTitleExpanded, eventStartTimeExpanded, eventLocationExpanded, expandedPane, expPanel, eventDay, monthAndYear, eventDescription,lblOwner, lblCollaborator);
                 egu.setEventDayPlacement(eventDay);
                 egu.setEventMonthAndYearPlacement(monthAndYear);
                 egu.setEventTitlePlacement(eventTitleExpanded, title);
                 egu.setEventStartTimePlacement(eventStartTimeExpanded, startTime);
                 egu.setEventLocationPlacement(location, eventLocationExpanded);
                 egu.setEventDescriptionPlacement(eventDescription);
+                egu.setOwnerAndCollaboratorStyling(lblOwner,lblCollaborator,eventOwner,eventCollaborator);
 
                 imageCxl.setOnMouseClicked(event -> cancelEvent(events));
                 imageCxl.setImage(loadImages(cxlURL));
@@ -107,10 +119,13 @@ public class UpcomingEventsController implements Initializable {
                 imageEdit.setImage(loadImages(editURL));
                 egu.setImageEditPlacement(imageEdit);
 
+                imageEvent.setImage(loadImages(cxlURL));
 
-                imageEvent.setImage(events.getEventImage());
-                egu.setImageEventPlacement(imageEvent);
+                imageBuyTicket.setImage(loadImages(buyTicket));
+                egu.setBuyTicketPlacement(imageBuyTicket);
 
+                imageBuyTicketExpanded.setImage(loadImages(buyTicket));
+                egu.setBuyTicketPlacement(imageBuyTicketExpanded);
 
                 imageEditExpanded.setImage(loadImages(editURL));
                 egu.setImageEditExpandedPlacement(imageEditExpanded);
@@ -121,8 +136,8 @@ public class UpcomingEventsController implements Initializable {
                 imageCxlExpanded.setImage(loadImages(cxlURL));
                 egu.setImageCxlExpandedPlacement(imageCxlExpanded);
 
-                egu.setCollapsedPaneChildren(collapsedPane, imageEvent, title, startTime, location, imageCxl, imageEdit);
-                egu.setExpandedPaneChildren(expandedPane, eventTitleExpanded, eventStartTimeExpanded, eventLocationExpanded, eventDescription, imageEventExpanded, imageCxlExpanded, imageEditExpanded);
+                egu.setCollapsedPaneChildren(collapsedPane, imageEvent, title, startTime, location, imageBuyTicket);
+                egu.setExpandedPaneChildren(expandedPane, eventTitleExpanded, eventStartTimeExpanded, eventLocationExpanded, eventDescription, imageEventExpanded, imageBuyTicketExpanded, eventOwner, eventCollaborator, lblOwner, lblCollaborator);
                 egu.setExpPanelPlacementAndChildren(expPanel, collapsedPane, expandedPane);
                 egu.setOuterPanePlacementAndChildren(outerPane, eventDay, monthAndYear, expPanel);
 
