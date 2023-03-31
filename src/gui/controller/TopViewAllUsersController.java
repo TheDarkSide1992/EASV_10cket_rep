@@ -40,6 +40,7 @@ public class TopViewAllUsersController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         controllerAssistant = ControllerAssistant.getInstance();
 
+
         if (controllerAssistant.getLoggedInUser() != null) {
             loggedInUser = controllerAssistant.getLoggedInUser();
             userType = loggedInUser.getUserStringType();
