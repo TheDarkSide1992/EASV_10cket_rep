@@ -20,7 +20,6 @@ public class LoginViewController implements Initializable {
     private ControllerAssistant controllerAssistant;
     private Model model;
     private User user;
-    public static IndexController indexController;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -84,18 +83,15 @@ public class LoginViewController implements Initializable {
             alert.setHeaderText("Successfully login to " + user.getUserFirstName());
             alert.showAndWait();
 
+            loadInUsers();
+
+
+            controllerAssistant.loadCenter("AllEventView.fxml");
+
+
         } catch (Exception e){
             displayError(e);
             e.printStackTrace();
-        }
-
-        loadInUsers();
-
-        try {
-            controllerAssistant.loadCenter("AllEventView.fxml");
-        } catch (IOException e) {
-            displayError(e);
-            throw new RuntimeException(e);
         }
     }
 
