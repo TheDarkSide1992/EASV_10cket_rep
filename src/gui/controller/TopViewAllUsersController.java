@@ -3,6 +3,7 @@ package gui.controller;
 import be.User;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -152,10 +153,12 @@ public class TopViewAllUsersController implements Initializable {
         Label userName = new Label();
         userName.setText(controllerAssistant.getLoggedInUser().getUserFirstName() + "\n"
                 + controllerAssistant.getLoggedInUser().getUserName());
-        userName.setAlignment(Pos.TOP_CENTER);
+        userName.setAlignment(Pos.BOTTOM_RIGHT);
 
         //TODO Dosent Display name posibly to to the size of other labels. fix later
-
+        userName.getStyleClass().add("lblMonthAndYear");
+        userName.setPadding(new Insets(60,100,1,2));
+        //userName.setLayoutX(-250);
         btnHolderHBox.getChildren().add(userName);
     }
 
