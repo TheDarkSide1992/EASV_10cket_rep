@@ -30,12 +30,8 @@ public class Model {
         allEvents = FXCollections.observableArrayList();
 
     }
-    public void sortByDate() {
-        allEvents.sort((Comparator.comparing(Event::getEventDate)));
-    }
-
     public ObservableList<Event> getAllEvents() throws Exception {
-        sortByDate();
+        allEvents = FXCollections.observableArrayList();
         allEvents.addAll(eventManager.getAllEvents());
         return allEvents;
     }
