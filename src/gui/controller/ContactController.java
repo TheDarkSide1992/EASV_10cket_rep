@@ -36,8 +36,8 @@ public class ContactController implements Initializable {
             allAdmins.addAll(model.getAllAdmins());
             allCoordinators.addAll(model.getAllCoordinators());
 
-            System.out.println("Admin " + allAdmins);
-            System.out.println("Cord " +allCoordinators);
+            //System.out.println("Admin " + allAdmins);
+            //System.out.println("Cord " +allCoordinators);
 
             setContactInfo();
 
