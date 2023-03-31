@@ -130,7 +130,7 @@ public class TopViewAllUsersController implements Initializable {
         Label logout = new Label();
         logout.setEffect(shadow);
         logout.setText("Log Out");
-        logout.setAlignment(Pos.CENTER_RIGHT);
+        logout.setAlignment(Pos.TOP_RIGHT);
 
         //Add a listener to label
         logout.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
