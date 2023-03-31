@@ -9,8 +9,6 @@
    <content>
       <VBox fx:id="vbox" prefHeight="462.0" prefWidth="218.0">
          <children>
-            <HBox fx:id="hBoxAdd" prefHeight="100.0" prefWidth="200.0" />
-            <HBox fx:id="hBoxCord" prefHeight="100.0" prefWidth="200.0" />
          </children>
       </VBox>
    </content>

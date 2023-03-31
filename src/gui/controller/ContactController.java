@@ -3,7 +3,6 @@ package gui.controller;
 import be.Administrator;
 import be.EventCoordinator;
 import gui.model.Model;
-import gui.util.EventGUIUtil;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
@@ -12,7 +11,6 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
 import java.net.URL;
@@ -21,7 +19,7 @@ import java.util.ResourceBundle;
 
 public class ContactController implements Initializable {
 
-    @FXML private HBox hBoxAdd1, hBoxCord1;
+    @FXML private HBox hBoxAdd, hBoxCord;
     @FXML private VBox vbox;
     private Model model;
 
@@ -71,9 +69,9 @@ public class ContactController implements Initializable {
 
         vbox.getChildren().add(outerPane);
 
-        hBoxAdd1 = new HBox();
-        hBoxAdd1.setPadding(new Insets(20,0,0,50));
-        vbox.getChildren().add(hBoxAdd1);
+        hBoxAdd = new HBox();
+        hBoxAdd.setPadding(new Insets(20,0,0,50));
+        vbox.getChildren().add(hBoxAdd);
 
         setContactInfoAdmin();
 
@@ -87,18 +85,23 @@ public class ContactController implements Initializable {
 
         vbox.getChildren().add(outerPane2);
 
-        hBoxCord1 = new HBox();
-        hBoxCord1.setPadding(new Insets(20,0,0,50));
-        vbox.getChildren().add(hBoxCord1);
+        hBoxCord = new HBox();
+        hBoxCord.setPadding(new Insets(20,0,0,50));
+        vbox.getChildren().add(hBoxCord);
 
         setContactInfoCord();
     }
 
     private void setContactInfoAdmin() {
         for (Administrator admin: allAdmins){
+            ImageView profilePicture = new ImageView();
             Label name = new Label(admin.getUserFirstName());
             Label email = new Label(admin.getUserEmail());
             Label phoneNumber = new Label(admin.getUserTLF());
+
+            if (admin.getProfilePicture() != null) {
+                profilePicture.setImage(admin.getProfilePicture());
+            }
 
             FlowPane outerPane = new FlowPane();
 
@@ -111,6 +114,7 @@ public class ContactController implements Initializable {
             name.setLayoutX(100);
             email.setLayoutX(100);
             phoneNumber.setLayoutX(100);
+            profilePicture.setLayoutX(100);
 
             name.setPadding(new Insets(15,0,0,60));
             email.setPadding(new Insets(15,0,0,60));
@@ -119,18 +123,24 @@ public class ContactController implements Initializable {
             outerPane.getChildren().add(name);
             outerPane.getChildren().add(email);
             outerPane.getChildren().add(phoneNumber);
+            outerPane.getChildren().add(profilePicture);
 
-            hBoxAdd1.getChildren().add(outerPane);
+            hBoxAdd.getChildren().add(outerPane);
 
         }
     }
 
     private void setContactInfoCord() {
         for (EventCoordinator cord: allCoordinators){
+            ImageView profilePicture = new ImageView();
             Label role = new Label("Event Coordinator");
             Label name = new Label(cord.getUserFirstName());
             Label email = new Label(cord.getUserEmail());
             Label phoneNumber = new Label(cord.getUserTLF());
+
+            if (cord.getProfilePicture() != null) {
+                profilePicture.setImage(cord.getProfilePicture());
+            }
 
             FlowPane outerPane = new FlowPane();
 
@@ -143,6 +153,8 @@ public class ContactController implements Initializable {
             name.setLayoutX(100);
             email.setLayoutX(100);
             phoneNumber.setLayoutX(100);
+            profilePicture.setLayoutX(100);
+
 
             name.setPadding(new Insets(15,0,0,60));
             email.setPadding(new Insets(15,0,0,60));
@@ -151,10 +163,9 @@ public class ContactController implements Initializable {
             outerPane.getChildren().add(name);
             outerPane.getChildren().add(email);
             outerPane.getChildren().add(phoneNumber);
+            outerPane.getChildren().add(profilePicture);
 
-            hBoxAdd1.getChildren().add(outerPane);
-
-            hBoxCord1.getChildren().add(outerPane);
+            hBoxCord.getChildren().add(outerPane);
 
         }
     }
