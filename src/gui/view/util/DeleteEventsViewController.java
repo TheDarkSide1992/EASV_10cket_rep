@@ -1,9 +1,7 @@
 package gui.view.util;
 
 import be.Event;
-import com.gluonhq.charm.glisten.control.ExpansionPanel;
 import gui.model.Model;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -14,8 +12,7 @@ import javafx.scene.control.*;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 
 import java.io.FileInputStream;
@@ -28,31 +25,36 @@ import java.util.function.Consumer;
 
 public class DeleteEventsViewController implements Initializable {
     @FXML
+    private FlowPane flowpane;
+    @FXML
     private VBox vBoxEventView;
     private Model model;
-
-    private static ObservableList<Event> activeEvents;
+    private static ObservableList<Event> allEvents;
 
     public static boolean submitForDeletion = false;
+    private int minHeightOuterPanel = 200;
+    private double fullWith = 1200;
 
+    private int expandedPaneHeight = 600;
     @FXML
-    private ImageView imageCxl, imageEdit, imageEvent;
+    private ImageView imageCxl, imageEdit, imageEvent, imageEventExpanded, imageCxlExpanded, imageEditExpanded;
 
     private String cxlURL = "data/Images/Cancel.png";
-
     private String editURL = "data/Images/Edit.png";
 
     private String eventURL = "data/Images/Event.png";
 
+    private DropShadow shadow;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
             model = new Model();
-            activeEvents = FXCollections.observableArrayList();
-            //Gets absolutely ALL events
-            activeEvents.addAll(model.getActiveEvents());
+            allEvents = model.getAllEvents();
+            shadow = new DropShadow(0, 4, 4, Color.color(0, 0, 0, 0.25));
+            vBoxEventView.setFillWidth(true);
             displayActiveEvents();
+            //allEventScrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -60,143 +62,211 @@ public class DeleteEventsViewController implements Initializable {
 
     private void displayActiveEvents() {
         try {
-            for (Event events : activeEvents) {
+            for (Event events : allEvents) {
+
+                //Outer pane contains datePane, and the "blue" inner-pane, with info about the event
+                BorderPane outerPane = new BorderPane();
+
+                int id = events.getEventID();
+                //Entities to add to outer pane
+                Pane datePane = createDatePane(events);
+
+                BorderPane innerpane = createEventPane(events);
+
+                innerpane = setImages(innerpane, events);
+                //Add pane to left side of pane
+                outerPane.setLeft(datePane);
+                //Add eventPane to center of this pane
+                outerPane.setCenter(innerpane);
+
+
+                outerPane.setMinHeight(minHeightOuterPanel);
+
+
                 if (!events.isEventIsActive()) {
-
-                    int id = events.getEventID();
-                    String day1 = "";
-                    Label day = new Label();
-                    Label month = new Label();
-                    Label year = new Label();
-                    imageEvent = new ImageView();
-                    imageCxl = new ImageView();
-                    imageEdit = new ImageView();
-                    Label title = new Label();
-                    Label startTime = new Label();
-                    Label location = new Label();
-
-                    Pane outerPane = new Pane();
-                    ExpansionPanel expPanel = new ExpansionPanel();
-                    Pane innerPane = new Pane();
-
-                    day.setText(String.valueOf(events.getEventDate().getDayOfMonth()));
-                    if (events.getEventDate().getDayOfMonth() <= 9) {
-                        day1 = "0" + day.getText();
-                        day.setText(day1);
-                    }
-
-
-                    month.setText(String.valueOf(events.getEventDate().getMonth()).substring(0, 3));
-                    year.setText(String.valueOf(events.getEventDate().getYear()));
-
-
-                    title.setText(events.getEventTitle());
-
-                    startTime.setText(events.getEventStartTime().toString().substring(0, 5));
-                    location.setText(events.getEventLocation());
-
-
-                    outerPane.getStylesheets().add(getClass().getResource("/gui/view/Main.css").toExternalForm());
-                    outerPane.getStyleClass().add("outerPane");
-                    title.getStyleClass().add("lblEventTitle");
-                    startTime.getStyleClass().add("lblStartTime");
-                    location.getStyleClass().add("lblLocation");
-                    innerPane.getStyleClass().add("innerPane");
-                    expPanel.getStyleClass().add("expansionPanel");
-                    day.getStyleClass().add("lblEventDay");
-                    month.getStyleClass().add("lblMonthAndYear");
-                    year.getStyleClass().add("lblMonthAndYear");
-
-                    DropShadow shadow = new DropShadow(0, 4, 4, Color.color(0, 0, 0, 0.25));
-
-                    day.setEffect(shadow);
-                    day.setLayoutX(30);
-                    day.setLayoutY(50);
-                    day.minHeight(100);
-                    day.minWidth(100);
-                    day.setAlignment(Pos.CENTER);
-                    month.setEffect(shadow);
-                    month.setLayoutX(110);
-                    month.setLayoutY(70);
-                    year.setEffect(shadow);
-                    year.setLayoutX(110);
-                    year.setLayoutY(95);
-                    expPanel.setLayoutX(200);
-                    expPanel.setLayoutY(25);
-                    outerPane.setMinHeight(200);
-                    innerPane.prefHeight(200);
-                    innerPane.prefWidth(1200);
-                    title.setEffect(shadow);
-                    title.setAlignment(Pos.CENTER);
-                    title.setMinWidth(1200);
-                    title.setMinHeight(60);
-                    startTime.setEffect(shadow);
-                    startTime.setAlignment(Pos.CENTER);
-                    startTime.setLayoutY(45);
-                    startTime.setMinWidth(1200);
-                    startTime.setMinHeight(60);
-                    location.setEffect(shadow);
-                    location.setLayoutY(90);
-                    location.setAlignment(Pos.CENTER);
-                    location.setMinWidth(1200);
-                    location.setMinHeight(60);
-
-                    outerPane.getChildren().add(day);
-                    outerPane.getChildren().add(month);
-                    outerPane.getChildren().add(year);
-
-
-                    imageCxl.setOnMouseClicked(event -> cancelEvent(events));
-                    imageEdit.setOnMouseClicked(event -> deleteEvent(events));  //TODO change this image to a trashcan, and only visible if it is an Admin who logged in;
-                    imageCxl.setImage(loadImages(cxlURL));
-                    imageEdit.setImage(loadImages(editURL));
-                    imageEvent.setImage(loadImages(cxlURL));
-                    imageCxl.setScaleX(0.8);
-                    imageCxl.setScaleY(0.8);
-                    imageEdit.setScaleX(0.68);
-                    imageEdit.setScaleY(0.68);
-
-
-                    imageCxl.setX(1100);
-                    imageCxl.setY(10);
-                    imageEdit.setX(1030);
-                    imageEdit.setY(10);
-                    imageEvent.setX(5);
-                    imageEvent.setY(10);
-                    imageCxl.setEffect(shadow);
-                    imageEdit.setEffect(shadow);
-
-
-                    innerPane.getChildren().add(imageEvent);
-                    innerPane.getChildren().add(title);
-                    innerPane.getChildren().add(startTime);
-                    innerPane.getChildren().add(location);
-
-                    innerPane.getChildren().add(imageCxl);
-                    innerPane.getChildren().add(imageEdit);
-
-
-                    expPanel.setCollapsedContent(innerPane);
-                    Pane expandedPane = new Pane();
-                    //Add to the expanded panel
-                    expandedPane.setMinHeight(200);
-                    expPanel.setExpandedContent(expandedPane);
-
-
-                    outerPane.setOpacity(0.5);
-                    outerPane.setStyle("-fx-background-color: Gray");
-                    expPanel.setStyle("-fx-background-color: Gray");
-
-                    outerPane.getChildren().add(expPanel);
+                    outerPane.setOpacity(1);
+                    outerPane.setStyle("-fx-background-color: LightGray");
 
                     vBoxEventView.getChildren().add(outerPane);
                 }
             }
+            vBoxEventView.setSpacing(10);
 
         } catch (Exception e) {
             Alert alert = new Alert(Alert.AlertType.ERROR, e.toString());
             alert.showAndWait();
         }
+    }
+
+    private BorderPane setImages(BorderPane innerpane, Event events) {
+
+        //Image cancel event
+        imageCxl.setOnMouseClicked(event -> cancelEvent(events));
+        //Image edit event
+        imageEdit.setOnMouseClicked(event -> deleteEvent(events));  //TODO change this image to a trashcan, and only visible if it is an Admin who logged in;
+
+        imageCxl.setImage(loadImages(cxlURL));
+        imageEdit.setImage(loadImages(editURL));
+
+        imageCxl.setEffect(shadow);
+        imageEdit.setEffect(shadow);
+
+        innerpane.setRight(imageCxl);
+        innerpane.setLeft(imageEdit);
+        return innerpane;
+    }
+
+    private BorderPane createEventPane(Event events) {
+        BorderPane innerPane = new BorderPane();
+
+        // Add to innerpane
+        imageEvent = new ImageView();
+        imageCxl = new ImageView();
+        imageEdit = new ImageView();
+        Label title = new Label();
+        Label startTime = new Label();
+        Label location = new Label();
+        imageEventExpanded = new ImageView();
+        imageCxlExpanded = new ImageView();
+        imageEditExpanded = new ImageView();
+        Label titleExpanded = new Label();
+        Label startTimeExpanded = new Label();
+        Label locationExpanded = new Label();
+        Label eventDescription = new Label();
+
+        title.setText(events.getEventTitle());
+        titleExpanded.setText(events.getEventTitle());
+
+        startTime.setText(events.getEventStartTime().toString().substring(0, 5));
+        location.setText(events.getEventLocation());
+
+        startTimeExpanded.setText(events.getEventStartTime().toString().substring(0, 5));
+        locationExpanded.setText(events.getEventLocation());
+
+        eventDescription.setText(events.getEventDescription());
+
+
+
+        //Add styling to the different things
+        title.getStyleClass().add("lblEventTitle");
+        startTime.getStyleClass().add("lblStartTime");
+        location.getStyleClass().add("lblLocation");
+        innerPane.getStyleClass().add("innerPane");
+
+        titleExpanded.getStyleClass().add("lblEventTitle");
+        startTimeExpanded.getStyleClass().add("lblStartTime");
+        locationExpanded.getStyleClass().add("lblLocation");
+        eventDescription.getStyleClass().add("lblEventDescription");
+
+
+        title.setEffect(shadow);
+        title.setAlignment(Pos.CENTER);
+        title.setMinWidth(fullWith);
+        title.setMinHeight(expandedPaneHeight * 0.15);
+        startTime.setEffect(shadow);
+        startTime.setAlignment(Pos.CENTER);
+        startTime.setLayoutY(expandedPaneHeight * 0.1125);
+        startTime.setMinWidth(fullWith);
+        startTime.setMinHeight(expandedPaneHeight * 0.15);
+        location.setEffect(shadow);
+        location.setLayoutY(expandedPaneHeight * 0.225);
+        location.setAlignment(Pos.CENTER);
+        location.setMinWidth(fullWith);
+        location.setMinHeight(expandedPaneHeight * 0.15);
+
+        eventDescription.setLayoutY(200);
+        eventDescription.setLayoutX(20);
+        eventDescription.setWrapText(true);
+        eventDescription.setMaxWidth(500);
+        eventDescription.setMaxHeight(300);
+
+        titleExpanded.setEffect(shadow);
+        titleExpanded.setAlignment(Pos.CENTER);
+        titleExpanded.setMinWidth(fullWith);
+        titleExpanded.setMinHeight(expandedPaneHeight * 0.15);
+        startTimeExpanded.setEffect(shadow);
+        startTimeExpanded.setAlignment(Pos.CENTER);
+        startTimeExpanded.setLayoutY(expandedPaneHeight * 0.1125);
+        startTimeExpanded.setMinWidth(fullWith);
+        startTimeExpanded.setMinHeight(expandedPaneHeight * 0.15);
+        locationExpanded.setEffect(shadow);
+        locationExpanded.setLayoutY(expandedPaneHeight * 0.225);
+        locationExpanded.setAlignment(Pos.CENTER);
+        locationExpanded.setMinWidth(fullWith);
+        locationExpanded.setMinHeight(expandedPaneHeight * 0.15);
+
+        title.setEffect(shadow);
+        title.setAlignment(Pos.CENTER);
+        title.setMinWidth(fullWith);
+        title.setMinHeight(expandedPaneHeight * 0.15);
+        startTime.setEffect(shadow);
+        startTime.setAlignment(Pos.CENTER);
+        startTime.setLayoutY(expandedPaneHeight * 0.1125);
+        startTime.setMinWidth(fullWith);
+        startTime.setMinHeight(expandedPaneHeight * 0.15);
+        location.setEffect(shadow);
+        location.setLayoutY(expandedPaneHeight * 0.225);
+        location.setAlignment(Pos.CENTER);
+        location.setMinWidth(fullWith);
+        location.setMinHeight(expandedPaneHeight * 0.15);
+
+        eventDescription.setLayoutY(200);
+        eventDescription.setLayoutX(20);
+        eventDescription.setWrapText(true);
+        eventDescription.setMaxWidth(500);
+        eventDescription.setMaxHeight(300);
+
+        innerPane.getChildren().add(title);
+
+        return innerPane;
+    }
+
+    private Pane createDatePane(Event events) {
+
+        String day1 = "";
+        Label day = new Label();
+        Label month = new Label();
+        Label year = new Label();
+
+        day.setText(String.valueOf(events.getEventDate().getDayOfMonth()));
+        if (events.getEventDate().getDayOfMonth() <= 9) {
+            day1 = "0" + day.getText();
+            day.setText(day1);
+        }
+
+
+        month.setText(String.valueOf(events.getEventDate().getMonth()).substring(0, 3));
+        year.setText(String.valueOf(events.getEventDate().getYear()));
+
+        //Styling the date
+        day.getStyleClass().add("lblEventDay");
+        month.getStyleClass().add("lblMonthAndYear");
+        year.getStyleClass().add("lblMonthAndYear");
+
+
+        //Entities to add to outer pane
+        day.setEffect(shadow);
+        day.setLayoutX(30);
+        day.setLayoutY(minHeightOuterPanel * 0.25);
+        day.minHeight(minHeightOuterPanel * 0.5);
+        day.minWidth(100);
+        day.setAlignment(Pos.CENTER);
+
+        month.setEffect(shadow);
+        month.setLayoutX(110);
+        month.setLayoutY(minHeightOuterPanel * 0.285);
+
+        year.setEffect(shadow);
+        year.setLayoutX(110);
+        year.setLayoutY(minHeightOuterPanel * 0.5);
+
+        Pane datePane = new Pane();
+        datePane.getChildren().add(day);
+        datePane.getChildren().add(month);
+        datePane.getChildren().add(year);
+
+        return datePane;
+
     }
 
     private Image loadImages(String url) {
@@ -279,6 +349,6 @@ public class DeleteEventsViewController implements Initializable {
             }
         }
     }
-
 }
+
 

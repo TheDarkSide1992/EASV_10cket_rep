@@ -66,8 +66,6 @@ public class TopViewAllUsersController implements Initializable {
                 stage.setTitle("Not active events");
                 stage.setScene(new Scene(root));
                 stage.show();
-                // Hide this current window (if this is what you want)
-                //((Node)(event.getSource())).getScene().getWindow().hide();
             }
             catch (IOException e) {
                 e.printStackTrace();

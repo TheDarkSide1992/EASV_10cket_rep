@@ -1,9 +1,8 @@
-package gui.controller;
+package gui.view.util;
 
 import be.Event;
 import com.gluonhq.charm.glisten.control.ExpansionPanel;
 import gui.model.Model;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -14,6 +13,7 @@ import javafx.scene.control.*;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -26,18 +26,21 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 import java.util.function.Consumer;
 
-public class AllEventController implements Initializable {
+public class DeleteEventsViewControllerNew implements Initializable {
     @FXML
-    public ScrollPane allEventScrollPane;
+    private FlowPane flowpane;
     @FXML
-    public VBox vBoxAllEventView;
+    private VBox vBoxEventView;
     private Model model;
     private static ObservableList<Event> allEvents;
 
     public static boolean submitForDeletion = false;
+    private int minHeightOuterPanel = 200;
+    private double fullWith = 1200;
 
+    private int expandedPaneHeight = 600;
     @FXML
-    private ImageView imageCxl, imageEdit, imageEvent, imageEventExpanded,imageCxlExpanded, imageEditExpanded;
+    private ImageView imageCxl, imageEdit, imageEvent, imageEventExpanded, imageCxlExpanded, imageEditExpanded;
 
     private String cxlURL = "data/Images/Cancel.png";
     private String editURL = "data/Images/Edit.png";
@@ -50,7 +53,7 @@ public class AllEventController implements Initializable {
             model = new Model();
             allEvents = model.getAllEvents();
             displayActiveEvents();
-            allEventScrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+            //allEventScrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -58,13 +61,15 @@ public class AllEventController implements Initializable {
 
     private void displayActiveEvents() {
         try {
-
             for (Event events : allEvents) {
                 int id = events.getEventID();
                 String day1 = "";
+                //Entites to add to outerpane
                 Label day = new Label();
                 Label month = new Label();
                 Label year = new Label();
+
+                // Add to innerpane
                 imageEvent = new ImageView();
                 imageCxl = new ImageView();
                 imageEdit = new ImageView();
@@ -80,8 +85,10 @@ public class AllEventController implements Initializable {
                 Label eventDescription = new Label();
 
 
+                //Later outerPane will contain expPanel
                 Pane outerPane = new Pane();
                 ExpansionPanel expPanel = new ExpansionPanel();
+
                 Pane collapsedPane = new Pane();
                 Pane expandedPane = new Pane();
 
@@ -108,6 +115,7 @@ public class AllEventController implements Initializable {
                 eventDescription.setText(events.getEventDescription());
 
 
+                //Add styling to the different things
                 outerPane.getStylesheets().add(getClass().getResource("/gui/view/Main.css").toExternalForm());
                 outerPane.getStyleClass().add("outerPane");
                 title.getStyleClass().add("lblEventTitle");
@@ -129,51 +137,57 @@ public class AllEventController implements Initializable {
                 //Entities to add to outer pane
                 day.setEffect(shadow);
                 day.setLayoutX(30);
-                day.setLayoutY(50);
-                day.minHeight(100);
+                day.setLayoutY(minHeightOuterPanel * 0.25);
+                day.minHeight(minHeightOuterPanel * 0.5);
                 day.minWidth(100);
                 day.setAlignment(Pos.CENTER);
+
                 month.setEffect(shadow);
                 month.setLayoutX(110);
-                month.setLayoutY(70);
+                month.setLayoutY(minHeightOuterPanel * 0.285);
+
                 year.setEffect(shadow);
                 year.setLayoutX(110);
-                year.setLayoutY(95);
+                year.setLayoutY(minHeightOuterPanel * 0.5);
+
 
                 expPanel.setLayoutX(200);
-                expPanel.setLayoutY(25);
-                outerPane.setMinHeight(200);
-                collapsedPane.prefHeight(200);
-                collapsedPane.prefWidth(1200);
+                expPanel.setLayoutY(minHeightOuterPanel * 0.125);
+                outerPane.setMinHeight(minHeightOuterPanel);
+                collapsedPane.prefHeight(minHeightOuterPanel);
+                collapsedPane.prefWidth(fullWith);
+
 
                 titleExpanded.setEffect(shadow);
                 titleExpanded.setAlignment(Pos.CENTER);
-                titleExpanded.setMinWidth(1200);
-                titleExpanded.setMinHeight(60);
+                titleExpanded.setMinWidth(fullWith);
+                titleExpanded.setMinHeight(expandedPaneHeight * 0.15);
                 startTimeExpanded.setEffect(shadow);
                 startTimeExpanded.setAlignment(Pos.CENTER);
-                startTimeExpanded.setLayoutY(45);
-                startTimeExpanded.setMinWidth(1200);
-                startTimeExpanded.setMinHeight(60);
+                startTimeExpanded.setLayoutY(expandedPaneHeight * 0.1125);
+                startTimeExpanded.setMinWidth(fullWith);
+                startTimeExpanded.setMinHeight(expandedPaneHeight * 0.15);
                 locationExpanded.setEffect(shadow);
-                locationExpanded.setLayoutY(90);
+                locationExpanded.setLayoutY(expandedPaneHeight * 0.225);
                 locationExpanded.setAlignment(Pos.CENTER);
-                locationExpanded.setMinWidth(1200);
-                locationExpanded.setMinHeight(60);
+                locationExpanded.setMinWidth(fullWith);
+                locationExpanded.setMinHeight(expandedPaneHeight * 0.15);
+
                 title.setEffect(shadow);
                 title.setAlignment(Pos.CENTER);
-                title.setMinWidth(1200);
-                title.setMinHeight(60);
+                title.setMinWidth(fullWith);
+                title.setMinHeight(expandedPaneHeight * 0.15);
                 startTime.setEffect(shadow);
                 startTime.setAlignment(Pos.CENTER);
-                startTime.setLayoutY(45);
-                startTime.setMinWidth(1200);
-                startTime.setMinHeight(60);
+                startTime.setLayoutY(expandedPaneHeight * 0.1125);
+                startTime.setMinWidth(fullWith);
+                startTime.setMinHeight(expandedPaneHeight * 0.15);
                 location.setEffect(shadow);
-                location.setLayoutY(90);
+                location.setLayoutY(expandedPaneHeight * 0.225);
                 location.setAlignment(Pos.CENTER);
-                location.setMinWidth(1200);
-                location.setMinHeight(60);
+                location.setMinWidth(fullWith);
+                location.setMinHeight(expandedPaneHeight * 0.15);
+
                 eventDescription.setLayoutY(200);
                 eventDescription.setLayoutX(20);
                 eventDescription.setWrapText(true);
@@ -232,7 +246,7 @@ public class AllEventController implements Initializable {
                 collapsedPane.getChildren().add(imageCxl);
                 collapsedPane.getChildren().add(imageEdit);
 
-                expandedPane.setMinHeight(400);
+                expandedPane.setMinHeight(expandedPaneHeight);
                 expandedPane.getChildren().add(imageEventExpanded);
                 expandedPane.getChildren().add(titleExpanded);
                 expandedPane.getChildren().add(startTimeExpanded);
@@ -255,11 +269,11 @@ public class AllEventController implements Initializable {
                     outerPane.setOpacity(1);
                     outerPane.setStyle("-fx-background-color: LightGray");
                     expPanel.setStyle("-fx-background-color: LightGray");
+
+                    outerPane.getChildren().add(expPanel);
+
+                    vBoxEventView.getChildren().add(outerPane);
                 }
-                outerPane.getChildren().add(expPanel);
-
-                vBoxAllEventView.getChildren().add(outerPane);
-
             }
 
         } catch (Exception e) {
@@ -293,7 +307,7 @@ public class AllEventController implements Initializable {
             try {
                 model.cancelEvent(event.getEventID());
             } catch (SQLException e) {
-                Alert error = new Alert(Alert.AlertType.ERROR, "Could not cancel Event" + "\n"+e, ButtonType.CANCEL);
+                Alert error = new Alert(Alert.AlertType.ERROR, "Could not cancel Event" + "\n" + e, ButtonType.CANCEL);
                 error.showAndWait();
             }
         }
@@ -343,11 +357,10 @@ public class AllEventController implements Initializable {
             try {
                 model.deleteEvent(event.getEventID()); //TODO get the event overview to update correctly
             } catch (SQLException e) {
-                Alert error = new Alert(Alert.AlertType.ERROR, "Could not delete Event from Database" + "\n"+e, ButtonType.CANCEL);
+                Alert error = new Alert(Alert.AlertType.ERROR, "Could not delete Event from Database" + "\n" + e, ButtonType.CANCEL);
                 error.showAndWait();
             }
         }
     }
-
 }
 
