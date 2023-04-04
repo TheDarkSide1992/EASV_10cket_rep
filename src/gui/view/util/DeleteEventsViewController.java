@@ -25,19 +25,14 @@ import java.util.function.Consumer;
 
 public class DeleteEventsViewController implements Initializable {
     @FXML
-    private FlowPane flowpane;
-    @FXML
     private VBox vBoxEventView;
     private Model model;
     private static ObservableList<Event> allEvents;
 
     public static boolean submitForDeletion = false;
-    private int minHeightOuterPanel = 200;
-    private double fullWith = 1200;
 
-    private int expandedPaneHeight = 600;
     @FXML
-    private ImageView imageCxl, imageEdit, imageEvent, imageEventExpanded, imageCxlExpanded, imageEditExpanded;
+    private ImageView imageCxl, imageEdit, imageEvent;
 
     private String cxlURL = "data/Images/Cancel.png";
     private String editURL = "data/Images/Edit.png";
@@ -54,7 +49,6 @@ public class DeleteEventsViewController implements Initializable {
             shadow = new DropShadow(0, 4, 4, Color.color(0, 0, 0, 0.25));
             vBoxEventView.setFillWidth(true);
             displayActiveEvents();
-            //allEventScrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -69,28 +63,22 @@ public class DeleteEventsViewController implements Initializable {
 
                 int id = events.getEventID();
                 //Entities to add to outer pane
-                Pane datePane = createDatePane(events);
-
+                outerPane = createDatePane(events, outerPane);
                 BorderPane innerpane = createEventPane(events);
 
                 innerpane = setImages(innerpane, events);
-                //Add pane to left side of pane
-                outerPane.setLeft(datePane);
                 //Add eventPane to center of this pane
                 outerPane.setCenter(innerpane);
 
-
-                outerPane.setMinHeight(minHeightOuterPanel);
-
-
                 if (!events.isEventIsActive()) {
                     outerPane.setOpacity(1);
-                    outerPane.setStyle("-fx-background-color: LightGray");
+                    outerPane.setStyle("-fx-background-color: #a886b0");
+
 
                     vBoxEventView.getChildren().add(outerPane);
                 }
             }
-            vBoxEventView.setSpacing(10);
+            vBoxEventView.setSpacing(20);
 
         } catch (Exception e) {
             Alert alert = new Alert(Alert.AlertType.ERROR, e.toString());
@@ -99,6 +87,10 @@ public class DeleteEventsViewController implements Initializable {
     }
 
     private BorderPane setImages(BorderPane innerpane, Event events) {
+
+        imageEvent = new ImageView();
+        imageCxl = new ImageView();
+        imageEdit = new ImageView();
 
         //Image cancel event
         imageCxl.setOnMouseClicked(event -> cancelEvent(events));
@@ -111,41 +103,37 @@ public class DeleteEventsViewController implements Initializable {
         imageCxl.setEffect(shadow);
         imageEdit.setEffect(shadow);
 
-        innerpane.setRight(imageCxl);
-        innerpane.setLeft(imageEdit);
+        VBox vBox1 = new VBox(imageCxl);
+        vBox1.setAlignment(Pos.CENTER);
+        VBox vBox2 = new VBox(imageEdit);
+        vBox2.setAlignment(Pos.CENTER);
+
+        innerpane.setRight(vBox1);
+        innerpane.setLeft(vBox2);
         return innerpane;
     }
 
     private BorderPane createEventPane(Event events) {
         BorderPane innerPane = new BorderPane();
 
-        // Add to innerpane
-        imageEvent = new ImageView();
-        imageCxl = new ImageView();
-        imageEdit = new ImageView();
+        // Add to inner-pane
         Label title = new Label();
         Label startTime = new Label();
         Label location = new Label();
-        imageEventExpanded = new ImageView();
-        imageCxlExpanded = new ImageView();
-        imageEditExpanded = new ImageView();
-        Label titleExpanded = new Label();
-        Label startTimeExpanded = new Label();
-        Label locationExpanded = new Label();
+
         Label eventDescription = new Label();
 
+        VBox eventBox = new VBox();
+
+
         title.setText(events.getEventTitle());
-        titleExpanded.setText(events.getEventTitle());
 
         startTime.setText(events.getEventStartTime().toString().substring(0, 5));
         location.setText(events.getEventLocation());
 
-        startTimeExpanded.setText(events.getEventStartTime().toString().substring(0, 5));
-        locationExpanded.setText(events.getEventLocation());
-
         eventDescription.setText(events.getEventDescription());
 
-
+        innerPane.getStylesheets().add(getClass().getResource("/gui/view/Main.css").toExternalForm());
 
         //Add styling to the different things
         title.getStyleClass().add("lblEventTitle");
@@ -153,75 +141,35 @@ public class DeleteEventsViewController implements Initializable {
         location.getStyleClass().add("lblLocation");
         innerPane.getStyleClass().add("innerPane");
 
-        titleExpanded.getStyleClass().add("lblEventTitle");
-        startTimeExpanded.getStyleClass().add("lblStartTime");
-        locationExpanded.getStyleClass().add("lblLocation");
         eventDescription.getStyleClass().add("lblEventDescription");
 
 
         title.setEffect(shadow);
         title.setAlignment(Pos.CENTER);
-        title.setMinWidth(fullWith);
-        title.setMinHeight(expandedPaneHeight * 0.15);
+        eventBox.getChildren().add(title);
+
+
         startTime.setEffect(shadow);
         startTime.setAlignment(Pos.CENTER);
-        startTime.setLayoutY(expandedPaneHeight * 0.1125);
-        startTime.setMinWidth(fullWith);
-        startTime.setMinHeight(expandedPaneHeight * 0.15);
+        eventBox.getChildren().add(startTime);
+
+
         location.setEffect(shadow);
-        location.setLayoutY(expandedPaneHeight * 0.225);
         location.setAlignment(Pos.CENTER);
-        location.setMinWidth(fullWith);
-        location.setMinHeight(expandedPaneHeight * 0.15);
+        eventBox.getChildren().add(location);
 
-        eventDescription.setLayoutY(200);
-        eventDescription.setLayoutX(20);
+        eventBox.setFillWidth(true);
+        eventBox.setAlignment(Pos.CENTER);
+
         eventDescription.setWrapText(true);
-        eventDescription.setMaxWidth(500);
-        eventDescription.setMaxHeight(300);
+        eventBox.getChildren().add(eventDescription);
 
-        titleExpanded.setEffect(shadow);
-        titleExpanded.setAlignment(Pos.CENTER);
-        titleExpanded.setMinWidth(fullWith);
-        titleExpanded.setMinHeight(expandedPaneHeight * 0.15);
-        startTimeExpanded.setEffect(shadow);
-        startTimeExpanded.setAlignment(Pos.CENTER);
-        startTimeExpanded.setLayoutY(expandedPaneHeight * 0.1125);
-        startTimeExpanded.setMinWidth(fullWith);
-        startTimeExpanded.setMinHeight(expandedPaneHeight * 0.15);
-        locationExpanded.setEffect(shadow);
-        locationExpanded.setLayoutY(expandedPaneHeight * 0.225);
-        locationExpanded.setAlignment(Pos.CENTER);
-        locationExpanded.setMinWidth(fullWith);
-        locationExpanded.setMinHeight(expandedPaneHeight * 0.15);
-
-        title.setEffect(shadow);
-        title.setAlignment(Pos.CENTER);
-        title.setMinWidth(fullWith);
-        title.setMinHeight(expandedPaneHeight * 0.15);
-        startTime.setEffect(shadow);
-        startTime.setAlignment(Pos.CENTER);
-        startTime.setLayoutY(expandedPaneHeight * 0.1125);
-        startTime.setMinWidth(fullWith);
-        startTime.setMinHeight(expandedPaneHeight * 0.15);
-        location.setEffect(shadow);
-        location.setLayoutY(expandedPaneHeight * 0.225);
-        location.setAlignment(Pos.CENTER);
-        location.setMinWidth(fullWith);
-        location.setMinHeight(expandedPaneHeight * 0.15);
-
-        eventDescription.setLayoutY(200);
-        eventDescription.setLayoutX(20);
-        eventDescription.setWrapText(true);
-        eventDescription.setMaxWidth(500);
-        eventDescription.setMaxHeight(300);
-
-        innerPane.getChildren().add(title);
+        innerPane.setCenter(eventBox);
 
         return innerPane;
     }
 
-    private Pane createDatePane(Event events) {
+    private BorderPane createDatePane(Event events, BorderPane updatedPane) {
 
         String day1 = "";
         Label day = new Label();
@@ -238,6 +186,8 @@ public class DeleteEventsViewController implements Initializable {
         month.setText(String.valueOf(events.getEventDate().getMonth()).substring(0, 3));
         year.setText(String.valueOf(events.getEventDate().getYear()));
 
+        updatedPane.getStylesheets().add(getClass().getResource("/gui/view/Main.css").toExternalForm());
+
         //Styling the date
         day.getStyleClass().add("lblEventDay");
         month.getStyleClass().add("lblMonthAndYear");
@@ -246,27 +196,24 @@ public class DeleteEventsViewController implements Initializable {
 
         //Entities to add to outer pane
         day.setEffect(shadow);
-        day.setLayoutX(30);
-        day.setLayoutY(minHeightOuterPanel * 0.25);
-        day.minHeight(minHeightOuterPanel * 0.5);
-        day.minWidth(100);
-        day.setAlignment(Pos.CENTER);
-
         month.setEffect(shadow);
-        month.setLayoutX(110);
-        month.setLayoutY(minHeightOuterPanel * 0.285);
-
         year.setEffect(shadow);
-        year.setLayoutX(110);
-        year.setLayoutY(minHeightOuterPanel * 0.5);
 
-        Pane datePane = new Pane();
-        datePane.getChildren().add(day);
-        datePane.getChildren().add(month);
-        datePane.getChildren().add(year);
+        HBox date = new HBox();
+        date.getChildren().add(day);
+        date.setAlignment(Pos.CENTER);
+        date.setMinWidth(100);
 
-        return datePane;
+        VBox monthYear = new VBox();
+        monthYear.getChildren().add(month);
+        monthYear.getChildren().add(year);
+        monthYear.setAlignment(Pos.CENTER);
 
+        date.getChildren().add(monthYear);
+
+        updatedPane.setLeft(date);
+
+        return updatedPane;
     }
 
     private Image loadImages(String url) {
