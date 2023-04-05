@@ -1,14 +1,20 @@
-.outerPane{
+.paneOuterPane{
     -fx-background: transparent;
 }
 
 .expansionPanel {
     -fx-border-color: rgba(243,218,218,1);
     -fx-background-color: rgba(71,158,224,1);
+    -fx-border-radius: 15;
+    -fx-background-radius: 15;
 
 }
 
-.innerPane {
+.paneCollapsedPane {
+    -fx-background: transparent;
+}
+
+.paneExpandedPane {
     -fx-background: transparent;
 }
 
@@ -45,8 +51,7 @@
 }
 
 .lblEventDescription {
-    -fx-font-size: 25;
-    -fx-font-weight: bold;
+    -fx-font-size: 18;
     -fx-text-fill: rgba(243,218,218,1);
 }
 
@@ -179,4 +184,16 @@
 
 .alertPane > .content > .button-bar > .button {
     -fx-background-radius: 15;
+}
+
+.lblOwnerAndCollaborator {
+    -fx-underline: true;
+    -fx-font-weight: bold;
+    -fx-font-size: 16;
+    -fx-text-fill: rgba(243,218,218,1);
+}
+
+.eventOwnerAndCollaborator {
+      -fx-font-size: 18;
+      -fx-text-fill: rgba(243,218,218,1);
 }

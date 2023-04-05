@@ -20,8 +20,6 @@ public class LoginViewController implements Initializable {
     private ControllerAssistant controllerAssistant;
     private Model model;
     private User user;
-    private static String userREAL = null;
-    public static IndexController indexController;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -50,28 +48,20 @@ public class LoginViewController implements Initializable {
     }
 
     public void handleLogIn(ActionEvent actionEvent) {
-        try {
-            indexController = new IndexController();
-            if (txtUserName.getText().contains("a")) {
-                userREAL = "Administrator";
-                controllerAssistant.loadTop("TopViewAllUsers.fxml");
-
-            } else if (txtUserName.getText().contains("e")) {
-                userREAL = "Event Coordinator";
-                controllerAssistant.loadTop("TopViewAllUsers.fxml");
-
-            } else {
-                userREAL = null;
-                controllerAssistant.loadTop("TopViewAllUsers.fxml");
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
+        if (txtUserName.getText().isEmpty() || txtPassword.getText().isEmpty()) {
+            displayAlert("Missing Username or Password.");
+            return;
         }
-        if (txtUserName.getText().isEmpty() || txtPassword.getText().isEmpty()) displayAlert("Missing Username or Password.");
 
-        if (txtPassword.getText().length() < 8) displayAlert("password is Incorrect");
+        if (txtPassword.getText().length() < 8) {
+            displayAlert("password is Incorrect");
+            return;
+        }
 
-        if (!validPassword(txtPassword.getText())) displayAlert("password contain illegal characters");
+        if (!validPassword(txtPassword.getText())) {
+            displayAlert("password contain illegal characters");
+            return;
+        }
 
         String password = txtPassword.getText().trim();
         System.out.println(password);
@@ -80,6 +70,12 @@ public class LoginViewController implements Initializable {
 
         try {
             user = model.checkLogIn(userName, password);
+
+            if (user == null){
+                displayAlert("Incorrect Log-in");
+                return;
+            }
+
             controllerAssistant.setLoggedInUser(user);
 
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -89,11 +85,16 @@ public class LoginViewController implements Initializable {
             );
             alert.showAndWait();
 
+            loadInUsers();
+
+
+            controllerAssistant.loadCenter("AllEventView.fxml");
+
+
         } catch (Exception e){
             displayError(e);
             e.printStackTrace();
         }
-
     }
 
     public boolean validPassword(String password){
@@ -102,7 +103,7 @@ public class LoginViewController implements Initializable {
             for (int i = 0; i < password.length() - 1; i++) {
                 for (int j = 0; j < specialChars.length() - 1; j++){
                     if(password.charAt(i) == specialChars.charAt(j)){
-                        return true;
+                        return false;
                     }
                 }
             }
@@ -110,14 +111,27 @@ public class LoginViewController implements Initializable {
             return false;
         }
 
-        return false;
+        return true;
+    }
+
+    private void loadInUsers(){
+        try {
+            if (controllerAssistant.getLoggedInUser().getUserStringType().equals("Administrator")) {
+                controllerAssistant.loadTop("TopViewAllUsers.fxml");
+
+            } else if (controllerAssistant.getLoggedInUser().getUserStringType().equals("Event Coordinator")) {
+                controllerAssistant.loadTop("TopViewAllUsers.fxml");
+
+            } else {
+                controllerAssistant.loadTop("TopViewAllUsers.fxml");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void handleCancel(ActionEvent actionEvent) {
-        controllerAssistant.openNewWindow("EventOverView.fxml");
+        controllerAssistant.openNewWindow("UpcomingEventsView.fxml");
     }
 
-    public String getUserREAL() {
-        return userREAL;
-    }
 }

@@ -1,13 +1,20 @@
 package gui.model;
 
+import be.Administrator;
 import be.Event;
+import be.EventCoordinator;
 import be.User;
 import bll.EventManager;
 import bll.UserManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import java.sql.Date;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.ArrayList;
 
 public class Model {
     private ObservableList<Event> activeEvents;
@@ -23,8 +30,8 @@ public class Model {
         allEvents = FXCollections.observableArrayList();
 
     }
-
     public ObservableList<Event> getAllEvents() throws Exception {
+        allEvents = FXCollections.observableArrayList();
         allEvents.addAll(eventManager.getAllEvents());
         return allEvents;
     }
@@ -50,6 +57,14 @@ public class Model {
 
     public User checkLogIn(String userName, String password) throws Exception{
         return userManager.getIfLongedInUSer(userName,password);
+    }
+
+    public ArrayList<Administrator> getAllAdmins() throws Exception {
+        return userManager.getAllAdmins();
+    }
+
+    public ArrayList<EventCoordinator> getAllCoordinators() throws Exception {
+        return userManager.getAllCoordinators();
     }
 }
 

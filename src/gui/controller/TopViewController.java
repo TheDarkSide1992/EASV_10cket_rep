@@ -70,7 +70,7 @@ public class TopViewController implements Initializable {
     }
 
     public void handleUpcomingEvents(ActionEvent actionEvent) {
-        controllerAssistant.openNewWindow("EventOverView.fxml");
+        controllerAssistant.openNewWindow("UpcomingEventsView.fxml");
     }
 
     public void handleSignIn(MouseEvent mouseEvent) {

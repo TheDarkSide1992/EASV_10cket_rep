@@ -37,13 +37,13 @@ public class AdminDAO implements IAdministratorDAO {
     }
 
     @Override
-    public List<Administrator> getAllAdministrators() throws Exception{
+    public ArrayList<Administrator> getAllAdministrators() throws Exception{
         ArrayList<Administrator> adminList = new ArrayList<>();
 
         try (Connection conn = dbConnector.getConnection()) {
             //Extract all administrators
             String sql = "SELECT * FROM User_ WHERE User_Type = " +
-                        "(sELECT User_Type_ID FROM User_Type WHERE USER_TYPE_TYPE = 'Event Kordinator')";
+                    "(sELECT User_Type_ID FROM User_Type WHERE USER_TYPE_TYPE = 'Administrator')";
             Statement stmt = conn.createStatement();
 
             //Execute the update to the DB
@@ -56,8 +56,16 @@ public class AdminDAO implements IAdministratorDAO {
                 int userType = rs.getInt("User_Type");
                 String userEmil = rs.getString("User_Email");
                 String tlfNumber = rs.getString("User_tlf");
+                byte[] data = rs.getBytes("User_Img");
 
-                adminList.add(new Administrator(id,userName,userFirstName,userEmil,tlfNumber,userType));
+                Administrator administrator = new Administrator(id,userName,userFirstName,userEmil,tlfNumber,userType);
+
+                if(data != null){
+                    administrator.setImageBytes(data);
+                    administrator.convertByteToImage();
+                }
+
+                adminList.add(administrator);
             }
         }
 

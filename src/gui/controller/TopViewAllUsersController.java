@@ -1,9 +1,10 @@
 package gui.controller;
 
-import javafx.event.ActionEvent;
+import be.User;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -14,6 +15,7 @@ import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -25,7 +27,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class TopViewAllUsersController implements Initializable {
@@ -37,28 +38,35 @@ public class TopViewAllUsersController implements Initializable {
     private ControllerAssistant controllerAssistant;
 
     private String url = "data/Images/10cketshort.png";
+    private String userType = null;
+    private User loggedInUser = null;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        //String userREAL = "Event Coordinator";
-        //String userREAL = "Administrator";
-        String user = null;
-        if (new LoginViewController().getUserREAL() != null) {
-            //user = new LoginViewController().indexController.getUser();
-            user = new LoginViewController().getUserREAL();
+        controllerAssistant = ControllerAssistant.getInstance();
+
+
+        if (controllerAssistant.getLoggedInUser() != null) {
+            loggedInUser = controllerAssistant.getLoggedInUser();
+            userType = loggedInUser.getUserStringType();
         }
-        Button[] buttons = assignButtonsToUsers(user);
+        Button[] buttons = assignButtonsToUsers(userType);
         addButtons(buttons);
         setLogo();
-        if (user == null) {
+        if (userType == null) {
             signInLabelStyling();
         } else {
-            logoutLabel();
+            FlowPane flowPane = new FlowPane();
+            flowPane.getChildren().add(logoutLabel());
+            flowPane.getChildren().add(setUserName());
+
+            flowPane.setAlignment(Pos.CENTER_RIGHT);
+            btnHolderHBox.getChildren().add(flowPane);
         }
         controllerAssistant = ControllerAssistant.getInstance();
 
         //Opens a new view, if the admin is logged in
-        if (user != null && user.equals("Administrator")) {
+        if (loggedInUser != null && loggedInUser.equals("Administrator")) {
             Parent root;
             try {
                 root = FXMLLoader.load(getClass().getClassLoader().getResource("gui/view/util/DeleteEventsView.fxml"), resources);
@@ -72,7 +80,6 @@ public class TopViewAllUsersController implements Initializable {
             }
             System.out.println("Logged in as admin");
         }
-
 
     }
 
@@ -146,12 +153,13 @@ public class TopViewAllUsersController implements Initializable {
         btnHolderHBox.getChildren().add(signInLbl);
     }
 
-    void logoutLabel() {
+    private Label logoutLabel() {
         DropShadow shadow = new DropShadow(0, 4, 4, Color.color(0, 0, 0, 0.25));
         Label logout = new Label();
         logout.setEffect(shadow);
         logout.setText("Log Out");
         logout.setAlignment(Pos.CENTER_RIGHT);
+        logout.setPadding(new Insets(10,100,0,0));
 
         //Add a listener to label
         logout.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
@@ -163,9 +171,36 @@ public class TopViewAllUsersController implements Initializable {
             addButtons(buttons);
             signInLabelStyling();
             upcomingEvents();
+            controllerAssistant.setLoggedInUser(null);
         });
         logout.getStyleClass().add("lblSignIn");
-        btnHolderHBox.getChildren().add(logout);
+
+        return logout;
+        /*
+        FlowPane logOutPane = new FlowPane();
+        logOutPane.getChildren().add(logout);
+        logOutPane.setAlignment(Pos.TOP_RIGHT);
+
+        btnHolderHBox.getChildren().add(logOutPane);*/
+    }
+
+    private Label setUserName(){
+        Label userName = new Label();
+        FlowPane namePane = new FlowPane();
+        userName.setText(controllerAssistant.getLoggedInUser().getUserFirstName() + "\n"
+                + controllerAssistant.getLoggedInUser().getUserName());
+        userName.setAlignment(Pos.BOTTOM_RIGHT);
+        userName.setPadding(new Insets(0,150,0,0));
+
+        //TODO Dosent Display name posibly to to the size of other labels. fix later
+        userName.getStyleClass().add("lblMonthAndYear");
+
+        return userName;
+        /*
+        namePane.getChildren().add(userName);
+        namePane.setAlignment(Pos.BOTTOM_RIGHT);
+        btnHolderHBox.getChildren().add(namePane);
+        */
     }
 
     private void setLogo() {
@@ -184,7 +219,7 @@ public class TopViewAllUsersController implements Initializable {
     }
 
     public void upcomingEvents() {
-        controllerAssistant.openNewWindow("EventOverView.fxml");
+        controllerAssistant.openNewWindow("UpcomingEventsView.fxml");
     }
 
     private void allEvents() {

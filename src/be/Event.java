@@ -13,24 +13,30 @@ import java.nio.file.Files;
 import java.sql.Time;
 import java.time.LocalDate;
 
-public class Event {
+public class Event implements Comparable<Event>{
     private int eventID;
     private String eventTitle;
     private LocalDate eventDate;
     private Time eventStartTime;
     private String eventLocation;
     private String eventDescription;
+
+    private String eventCollaborator;
+
+    private String eventCoordinator;
     private int eventTicketAmount;
     private boolean eventIsActive;
     private Image eventImage;
     private byte[]  imageBytes;
-    public Event(int eventID, String eventTitle, LocalDate eventDate, Time eventStartTime, String eventLocation, String eventDescription, boolean eventIsActive) {
+    public Event(int eventID, String eventTitle, LocalDate eventDate, Time eventStartTime, String eventLocation, String eventDescription, boolean eventIsActive, String eventCollaborator, String eventCoordinator) {
         this.eventID = eventID;
         this.eventTitle = eventTitle;
         this.eventDate = eventDate;
         this.eventStartTime = eventStartTime;
         this.eventLocation = eventLocation;
         this.eventDescription = eventDescription;
+        this.eventCollaborator = eventCollaborator;
+        this.eventCoordinator = eventCoordinator;
         this.eventIsActive = eventIsActive;
     }
 
@@ -126,4 +132,33 @@ public class Event {
         eventImage = img;
     }
 
+    public String getEventCollaborator() {
+        return eventCollaborator;
+    }
+
+    public void setEventCollaborator(String eventCollaborator) {
+        this.eventCollaborator = eventCollaborator;
+    }
+
+    public String getEventCoordinator() {
+        return eventCoordinator;
+    }
+
+    public void setEventCoordinator(String eventCoordinator) {
+        this.eventCoordinator = eventCoordinator;
+    }
+
+    @Override
+    public int compareTo(Event e) {
+        if(this.getEventDate().isBefore(e.getEventDate())){
+            return -1;
+        } else if (this.getEventDate().isEqual(e.getEventDate())) {
+            return 0;
+        }
+        else {
+            return 1;
+        }
+
+
+    }
 }

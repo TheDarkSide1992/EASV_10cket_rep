@@ -13,11 +13,11 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<ScrollPane styleClass="scrollPane" stylesheets="@Main.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.CreateEventController">
+<ScrollPane styleClass="scrollPane" stylesheets="@Main.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.CreateEventController">
    <content>
       <AnchorPane prefHeight="824.0" prefWidth="1440.0" styleClass="scrollPane" stylesheets="@Main.css">
          <children>
-            <Label fx:id="lblCreateEvent" layoutX="50.0" layoutY="50.0" styleClass="lblCreateEvent" text="Create Event" underline="true">
+            <Label fx:id="lblCreateEvent" focusTraversable="false" layoutX="50.0" layoutY="50.0" scaleShape="false" styleClass="lblCreateEvent" text="Create Event" underline="true">
                <font>
                   <Font name="Verdana Bold" size="48.0" />
                </font>
@@ -43,7 +43,7 @@
                   <Font name="Verdana" size="24.0" />
                </font>
             </TextArea>
-            <Pane layoutX="880.0" layoutY="80.0" styleClass="imgChooseImage" fx:id="imagePane">
+            <Pane fx:id="imagePane" layoutX="880.0" layoutY="80.0" styleClass="imgChooseImage">
                <children>
                   <ImageView fx:id="imgEventImage" fitHeight="280.0" fitWidth="420.0" layoutX="5.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true" styleClass="imgChooseImage" />
                </children>

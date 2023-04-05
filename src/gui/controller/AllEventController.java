@@ -49,14 +49,14 @@ public class AllEventController implements Initializable {
         try {
             model = new Model();
             allEvents = model.getAllEvents();
-            displayActiveEvents();
+            displayAllEvents();
             allEventScrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
 
-    private void displayActiveEvents() {
+    private void displayAllEvents() {
         try {
 
             for (Event events : allEvents) {
@@ -120,8 +120,8 @@ public class AllEventController implements Initializable {
                 expandedPane.getStyleClass().add("innerPane");
                 expPanel.getStyleClass().add("expansionPanel");
                 day.getStyleClass().add("lblEventDay");
-                month.getStyleClass().add("lblMonthAndYear");
-                year.getStyleClass().add("lblMonthAndYear");
+                month.getStyleClass().add("lblMonth");
+                year.getStyleClass().add("lblYear");
                 eventDescription.getStyleClass().add("lblEventDescription");
 
                 DropShadow shadow = new DropShadow(0, 4, 4, Color.color(0, 0, 0, 0.25));

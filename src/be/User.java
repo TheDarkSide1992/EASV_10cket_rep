@@ -1,20 +1,32 @@
 package be;
 
+import javafx.scene.image.Image;
+
+import java.io.ByteArrayInputStream;
+
 public abstract class User {
     private int userID;
-    private String userNAme;
+    private String userName;
     private String userFirstName;
     private String userEmail;
     private String userTLF;
     private int userTypeId;
+    private String userStringType;
 
-    public User(int userID, String userNAme, String userFirstName, String userEmail, String userTLF, int userTypeId) {
+    private byte[]  imageBytes;
+
+    private Image profilePicture;
+
+
+    public User(int userID, String userNAme, String userFirstName, String userEmail, String userTLF, int userTypeId, String userStringType) {
         this.userID = userID;
-        this.userNAme = userNAme;
+        this.userName = userNAme;
         this.userFirstName = userFirstName;
         this.userEmail = userEmail;
         this.userTLF = userTLF;
         this.userTypeId = userTypeId;
+        this.userStringType = userStringType;
+
     }
 
     public int getUserID() {
@@ -25,12 +37,12 @@ public abstract class User {
         this.userID = userID;
     }
 
-    public String getUserNAme() {
-        return userNAme;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setUserNAme(String userNAme) {
-        this.userNAme = userNAme;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getUserFirstName() {
@@ -65,11 +77,40 @@ public abstract class User {
         this.userTypeId = userTypeId;
     }
 
+    public String getUserStringType() {
+        return userStringType;
+    }
+
+    public void setUserStringType(String userStringType) {
+        this.userStringType = userStringType;
+    }
+
+    public byte[] getImageBytes() {
+        return imageBytes;
+    }
+
+    public void setImageBytes(byte[] imageBytes) {
+        this.imageBytes = imageBytes;
+    }
+
+    public javafx.scene.image.Image getProfilePicture() {
+        return profilePicture;
+    }
+
+    public void setProfilePicture(javafx.scene.image.Image profilePicture) {
+        this.profilePicture = profilePicture;
+    }
+
+    public void convertByteToImage() throws Exception{
+        javafx.scene.image.Image img = new javafx.scene.image.Image(new ByteArrayInputStream(imageBytes));
+        profilePicture = img;
+    }
+
     @Override
     public String toString() {
         return "User{" +
                 "userID=" + userID +
-                ", userNAme='" + userNAme + '\'' +
+                ", userNAme='" + userName + '\'' +
                 ", userFirstName='" + userFirstName + '\'' +
                 ", userEmail='" + userEmail + '\'' +
                 ", userTLF='" + userTLF + '\'' +
