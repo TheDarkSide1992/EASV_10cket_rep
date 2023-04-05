@@ -11,13 +11,15 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+        /*
         Parent root;
         root = FXMLLoader.load(getClass().getClassLoader().getResource("gui/view/util/DeleteEventsView.fxml"));
         Stage stage = new Stage();
         stage.setTitle("Not active events");
         stage.setScene(new Scene(root));
         stage.show();
-/**
+        */
+
 
         Parent root = FXMLLoader.load(getClass().getResource("gui/view/Index.fxml"));
 
@@ -27,6 +29,5 @@ public class Main extends Application {
         primaryStage.setResizable(true);
         primaryStage.setOnCloseRequest(event -> System.exit(0));
         primaryStage.show();
- */
     }
 }
