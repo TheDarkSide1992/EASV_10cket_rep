@@ -106,8 +106,8 @@ public class ContactController implements Initializable {
         btnAdd.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> addUser());
 
 
-        if(controllerAssistant.getLoggedInUser() != null &&controllerAssistant.getLoggedInUser().getUserStringType().equals("Administrator")) {
-
+        //if(controllerAssistant.getLoggedInUser() != null &&controllerAssistant.getLoggedInUser().getUserStringType().equals("Administrator")) {
+        if(true){ //TODO THIS IS A BAD IDEA CHANGE LATER AFTER TESTING
             hBoxAddUser = new HBox();
             hBoxAddUser.setPadding(new Insets(20, 0, 0, 50));
 
@@ -200,9 +200,9 @@ public class ContactController implements Initializable {
 
     private void addUser(){
         try {
-            //TODO CHANGE THE WINDOW TO CREATE A USER WINDOW
-            controllerAssistant.loadCenter("CreateEventView.fxml");
+            controllerAssistant.loadCenter("CreateUser.fxml");
         } catch (Exception e) {
+            e.printStackTrace();
             displayError(e);
         }
     }
