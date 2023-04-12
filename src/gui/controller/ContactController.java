@@ -1,36 +1,45 @@
 package gui.controller;
 
 import be.Administrator;
+import be.Event;
 import be.EventCoordinator;
 import gui.model.Model;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class ContactController implements Initializable {
 
-    @FXML private HBox hBoxAdd, hBoxCord;
+    @FXML private HBox hBoxAdd, hBoxCord, hBoxAddUser;
     @FXML private VBox vbox;
     private Model model;
 
     private ArrayList<Administrator> allAdmins;
     private ArrayList<EventCoordinator> allCoordinators;
+    private ControllerAssistant controllerAssistant;
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         allAdmins = new ArrayList<>();
         allCoordinators = new ArrayList<>();
         try {
+            controllerAssistant = ControllerAssistant.getInstance();
+
             model = new Model();
 
             allAdmins.addAll(model.getAllAdmins());
@@ -90,7 +99,26 @@ public class ContactController implements Initializable {
         vbox.getChildren().add(hBoxCord);
 
         setContactInfoCord();
+
+        FlowPane outerPane3 = new FlowPane();
+
+        Button btnAdd = new Button("Add User");
+        btnAdd.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> addUser());
+
+
+        //if(controllerAssistant.getLoggedInUser() != null &&controllerAssistant.getLoggedInUser().getUserStringType().equals("Administrator")) {
+        if(true){ //TODO THIS IS A BAD IDEA CHANGE LATER AFTER TESTING
+            hBoxAddUser = new HBox();
+            hBoxAddUser.setPadding(new Insets(20, 0, 0, 50));
+
+            hBoxAddUser.getChildren().add(btnAdd);
+            outerPane3.getChildren().add(hBoxAddUser);
+
+            vbox.getChildren().add(hBoxAddUser);
+        }
     }
+
+
 
     private void setContactInfoAdmin() {
         for (Administrator admin: allAdmins){
@@ -167,6 +195,15 @@ public class ContactController implements Initializable {
 
             hBoxCord.getChildren().add(outerPane);
 
+        }
+    }
+
+    private void addUser(){
+        try {
+            controllerAssistant.loadCenter("CreateUser.fxml");
+        } catch (Exception e) {
+            e.printStackTrace();
+            displayError(e);
         }
     }
 }

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<ScrollPane styleClass="scrollPane" stylesheets="@Main.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.CreateUserController">
+   <content>
+      <AnchorPane prefHeight="824.0" prefWidth="1440.0" styleClass="scrollPane" stylesheets="@Main.css">
+         <children>
+            <Label fx:id="lblCreateUser" focusTraversable="false" layoutX="50.0" layoutY="50.0" scaleShape="false" styleClass="lblCreateEvent" text="Create User" underline="true">
+               <font>
+                  <Font name="Verdana Bold" size="48.0" />
+               </font>
+            </Label>
+            <TextField fx:id="txtFieldUserFirstName" layoutX="51.0" layoutY="165.0" minHeight="60.0" minWidth="500.0" promptText="User First Name" styleClass="txtTitleOfEvent">
+               <font>
+                  <Font name="Verdana" size="24.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="txtFieldUSerUserName" layoutX="51.0" layoutY="265.0" minHeight="60.0" minWidth="500.0" promptText="User's User-Name" styleClass="txtLocation">
+               <font>
+                  <Font name="Verdana" size="24.0" />
+               </font>
+            </TextField>
+            <Pane fx:id="imagePane" layoutX="880.0" layoutY="80.0" styleClass="imgChooseImage">
+               <children>
+                  <ImageView fx:id="imgUserProfilePicture" fitHeight="280.0" fitWidth="420.0" layoutX="5.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true" styleClass="imgChooseImage" />
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </Pane>
+            <Button fx:id="btnChooseImage" layoutX="962.0" layoutY="463.0" minHeight="60.0" minWidth="260.0" mnemonicParsing="false" onAction="#handleChooseImage" onKeyReleased="#handleChooseImage" styleClass="btnChooseImage" text="Choose Image">
+               <font>
+                  <Font name="Verdana" size="24.0" />
+               </font>
+            </Button>
+            <TextField fx:id="txtEmail" layoutX="51.0" layoutY="430.0" minHeight="60.0" minWidth="500.0" promptText="User Email" styleClass="txtEventOwner">
+               <font>
+                  <Font name="Verdana" size="24.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="txtFieldTlf" layoutX="55.0" layoutY="526.0" minHeight="60.0" minWidth="500.0" promptText="User Phone Number" styleClass="txtEventCollaborator">
+               <font>
+                  <Font name="Verdana" size="24.0" />
+               </font>
+            </TextField>
+            <Button fx:id="btnSaveUser" layoutX="967.0" layoutY="589.0" minHeight="60.0" minWidth="260.0" mnemonicParsing="false" onAction="#handleSaveUser" onKeyPressed="#handleSaveUser" styleClass="btnSaveEvent" text="Save User">
+               <font>
+                  <Font name="Verdana" size="24.0" />
+               </font>
+            </Button>
+            <ComboBox fx:id="comboBoxUserType" layoutX="59.0" layoutY="357.0" prefHeight="42.0" prefWidth="491.0" promptText="UserTypes" />
+            <TextField fx:id="txtFieldPassword" layoutX="55.0" layoutY="620.0" minHeight="60.0" minWidth="500.0" promptText="set User Password" styleClass="txtEventCollaborator">
+               <font>
+                  <Font name="Verdana" size="24.0" />
+               </font>
+            </TextField>
+         </children>
+      </AnchorPane>
+   </content>
+</ScrollPane>

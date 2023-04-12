@@ -9,11 +9,7 @@ import bll.UserManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-import java.sql.Date;
 import java.sql.SQLException;
-import java.time.LocalDate;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.ArrayList;
 
 public class Model {
@@ -44,6 +40,15 @@ public class Model {
     public void createEvent(Event event) throws Exception {
         event.setEventID(eventManager.createEvent(event));
         activeEvents.add(event);
+    }
+
+    public void createUser(User user) throws Exception{
+        user.setUserID(userManager.createUser(user));
+
+    }
+
+    public void setUserPassword(User user, String password) throws Exception{
+        userManager.handlePassword(user, password);
     }
 
     public void deleteEvent(int id) throws SQLException {
