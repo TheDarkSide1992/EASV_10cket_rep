@@ -119,7 +119,9 @@ public class UpcomingEventsController implements Initializable {
                 imageEdit.setImage(loadImages(editURL));
                 egu.setImageEditPlacement(imageEdit);
 
-                imageEvent.setImage(loadImages(cxlURL));
+                if(events.getEventImage() == null) {
+                imageEvent.setImage(loadImages(cxlURL)); }
+                else imageEvent.setImage(events.getEventImage());
 
                 imageBuyTicket.setImage(loadImages(buyTicket));
                 egu.setBuyTicketPlacement(imageBuyTicket);
@@ -130,7 +132,10 @@ public class UpcomingEventsController implements Initializable {
                 imageEditExpanded.setImage(loadImages(editURL));
                 egu.setImageEditExpandedPlacement(imageEditExpanded);
 
-                imageEventExpanded.setImage(loadImages(cxlURL));
+                if(events.getEventImage() == null) {
+                imageEventExpanded.setImage(loadImages(cxlURL)); }
+                else imageEventExpanded.setImage(events.getEventImage());
+
                 egu.setImageEventExpandedPlacement(imageEventExpanded);
 
                 imageCxlExpanded.setImage(loadImages(cxlURL));
