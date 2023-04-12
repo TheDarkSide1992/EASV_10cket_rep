@@ -62,6 +62,7 @@ CREATE TABLE Event_(
     Event_ID                    INT IDENTITY(1,1)                       NOT NULL,
     Event_Title                 NVARCHAR(250)                           NOT NULL,
     Event_Location              NVARCHAR(250)                           NOT NULL,
+    Event_LocationURL           NVARCHAR(250),
     Event_Event_Coordinator_ID  INT                                     NOT NULL,
     Event_Authors               NVARCHAR(250),
     Event_Date                  DATE                                    NOT NULL,
