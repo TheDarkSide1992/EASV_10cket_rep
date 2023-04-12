@@ -6,10 +6,7 @@ import be.User;
 import dal.interfaces.IGeneralUser;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 
 public class GeneralUserDAO implements IGeneralUser {
@@ -26,8 +23,34 @@ public class GeneralUserDAO implements IGeneralUser {
     }
 
     @Override
-    public int createUser() throws Exception{
-        return 0;
+    public int createUser(User user) throws Exception{
+        int id = 0;
+        try (Connection conn = db.getConnection()) {
+            //String sql = "INSERT INTO Event_ (Event_Title, Event_Location, Event_Event_Coordinator_ID, Event_Date, Event_Start_Time, Event_Description, Event_Ticket_Total, Event_Ticket_Sold, Event_Is_Active) Values(?,?,?,?,?,?,?,?,?);";
+            String sql = "INSERT INTO User_ VALUES(?, ?, (SELECT DISTINCT User_Type_ID FROM User_Type WHERE USER_TYPE_TYPE = ?), ?,?, ?)";
+
+
+            PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+
+            stmt.setString(1, user.getUserName());
+            stmt.setString(2, user.getUserFirstName());
+            stmt.setString(3, user.getUserStringType());
+            stmt.setString(4, user.getUserEmail());
+            stmt.setString(5, user.getUserTLF());
+            stmt.setBytes(6, user.getImageBytes());
+
+            stmt.executeUpdate();
+
+            ResultSet rs = stmt.getGeneratedKeys();
+
+            if (rs.next()) {
+                id = rs.getInt(1);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            throw new Exception("Could not create Event" + ex);
+        }
+        return id;
     }
 
     @Override

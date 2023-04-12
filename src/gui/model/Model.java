@@ -46,6 +46,11 @@ public class Model {
         activeEvents.add(event);
     }
 
+    public void createUser(User user) throws Exception{
+        user.setUserID(userManager.createUser(user));
+
+    }
+
     public void deleteEvent(int id) throws SQLException {
         eventManager.deleteEvent(id);
 

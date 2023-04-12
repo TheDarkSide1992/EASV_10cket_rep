@@ -43,7 +43,7 @@
                   <Font name="Verdana" size="24.0" />
                </font>
             </Button>
-            <TextField fx:id="txtEventOwner" layoutX="51.0" layoutY="430.0" minHeight="60.0" minWidth="500.0" promptText="User Email" styleClass="txtEventOwner">
+            <TextField fx:id="txtEmail" layoutX="51.0" layoutY="430.0" minHeight="60.0" minWidth="500.0" promptText="User Email" styleClass="txtEventOwner">
                <font>
                   <Font name="Verdana" size="24.0" />
                </font>
@@ -53,7 +53,7 @@
                   <Font name="Verdana" size="24.0" />
                </font>
             </TextField>
-            <Button fx:id="btnSaveUser" layoutX="965.0" layoutY="526.0" minHeight="60.0" minWidth="260.0" mnemonicParsing="false" onAction="#handleSaveEvent" onKeyPressed="#handleSaveEvent" styleClass="btnSaveEvent" text="Save User">
+            <Button fx:id="btnSaveUser" layoutX="965.0" layoutY="526.0" minHeight="60.0" minWidth="260.0" mnemonicParsing="false" onAction="#handleSaveUser" onKeyPressed="#handleSaveUser" styleClass="btnSaveEvent" text="Save User">
                <font>
                   <Font name="Verdana" size="24.0" />
                </font>

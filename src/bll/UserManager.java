@@ -34,4 +34,8 @@ public class UserManager {
     public ArrayList<EventCoordinator> getAllCoordinators() throws Exception{
         return eventCoordinator.getAllEventCoordinators();
     }
+
+    public int createUser(User user) throws Exception{
+        return generalUser.createUser(user);
+    }
 }
