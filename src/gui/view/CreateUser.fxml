@@ -59,7 +59,7 @@
                </font>
             </Button>
             <ComboBox fx:id="comboBoxUserType" layoutX="59.0" layoutY="357.0" prefHeight="42.0" prefWidth="491.0" promptText="UserTypes" />
-            <TextField fx:id="txtFieldPassword" layoutX="55.0" layoutY="620.0" minHeight="60.0" minWidth="500.0" promptText="User Phone Number" styleClass="txtEventCollaborator">
+            <TextField fx:id="txtFieldPassword" layoutX="55.0" layoutY="620.0" minHeight="60.0" minWidth="500.0" promptText="set User Password" styleClass="txtEventCollaborator">
                <font>
                   <Font name="Verdana" size="24.0" />
                </font>

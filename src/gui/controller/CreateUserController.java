@@ -43,7 +43,7 @@ public class CreateUserController implements Initializable {
         comboBoxUserType.getItems().add("Administrator");
         comboBoxUserType.getItems().add("Event Coordinator");
 
-        btnSaveUser.setDisable(false); //TODO set true
+        btnSaveUser.setDisable(true);
 
         txtEmail.textProperty().addListener(observable -> isEmpty());
         txtFieldTlf.textProperty().addListener(observable -> isEmpty());
@@ -121,7 +121,7 @@ public class CreateUserController implements Initializable {
     }
 
     public void handleSaveUser(ActionEvent actionEvent) {
-        if (checkData()) saveUser();
+        if (checkData() || validPassword(txtFieldPassword.getText())) saveUser();
 
         txtFieldPassword.setText("");
     }
@@ -129,17 +129,37 @@ public class CreateUserController implements Initializable {
     private boolean checkData(){
         if(txtFieldUserFirstName.getText() == null || txtFieldUserFirstName.getText().isEmpty()){
             displayAlert("Missing firstName");
+            btnSaveUser.setDisable(true);
             return false;
         } else if (txtFieldUSerUserName.getText() == null || txtFieldUSerUserName.getText().isEmpty()){
             displayAlert("Missing a Username");
+            btnSaveUser.setDisable(true);
             return false;
-        } else if (!txtEmail.getText().contains("@") || txtEmail.getText().contains(".") || txtEmail.getText().contains(" ")) {
+        } else if (!txtEmail.getText().contains("@") || !txtEmail.getText().contains(".") || txtEmail.getText().contains(" ")) {
             displayAlert("Invalid Email");
+            btnSaveUser.setDisable(true);
             return false;
         }
         btnSaveUser.setDisable(false);
         return true;
 
+    }
+
+    public boolean validPassword(String password){
+        String specialChars = "!,.:;<>\\/()#%=+?'*";
+        if (password.length() >= 8){
+            for (int i = 0; i < password.length() - 1; i++) {
+                for (int j = 0; j < specialChars.length() - 1; j++){
+                    if(password.charAt(i) == specialChars.charAt(j)){
+                        return false;
+                    }
+                }
+            }
+        }else if (password.length() < 8){
+            return false;
+        }
+
+        return true;
     }
 
     private void saveUser(){
