@@ -32,6 +32,7 @@ public class EventDAO implements IEventDAO{
                 LocalDate date = rs.getDate("Event_Date").toLocalDate();
                 Time startTime = rs.getTime("Event_Start_Time");
                 String location = rs.getString("Event_Location");
+                String locationURL = rs.getString("Event_LocationURL");
                 String description = rs.getString("Event_Description");
                 String eventCollaborator = rs.getString("Event_Authors");
                 String eventCoordinator = rs.getString("User_Name");
@@ -44,7 +45,7 @@ public class EventDAO implements IEventDAO{
                 }
 
 
-                Event event = new Event(id, title, date, startTime, location, description, isActive, eventCollaborator, eventCoordinator);
+                Event event = new Event(id, title, date, startTime, location, locationURL, description, isActive, eventCollaborator, eventCoordinator);
 
                 if(data != null){
                     event.setByteImage(data);
@@ -69,21 +70,22 @@ public class EventDAO implements IEventDAO{
         int id = 0;
         try (Connection conn = db.getConnection()) {
             //String sql = "INSERT INTO Event_ (Event_Title, Event_Location, Event_Event_Coordinator_ID, Event_Date, Event_Start_Time, Event_Description, Event_Ticket_Total, Event_Ticket_Sold, Event_Is_Active) Values(?,?,?,?,?,?,?,?,?);";
-            String sql = "INSERT INTO Event_ (Event_Title, Event_Location, Event_Event_Coordinator_ID, Event_Date, Event_Start_Time, Event_Description, Event_Ticket_Total, Event_Ticket_Sold, Event_Is_Active, Event_Img) Values(?,?,?,?,?,?,?,?,?,?);";
+            String sql = "INSERT INTO Event_ (Event_Title, Event_Location, Event_LocationURL, Event_Event_Coordinator_ID, Event_Date, Event_Start_Time, Event_Description, Event_Ticket_Total, Event_Ticket_Sold, Event_Is_Active, Event_Img) Values(?,?,?,?,?,?,?,?,?,?,?);";
 
 
             PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
             stmt.setString(1, event.getEventTitle());
             stmt.setString(2, event.getEventLocation());
-            stmt.setInt(3, 1);
-            stmt.setDate(4, Date.valueOf(event.getEventDate()));
-            stmt.setTime(5, event.getEventStartTime());
-            stmt.setString(6, event.getEventDescription());
-            stmt.setInt(7, 0);
+            stmt.setString(3, event.getEventLocationURL());
+            stmt.setInt(4, 1);
+            stmt.setDate(5, Date.valueOf(event.getEventDate()));
+            stmt.setTime(6, event.getEventStartTime());
+            stmt.setString(7, event.getEventDescription());
             stmt.setInt(8, 0);
-            stmt.setBoolean(9, event.isEventIsActive());
-            stmt.setBytes(10, event.getImageByte());
+            stmt.setInt(9, 0);
+            stmt.setBoolean(10, event.isEventIsActive());
+            stmt.setBytes(11, event.getImageByte());
 
             stmt.executeUpdate();
 

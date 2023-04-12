@@ -28,7 +28,7 @@ public class CreateEventController implements Initializable {
     @FXML
     private Label lblCreateEvent;
     @FXML
-    private TextField txtTitleOfEvent, txtLocation, txtEventOwner, txtEventCollaborator, txtEventStartTime;
+    private TextField txtTitleOfEvent, txtLocation, txtLocationURL, txtEventOwner, txtEventCollaborator, txtEventStartTime;
 
     @FXML
     private TextArea txtEventDescription;
@@ -144,7 +144,7 @@ public class CreateEventController implements Initializable {
             return false;
         } else if (txtLocation.getText() == null || txtLocation.getText().isEmpty()) {
             displayAlert("Missing a Location");
-            return false;
+            return false; //TODO add LocationURL.getText
         } else if (txtEventDescription.getText() == null || txtEventDescription.getText().isEmpty()){
             displayAlert("Missing a Description");
             return false;
@@ -160,6 +160,7 @@ public class CreateEventController implements Initializable {
                 datePicker.getValue(),
                 Time.valueOf(txtEventStartTime.getText()+ ":00"),
                 txtLocation.getText(),
+                txtLocationURL.getText(),
                 txtEventDescription.getText(),
                 cbIsActive.isSelected());
         if (imgEventImage != null){

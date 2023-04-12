@@ -19,6 +19,7 @@ public class Event implements Comparable<Event>{
     private LocalDate eventDate;
     private Time eventStartTime;
     private String eventLocation;
+    private String eventLocationURL;
     private String eventDescription;
 
     private String eventCollaborator;
@@ -28,23 +29,25 @@ public class Event implements Comparable<Event>{
     private boolean eventIsActive;
     private Image eventImage;
     private byte[]  imageBytes;
-    public Event(int eventID, String eventTitle, LocalDate eventDate, Time eventStartTime, String eventLocation, String eventDescription, boolean eventIsActive, String eventCollaborator, String eventCoordinator) {
+    public Event(int eventID, String eventTitle, LocalDate eventDate, Time eventStartTime, String eventLocation, String eventLocationURL, String eventDescription, boolean eventIsActive, String eventCollaborator, String eventCoordinator) {
         this.eventID = eventID;
         this.eventTitle = eventTitle;
         this.eventDate = eventDate;
         this.eventStartTime = eventStartTime;
         this.eventLocation = eventLocation;
+        this.eventLocationURL = eventLocationURL;
         this.eventDescription = eventDescription;
         this.eventCollaborator = eventCollaborator;
         this.eventCoordinator = eventCoordinator;
         this.eventIsActive = eventIsActive;
     }
 
-    public Event(String eventTitle, LocalDate eventDate, Time eventStartTime, String eventLocation, String eventDescription, boolean eventIsActive) {
+    public Event(String eventTitle, LocalDate eventDate, Time eventStartTime, String eventLocation, String eventLocationURL, String eventDescription, boolean eventIsActive) {
         this.eventTitle = eventTitle;
         this.eventDate = eventDate;
         this.eventStartTime = eventStartTime;
         this.eventLocation = eventLocation;
+        this.eventLocationURL = eventLocationURL;
         this.eventDescription = eventDescription;
         this.eventIsActive = eventIsActive;
     }
@@ -160,5 +163,13 @@ public class Event implements Comparable<Event>{
         }
 
 
+    }
+
+    public String getEventLocationURL() {
+        return eventLocationURL;
+    }
+
+    public void setEventLocationURL(String eventLocationURL) {
+        this.eventLocationURL = eventLocationURL;
     }
 }

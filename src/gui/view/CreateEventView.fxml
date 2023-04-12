@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<ScrollPane styleClass="scrollPane" stylesheets="@Main.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.CreateEventController">
+<ScrollPane styleClass="scrollPane" stylesheets="@Main.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.CreateEventController">
    <content>
       <AnchorPane prefHeight="824.0" prefWidth="1440.0" styleClass="scrollPane" stylesheets="@Main.css">
          <children>
@@ -27,13 +27,18 @@
                   <Font name="Verdana" size="24.0" />
                </font>
             </TextField>
-            <DatePicker fx:id="datePicker" layoutX="50.0" layoutY="260.0" minHeight="60.0" minWidth="225.0" prefHeight="60.0" prefWidth="241.0" showWeekNumbers="true" styleClass="datePicker" />
+            <DatePicker fx:id="datePicker" layoutX="50.0" layoutY="260.0" minHeight="60.0" minWidth="240.0" prefHeight="60.0" prefWidth="240.0" showWeekNumbers="true" styleClass="datePicker" />
             <TextField fx:id="txtEventStartTime" layoutX="325.0" layoutY="260.0" minHeight="60.0" minWidth="225.0" prefHeight="60.0" prefWidth="225.0" promptText="HH:MM" styleClass="txtEventStartTime">
                <font>
                   <Font name="Verdana" size="24.0" />
                </font>
             </TextField>
-            <TextField fx:id="txtLocation" layoutX="51.0" layoutY="360.0" minHeight="60.0" minWidth="500.0" promptText="Location..." styleClass="txtLocation">
+            <TextField fx:id="txtLocation" layoutX="51.0" layoutY="360.0" minHeight="60.0" minWidth="240.0" prefHeight="60.0" prefWidth="240.0" promptText="Location..." styleClass="txtLocation">
+               <font>
+                  <Font name="Verdana" size="24.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="txtLocationURL" layoutX="325.0" layoutY="360.0" minHeight="60.0" minWidth="225.0" prefHeight="60.0" prefWidth="225.0" promptText="Google Maps URL..." styleClass="txtLocation">
                <font>
                   <Font name="Verdana" size="24.0" />
                </font>

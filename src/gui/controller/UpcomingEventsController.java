@@ -10,6 +10,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
@@ -20,9 +22,11 @@ import javafx.scene.paint.ImagePattern;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 
+import java.awt.*;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.net.URI;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
@@ -79,9 +83,11 @@ public class UpcomingEventsController implements Initializable {
                 Label title = new Label(events.getEventTitle());
                 Label startTime = new Label(events.getEventStartTime().toString().substring(0, 5));
                 Label location = new Label(events.getEventLocation());
+                location.setOnMouseClicked(event -> handleLocation(events));
                 Label eventTitleExpanded = new Label(events.getEventTitle());
                 Label eventStartTimeExpanded = new Label(events.getEventStartTime().toString().substring(0, 5));
                 Label eventLocationExpanded = new Label(events.getEventLocation());
+                eventLocationExpanded.setOnMouseClicked(event -> handleLocation(events));
                 Label eventDescription = new Label(events.getEventDescription());
                 Label lblOwner = new Label("Event Coordinator:");
                 Label lblCollaborator = new Label("Event Collaborator:");
@@ -153,6 +159,18 @@ public class UpcomingEventsController implements Initializable {
             Alert alert = new Alert(Alert.AlertType.ERROR, e.toString());
             alert.showAndWait();
         }
+    }
+
+    private void handleLocation(Event events) {
+        try {
+            Desktop desktop = java.awt.Desktop.getDesktop();
+            URI oURL = new URI(events.getEventLocationURL());
+            desktop.browse(oURL);
+        } catch (Exception e) {
+            Alert alert = new Alert(Alert.AlertType.WARNING, "URL not specified", ButtonType.OK);
+            alert.showAndWait();
+        }
+
     }
 
     private Image loadImages(String url) {
