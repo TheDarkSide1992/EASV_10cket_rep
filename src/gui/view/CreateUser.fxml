@@ -38,7 +38,7 @@
                   <Insets />
                </opaqueInsets>
             </Pane>
-            <Button fx:id="btnChooseImage" layoutX="960.0" layoutY="400.0" minHeight="60.0" minWidth="260.0" mnemonicParsing="false" onAction="#handleChooseImage" onKeyReleased="#handleChooseImage" styleClass="btnChooseImage" text="Choose Image">
+            <Button fx:id="btnChooseImage" layoutX="962.0" layoutY="463.0" minHeight="60.0" minWidth="260.0" mnemonicParsing="false" onAction="#handleChooseImage" onKeyReleased="#handleChooseImage" styleClass="btnChooseImage" text="Choose Image">
                <font>
                   <Font name="Verdana" size="24.0" />
                </font>
@@ -53,12 +53,17 @@
                   <Font name="Verdana" size="24.0" />
                </font>
             </TextField>
-            <Button fx:id="btnSaveUser" layoutX="965.0" layoutY="526.0" minHeight="60.0" minWidth="260.0" mnemonicParsing="false" onAction="#handleSaveUser" onKeyPressed="#handleSaveUser" styleClass="btnSaveEvent" text="Save User">
+            <Button fx:id="btnSaveUser" layoutX="967.0" layoutY="589.0" minHeight="60.0" minWidth="260.0" mnemonicParsing="false" onAction="#handleSaveUser" onKeyPressed="#handleSaveUser" styleClass="btnSaveEvent" text="Save User">
                <font>
                   <Font name="Verdana" size="24.0" />
                </font>
             </Button>
             <ComboBox fx:id="comboBoxUserType" layoutX="59.0" layoutY="357.0" prefHeight="42.0" prefWidth="491.0" promptText="UserTypes" />
+            <TextField fx:id="txtFieldPassword" layoutX="55.0" layoutY="620.0" minHeight="60.0" minWidth="500.0" promptText="User Phone Number" styleClass="txtEventCollaborator">
+               <font>
+                  <Font name="Verdana" size="24.0" />
+               </font>
+            </TextField>
          </children>
       </AnchorPane>
    </content>

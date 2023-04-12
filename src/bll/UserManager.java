@@ -38,4 +38,10 @@ public class UserManager {
     public int createUser(User user) throws Exception{
         return generalUser.createUser(user);
     }
+
+    public void handlePassword(User user, String passWord) {
+        //TODO Encrypt password with salt
+
+
+    }
 }

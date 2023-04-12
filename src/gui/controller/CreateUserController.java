@@ -18,24 +18,17 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Files;
-import java.sql.Time;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
 
 public class CreateUserController implements Initializable {
     @FXML private ComboBox comboBoxUserType;
     @FXML private Button btnSaveUser, btnChooseImage;
-    @FXML private TextField txtFieldTlf, txtEmail, txtFieldUSerUserName, txtFieldUserFirstName;
+    @FXML private TextField txtFieldTlf, txtEmail, txtFieldUSerUserName, txtFieldUserFirstName, txtFieldPassword;
     @FXML private ImageView imgUserProfilePicture;
     @FXML private Pane imagePane;
     @FXML private Label lblCreateUser;
     private Model model;
     private byte[] data;
-
-    private List<String> userType;
-
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -47,14 +40,10 @@ public class CreateUserController implements Initializable {
             displayError(e);
         }
 
-        userType = new ArrayList<>();
+        comboBoxUserType.getItems().add("Administrator");
+        comboBoxUserType.getItems().add("Event Coordinator");
 
-        userType.add("Administrator");
-        userType.add("Event Coordinator");
-
-        comboBoxUserType.getItems().add(userType);
-
-        btnSaveUser.setDisable(true);
+        btnSaveUser.setDisable(false); //TODO set true
 
         txtEmail.textProperty().addListener(observable -> isEmpty());
         txtFieldTlf.textProperty().addListener(observable -> isEmpty());
@@ -62,6 +51,7 @@ public class CreateUserController implements Initializable {
         txtFieldUserFirstName.textProperty().addListener(observable -> isEmpty());
         comboBoxUserType.getSelectionModel().selectedItemProperty().addListener(observable -> isEmpty());
         imgUserProfilePicture.imageProperty().addListener(observable -> imageChosen());
+        txtFieldPassword.textProperty().addListener(observable -> isEmpty());
 
     }
     private void displayError(Throwable t)
@@ -122,6 +112,8 @@ public class CreateUserController implements Initializable {
 
         if (txtFieldTlf.getText().isEmpty()) return;
 
+        if (txtFieldPassword.getText().isEmpty()) return;
+
         if (!comboBoxUserType.getValue().equals("Administrator") ||
                 !comboBoxUserType.getValue().equals("Event Coordinator")) return;
 
@@ -130,6 +122,8 @@ public class CreateUserController implements Initializable {
 
     public void handleSaveUser(ActionEvent actionEvent) {
         if (checkData()) saveUser();
+
+        txtFieldPassword.setText("");
     }
 
     private boolean checkData(){
@@ -172,7 +166,10 @@ public class CreateUserController implements Initializable {
 
         try {
             model.createUser(user);
+            model.setUserPassword(user, txtFieldPassword.getText());
         } catch (Exception e) {
+            //TODO if fail try to delete user
+            e.printStackTrace();
             displayError(e);
         }
 

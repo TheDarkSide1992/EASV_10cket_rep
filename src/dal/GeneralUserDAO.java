@@ -48,9 +48,29 @@ public class GeneralUserDAO implements IGeneralUser {
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
-            throw new Exception("Could not create Event" + ex);
+            throw new Exception("Could not create User\n" + ex);
         }
         return id;
+    }
+
+    @Override
+    public void setPassword(User user, String password) throws Exception {
+        try (Connection conn = db.getConnection()) {
+            //String sql = "INSERT INTO Event_ (Event_Title, Event_Location, Event_Event_Coordinator_ID, Event_Date, Event_Start_Time, Event_Description, Event_Ticket_Total, Event_Ticket_Sold, Event_Is_Active) Values(?,?,?,?,?,?,?,?,?);";
+            String sql = "INSERT INTO User_Passwords VALUES((SELECT DISTINCT User_ID FROM User_  WHERE User_Name = ?),?,?)";
+
+            PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+
+            stmt.setString(1, user.getUserName());
+            stmt.setString(2, user.getUserName());
+            stmt.setString(3, password);
+
+            stmt.executeUpdate();
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            throw new Exception("Could not set password Event\n" + ex);
+        }
     }
 
     @Override
