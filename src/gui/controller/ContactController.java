@@ -106,8 +106,7 @@ public class ContactController implements Initializable {
         btnAdd.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> addUser());
 
 
-        //if(controllerAssistant.getLoggedInUser() != null &&controllerAssistant.getLoggedInUser().getUserStringType().equals("Administrator")) {
-        if(true){ //TODO THIS IS A BAD IDEA CHANGE LATER AFTER TESTING
+        if(controllerAssistant.getLoggedInUser() != null &&controllerAssistant.getLoggedInUser().getUserStringType().equals("Administrator")) {
             hBoxAddUser = new HBox();
             hBoxAddUser.setPadding(new Insets(20, 0, 0, 50));
 
