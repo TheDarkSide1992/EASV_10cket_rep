@@ -102,13 +102,17 @@ public class ContactController implements Initializable {
 
         FlowPane outerPane3 = new FlowPane();
 
-        Button btnAdd = new Button("Add User");
-        btnAdd.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> addUser());
+
 
 
         if(controllerAssistant.getLoggedInUser() != null &&controllerAssistant.getLoggedInUser().getUserStringType().equals("Administrator")) {
+            Button btnAdd = new Button("Add User");
+            btnAdd.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> addUser());
+
             hBoxAddUser = new HBox();
             hBoxAddUser.setPadding(new Insets(20, 0, 0, 50));
+
+            btnAdd.setStyle(".btnTopButtons"); //TODO Style btn
 
             hBoxAddUser.getChildren().add(btnAdd);
             outerPane3.getChildren().add(hBoxAddUser);
