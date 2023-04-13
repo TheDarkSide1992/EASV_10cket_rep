@@ -23,6 +23,32 @@ public class GeneralUserDAO implements IGeneralUser {
     }
 
     @Override
+    public int doesUserAlreadyExist(String userName) throws Exception {
+        int id = 0;
+        try (Connection conn = db.getConnection()) {
+
+            String sql = "SELECT User_User_ID FROM User_Passwords WHERE (User_User_Name = ?)";
+
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setString(1,userName);
+
+
+            stmt.executeQuery();
+
+            //Execute the update to the DB
+            ResultSet rs = stmt.getResultSet();
+
+            while (rs.next()){
+                id = rs.getInt("User_User_ID");
+            }
+
+        }
+
+        return id;
+    }
+
+
+    @Override
     public int createUser(User user) throws Exception{
         int id = 0;
         try (Connection conn = db.getConnection()) {

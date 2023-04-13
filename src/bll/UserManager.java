@@ -41,6 +41,9 @@ public class UserManager {
     }
 
     public int createUser(User user) throws Exception{
+
+        if (generalUser.doesUserAlreadyExist(user.getUserName()) == 0) throw new Exception("the current UserName is taken");
+
         return generalUser.createUser(user);
     }
 
