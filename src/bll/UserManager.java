@@ -54,8 +54,6 @@ public class UserManager {
 
         generalUser.setPassword(user, hashed, salt);
 
-        //TODO Encrypt password with salt
-
 
     }
 }
