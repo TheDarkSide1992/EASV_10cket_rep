@@ -79,6 +79,7 @@
 }
 
 .lblCreateEvent {
+    -fx-font-size: 70;
     -fx-font-weight: bold;
     -fx-text-fill: rgba(243,218,218,1);
 }

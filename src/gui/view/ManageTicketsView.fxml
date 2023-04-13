@@ -11,12 +11,11 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-
-<ScrollPane prefHeight="600.0" prefWidth="1440.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.ManageTicketsController">
+<ScrollPane prefHeight="600.0" prefWidth="1440.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.ManageTicketsController" stylesheets="@Main.css" styleClass="scrollPane">
    <content>
-      <AnchorPane prefHeight="598.0" prefWidth="1438.0">
+      <AnchorPane styleClass="scrollPane" prefHeight="598.0" prefWidth="1438.0">
          <children>
-            <Label text="Manage Tickets" underline="true" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="50.0">
+            <Label text="Manage Tickets" styleClass="lblCreateEvent" underline="true" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="50.0">
                <font>
                   <Font size="36.0" />
                </font>
@@ -26,38 +25,39 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <ChoiceBox prefHeight="40.0" prefWidth="250.0" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="180.0" />
-            <TextField editable="false" prefHeight="60.0" prefWidth="250.0" promptText="Title of event" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="275.0">
+            <ChoiceBox fx:id="comboChooseEvent" prefHeight="40.0" prefWidth="250.0" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="180.0" />
+            <TextField fx:id="txtTitleOfEvent" editable="false" prefHeight="60.0" prefWidth="250.0" promptText="Title of event" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="275.0">
                <font>
                   <Font size="24.0" />
                </font>
             </TextField>
-            <TextField editable="false" prefHeight="60.0" prefWidth="250.0" promptText="Date of event" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="350.0" />
-            <TextField prefHeight="60.0" prefWidth="250.0" promptText="Total amount of tickets" AnchorPane.leftAnchor="375.0" AnchorPane.topAnchor="160.0">
+            <TextField fx:id="txtDateOfEvent" editable="false" prefHeight="60.0" prefWidth="250.0" promptText="Date of event" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="350.0" />
+            <TextField fx:id="txtTotalAmountOfTickets" prefHeight="60.0" prefWidth="250.0" promptText="Total amount of tickets" AnchorPane.leftAnchor="375.0" AnchorPane.topAnchor="160.0">
                <font>
                   <Font size="24.0" />
                </font>
             </TextField>
-            <TextField editable="false" prefHeight="60.0" prefWidth="250.0" promptText="Tickets sold" AnchorPane.leftAnchor="375.0" AnchorPane.topAnchor="275.0">
+            <TextField fx:id="txtTicketsSold" editable="false" prefHeight="60.0" prefWidth="250.0" promptText="Tickets sold" AnchorPane.leftAnchor="375.0" AnchorPane.topAnchor="275.0">
                <font>
                   <Font size="24.0" />
                </font>
             </TextField>
-            <TextField editable="false" prefHeight="60.0" prefWidth="250.0" promptText="Location of Event" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="425.0" />
-            <TextField layoutX="703.0" layoutY="190.0" prefHeight="25.0" prefWidth="150.0" promptText="Add extras" />
-            <TableView layoutX="946.0" layoutY="104.0" prefHeight="428.0" prefWidth="337.0">
+            <TextField fx:id="txtLocationOfEvent" editable="false" prefHeight="60.0" prefWidth="250.0" promptText="Location of Event" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="425.0" />
+            <TextField fx:id="txtAddExtras" prefHeight="40.0" prefWidth="150.0" promptText="Add extras" AnchorPane.leftAnchor="780.0" AnchorPane.topAnchor="240.0" />
+            <TableView fx:id="tblviewTypesOfTickets" prefHeight="425.0" prefWidth="350.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="80.0">
               <columns>
-                <TableColumn prefWidth="62.0" text="Type" />
-                <TableColumn prefWidth="157.0" text="Contains" />
-                  <TableColumn prefWidth="49.0" text="Price" />
-                  <TableColumn prefWidth="75.0" text="Amount" />
+                <TableColumn fx:id="colType" prefWidth="62.0" text="Type" />
+                <TableColumn fx:id="colContains" prefWidth="157.0" text="Contains" />
+                  <TableColumn fx:id="colPrice" prefWidth="63.0" text="Price" />
+                  <TableColumn fx:id="colAmount" prefWidth="61.0" text="Amount" />
               </columns>
             </TableView>
-            <TextField layoutX="703.0" layoutY="239.0" prefHeight="25.0" prefWidth="150.0" promptText="Number of tickets" />
-            <TextField layoutX="703.0" layoutY="292.0" prefHeight="25.0" prefWidth="150.0" promptText="New price of ticket" />
-            <Button layoutX="703.0" layoutY="410.0" mnemonicParsing="false" text="Add" />
-            <Line endX="16.0" endY="518.0" layoutX="641.0" layoutY="50.0" startX="16.0" startY="-29.0" />
-            <ChoiceBox layoutX="703.0" layoutY="350.0" prefHeight="25.0" prefWidth="150.0" />
+            <TextField fx:id="txtNumberOfTickets" layoutX="781.0" layoutY="239.0" prefHeight="40.0" prefWidth="150.0" promptText="Number of tickets" AnchorPane.leftAnchor="780.0" AnchorPane.topAnchor="300.0" />
+            <TextField fx:id="txtNewPriceOfTicket" layoutX="781.0" layoutY="293.0" prefHeight="40.0" prefWidth="150.0" promptText="New price of ticket" AnchorPane.leftAnchor="780.0" AnchorPane.topAnchor="360.0" />
+            <Button fx:id="btnAdd" layoutX="781.0" layoutY="424.0" mnemonicParsing="false" onAction="#handleAdd" text="Add" AnchorPane.leftAnchor="780.0" />
+            <Line endX="16.0" endY="518.0" layoutX="703.0" layoutY="54.0" startX="16.0" startY="-29.0" />
+            <ChoiceBox fx:id="comboTypeOfTicket" layoutX="781.0" layoutY="364.0" prefHeight="40.0" prefWidth="150.0" AnchorPane.leftAnchor="780.0" AnchorPane.topAnchor="180.0" />
+            <Button fx:id="btnSaveTickets" mnemonicParsing="false" onAction="#handleSaveTickets" prefHeight="30.0" prefWidth="152.0" text="Save Tickets" AnchorPane.bottomAnchor="25.0" AnchorPane.rightAnchor="50.0" />
          </children>
       </AnchorPane>
    </content>
