@@ -28,8 +28,12 @@ public class UserManager {
         return administrator.getAllAdministrators();
     }
 
-    public User getIfLongedInUSer(String userName, String pasWord) throws Exception{
-        return generalUser.IsLogInLegit(userName, pasWord);
+    public User getIfLongedInUSer(String userName, String password) throws Exception{
+        String salt = generalUser.getUserSalt(userName);
+
+        String hashed = BCrypt.hashpw(password, salt );
+
+        return generalUser.IsLogInLegit(userName, hashed);
     }
 
     public ArrayList<EventCoordinator> getAllCoordinators() throws Exception{
@@ -37,12 +41,18 @@ public class UserManager {
     }
 
     public int createUser(User user) throws Exception{
+
+        if (generalUser.doesUserAlreadyExist(user.getUserName()) == 0) throw new Exception("the current UserName is taken");
+
         return generalUser.createUser(user);
     }
 
-    public void handlePassword(User user, String passWord) {
+    public void handlePassword(User user, String password) throws Exception {
         String salt = BCrypt.gensalt(16);
-        //TODO Encrypt password with salt
+
+        String hashed = BCrypt.hashpw(password, salt );
+
+        generalUser.setPassword(user, hashed, salt);
 
 
     }

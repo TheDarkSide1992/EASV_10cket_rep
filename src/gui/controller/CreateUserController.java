@@ -51,6 +51,7 @@ public class CreateUserController implements Initializable {
         txtFieldUserFirstName.textProperty().addListener(observable -> isEmpty());
         comboBoxUserType.getSelectionModel().selectedItemProperty().addListener(observable -> isEmpty());
         imgUserProfilePicture.imageProperty().addListener(observable -> imageChosen());
+        imgUserProfilePicture.imageProperty().addListener(observable -> isEmpty());
         txtFieldPassword.textProperty().addListener(observable -> isEmpty());
 
     }
@@ -186,16 +187,17 @@ public class CreateUserController implements Initializable {
         try {
             model.createUser(user);
             model.setUserPassword(user, txtFieldPassword.getText());
+
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Success");
+            alert.setHeaderText("User Successfully created");
+            alert.showAndWait();
+
         } catch (Exception e) {
             //TODO if fail try to delete user
             e.printStackTrace();
             displayError(e);
         }
-
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Success");
-        alert.setHeaderText("User Successfully created");
-        alert.showAndWait();
 
     }
 }
