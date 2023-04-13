@@ -63,7 +63,7 @@
             </TableView>
             <TextField fx:id="txtNumberOfTickets" layoutX="781.0" layoutY="239.0" prefHeight="40.0" prefWidth="150.0" promptText="Number of tickets" styleClass="txtTitleOfEvent" AnchorPane.leftAnchor="780.0" AnchorPane.topAnchor="300.0" />
             <TextField fx:id="txtNewPriceOfTicket" layoutX="781.0" layoutY="293.0" prefHeight="40.0" prefWidth="150.0" promptText="New price of ticket" styleClass="txtTitleOfEvent" AnchorPane.leftAnchor="780.0" AnchorPane.topAnchor="360.0" />
-            <Button fx:id="btnAdd" layoutX="781.0" layoutY="424.0" mnemonicParsing="false" onAction="#handleAdd" prefHeight="40.0" styleClass="btnSaveEvent" text="Add" AnchorPane.leftAnchor="780.0" />
+            <Button fx:id="btnAdd" layoutX="781.0" layoutY="424.0" mnemonicParsing="false" onAction="#handleAdd" prefHeight="40.0" prefWidth="80.0" styleClass="btnSaveEvent" text="Add" AnchorPane.leftAnchor="780.0" />
             <Line endX="16.0" endY="518.0" layoutX="703.0" layoutY="54.0" startX="16.0" startY="-29.0" />
             <ChoiceBox fx:id="comboTypeOfTicket" layoutX="781.0" layoutY="364.0" prefHeight="40.0" prefWidth="150.0" styleClass="txtTitleOfEvent" AnchorPane.leftAnchor="780.0" AnchorPane.topAnchor="180.0" />
             <Button fx:id="btnSaveTickets" mnemonicParsing="false" onAction="#handleSaveTickets" prefHeight="40.0" prefWidth="152.0" styleClass="btnSaveEvent" text="Save Tickets" AnchorPane.bottomAnchor="25.0" AnchorPane.rightAnchor="50.0" />
