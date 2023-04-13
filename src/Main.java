@@ -18,9 +18,7 @@ public class Main extends Application {
         stage.setTitle("Not active events");
         stage.setScene(new Scene(root));
         stage.show();
-        */
-
-
+*/
         Parent root = FXMLLoader.load(getClass().getResource("gui/view/Index.fxml"));
 
         primaryStage.setTitle("10cket_System");
@@ -29,5 +27,6 @@ public class Main extends Application {
         primaryStage.setResizable(true);
         primaryStage.setOnCloseRequest(event -> System.exit(0));
         primaryStage.show();
+
     }
 }
