@@ -16,11 +16,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.ImagePattern;
-import javafx.scene.paint.Paint;
-import javafx.scene.shape.Rectangle;
 
 import java.awt.*;
 import java.io.FileInputStream;
@@ -31,6 +27,8 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 import java.util.function.Consumer;
+
+import static javafx.scene.paint.Color.*;
 
 
 public class UpcomingEventsController implements Initializable {
@@ -84,6 +82,8 @@ public class UpcomingEventsController implements Initializable {
                 Label startTime = new Label(events.getEventStartTime().toString().substring(0, 5));
                 Label location = new Label(events.getEventLocation());
                 location.setOnMouseClicked(event -> handleLocation(events));
+                location.setOnMouseEntered(event -> hoverLocation(location));
+                location.setOnMouseExited(event -> unHoverLocation(location));
                 Label eventTitleExpanded = new Label(events.getEventTitle());
                 Label eventStartTimeExpanded = new Label(events.getEventStartTime().toString().substring(0, 5));
                 Label eventLocationExpanded = new Label(events.getEventLocation());
@@ -159,6 +159,17 @@ public class UpcomingEventsController implements Initializable {
             Alert alert = new Alert(Alert.AlertType.ERROR, e.toString());
             alert.showAndWait();
         }
+    }
+
+    private void unHoverLocation(Label location) {
+        location.setUnderline(false);
+        location.setTextFill(rgb(243,218,218));
+    }
+
+    private void hoverLocation(Label location) {
+        location.setUnderline(true);
+        location.setTextFill(MEDIUMBLUE);
+
     }
 
     private void handleLocation(Event events) {
