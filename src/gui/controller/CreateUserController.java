@@ -114,8 +114,7 @@ public class CreateUserController implements Initializable {
 
         if (txtFieldPassword.getText().isEmpty()) return;
 
-        if (!comboBoxUserType.getValue().equals("Administrator") ||
-                !comboBoxUserType.getValue().equals("Event Coordinator")) return;
+        if (comboBoxUserType.getValue() == null) return;
 
         btnSaveUser.setDisable(false);
     }

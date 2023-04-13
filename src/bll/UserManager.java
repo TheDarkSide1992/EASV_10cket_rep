@@ -3,6 +3,7 @@ package bll;
 import be.Administrator;
 import be.EventCoordinator;
 import be.User;
+import bll.util.BCrypt;
 import dal.AdminDAO;
 import dal.EventCoordinatorDAO;
 import dal.GeneralUserDAO;
@@ -40,6 +41,7 @@ public class UserManager {
     }
 
     public void handlePassword(User user, String passWord) {
+        String salt = BCrypt.gensalt(16);
         //TODO Encrypt password with salt
 
 
