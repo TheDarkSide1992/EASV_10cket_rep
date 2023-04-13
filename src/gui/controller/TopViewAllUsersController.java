@@ -243,7 +243,7 @@ public class TopViewAllUsersController implements Initializable {
     }
 
     private void manageTickets() {
-        controllerAssistant.openNewWindow("");
+        controllerAssistant.openNewWindow("ManageTicketsView.fxml");
     }
 
     private void createCoordinators() {
