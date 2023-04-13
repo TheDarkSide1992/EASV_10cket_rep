@@ -51,6 +51,7 @@ public class CreateUserController implements Initializable {
         txtFieldUserFirstName.textProperty().addListener(observable -> isEmpty());
         comboBoxUserType.getSelectionModel().selectedItemProperty().addListener(observable -> isEmpty());
         imgUserProfilePicture.imageProperty().addListener(observable -> imageChosen());
+        imgUserProfilePicture.imageProperty().addListener(observable -> isEmpty());
         txtFieldPassword.textProperty().addListener(observable -> isEmpty());
 
     }
