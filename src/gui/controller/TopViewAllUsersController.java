@@ -66,7 +66,8 @@ public class TopViewAllUsersController implements Initializable {
         controllerAssistant = ControllerAssistant.getInstance();
 
         //Opens a new view, if the admin is logged in
-        if (loggedInUser != null && loggedInUser.equals("Administrator")) {
+        //Check if logged in user is admin
+        if (loggedInUser != null && loggedInUser.getUserTypeId()==1) {
             Parent root;
             try {
                 root = FXMLLoader.load(getClass().getClassLoader().getResource("gui/view/util/DeleteEventsView.fxml"), resources);
