@@ -63,13 +63,10 @@ public class LoginViewController implements Initializable {
             return;
         }
 
-        String password = txtPassword.getText().trim();
-        System.out.println(password);
-
         String userName = txtUserName.getText().trim();
 
         try {
-            user = model.checkLogIn(userName, password);
+            user = model.checkLogIn(userName,  txtPassword.getText().trim());
 
             if (user == null){
                 displayAlert("Incorrect Log-in");
