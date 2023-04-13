@@ -7,9 +7,16 @@ public class Ticket {
     private int ticketID;
     private int ticketPrice;
 
+    private String ticketContains;
+
     private Image ticketBarCode;
 
     private Image ticketQRCode;
+
+    public Ticket(int ticketID, String ticketContains, int ticketPrice) {
+        this.ticketID = ticketID;
+        this.ticketContains = ticketContains;
+    }
 
     public int getTicketID() {
         return ticketID;
@@ -41,5 +48,13 @@ public class Ticket {
 
     public void setTicketQRCode(Image ticketQRCode) {
         this.ticketQRCode = ticketQRCode;
+    }
+
+    public String getTicketContains() {
+        return ticketContains;
+    }
+
+    public void setTicketContains(String ticketContains) {
+        this.ticketContains = ticketContains;
     }
 }

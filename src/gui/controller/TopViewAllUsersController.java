@@ -228,7 +228,7 @@ public class TopViewAllUsersController implements Initializable {
     }
 
     private void calender() {
-        controllerAssistant.openNewWindow("CalendarView.fxml");
+        controllerAssistant.openNewWindow("ManageTicketsView.fxml");
     }
 
     private void contact() {

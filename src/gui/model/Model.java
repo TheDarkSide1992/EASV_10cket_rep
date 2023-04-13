@@ -1,25 +1,27 @@
 package gui.model;
 
-import be.Administrator;
-import be.Event;
-import be.EventCoordinator;
-import be.User;
+import be.*;
 import bll.EventManager;
+import bll.TicketManager;
 import bll.UserManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Model {
     private ObservableList<Event> activeEvents;
     private ObservableList<Event> allEvents;
+
+    private ObservableList ticketObservableList;
     EventManager eventManager;
     UserManager userManager;
+    TicketManager ticketManager;
 
     public Model() throws Exception {
-
+        ticketManager = new TicketManager();
         eventManager = new EventManager();
         userManager = new UserManager();
         activeEvents = FXCollections.observableArrayList();
@@ -70,6 +72,14 @@ public class Model {
 
     public ArrayList<EventCoordinator> getAllCoordinators() throws Exception {
         return userManager.getAllCoordinators();
+    }
+
+    public ObservableList getTickets(int eventID) throws SQLException {
+        ticketObservableList = FXCollections.observableArrayList();
+        List<Ticket> allTickets = ticketManager.getTickets(eventID);
+        int amountOfTickets = 0;
+        //TODO continue from here
+        return ticketObservableList;
     }
 }
 

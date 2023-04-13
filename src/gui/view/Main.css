@@ -218,3 +218,8 @@
     -fx-border-radius: 15;
     -fx-background-radius: 15;
 }
+
+.tblviewTypesOfTickets .column-header .label{
+    -fx-text-fill: black;
+
+}

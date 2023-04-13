@@ -49,7 +49,7 @@
                <font>
                   <Font size="24.0" />
                </font></TextField>
-            <TextField fx:id="txtAddExtras" prefHeight="40.0" prefWidth="150.0" promptText="Add extras" styleClass="txtTitleOfEvent" AnchorPane.leftAnchor="780.0" AnchorPane.topAnchor="240.0" />
+            <TextField fx:id="txtAddExtras" prefHeight="40.0" prefWidth="180.0" promptText="Add extras" styleClass="txtTitleOfEvent" AnchorPane.leftAnchor="780.0" AnchorPane.topAnchor="240.0" />
             <TableView fx:id="tblviewTypesOfTickets" fixedCellSize="0.0" prefHeight="425.0" prefWidth="350.0" styleClass="tblviewTypesOfTickets" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="80.0">
               <columns>
                 <TableColumn fx:id="colType" prefWidth="62.0" styleClass="colType" text="Type" />
@@ -61,11 +61,11 @@
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                </columnResizePolicy>
             </TableView>
-            <TextField fx:id="txtNumberOfTickets" layoutX="781.0" layoutY="239.0" prefHeight="40.0" prefWidth="150.0" promptText="Number of tickets" styleClass="txtTitleOfEvent" AnchorPane.leftAnchor="780.0" AnchorPane.topAnchor="300.0" />
-            <TextField fx:id="txtNewPriceOfTicket" layoutX="781.0" layoutY="293.0" prefHeight="40.0" prefWidth="150.0" promptText="New price of ticket" styleClass="txtTitleOfEvent" AnchorPane.leftAnchor="780.0" AnchorPane.topAnchor="360.0" />
-            <Button fx:id="btnAdd" layoutX="781.0" layoutY="424.0" mnemonicParsing="false" onAction="#handleAdd" prefHeight="40.0" prefWidth="80.0" styleClass="btnSaveEvent" text="Add" AnchorPane.leftAnchor="780.0" />
-            <Line endX="16.0" endY="518.0" layoutX="703.0" layoutY="54.0" startX="16.0" startY="-29.0" />
-            <ChoiceBox fx:id="comboTypeOfTicket" layoutX="781.0" layoutY="364.0" prefHeight="40.0" prefWidth="150.0" styleClass="txtTitleOfEvent" AnchorPane.leftAnchor="780.0" AnchorPane.topAnchor="180.0" />
+            <TextField fx:id="txtNumberOfTickets" layoutX="781.0" layoutY="239.0" prefHeight="40.0" prefWidth="180.0" promptText="Number of tickets" styleClass="txtTitleOfEvent" AnchorPane.leftAnchor="780.0" AnchorPane.topAnchor="300.0" />
+            <TextField fx:id="txtNewPriceOfTicket" layoutX="781.0" layoutY="293.0" prefHeight="40.0" prefWidth="180.0" promptText="New price of ticket" styleClass="txtTitleOfEvent" AnchorPane.leftAnchor="780.0" AnchorPane.topAnchor="360.0" />
+            <Button fx:id="btnAdd" layoutX="781.0" layoutY="424.0" mnemonicParsing="false" onAction="#handleAdd" prefHeight="40.0" prefWidth="90.0" styleClass="btnSaveEvent" text="Add" AnchorPane.leftAnchor="780.0" />
+            <Line endY="563.0" startY="25.0" stroke="#f3dada" AnchorPane.bottomAnchor="24.5" AnchorPane.leftAnchor="718.0" AnchorPane.rightAnchor="718.0" AnchorPane.topAnchor="24.5" />
+            <ChoiceBox fx:id="comboTypeOfTicket" layoutX="781.0" layoutY="364.0" prefHeight="40.0" prefWidth="180.0" styleClass="txtTitleOfEvent" AnchorPane.leftAnchor="780.0" AnchorPane.topAnchor="180.0" />
             <Button fx:id="btnSaveTickets" mnemonicParsing="false" onAction="#handleSaveTickets" prefHeight="40.0" prefWidth="152.0" styleClass="btnSaveEvent" text="Save Tickets" AnchorPane.bottomAnchor="25.0" AnchorPane.rightAnchor="50.0" />
          </children>
       </AnchorPane>
