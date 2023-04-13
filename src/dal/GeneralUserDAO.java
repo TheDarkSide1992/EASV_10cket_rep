@@ -54,16 +54,17 @@ public class GeneralUserDAO implements IGeneralUser {
     }
 
     @Override
-    public void setPassword(User user, String password) throws Exception {
+    public void setPassword(User user, String password, String salt) throws Exception {
         try (Connection conn = db.getConnection()) {
             //String sql = "INSERT INTO Event_ (Event_Title, Event_Location, Event_Event_Coordinator_ID, Event_Date, Event_Start_Time, Event_Description, Event_Ticket_Total, Event_Ticket_Sold, Event_Is_Active) Values(?,?,?,?,?,?,?,?,?);";
-            String sql = "INSERT INTO User_Passwords VALUES((SELECT DISTINCT User_ID FROM User_  WHERE User_Name = ?),?,?)";
+            String sql = "INSERT INTO User_Passwords VALUES((SELECT DISTINCT User_ID FROM User_  WHERE User_Name = ?),?,?,?)";
 
             PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
             stmt.setString(1, user.getUserName());
             stmt.setString(2, user.getUserName());
             stmt.setString(3, password);
+            stmt.setString(4, salt);
 
             stmt.executeUpdate();
 
@@ -115,5 +116,30 @@ public class GeneralUserDAO implements IGeneralUser {
         }
 
         return user;
+    }
+
+    @Override
+    public String getUserSalt(String userName) throws Exception{
+        String salt = "";
+        try (Connection conn = db.getConnection()) {
+
+            String sql = "SELECT Users_Salt FROM User_Passwords WHERE (User_User_Name = ?)";
+
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setString(1,userName);
+
+
+            stmt.executeQuery();
+
+            //Execute the update to the DB
+            ResultSet rs = stmt.getResultSet();
+
+            while (rs.next()){
+                salt = rs.getString("Users_Salt");
+            }
+
+        }
+
+        return salt;
     }
 }
