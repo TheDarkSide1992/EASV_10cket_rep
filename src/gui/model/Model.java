@@ -1,10 +1,8 @@
 package gui.model;
 
-import be.Administrator;
-import be.Event;
-import be.EventCoordinator;
-import be.User;
+import be.*;
 import bll.EventManager;
+import bll.TicketGenerator;
 import bll.UserManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -15,13 +13,15 @@ import java.util.ArrayList;
 public class Model {
     private ObservableList<Event> activeEvents;
     private ObservableList<Event> allEvents;
-    EventManager eventManager;
-    UserManager userManager;
+    private EventManager eventManager;
+    private UserManager userManager;
+    private TicketGenerator ticketGenerator;
 
     public Model() throws Exception {
 
         eventManager = new EventManager();
         userManager = new UserManager();
+        ticketGenerator = new TicketGenerator();
         activeEvents = FXCollections.observableArrayList();
         allEvents = FXCollections.observableArrayList();
 
@@ -70,6 +70,12 @@ public class Model {
 
     public ArrayList<EventCoordinator> getAllCoordinators() throws Exception {
         return userManager.getAllCoordinators();
+    }
+
+    public void makeTicket(Event event, Ticket ticket) throws Exception{
+        event = getActiveEvents().get(2);
+        ticket = new Ticket();
+        ticketGenerator.makeTicket(event, ticket);
     }
 }
 

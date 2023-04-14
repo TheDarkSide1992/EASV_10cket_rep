@@ -119,6 +119,28 @@ public class ContactController implements Initializable {
 
             vbox.getChildren().add(hBoxAddUser);
         }
+
+        if(true) {
+            Button btnAdd = new Button("print pdf");
+            btnAdd.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+                try {
+                    model.makeTicket(null, null);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    displayError(e);
+                }
+            });
+
+            hBoxAddUser = new HBox();
+            hBoxAddUser.setPadding(new Insets(20, 0, 0, 50));
+
+            btnAdd.setStyle(".btnTopButtons"); //TODO Style btn
+
+            hBoxAddUser.getChildren().add(btnAdd);
+            outerPane3.getChildren().add(hBoxAddUser);
+
+            vbox.getChildren().add(hBoxAddUser);
+        }
     }
 
 
