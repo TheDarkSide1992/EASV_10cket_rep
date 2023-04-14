@@ -23,7 +23,7 @@ public class TicketDAO implements ITicketDAO {
     public List<Ticket> getTickets(int eventID) throws SQLException {
         List<Ticket> tickets = new ArrayList<>();
         try (Connection conn = db.getConnection()) {
-            String sql = "SELECT * FROM Ticket WHERE Ticket_Event_ID = " + eventID;
+            String sql = "SELECT * FROM Ticket WHERE Ticket_Event_ID = " + eventID + "ORDER BY Ticket_Contains";
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
 

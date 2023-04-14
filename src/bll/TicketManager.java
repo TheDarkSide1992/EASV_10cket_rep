@@ -8,9 +8,12 @@ import javafx.collections.ObservableList;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class TicketManager {
+
+
 
     ITicketDAO ticketDAO = new TicketDAO();
 
@@ -19,5 +22,6 @@ public class TicketManager {
 
     public List<Ticket> getTickets(int eventID) throws SQLException {
         return ticketDAO.getTickets(eventID);
+        }
     }
-}
+

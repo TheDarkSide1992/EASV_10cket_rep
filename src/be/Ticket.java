@@ -13,9 +13,19 @@ public class Ticket {
 
     private Image ticketQRCode;
 
+    private int amountOfTickets;
+
     public Ticket(int ticketID, String ticketContains, int ticketPrice) {
         this.ticketID = ticketID;
         this.ticketContains = ticketContains;
+        this.ticketPrice =  ticketPrice;
+    }
+
+    public Ticket(String ticketContains, int ticketPrice, int amountOfTickets) {
+        this.ticketContains = ticketContains;
+        this.ticketPrice =  ticketPrice;
+        this.amountOfTickets = amountOfTickets;
+
     }
 
     public int getTicketID() {
@@ -57,4 +67,12 @@ public class Ticket {
     public void setTicketContains(String ticketContains) {
         this.ticketContains = ticketContains;
     }
+    public int getAmountOfTickets() {
+        return amountOfTickets;
+    }
+
+    public void setAmountOfTickets(int amountOfTickets) {
+        this.amountOfTickets = amountOfTickets;
+    }
+
 }

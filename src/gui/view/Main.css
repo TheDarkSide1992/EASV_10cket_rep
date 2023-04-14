@@ -199,7 +199,7 @@
       -fx-text-fill: rgba(243,218,218,1);
 }
 
-.colType {
+.colContains {
     -fx-border-radius: 15 0 0 0;
     -fx-background-radius: 15 0 0 0;
 }
