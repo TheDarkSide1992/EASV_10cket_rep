@@ -48,6 +48,7 @@ public class TicketGenerator {
                     "Location: \n" + event.getEventLocation() +
                     "TIME: \n" + event.getEventDate() +" : "+ event.getEventStartTime() + "\n \n" +
                     "Description: \n" + event.getEventDescription() + "\n \n" + event.getEventImage() +
+                    "Extra: " + ticket.getTicketID() + "\n\n" + ticket.getTicketBarCode() +"\n"+ ticket.getTicketQRCode() +
                     "\n\n Organised by: " + event.getEventCoordinator() +" + "+ event.getEventCollaborator()
             );
 
