@@ -66,6 +66,10 @@ public class TicketGenerator {
             doc.add(paragraph1);
             if (event.getImageByte().length > 12) doc.add(Image.getInstance(event.getImageByte()));
 
+            Path barCode = Path.of("data/Images/RickQR.PNG");
+            Image img = Image.getInstance(String.valueOf(barCode));
+            doc.add(img);
+
             //Classes file to avoid memory leak
             doc.close();
 
