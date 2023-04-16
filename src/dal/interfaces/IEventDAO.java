@@ -13,5 +13,6 @@ public interface IEventDAO {
     void deleteEvent(int id) throws SQLException;
 
     void cancelEvent(int id) throws SQLException;
+    int requestToDeleteEventCoordinator(Event eventToBeDeleted) throws Exception;
 
 }

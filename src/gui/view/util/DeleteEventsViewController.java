@@ -27,7 +27,7 @@ public class DeleteEventsViewController implements Initializable {
     @FXML
     private VBox vBoxEventView;
     private Model model;
-    private static ObservableList<Event> allEvents;
+    private static ObservableList<Event> eventsForDeletion;
 
     public static boolean submitForDeletion = false;
 
@@ -45,7 +45,7 @@ public class DeleteEventsViewController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         try {
             model = new Model();
-            allEvents = model.getAllEvents();
+            eventsForDeletion = model.getSubmittedForDeletion();
             shadow = new DropShadow(0, 4, 4, Color.color(0, 0, 0, 0.25));
             vBoxEventView.setFillWidth(true);
             displayActiveEvents();
@@ -56,7 +56,7 @@ public class DeleteEventsViewController implements Initializable {
 
     private void displayActiveEvents() {
         try {
-            for (Event events : allEvents) {
+            for (Event events : eventsForDeletion) {
 
                 //Outer pane contains datePane, and the "blue" inner-pane, with info about the event
                 BorderPane outerPane = new BorderPane();

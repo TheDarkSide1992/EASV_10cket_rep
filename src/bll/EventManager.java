@@ -37,6 +37,9 @@ public class EventManager {
     public int createEvent(Event event) throws Exception {
         return eventDAO.createEvent(event);
     }
+    public int submitForDeletion(Event eventToBeDeleted) throws Exception {
+        return eventDAO.requestToDeleteEventCoordinator(eventToBeDeleted);
+    }
 
     public void deleteEvent(int id) throws SQLException {
         eventDAO.deleteEvent(id);

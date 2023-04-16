@@ -13,6 +13,7 @@ import java.util.ArrayList;
 public class Model {
     private ObservableList<Event> activeEvents;
     private ObservableList<Event> allEvents;
+    private ObservableList<Event> submittedForDeletion;
     private EventManager eventManager;
     private UserManager userManager;
     private TicketGenerator ticketGenerator;
@@ -24,6 +25,7 @@ public class Model {
         ticketGenerator = new TicketGenerator();
         activeEvents = FXCollections.observableArrayList();
         allEvents = FXCollections.observableArrayList();
+        submittedForDeletion = FXCollections.observableArrayList();
 
     }
     public ObservableList<Event> getAllEvents() throws Exception {
@@ -35,6 +37,9 @@ public class Model {
     public ObservableList<Event> getActiveEvents() throws Exception {
         activeEvents.addAll(eventManager.getActiveEvents());
         return activeEvents;
+    }
+    public ObservableList<Event> getSubmittedForDeletion(){
+        return submittedForDeletion;
     }
 
     public void createEvent(Event event) throws Exception {
@@ -59,6 +64,10 @@ public class Model {
     public void cancelEvent(int eventID) throws SQLException {
         eventManager.cancelEvent(eventID);
     }
+    public void submitForDeletion(Event eventToBeDeleted) throws Exception {
+        eventToBeDeleted.setEventID(eventManager.submitForDeletion(eventToBeDeleted));
+        submittedForDeletion.add(eventToBeDeleted);
+    }
 
     public User checkLogIn(String userName, String password) throws Exception{
         return userManager.getIfLongedInUSer(userName,password);
@@ -79,4 +88,3 @@ public class Model {
         ticketGenerator.makeTicket(event, ticket);
     }
 }
-

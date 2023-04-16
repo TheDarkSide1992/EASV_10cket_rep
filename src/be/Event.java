@@ -109,7 +109,13 @@ public class Event implements Comparable<Event>{
     }
 
     public boolean isEventIsActive() {
-        return eventIsActive;
+        if(eventDate.isAfter(LocalDate.now())){
+            return eventIsActive;
+        }
+        else{
+            return false;
+        }
+
     }
 
     public void setEventIsActive(boolean eventIsActive) {
