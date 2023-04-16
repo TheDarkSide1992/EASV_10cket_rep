@@ -73,8 +73,9 @@ public class Model {
     }
 
     public void makeTicket(Event event, Ticket ticket) throws Exception{
-        event = getActiveEvents().get(2);
-        ticket = new Ticket();
+        //TODO USED FOR TESTING
+        //event = getActiveEvents().get(2);
+        //ticket = new Ticket();
         ticketGenerator.makeTicket(event, ticket);
     }
 }
