@@ -120,8 +120,9 @@ public class ContactController implements Initializable {
             vbox.getChildren().add(hBoxAddUser);
         }
 
+        /*
         if(true) {
-            Button btnAdd = new Button("print pdf");
+            Button btnAdd = new Button("print pdf"); //TODO btn where used for pdf testing. need removal once there is a better implementation
             btnAdd.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
                 try {
                     model.makeTicket(null, null);
@@ -134,13 +135,15 @@ public class ContactController implements Initializable {
             hBoxAddUser = new HBox();
             hBoxAddUser.setPadding(new Insets(20, 0, 0, 50));
 
-            btnAdd.setStyle(".btnTopButtons"); //TODO Style btn
+            btnAdd.setStyle(".btnTopButtons");
 
             hBoxAddUser.getChildren().add(btnAdd);
             outerPane3.getChildren().add(hBoxAddUser);
 
             vbox.getChildren().add(hBoxAddUser);
         }
+        /*
+         */
     }
 
 
