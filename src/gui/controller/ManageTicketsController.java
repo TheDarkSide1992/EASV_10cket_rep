@@ -176,6 +176,22 @@ public class ManageTicketsController implements Initializable {
     }
 
     public void handleAdd(ActionEvent actionEvent) {
+        if (comboTypeOfTicket.getSelectionModel().getSelectedItem().toString().equals("New Ticket")) {
+            for (int i = 0; i < tblviewTypesOfTickets.getItems().size() - 1; i++) {
+                Ticket t = (Ticket) tblviewTypesOfTickets.getItems().get(i);
+                if (!t.getTicketContains().equals(txtAddExtras.getText())) {
+
+                    Ticket t1 = new Ticket(txtAddExtras.getText(), Integer.parseInt(txtNewPriceOfTicket.getText()), Integer.parseInt(txtNumberOfTickets.getText()));
+                    tblviewTypesOfTickets.getItems().add(t1);
+
+                    //TODO CONTINUE FROM HERE
+                    
+                }
+
+
+            }
+
+        }
     }
 
     public void handleSaveTickets(ActionEvent actionEvent) {

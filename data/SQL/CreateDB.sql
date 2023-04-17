@@ -87,6 +87,7 @@ CREATE TABLE Ticket(
     Ticket_Event_ID             INT                                     NOT NULL,
     Ticket_Contains             NVARCHAR(100)                           NOT NULL,
     Ticket_Price                INT                                     NOT NULL,
+    Ticket_TotalNrOfTickets     INT,
 
     CONSTRAINT PK_TICKET_CONTENT_ID PRIMARY KEY(Ticket_Content_ID),
 
