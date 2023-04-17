@@ -120,7 +120,7 @@ public class ContactController implements Initializable {
             vbox.getChildren().add(hBoxAddUser);
         }
 
-        /*
+
         if(true) {
             Button btnAdd = new Button("print pdf"); //TODO btn where used for pdf testing. need removal once there is a better implementation
             btnAdd.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
@@ -142,8 +142,8 @@ public class ContactController implements Initializable {
 
             vbox.getChildren().add(hBoxAddUser);
         }
-        /*
-         */
+
+
     }
 
 

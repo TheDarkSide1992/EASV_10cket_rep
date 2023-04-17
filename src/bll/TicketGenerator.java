@@ -20,17 +20,33 @@ import java.util.stream.Stream;
 
 public class TicketGenerator {
     private Document doc;
+    private String codeID;
     public TicketGenerator() {
-
+        codeID = "";
     }
     public void makeTicket(Event event, Ticket ticket) throws Exception{
         //setFilepath();
         //TODO if posible make it posible to sellect ones own filepath
+        generateCodeID(event, ticket);
 
         generateTicket(event, ticket);
         //TODO make pdf hold data of event
 
         System.out.println("succes");
+    }
+
+    private void generateCodeID(Event event, Ticket ticket){
+        int id = ticket.getTicketID();
+        int date = event.getEventDate().hashCode();
+        int name = event.getEventTitle().hashCode();
+
+        StringBuilder stb = new StringBuilder();
+
+        stb.append(id);
+        stb.append(date);
+        stb.append(name);
+
+        codeID = stb.toString();
     }
 
     private void generateTicket(Event event, Ticket ticket) throws Exception{
@@ -52,6 +68,8 @@ public class TicketGenerator {
                     "\n\n Organised by: " + event.getEventCoordinator() +" + "+ event.getEventCollaborator()
             );
 
+            var paragraph2 = new Paragraph("\n\n" + codeID);
+
             /*
             var table = new PdfPTable(2);
             //Creates a table where there can be inserted data, might not be neded
@@ -66,9 +84,17 @@ public class TicketGenerator {
             doc.add(paragraph1);
             if (event.getImageByte().length > 12) doc.add(Image.getInstance(event.getImageByte()));
 
-            Path barCode = Path.of("data/Images/RickQR.PNG");
-            Image img = Image.getInstance(String.valueOf(barCode));
+            Path qrCode = Path.of("data/Images/RickQR.PNG");
+            Image img = Image.getInstance(String.valueOf(qrCode));
+            img.scaleAbsoluteWidth(100);
+            img.scaleAbsoluteHeight(100);
             doc.add(img);
+            doc.add(paragraph2);
+            Path barCode = Path.of("data/Images/barcode.jpg");
+            Image img2 = Image.getInstance(String.valueOf(barCode));
+            img2.scaleAbsoluteWidth(200);
+            img2.scaleAbsoluteHeight(50);
+            doc.add(img2);
 
             //Classes file to avoid memory leak
             doc.close();
