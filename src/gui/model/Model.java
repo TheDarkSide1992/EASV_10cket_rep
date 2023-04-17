@@ -3,6 +3,7 @@ package gui.model;
 import be.*;
 import bll.EventManager;
 import bll.TicketManager;
+import bll.TicketGenerator;
 import bll.UserManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -19,13 +20,19 @@ public class Model {
     EventManager eventManager;
     UserManager userManager;
     TicketManager ticketManager;
+    private ObservableList<Event> submittedForDeletion;
+    private EventManager eventManager;
+    private UserManager userManager;
+    private TicketGenerator ticketGenerator;
 
     public Model() throws Exception {
         ticketManager = new TicketManager();
         eventManager = new EventManager();
         userManager = new UserManager();
+        ticketGenerator = new TicketGenerator();
         activeEvents = FXCollections.observableArrayList();
         allEvents = FXCollections.observableArrayList();
+        submittedForDeletion = FXCollections.observableArrayList();
 
     }
     public ObservableList<Event> getAllEvents() throws Exception {
@@ -37,6 +44,9 @@ public class Model {
     public ObservableList<Event> getActiveEvents() throws Exception {
         activeEvents.addAll(eventManager.getActiveEvents());
         return activeEvents;
+    }
+    public ObservableList<Event> getSubmittedForDeletion(){
+        return submittedForDeletion;
     }
 
     public void createEvent(Event event) throws Exception {
@@ -61,6 +71,10 @@ public class Model {
     public void cancelEvent(int eventID) throws SQLException {
         eventManager.cancelEvent(eventID);
     }
+    public void submitForDeletion(Event eventToBeDeleted) throws Exception {
+        eventToBeDeleted.setEventID(eventManager.submitForDeletion(eventToBeDeleted));
+        submittedForDeletion.add(eventToBeDeleted);
+    }
 
     public User checkLogIn(String userName, String password) throws Exception{
         return userManager.getIfLongedInUSer(userName,password);
@@ -81,5 +95,12 @@ public class Model {
         //TODO continue from here
         return ticketObservableList;
     }
-}
 
+
+    public void makeTicket(Event event, Ticket ticket) throws Exception{
+        //TODO USED FOR TESTING
+        //event = getActiveEvents().get(2);
+        //ticket = new Ticket();
+        ticketGenerator.makeTicket(event, ticket);
+    }
+}

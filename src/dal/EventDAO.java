@@ -133,4 +133,29 @@ public class EventDAO implements IEventDAO{
         }
 
     }
+    @Override
+    public int requestToDeleteEventCoordinator(Event eventToBeDeleted) throws Exception {
+        int id = 0;
+        try (Connection conn = db.getConnection()) {
+
+            String sql = "INSERT INTO Submit_For_Deletion (Submit_Delete_Event) Values(?);";
+
+
+            PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+
+            stmt.setInt(1, eventToBeDeleted.getEventID());
+
+            stmt.executeUpdate();
+
+            ResultSet rs = stmt.getGeneratedKeys();
+
+            if (rs.next()) {
+                id = rs.getInt(1);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            throw new Exception("Could not submit Event for deletion" + ex);
+        }
+        return id;
+    }
 }

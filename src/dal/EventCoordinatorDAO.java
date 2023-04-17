@@ -6,9 +6,7 @@ import be.EventCoordinator;
 import dal.DBConnector;
 import dal.interfaces.IEventCoordinator;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -60,10 +58,7 @@ public class EventCoordinatorDAO implements IEventCoordinator {
         return 0;
     }
 
-    @Override
-    public boolean requestToDeleteEventCoordinator(Event eventToBeDeleted) throws Exception {
-        return false;
-    }
+
 
     @Override
     public void deleteEventCoordinator(int id) throws Exception {
