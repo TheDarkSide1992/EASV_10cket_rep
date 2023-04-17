@@ -17,9 +17,7 @@ public class Model {
     private ObservableList<Event> allEvents;
 
     private ObservableList ticketObservableList;
-    EventManager eventManager;
-    UserManager userManager;
-    TicketManager ticketManager;
+    private TicketManager ticketManager;
     private ObservableList<Event> submittedForDeletion;
     private EventManager eventManager;
     private UserManager userManager;
