@@ -19,7 +19,7 @@ import java.util.ResourceBundle;
 
 public class ManageTicketsController implements Initializable {
     @FXML
-    private Button btnAdd, btnSaveTickets;
+    private Button btnAdd, btnSaveTickets, btnRemoveTickets;
     @FXML
     private ChoiceBox comboChooseEvent, comboTypeOfTicket;
     @FXML
@@ -53,11 +53,13 @@ public class ManageTicketsController implements Initializable {
     private static ObservableList<Event> coordinatorsEvents;
 
     private static ObservableList<Ticket> ticketsForSale;
-    private static ObservableList<Ticket> defaultGenTickets;
+
+    private static Ticket defaultEntryTickets;
 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        defaultEntryTickets = new Ticket("Entry", 50,150);
         coordinatorsEvents = FXCollections.observableArrayList();
         try {
             model = new Model();
@@ -106,22 +108,24 @@ public class ManageTicketsController implements Initializable {
             Alert alert = new Alert(Alert.AlertType.ERROR, "Could not get tickets from Database", ButtonType.OK);
             alert.showAndWait();
         }
-        if (ticketsForSale.size() == 0 && txtNumberOfTickets.getText().isEmpty()) {
+        if (ticketsForSale.size() == 0 || txtNumberOfTickets.getText().isEmpty()) {
+            comboTypeOfTicket.getItems().clear();
+            tblviewTypesOfTickets.getItems().clear();
             txtPriceOfTickets.setText("50");
             txtTotalAmountOfTickets.setText("150");
-            Ticket ticket = new Ticket("Entry", Integer.parseInt(txtPriceOfTickets.getText()), Integer.parseInt(txtTotalAmountOfTickets.getText()));
-            defaultGenTickets = FXCollections.observableArrayList();
-            defaultGenTickets.add(ticket);
+
+
             colContains.setCellValueFactory(new PropertyValueFactory<>("ticketContains"));
             colPrice.setCellValueFactory(new PropertyValueFactory<>("ticketPrice"));
             colAmount.setCellValueFactory(new PropertyValueFactory<>("amountOfTickets"));
 
             tblviewTypesOfTickets.getColumns().addAll();
-            tblviewTypesOfTickets.setItems(defaultGenTickets);
-            comboTypeOfTicket.getItems().add(ticket.getTicketContains());
+            tblviewTypesOfTickets.getItems().add(defaultEntryTickets);
+            comboTypeOfTicket.getItems().add(defaultEntryTickets.getTicketContains());
+            comboTypeOfTicket.getItems().add("New Ticket");
             comboTypeOfTicket.getSelectionModel().select(0);
-            txtNumberOfTickets.setText("50");
-            txtNewPriceOfTicket.setText("150");
+            txtNumberOfTickets.setText("150");
+            txtNewPriceOfTicket.setText("50");
 
         }
         else {
@@ -146,12 +150,14 @@ public class ManageTicketsController implements Initializable {
             }
             else break;
         }
-        comboTypeOfTicket.getItems().add(0,"New Ticket");
         comboTypeOfTicket.getItems().addAll(comboBoxTicketTypes);
-
-    }
+            }
 
     private void displayInfoOfTicket(Object newValue) {
+        if (newValue == "New Ticket")
+        {
+            clearTicketInfo();
+        }
         for (int i = 0; i < ticketsForSale.size(); i++) {
             if(ticketsForSale.get(i).getTicketContains().equals(newValue)){
                 txtNumberOfTickets.setText(String.valueOf(ticketsForSale.get(i).getAmountOfTickets()));
@@ -163,9 +169,19 @@ public class ManageTicketsController implements Initializable {
 
     }
 
+    private void clearTicketInfo() {
+        txtAddExtras.clear();
+        txtNewPriceOfTicket.clear();
+        txtNumberOfTickets.clear();
+    }
+
     public void handleAdd(ActionEvent actionEvent) {
     }
 
     public void handleSaveTickets(ActionEvent actionEvent) {
+    }
+
+    public void handleRemoveTickets(ActionEvent event) {
+        tblviewTypesOfTickets.getItems().remove(tblviewTypesOfTickets.getFocusModel().getFocusedItem());
     }
 }

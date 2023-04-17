@@ -11,7 +11,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<ScrollPane prefHeight="600.0" prefWidth="1440.0" styleClass="scrollPane" stylesheets="@Main.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.ManageTicketsController">
+<ScrollPane prefHeight="600.0" prefWidth="1440.0" styleClass="scrollPane" stylesheets="@Main.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.ManageTicketsController">
    <content>
       <AnchorPane prefHeight="598.0" prefWidth="1438.0" styleClass="scrollPane">
          <children>
@@ -52,7 +52,7 @@
             <TextField fx:id="txtAddExtras" prefHeight="40.0" prefWidth="180.0" promptText="Add extras" styleClass="txtTitleOfEvent" AnchorPane.leftAnchor="780.0" AnchorPane.topAnchor="240.0" />
             <TableView fx:id="tblviewTypesOfTickets" fixedCellSize="0.0" prefHeight="425.0" prefWidth="350.0" styleClass="tblviewTypesOfTickets" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="80.0">
               <columns>
-                <TableColumn styleClass="colContains" fx:id="colContains" prefWidth="200.0" text="Contains" />
+                <TableColumn fx:id="colContains" prefWidth="200.0" styleClass="colContains" text="Contains" />
                   <TableColumn fx:id="colPrice" prefWidth="75.0" text="Price" />
                   <TableColumn fx:id="colAmount" prefWidth="75.0" styleClass="colAmount" text="Amount" />
               </columns>
@@ -71,6 +71,7 @@
                   <Font size="24.0" />
                </font>
             </TextField>
+            <Button fx:id="btnRemoveTickets" layoutX="1038.0" layoutY="533.0" mnemonicParsing="false" onAction="#handleRemoveTickets" prefHeight="40.0" prefWidth="152.0" styleClass="btnSaveEvent" text="Remove Ticket" />
          </children>
       </AnchorPane>
    </content>
