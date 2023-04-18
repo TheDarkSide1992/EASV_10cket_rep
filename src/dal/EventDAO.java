@@ -104,7 +104,7 @@ public class EventDAO implements IEventDAO{
     @Override
     public void deleteEvent(int id) throws SQLException {
 
-        String sql = "DELETE FROM Event_ WHERE Event_ID = " + id + ";";
+        String sql = "DELETE * FROM Event_ WHERE Event_ID = " + id + ";";
 
         try (Connection conn = db.getConnection()) {
 

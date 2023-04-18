@@ -98,7 +98,7 @@ public class Model {
     public void makeTicket(Event event, Ticket ticket) throws Exception{
         //TODO USED FOR TESTING
         event = getActiveEvents().get(2);
-        ticket = new Ticket();
+        ticket = new Ticket(0, "string", 1);
         ticketGenerator.makeTicket(event, ticket);
     }
 }
