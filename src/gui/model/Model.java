@@ -43,7 +43,9 @@ public class Model {
         activeEvents.addAll(eventManager.getActiveEvents());
         return activeEvents;
     }
-    public ObservableList<Event> getSubmittedForDeletion(){
+    public ObservableList<Event> getSubmittedForDeletion() throws Exception {
+        submittedForDeletion = FXCollections.observableArrayList();
+        submittedForDeletion.addAll(eventManager.getSubmittedForDeletion());
         return submittedForDeletion;
     }
 
@@ -97,8 +99,8 @@ public class Model {
 
     public void makeTicket(Event event, Ticket ticket) throws Exception{
         //TODO USED FOR TESTING
-        event = getActiveEvents().get(2);
-        ticket = new Ticket();
+        //event = getActiveEvents().get(2);
+        //ticket = new Ticket();
         ticketGenerator.makeTicket(event, ticket);
     }
 }

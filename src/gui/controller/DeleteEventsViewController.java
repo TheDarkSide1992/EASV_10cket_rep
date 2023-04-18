@@ -1,4 +1,4 @@
-package gui.view.util;
+package gui.controller;
 
 import be.Event;
 import gui.model.Model;
@@ -35,6 +35,7 @@ public class DeleteEventsViewController implements Initializable {
     private ImageView imageCxl, imageEdit, imageEvent;
 
     private String cxlURL = "data/Images/Cancel.png";
+    private String deleteURL = "data/Images/Trash Can.png";
     private String editURL = "data/Images/Edit.png";
 
     private String eventURL = "data/Images/Event.png";
@@ -49,6 +50,7 @@ public class DeleteEventsViewController implements Initializable {
             shadow = new DropShadow(0, 4, 4, Color.color(0, 0, 0, 0.25));
             vBoxEventView.setFillWidth(true);
             displayActiveEvents();
+            eventsForDeletion = model.getSubmittedForDeletion();
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -57,6 +59,7 @@ public class DeleteEventsViewController implements Initializable {
     private void displayActiveEvents() {
         try {
             for (Event events : eventsForDeletion) {
+                System.out.println(eventsForDeletion);
 
                 //Outer pane contains datePane, and the "blue" inner-pane, with info about the event
                 BorderPane outerPane = new BorderPane();
@@ -98,7 +101,7 @@ public class DeleteEventsViewController implements Initializable {
         imageEdit.setOnMouseClicked(event -> deleteEvent(events));  //TODO change this image to a trashcan, and only visible if it is an Admin who logged in;
 
         imageCxl.setImage(loadImages(cxlURL));
-        imageEdit.setImage(loadImages(editURL));
+        imageEdit.setImage(loadImages(deleteURL));
 
         imageCxl.setEffect(shadow);
         imageEdit.setEffect(shadow);

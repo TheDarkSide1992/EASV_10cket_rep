@@ -19,6 +19,7 @@ public class EventManager {
 
     private IEventDAO eventDAO;
     private List<Event> events = new ArrayList<>();
+    private List<Event> submittedForDeletion = new ArrayList<>();
     public EventManager() {
         try {
             this.eventDAO = new EventDAO();
@@ -31,6 +32,11 @@ public class EventManager {
         events.addAll(eventDAO.getAllEvents());
         Collections.sort(events,new DateComparator());
         return events;
+    }
+    public List<Event> getSubmittedForDeletion() throws Exception {
+        submittedForDeletion.addAll(eventDAO.getSubmittedForDeletion());
+        Collections.sort(submittedForDeletion, new DateComparator());
+        return submittedForDeletion;
     }
 
 
