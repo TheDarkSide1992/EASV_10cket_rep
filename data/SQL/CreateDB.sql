@@ -115,6 +115,6 @@ CREATE TABLE Submitted_For_Deletion(
     CONSTRAINT PK_SD_ID PRIMARY KEY(Submit_Delete_ID),
 
     CONSTRAINT FK_SD_Event_ID FOREIGN KEY(Submit_Delete_Event)
-    REFERENCES Event_(Event_ID)
+    REFERENCES Event_(Event_ID) ON DELETE CASCADE
 )
 GO

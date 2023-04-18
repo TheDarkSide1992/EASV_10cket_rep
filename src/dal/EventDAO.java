@@ -66,6 +66,52 @@ public class EventDAO implements IEventDAO{
     }
 
     @Override
+    public List<Event> getSubmittedForDeletion() throws SQLException {
+        ArrayList<Event> submittedForDeletion = new ArrayList<>();
+        try (Connection conn = db.getConnection()) {
+            String sql = "SELECT * FROM Event_ JOIN User_ ON Event_Event_Coordinator_ID = User_ID WHERE Event_ID IN (SELECT DISTINCT Submit_Delete_Event FROM Submitted_For_Deletion);";
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+
+            while (rs.next()) {
+                int id = rs.getInt("Event_ID");
+                String title = rs.getString("Event_Title");
+                LocalDate date = rs.getDate("Event_Date").toLocalDate();
+                Time startTime = rs.getTime("Event_Start_Time");
+                String location = rs.getString("Event_Location");
+                String locationURL = rs.getString("Event_LocationURL");
+                String description = rs.getString("Event_Description");
+                String eventCollaborator = rs.getString("Event_Authors");
+                String eventCoordinator = rs.getString("User_Name");
+                byte[] data = rs.getBytes("Event_Img");
+
+                boolean isActive = false;
+                switch (rs.getInt("Event_Is_Active")) {
+                    case 0:
+                }
+
+
+                Event event = new Event(id, title, date, startTime, location, locationURL, description, isActive, eventCollaborator, eventCoordinator);
+
+                if(data != null){
+                    event.setByteImage(data);
+                    event.setImageWithByte(data);
+                }
+
+                submittedForDeletion.add(event);
+
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            throw new SQLException("Could not get events submitted for deletion from database");
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        return submittedForDeletion;
+    }
+
+    @Override
     public int createEvent(Event event) throws Exception {
         int id = 0;
         try (Connection conn = db.getConnection()) {
@@ -138,7 +184,7 @@ public class EventDAO implements IEventDAO{
         int id = 0;
         try (Connection conn = db.getConnection()) {
 
-            String sql = "INSERT INTO Submit_For_Deletion (Submit_Delete_Event) Values(?);";
+            String sql = "INSERT INTO Submitted_For_Deletion (Submit_Delete_Event) Values(?);";
 
 
             PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
