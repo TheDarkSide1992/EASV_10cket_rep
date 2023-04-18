@@ -86,6 +86,8 @@ public class CreateEventController implements Initializable {
     }
 
     private void isEmpty(){
+        btnSaveEvent.setDisable(true);
+
         if (txtTitleOfEvent.getText().isEmpty())  return;
 
         if (datePicker.getValue() == null) return;
