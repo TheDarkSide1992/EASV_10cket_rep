@@ -49,6 +49,8 @@ public class ManageTicketsController implements Initializable {
     private TableColumn colContains, colPrice, colAmount;
     private Model model;
 
+    private static ObservableList<Ticket> ticketsForThisEvent;
+
     private static ObservableList<Event> allEvents;
 
     private static ObservableList<Event> coordinatorsEvents;
@@ -103,13 +105,37 @@ public class ManageTicketsController implements Initializable {
     }
 
     private void updateTableView(Event event) {
+        ticketsForSale = FXCollections.observableArrayList();
         try {
-            ticketsForSale = model.getTickets(event.getEventID());
+            ticketsForThisEvent = model.getTickets(event.getEventID());
         } catch (SQLException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR, "Could not get tickets from Database", ButtonType.OK);
             alert.showAndWait();
         }
-        if (ticketsForSale.size() == 0 || txtNumberOfTickets.getText().isEmpty()) {
+
+        Ticket firstOfThisType = null;
+        Ticket firstOfNextType = null;
+        for (int i = 0; i < ticketsForThisEvent.size(); i = firstOfThisType.getAmountOfTickets()+1) {
+            if(firstOfThisType == null) {
+                firstOfThisType = ticketsForThisEvent.get(i);
+            }
+            else {
+                firstOfThisType = firstOfNextType;
+            }
+            ticketsForSale.add(firstOfThisType);
+            if(i < ticketsForSale.size()-1) {
+                firstOfNextType = ticketsForThisEvent.get(firstOfThisType.getAmountOfTickets()+1);
+            }
+
+
+        }
+
+
+
+
+
+
+        if (ticketsForSale.size() == 0 && txtNumberOfTickets.getText().isEmpty()) {
             comboTypeOfTicket.getItems().clear();
             tblviewTypesOfTickets.getItems().clear();
             txtPriceOfTickets.setText("50");

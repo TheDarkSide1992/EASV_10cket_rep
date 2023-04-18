@@ -25,12 +25,12 @@ public class TicketDAO implements ITicketDAO {
             ResultSet rs = stmt.executeQuery(sql);
 
             while (rs.next()) {
-                int ticketID = rs.getInt("Ticket_Content_ID");
                 String ticketContains = rs.getString("Ticket_Contains");
                 int ticketPrice = rs.getInt("Ticket_Price");
+                int ticketAmount = rs.getInt("Ticket_AmountOfThisTicketType");
 
 
-                Ticket ticket = new Ticket(ticketID, ticketContains, ticketPrice);
+                Ticket ticket = new Ticket(ticketContains, ticketPrice, ticketAmount);
 
                 tickets.add(ticket);
             }

@@ -91,8 +91,7 @@ public class Model {
     public ObservableList getTickets(int eventID) throws SQLException {
         ticketObservableList = FXCollections.observableArrayList();
         List<Ticket> allTickets = ticketManager.getTickets(eventID);
-        int amountOfTickets = 0;
-        //TODO continue from here
+        ticketObservableList.addAll(allTickets);
         return ticketObservableList;
     }
 
