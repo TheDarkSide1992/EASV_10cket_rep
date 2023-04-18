@@ -1,14 +1,11 @@
 package bll;
 
-import be.Event;
 import be.Ticket;
 import dal.TicketDAO;
 import dal.interfaces.ITicketDAO;
-import javafx.collections.ObservableList;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class TicketManager {
@@ -23,5 +20,9 @@ public class TicketManager {
     public List<Ticket> getTickets(int eventID) throws SQLException {
         return ticketDAO.getTickets(eventID);
         }
+
+    public void saveTickets(List<Ticket> ticketsForSale, int eventID) throws SQLException {
+        ticketDAO.saveTickets(ticketsForSale, eventID);
     }
+}
 

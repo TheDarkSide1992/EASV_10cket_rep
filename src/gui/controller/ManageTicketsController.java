@@ -15,6 +15,7 @@ import javafx.util.Callback;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class ManageTicketsController implements Initializable {
@@ -59,7 +60,7 @@ public class ManageTicketsController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        defaultEntryTickets = new Ticket("Entry", 50,150);
+        defaultEntryTickets = new Ticket("Entry", 50, 150);
         coordinatorsEvents = FXCollections.observableArrayList();
         try {
             model = new Model();
@@ -120,15 +121,15 @@ public class ManageTicketsController implements Initializable {
             colAmount.setCellValueFactory(new PropertyValueFactory<>("amountOfTickets"));
 
             tblviewTypesOfTickets.getColumns().addAll();
-            tblviewTypesOfTickets.getItems().add(defaultEntryTickets);
+            ticketsForSale.add(defaultEntryTickets);
+            tblviewTypesOfTickets.setItems(ticketsForSale);
             comboTypeOfTicket.getItems().add(defaultEntryTickets.getTicketContains());
             comboTypeOfTicket.getItems().add("New Ticket");
             comboTypeOfTicket.getSelectionModel().select(0);
             txtNumberOfTickets.setText("150");
             txtNewPriceOfTicket.setText("50");
 
-        }
-        else {
+        } else {
             colContains.setCellValueFactory(new PropertyValueFactory<>("ticketContains"));
             colPrice.setCellValueFactory(new PropertyValueFactory<>("ticketPrice"));
             colAmount.setCellValueFactory(new PropertyValueFactory<>("amountOfTickets"));
@@ -142,24 +143,23 @@ public class ManageTicketsController implements Initializable {
 
     private void updateComboTicketTypes() {
         ArrayList<String> comboBoxTicketTypes = new ArrayList<>();
-        for (int i = 0; i < ticketsForSale.size()-1; i++) {
+        for (int i = 1; i < ticketsForSale.size() - 1; i++) {
             Ticket ticket1 = ticketsForSale.get(i);
             comboBoxTicketTypes.add(ticket1.getTicketContains());
-            if(ticketsForSale.lastIndexOf(ticket1) < ticketsForSale.size()-1) {
+            if (ticketsForSale.lastIndexOf(ticket1) < ticketsForSale.size()) {
                 i = ticketsForSale.lastIndexOf(ticket1) + 1;
-            }
-            else break;
+            } else break;
         }
+        comboTypeOfTicket.getItems().clear();
         comboTypeOfTicket.getItems().addAll(comboBoxTicketTypes);
-            }
+    }
 
     private void displayInfoOfTicket(Object newValue) {
-        if (newValue == "New Ticket")
-        {
+        if (newValue == "New Ticket") {
             clearTicketInfo();
         }
         for (int i = 0; i < ticketsForSale.size(); i++) {
-            if(ticketsForSale.get(i).getTicketContains().equals(newValue)){
+            if (ticketsForSale.get(i).getTicketContains().equals(newValue)) {
                 txtNumberOfTickets.setText(String.valueOf(ticketsForSale.get(i).getAmountOfTickets()));
                 txtNewPriceOfTicket.setText(String.valueOf(ticketsForSale.get(i).getTicketPrice()));
                 txtAddExtras.setText(ticketsForSale.get(i).getTicketContains());
@@ -176,28 +176,57 @@ public class ManageTicketsController implements Initializable {
     }
 
     public void handleAdd(ActionEvent actionEvent) {
-        if (comboTypeOfTicket.getSelectionModel().getSelectedItem().toString().equals("New Ticket")) {
-            for (int i = 0; i < tblviewTypesOfTickets.getItems().size() - 1; i++) {
-                Ticket t = (Ticket) tblviewTypesOfTickets.getItems().get(i);
-                if (!t.getTicketContains().equals(txtAddExtras.getText())) {
-
-                    Ticket t1 = new Ticket(txtAddExtras.getText(), Integer.parseInt(txtNewPriceOfTicket.getText()), Integer.parseInt(txtNumberOfTickets.getText()));
-                    tblviewTypesOfTickets.getItems().add(t1);
-
-                    //TODO CONTINUE FROM HERE
-                    
-                }
-
+        boolean b = false;
+        int k = 0;
+        for (int i = 0; i < ticketsForSale.size(); i++) {
+            k = i;
+            b = txtAddExtras.getText().equals(ticketsForSale.get(i).getTicketContains());
+            if (b) break;
+        }
+        if (comboTypeOfTicket.getSelectionModel().getSelectedItem().equals("New Ticket")) {
+            if (b) {
+                Alert alert = new Alert(Alert.AlertType.WARNING, "Ticket type: \"" + txtAddExtras.getText() + "\" already exists", ButtonType.CANCEL);
+                alert.showAndWait();
+            } else {
+                Ticket t1 = new Ticket(txtAddExtras.getText(), Integer.parseInt(txtNewPriceOfTicket.getText()), Integer.parseInt(txtNumberOfTickets.getText()));
+                ticketsForSale.add(t1);
+                tblviewTypesOfTickets.setItems(ticketsForSale);
+                comboTypeOfTicket.getItems().add(t1.getTicketContains());
 
             }
+        } else {
+            Ticket t = new Ticket(txtAddExtras.getText(), Integer.parseInt(txtNewPriceOfTicket.getText()), Integer.parseInt(txtNumberOfTickets.getText()));
+            ticketsForSale.remove(k);
+            ticketsForSale.add(t);
+            tblviewTypesOfTickets.setItems(ticketsForSale);
+            comboTypeOfTicket.getItems().add(t.getTicketContains());
 
         }
+
+
     }
 
     public void handleSaveTickets(ActionEvent actionEvent) {
+        List<Event> events = new ArrayList<>();
+        events.addAll(coordinatorsEvents);
+        Event event = null;
+        for (int i = 0; i < events.size()-1; i++) {
+            if(events.get(i).getEventTitle().equals(comboChooseEvent.getSelectionModel().getSelectedItem()))
+            event = events.get(i);
+        }
+        try {
+            model.saveTickets(ticketsForSale, event.getEventID());
+        } catch (SQLException e){
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Could not save tickets to Database", ButtonType.CANCEL);
+            alert.showAndWait();
+        }
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "All tickets saved");
+        alert.show();
     }
 
     public void handleRemoveTickets(ActionEvent event) {
-        tblviewTypesOfTickets.getItems().remove(tblviewTypesOfTickets.getFocusModel().getFocusedItem());
+        Ticket ticket = (Ticket) tblviewTypesOfTickets.getFocusModel().getFocusedItem();
+        tblviewTypesOfTickets.getItems().remove(ticket);
+        comboTypeOfTicket.getItems().remove(ticket.getTicketContains());
     }
 }

@@ -101,4 +101,8 @@ public class Model {
         //ticket = new Ticket();
         ticketGenerator.makeTicket(event, ticket);
     }
+
+    public void saveTickets(List<Ticket> ticketsForSale, int eventID) throws SQLException {
+        ticketManager.saveTickets(ticketsForSale, eventID);
+    }
 }

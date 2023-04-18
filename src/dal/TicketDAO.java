@@ -1,14 +1,10 @@
 package dal;
 
-import be.Event;
 import be.Ticket;
 import dal.interfaces.ITicketDAO;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,6 +15,7 @@ public class TicketDAO implements ITicketDAO {
     public TicketDAO() throws IOException {
         db = new DBConnector();
     }
+
     @Override
     public List<Ticket> getTickets(int eventID) throws SQLException {
         List<Ticket> tickets = new ArrayList<>();
@@ -37,12 +34,35 @@ public class TicketDAO implements ITicketDAO {
 
                 tickets.add(ticket);
             }
-        }
-        catch (SQLException ex) {
+        } catch (SQLException ex) {
             ex.printStackTrace();
             throw new SQLException("Could not get events from database");
+        }
+        return tickets;
     }
-    return tickets;
+
+    @Override
+    public void saveTickets(List<Ticket> ticketsForSale, int eventID) throws SQLException {
+
+        try (Connection conn = db.getConnection()) {
+            String sql = "INSERT INTO Ticket (Ticket_Event_ID, Ticket_Contains, Ticket_Price, Ticket_AmountOfThisTicketType) VALUES(?,?,?,?);";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            for (int i = 0; i < ticketsForSale.size(); i++) {
+                for (int j = 0; j < ticketsForSale.get(i).getAmountOfTickets(); j++) {
+                    Ticket t = ticketsForSale.get(i);
+                    ps.setInt(1, eventID);
+                    ps.setString(2, t.getTicketContains());
+                    ps.setInt(3, t.getTicketPrice());
+                    ps.setInt(4, t.getAmountOfTickets());
+                    ps.addBatch();
+
+                }
+            }
+            ps.executeBatch();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            throw new SQLException("Could not get events from database");
+        }
     }
 
 }

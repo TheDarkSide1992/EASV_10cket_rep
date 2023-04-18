@@ -83,11 +83,11 @@ CREATE TABLE Event_(
 GO
 
 CREATE TABLE Ticket(
-    Ticket_Content_ID           INT IDENTITY(1,1)                       NOT NULL,
-    Ticket_Event_ID             INT                                     NOT NULL,
-    Ticket_Contains             NVARCHAR(100)                           NOT NULL,
-    Ticket_Price                INT                                     NOT NULL,
-    Ticket_TotalNrOfTickets     INT,
+    Ticket_Content_ID               INT IDENTITY(1,1)                       NOT NULL,
+    Ticket_Event_ID                 INT                                     NOT NULL,
+    Ticket_Contains                 NVARCHAR(100)                           NOT NULL,
+    Ticket_Price                    INT                                     NOT NULL,
+    Ticket_AmountOfThisTicketType   INT,
 
     CONSTRAINT PK_TICKET_CONTENT_ID PRIMARY KEY(Ticket_Content_ID),
 
