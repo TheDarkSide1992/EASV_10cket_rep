@@ -176,15 +176,15 @@ public class ManageTicketsController implements Initializable {
     }
 
     public void handleAdd(ActionEvent actionEvent) {
-        boolean b = false;
-        int k = 0;
+        boolean ticketTypeExists = false;
+        int ticketTypeToReplace = 0;
         for (int i = 0; i < ticketsForSale.size(); i++) {
-            k = i;
-            b = txtAddExtras.getText().equals(ticketsForSale.get(i).getTicketContains());
-            if (b) break;
+            ticketTypeToReplace = i;
+            ticketTypeExists = txtAddExtras.getText().equals(ticketsForSale.get(i).getTicketContains());
+            if (ticketTypeExists) break;
         }
         if (comboTypeOfTicket.getSelectionModel().getSelectedItem().equals("New Ticket")) {
-            if (b) {
+            if (ticketTypeExists) {
                 Alert alert = new Alert(Alert.AlertType.WARNING, "Ticket type: \"" + txtAddExtras.getText() + "\" already exists", ButtonType.CANCEL);
                 alert.showAndWait();
             } else {
@@ -196,7 +196,7 @@ public class ManageTicketsController implements Initializable {
             }
         } else {
             Ticket t = new Ticket(txtAddExtras.getText(), Integer.parseInt(txtNewPriceOfTicket.getText()), Integer.parseInt(txtNumberOfTickets.getText()));
-            ticketsForSale.remove(k);
+            ticketsForSale.remove(ticketTypeToReplace);
             ticketsForSale.add(t);
             tblviewTypesOfTickets.setItems(ticketsForSale);
             comboTypeOfTicket.getItems().add(t.getTicketContains());
