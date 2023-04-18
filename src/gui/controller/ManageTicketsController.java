@@ -112,7 +112,7 @@ public class ManageTicketsController implements Initializable {
             Alert alert = new Alert(Alert.AlertType.ERROR, "Could not get tickets from Database", ButtonType.OK);
             alert.showAndWait();
         }
-
+        //TODO keep working on this
         Ticket firstOfThisType = null;
         Ticket firstOfNextType = null;
         for (int i = 0; i < ticketsForThisEvent.size(); i = firstOfThisType.getAmountOfTickets()+1) {
