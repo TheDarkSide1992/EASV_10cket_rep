@@ -12,6 +12,8 @@ import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import javafx.stage.DirectoryChooser;
 
+import javax.imageio.ImageIO;
+import java.io.ByteArrayInputStream;
 import java.io.FileOutputStream;
 import java.nio.file.Path;
 import java.time.temporal.ChronoUnit;
@@ -64,23 +66,13 @@ public class TicketGenerator {
                     "Location: \n" + event.getEventLocation() +
                     "TIME: \n" + event.getEventDate() +" : "+ event.getEventStartTime() + "\n \n" +
                     "Description: \n" + event.getEventDescription() + "\n \n" + event.getEventImage() +
-                    "Extra: " + ticket.getTicketID() + "\n\n" + ticket.getTicketBarCode() +"\n"+ ticket.getTicketQRCode() +
-                    "\n\n Organised by: " + event.getEventCoordinator() +" + "+ event.getEventCollaborator()
+                    "\nOrganised by: " + event.getEventCoordinator() +" + "+ event.getEventCollaborator() +
+                    "\n\nExtra: " +
+                    "\n          Qr - Code"
             );
 
             var paragraph2 = new Paragraph("\n\n" + codeID);
 
-            /*
-            var table = new PdfPTable(2);
-            //Creates a table where there can be inserted data, might not be neded
-            Stream.of("Ticket", "Content").forEach(table::addCell);
-
-            Arrays.stream(ChronoUnit.values()).forEach(val -> {
-                table.addCell(val.toString());
-                table.addCell(val.getDuration().toString());
-            });
-            paragraph.add(table);
-             */
             doc.add(paragraph1);
             if (event.getImageByte().length > 12) doc.add(Image.getInstance(event.getImageByte()));
 
