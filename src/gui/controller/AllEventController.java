@@ -296,6 +296,14 @@ public class AllEventController implements Initializable {
                 Alert error = new Alert(Alert.AlertType.ERROR, "Could not cancel Event" + "\n"+e, ButtonType.CANCEL);
                 error.showAndWait();
             }
+            if(submitForDeletion = true){
+                try {
+                    model.submitForDeletion(event);
+                } catch (Exception ex) {
+                    Alert error1 = new Alert(Alert.AlertType.ERROR, "Event could not be submitted for deletion" + ex);
+                }
+
+            }
         }
     }
 

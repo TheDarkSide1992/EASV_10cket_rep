@@ -43,7 +43,9 @@ public class Model {
         activeEvents.addAll(eventManager.getActiveEvents());
         return activeEvents;
     }
-    public ObservableList<Event> getSubmittedForDeletion(){
+    public ObservableList<Event> getSubmittedForDeletion() throws Exception {
+        submittedForDeletion = FXCollections.observableArrayList();
+        submittedForDeletion.addAll(eventManager.getSubmittedForDeletion());
         return submittedForDeletion;
     }
 
