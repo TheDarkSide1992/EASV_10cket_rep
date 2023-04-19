@@ -43,7 +43,14 @@ public class TicketDAO implements ITicketDAO {
 
     @Override
     public void saveTickets(List<Ticket> ticketsForSale, int eventID) throws SQLException {
-
+        try (Connection conn = db.getConnection()){
+            String sql = "DELETE FROM Ticket WHERE Ticket_Event_ID = " + eventID + ";";
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.executeUpdate();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            throw new SQLException("Could not modify tickets in Database");
+        }
         try (Connection conn = db.getConnection()) {
             String sql = "INSERT INTO Ticket (Ticket_Event_ID, Ticket_Contains, Ticket_Price, Ticket_AmountOfThisTicketType) VALUES(?,?,?,?);";
             PreparedStatement ps = conn.prepareStatement(sql);
@@ -55,13 +62,12 @@ public class TicketDAO implements ITicketDAO {
                     ps.setInt(3, t.getTicketPrice());
                     ps.setInt(4, t.getAmountOfTickets());
                     ps.addBatch();
-
                 }
             }
             ps.executeBatch();
         } catch (SQLException ex) {
             ex.printStackTrace();
-            throw new SQLException("Could not get events from database");
+            throw new SQLException("Could not save tickets to database");
         }
     }
 
