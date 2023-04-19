@@ -63,14 +63,13 @@ public class TopViewAllUsersController implements Initializable {
             flowPane.setAlignment(Pos.CENTER_RIGHT);
             btnHolderHBox.getChildren().add(flowPane);
         }
-        controllerAssistant = ControllerAssistant.getInstance();
 
         //Opens a new view, if the admin is logged in
         //Check if logged in user is admin
         if (loggedInUser != null && loggedInUser.getUserTypeId()==1) {
             Parent root;
             try {
-                root = FXMLLoader.load(getClass().getClassLoader().getResource("gui/view/util/DeleteEventsView.fxml"), resources);
+                root = FXMLLoader.load(getClass().getClassLoader().getResource("gui/view/DeleteEventsView.fxml"), resources);
                 Stage stage = new Stage();
                 stage.setTitle("Not active events");
                 stage.setScene(new Scene(root));
