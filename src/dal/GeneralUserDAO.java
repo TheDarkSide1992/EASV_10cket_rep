@@ -168,4 +168,9 @@ public class GeneralUserDAO implements IGeneralUser {
 
         return salt;
     }
+
+    @Override
+    public void sendRequest(String request, int eventID) {
+        
+    }
 }

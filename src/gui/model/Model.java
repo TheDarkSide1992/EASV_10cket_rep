@@ -5,7 +5,6 @@ import bll.EventManager;
 import bll.TicketManager;
 import bll.TicketGenerator;
 import bll.UserManager;
-import gui.controller.BuyTicketViewController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -107,4 +106,7 @@ public class Model {
         ticketManager.saveTickets(ticketsForSale, eventID);
     }
 
+    public void sendRequest(String request, int eventID) {
+        userManager.sendRequest(request, eventID);
+    }
 }

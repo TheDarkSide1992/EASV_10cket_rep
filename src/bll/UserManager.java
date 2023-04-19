@@ -56,4 +56,8 @@ public class UserManager {
 
 
     }
+
+    public void sendRequest(String request, int eventID) {
+        generalUser.sendRequest(request,eventID);
+    }
 }
