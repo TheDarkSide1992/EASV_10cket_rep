@@ -235,7 +235,7 @@ public class TopViewAllUsersController implements Initializable {
     }
 
     private void prices() {
-        controllerAssistant.openNewWindow("PriceView.fxml");
+        controllerAssistant.openNewWindow("TicketRequestView.fxml");
     }
 
     private void createEvent() {
