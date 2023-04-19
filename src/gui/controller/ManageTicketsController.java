@@ -49,7 +49,7 @@ public class ManageTicketsController implements Initializable {
     private TableColumn colContains, colPrice, colAmount;
     private Model model;
 
-    private static ObservableList<Ticket> ticketsForThisEvent;
+    private static List<Ticket> ticketsForThisEvent;
 
     private static ObservableList<Event> allEvents;
 
@@ -112,30 +112,21 @@ public class ManageTicketsController implements Initializable {
             Alert alert = new Alert(Alert.AlertType.ERROR, "Could not get tickets from Database", ButtonType.OK);
             alert.showAndWait();
         }
-        //TODO keep working on this
-        Ticket firstOfThisType = null;
-        Ticket firstOfNextType = null;
-        for (int i = 0; i < ticketsForThisEvent.size(); i = firstOfThisType.getAmountOfTickets()+1) {
-            if(firstOfThisType == null) {
-                firstOfThisType = ticketsForThisEvent.get(i);
-            }
-            else {
-                firstOfThisType = firstOfNextType;
-            }
-            ticketsForSale.add(firstOfThisType);
-            if(i < ticketsForSale.size()-1) {
-                firstOfNextType = ticketsForThisEvent.get(firstOfThisType.getAmountOfTickets()+1);
-            }
 
-
+        if(ticketsForThisEvent.size() > 0)
+        {
+            Ticket first = null;
+            int totalTickets = 0;
+            for (int i = 0; i < ticketsForThisEvent.size()-1; i = i + (first.getAmountOfTickets()+1)) {
+                first = ticketsForThisEvent.get(i);
+                ticketsForSale.add(first);
+                totalTickets = totalTickets + first.getAmountOfTickets();
+            }
+            txtTotalAmountOfTickets.setText(String.valueOf(totalTickets));
+            updateComboTicketTypes();
         }
 
-
-
-
-
-
-        if (ticketsForSale.size() == 0 && txtNumberOfTickets.getText().isEmpty()) {
+        if (ticketsForThisEvent.size() < 1 && txtTotalAmountOfTickets.getText().equals("0")) {
             comboTypeOfTicket.getItems().clear();
             tblviewTypesOfTickets.getItems().clear();
             txtPriceOfTickets.setText("50");
@@ -152,6 +143,7 @@ public class ManageTicketsController implements Initializable {
             comboTypeOfTicket.getItems().add(defaultEntryTickets.getTicketContains());
             comboTypeOfTicket.getItems().add("New Ticket");
             comboTypeOfTicket.getSelectionModel().select(0);
+            txtAddExtras.setText("Entry");
             txtNumberOfTickets.setText("150");
             txtNewPriceOfTicket.setText("50");
 
@@ -168,16 +160,14 @@ public class ManageTicketsController implements Initializable {
     }
 
     private void updateComboTicketTypes() {
-        ArrayList<String> comboBoxTicketTypes = new ArrayList<>();
-        for (int i = 1; i < ticketsForSale.size() - 1; i++) {
-            Ticket ticket1 = ticketsForSale.get(i);
-            comboBoxTicketTypes.add(ticket1.getTicketContains());
-            if (ticketsForSale.lastIndexOf(ticket1) < ticketsForSale.size()) {
-                i = ticketsForSale.lastIndexOf(ticket1) + 1;
-            } else break;
+        ObservableList<String> comboBoxTicketTypes = FXCollections.observableArrayList();
+        for (Ticket t : ticketsForSale) {
+            comboBoxTicketTypes.add(t.getTicketContains());
         }
+        comboBoxTicketTypes.add("New Ticket");
         comboTypeOfTicket.getItems().clear();
-        comboTypeOfTicket.getItems().addAll(comboBoxTicketTypes);
+        comboTypeOfTicket.setItems(comboBoxTicketTypes);
+        comboTypeOfTicket.getSelectionModel().select(0);
     }
 
     private void displayInfoOfTicket(Object newValue) {
@@ -236,13 +226,13 @@ public class ManageTicketsController implements Initializable {
         List<Event> events = new ArrayList<>();
         events.addAll(coordinatorsEvents);
         Event event = null;
-        for (int i = 0; i < events.size()-1; i++) {
-            if(events.get(i).getEventTitle().equals(comboChooseEvent.getSelectionModel().getSelectedItem()))
-            event = events.get(i);
+        for (int i = 0; i < events.size() - 1; i++) {
+            if (events.get(i).getEventTitle().equals(comboChooseEvent.getSelectionModel().getSelectedItem()))
+                event = events.get(i);
         }
         try {
             model.saveTickets(ticketsForSale, event.getEventID());
-        } catch (SQLException e){
+        } catch (SQLException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR, "Could not save tickets to Database", ButtonType.CANCEL);
             alert.showAndWait();
         }

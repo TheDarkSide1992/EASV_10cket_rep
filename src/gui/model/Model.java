@@ -88,7 +88,7 @@ public class Model {
         return userManager.getAllCoordinators();
     }
 
-    public ObservableList getTickets(int eventID) throws SQLException {
+    public List<Ticket> getTickets(int eventID) throws SQLException {
         ticketObservableList = FXCollections.observableArrayList();
         List<Ticket> allTickets = ticketManager.getTickets(eventID);
         ticketObservableList.addAll(allTickets);
