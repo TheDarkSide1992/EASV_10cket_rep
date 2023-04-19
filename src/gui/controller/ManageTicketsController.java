@@ -113,11 +113,10 @@ public class ManageTicketsController implements Initializable {
             alert.showAndWait();
         }
 
-        if(ticketsForThisEvent.size() > 0)
-        {
+        if (ticketsForThisEvent.size() > 0) {
             Ticket first = null;
             int totalTickets = 0;
-            for (int i = 0; i < ticketsForThisEvent.size()-1; i = i + (first.getAmountOfTickets()+1)) {
+            for (int i = 0; i < ticketsForThisEvent.size() - 1; i = i + (first.getAmountOfTickets() + 1)) {
                 first = ticketsForThisEvent.get(i);
                 ticketsForSale.add(first);
                 totalTickets = totalTickets + first.getAmountOfTickets();
@@ -171,18 +170,20 @@ public class ManageTicketsController implements Initializable {
     }
 
     private void displayInfoOfTicket(Object newValue) {
-        if (newValue == "New Ticket") {
-            clearTicketInfo();
-        }
-        for (int i = 0; i < ticketsForSale.size(); i++) {
-            if (ticketsForSale.get(i).getTicketContains().equals(newValue)) {
-                txtNumberOfTickets.setText(String.valueOf(ticketsForSale.get(i).getAmountOfTickets()));
-                txtNewPriceOfTicket.setText(String.valueOf(ticketsForSale.get(i).getTicketPrice()));
-                txtAddExtras.setText(ticketsForSale.get(i).getTicketContains());
+        if (newValue != null) {
+            String type = (String) newValue;
+            if (type.equals("New Ticket")) {
+                clearTicketInfo();
+            } else { 
+                for (int i = 0; i < ticketsForSale.size(); i++) {
+                    if (type == (ticketsForSale.get(i).getTicketContains())) {
+                        txtAddExtras.setText(ticketsForSale.get(i).getTicketContains());
+                        txtNewPriceOfTicket.setText(String.valueOf(ticketsForSale.get(i).getTicketPrice()));
+                        txtNumberOfTickets.setText(String.valueOf(ticketsForSale.get(i).getAmountOfTickets()));
+                    }
+                }
             }
-            break;
         }
-
     }
 
     private void clearTicketInfo() {
