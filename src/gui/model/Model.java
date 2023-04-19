@@ -5,6 +5,7 @@ import bll.EventManager;
 import bll.TicketManager;
 import bll.TicketGenerator;
 import bll.UserManager;
+import gui.controller.BuyTicketViewController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -15,7 +16,6 @@ import java.util.List;
 public class Model {
     private ObservableList<Event> activeEvents;
     private ObservableList<Event> allEvents;
-
     private ObservableList ticketObservableList;
     private TicketManager ticketManager;
     private ObservableList<Event> submittedForDeletion;
@@ -106,4 +106,5 @@ public class Model {
     public void saveTickets(List<Ticket> ticketsForSale, int eventID) throws SQLException {
         ticketManager.saveTickets(ticketsForSale, eventID);
     }
+
 }

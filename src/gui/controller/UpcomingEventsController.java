@@ -6,9 +6,11 @@ import gui.util.EventGUIUtil;
 import gui.model.Model;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Group;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -17,10 +19,12 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 import java.awt.*;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
 import java.net.URL;
@@ -77,7 +81,7 @@ public class UpcomingEventsController implements Initializable {
                     day1 = "0" + eventDay.getText();
                     eventDay.setText(day1);
                 }
-                Label monthAndYear = new Label(String.valueOf(events.getEventDate().getMonth()).substring(0, 3)+"\n"+ events.getEventDate().getYear());
+                Label monthAndYear = new Label(String.valueOf(events.getEventDate().getMonth()).substring(0, 3) + "\n" + events.getEventDate().getYear());
                 Label title = new Label(events.getEventTitle());
                 Label startTime = new Label(events.getEventStartTime().toString().substring(0, 5));
                 Label location = new Label(events.getEventLocation());
@@ -92,7 +96,7 @@ public class UpcomingEventsController implements Initializable {
                 Label lblOwner = new Label("Event Coordinator:");
                 Label lblCollaborator = new Label("Event Collaborator:");
                 Label eventOwner = new Label(events.getEventCoordinator());
-                Label eventCollaborator = new  Label(events.getEventCollaborator());
+                Label eventCollaborator = new Label(events.getEventCollaborator());
 
                 imageEvent = new ImageView();
                 imageCxl = new ImageView();
@@ -108,14 +112,14 @@ public class UpcomingEventsController implements Initializable {
                 BorderPane collapsedPane = new BorderPane();
                 BorderPane expandedPane = new BorderPane();
 
-                egu.setStyleSheetsAndClass(outerPane, title, startTime, location, collapsedPane, eventTitleExpanded, eventStartTimeExpanded, eventLocationExpanded, expandedPane, expPanel, eventDay, monthAndYear, eventDescription,lblOwner, lblCollaborator);
+                egu.setStyleSheetsAndClass(outerPane, title, startTime, location, collapsedPane, eventTitleExpanded, eventStartTimeExpanded, eventLocationExpanded, expandedPane, expPanel, eventDay, monthAndYear, eventDescription, lblOwner, lblCollaborator);
                 egu.setEventDayPlacement(eventDay);
                 egu.setEventMonthAndYearPlacement(monthAndYear);
                 egu.setEventTitlePlacement(eventTitleExpanded, title);
                 egu.setEventStartTimePlacement(eventStartTimeExpanded, startTime);
                 egu.setEventLocationPlacement(location, eventLocationExpanded);
                 egu.setEventDescriptionPlacement(eventDescription);
-                egu.setOwnerAndCollaboratorStyling(lblOwner,lblCollaborator,eventOwner,eventCollaborator);
+                egu.setOwnerAndCollaboratorStyling(lblOwner, lblCollaborator, eventOwner, eventCollaborator);
 
                 imageCxl.setOnMouseClicked(event -> cancelEvent(events));
                 imageCxl.setImage(loadImages(cxlURL));
@@ -125,22 +129,24 @@ public class UpcomingEventsController implements Initializable {
                 imageEdit.setImage(loadImages(editURL));
                 egu.setImageEditPlacement(imageEdit);
 
-                if(events.getEventImage() == null || events.getImageByte().length < 10) {
-                imageEvent.setImage(loadImages(cxlURL)); }
-                else imageEvent.setImage(events.getEventImage());
+                if (events.getEventImage() == null || events.getImageByte().length < 10) {
+                    imageEvent.setImage(loadImages(cxlURL));
+                } else imageEvent.setImage(events.getEventImage());
 
                 imageBuyTicket.setImage(loadImages(buyTicket));
                 egu.setBuyTicketPlacement(imageBuyTicket);
+                imageBuyTicket.setOnMouseClicked(event -> buyTickets(events));
 
                 imageBuyTicketExpanded.setImage(loadImages(buyTicket));
                 egu.setBuyTicketPlacement(imageBuyTicketExpanded);
+                imageBuyTicketExpanded.setOnMouseClicked(event -> buyTickets(events));
 
                 imageEditExpanded.setImage(loadImages(editURL));
                 egu.setImageEditExpandedPlacement(imageEditExpanded);
 
-                if(events.getEventImage() == null || events.getImageByte().length < 10) {
-                imageEventExpanded.setImage(loadImages(cxlURL)); }
-                else imageEventExpanded.setImage(events.getEventImage());
+                if (events.getEventImage() == null || events.getImageByte().length < 10) {
+                    imageEventExpanded.setImage(loadImages(cxlURL));
+                } else imageEventExpanded.setImage(events.getEventImage());
 
                 egu.setImageEventExpandedPlacement(imageEventExpanded);
 
@@ -161,9 +167,28 @@ public class UpcomingEventsController implements Initializable {
         }
     }
 
+    private void buyTickets(Event event) {
+        BuyTicketViewController buyTicketViewController = new BuyTicketViewController();
+
+        try {
+            Stage stage = new Stage();
+            FXMLLoader loader = new FXMLLoader();
+            loader.setController(buyTicketViewController);
+            loader.setLocation(getClass().getResource("/gui/view/BuyTicketView.fxml"));
+            buyTicketViewController.setBuyTicketEvent(event);
+            Scene scene = new Scene(loader.load());
+            stage.setScene(scene);
+            stage.showAndWait();
+        } catch (IOException e) {
+            e.printStackTrace();
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Could not open new window", ButtonType.CANCEL);
+            alert.showAndWait();
+        }
+    }
+
     private void unHoverLocation(Label location) {
         location.setUnderline(false);
-        location.setTextFill(rgb(243,218,218));
+        location.setTextFill(rgb(243, 218, 218));
     }
 
     private void hoverLocation(Label location) {
@@ -213,7 +238,8 @@ public class UpcomingEventsController implements Initializable {
         }
     }
 
-    public static Alert createAlertWithDelete(Alert.AlertType type, String title, String headerText, String message, String deletionMessage, Consumer<Boolean> deletionAction, ButtonType... buttonTypes) {
+    public static Alert createAlertWithDelete(Alert.AlertType type, String title, String headerText, String
+            message, String deletionMessage, Consumer<Boolean> deletionAction, ButtonType... buttonTypes) {
         Alert alert = new Alert(type);
         // Need to force the alert to layout in order to grab the graphic,
         // as we are replacing the dialog pane with a custom pane
