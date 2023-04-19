@@ -5,6 +5,7 @@ import bll.EventManager;
 import bll.TicketManager;
 import bll.TicketGenerator;
 import bll.UserManager;
+import com.microsoft.sqlserver.jdbc.SQLServerException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -106,7 +107,7 @@ public class Model {
         ticketManager.saveTickets(ticketsForSale, eventID);
     }
 
-    public void sendRequest(String request, int eventID) {
+    public void sendRequest(String request, int eventID) throws SQLServerException {
         userManager.sendRequest(request, eventID);
     }
 }

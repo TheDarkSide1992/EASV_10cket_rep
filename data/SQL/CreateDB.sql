@@ -118,3 +118,14 @@ CREATE TABLE Submitted_For_Deletion(
     REFERENCES Event_(Event_ID) ON DELETE CASCADE
 )
 GO
+
+CREATE TABLE Ticket_Request(
+    RequestID                 INT IDENTITY(1,1)                       NOT NULL,
+    Event_ID                  INT                                     NOT NULL,
+    Request                   NVARCHAR(200)                           NOT NULL,
+
+    CONSTRAINT PK_SD_ID PRIMARY KEY(RequestID),
+    CONSTRAINT FK_SD_Event_ID FOREIGN KEY(Event_ID)
+    REFERENCES Event_(Event_ID) ON DELETE CASCADE
+)
+GO

@@ -1,6 +1,7 @@
 package dal.interfaces;
 
 import be.User;
+import com.microsoft.sqlserver.jdbc.SQLServerException;
 
 import java.util.ArrayList;
 
@@ -12,5 +13,5 @@ public interface IGeneralUser {
     User IsLogInLegit(String username, String password) throws Exception;
     String getUserSalt(String userName) throws Exception;
 
-    void sendRequest(String request, int eventID);
+    void sendRequest(String request, int eventID) throws SQLServerException;
 }

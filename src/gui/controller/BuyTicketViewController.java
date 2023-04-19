@@ -2,6 +2,7 @@ package gui.controller;
 
 import be.Event;
 import be.Ticket;
+import com.microsoft.sqlserver.jdbc.SQLServerException;
 import gui.model.Model;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -86,10 +87,16 @@ public class BuyTicketViewController implements Initializable {
                 + " " + colTypeOfTicket.getCellObservableValue(tblViewTypeOfTickets.getSelectionModel().getSelectedItem()).getValue().toString()
                 + " tickets for " + event.getEventTitle() + " at " + event.getEventLocation() + " on " + event.getEventDate() + "."
                 + "\nPlease respond to " + txtCustomerName.getText() + " by calling " + txtCustomerTlf.getText() +
-                " and send the tickets to their email: " + txtCustomerEmail.getText() + ".";
+                " and send the tickets to the email: " + txtCustomerEmail.getText() + ".";
 
 
-        model.sendRequest(request, event.getEventID());
+        try {
+            model.sendRequest(request, event.getEventID());
+        } catch (SQLServerException e) {
+            Alert alert = new Alert(Alert.AlertType.WARNING,"Could not process your request", ButtonType.CANCEL);
+            alert.showAndWait();
+            return;
+        }
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Tickets have been requested", ButtonType.OK);
         alert.showAndWait();
     }

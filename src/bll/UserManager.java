@@ -4,6 +4,7 @@ import be.Administrator;
 import be.EventCoordinator;
 import be.User;
 import bll.util.BCrypt;
+import com.microsoft.sqlserver.jdbc.SQLServerException;
 import dal.AdminDAO;
 import dal.EventCoordinatorDAO;
 import dal.GeneralUserDAO;
@@ -57,7 +58,7 @@ public class UserManager {
 
     }
 
-    public void sendRequest(String request, int eventID) {
+    public void sendRequest(String request, int eventID) throws SQLServerException {
         generalUser.sendRequest(request,eventID);
     }
 }

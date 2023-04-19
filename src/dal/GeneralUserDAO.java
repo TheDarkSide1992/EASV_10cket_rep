@@ -3,6 +3,7 @@ package dal;
 import be.Administrator;
 import be.EventCoordinator;
 import be.User;
+import com.microsoft.sqlserver.jdbc.SQLServerException;
 import dal.interfaces.IGeneralUser;
 
 import java.io.IOException;
@@ -18,7 +19,7 @@ public class GeneralUserDAO implements IGeneralUser {
     }
 
     @Override
-    public ArrayList<User> getAllUsers()  throws Exception{
+    public ArrayList<User> getAllUsers() throws Exception {
         return null;
     }
 
@@ -30,7 +31,7 @@ public class GeneralUserDAO implements IGeneralUser {
             String sql = "SELECT User_User_ID FROM User_Passwords WHERE (User_User_Name = ?)";
 
             PreparedStatement stmt = conn.prepareStatement(sql);
-            stmt.setString(1,userName);
+            stmt.setString(1, userName);
 
 
             stmt.executeQuery();
@@ -38,7 +39,7 @@ public class GeneralUserDAO implements IGeneralUser {
             //Execute the update to the DB
             ResultSet rs = stmt.getResultSet();
 
-            while (rs.next()){
+            while (rs.next()) {
                 id = rs.getInt("User_User_ID");
             }
 
@@ -49,7 +50,7 @@ public class GeneralUserDAO implements IGeneralUser {
 
 
     @Override
-    public int createUser(User user) throws Exception{
+    public int createUser(User user) throws Exception {
         int id = 0;
         try (Connection conn = db.getConnection()) {
             //String sql = "INSERT INTO Event_ (Event_Title, Event_Location, Event_Event_Coordinator_ID, Event_Date, Event_Start_Time, Event_Description, Event_Ticket_Total, Event_Ticket_Sold, Event_Is_Active) Values(?,?,?,?,?,?,?,?,?);";
@@ -116,7 +117,7 @@ public class GeneralUserDAO implements IGeneralUser {
             String sql = "SELECT * FROM User_ WHERE User_ID = (SELECT User_User_ID FROM User_Passwords WHERE (User_User_Name = ?) AND (Users_Password = ?))";
 
             PreparedStatement stmt = conn.prepareStatement(sql);
-            stmt.setString(1,username);
+            stmt.setString(1, username);
             stmt.setString(2, password);
 
             stmt.executeQuery();
@@ -124,7 +125,7 @@ public class GeneralUserDAO implements IGeneralUser {
             //Execute the update to the DB
             ResultSet rs = stmt.getResultSet();
 
-            while (rs.next()){
+            while (rs.next()) {
 
                 int id = rs.getInt("User_ID");
                 String userName = rs.getString("User_Name");
@@ -134,10 +135,10 @@ public class GeneralUserDAO implements IGeneralUser {
                 String tlfNumber = rs.getString("User_tlf");
 
                 if (userType == 1)
-                    user = new Administrator(id,userName,userFirstName,userEmil,tlfNumber,userType);
+                    user = new Administrator(id, userName, userFirstName, userEmil, tlfNumber, userType);
 
                 if (userType == 2)
-                    user = new EventCoordinator(id,userName,userFirstName,userEmil,tlfNumber,userType);
+                    user = new EventCoordinator(id, userName, userFirstName, userEmil, tlfNumber, userType);
             }
         }
 
@@ -145,14 +146,14 @@ public class GeneralUserDAO implements IGeneralUser {
     }
 
     @Override
-    public String getUserSalt(String userName) throws Exception{
+    public String getUserSalt(String userName) throws Exception {
         String salt = "";
         try (Connection conn = db.getConnection()) {
 
             String sql = "SELECT Users_Salt FROM User_Passwords WHERE (User_User_Name = ?)";
 
             PreparedStatement stmt = conn.prepareStatement(sql);
-            stmt.setString(1,userName);
+            stmt.setString(1, userName);
 
 
             stmt.executeQuery();
@@ -160,7 +161,7 @@ public class GeneralUserDAO implements IGeneralUser {
             //Execute the update to the DB
             ResultSet rs = stmt.getResultSet();
 
-            while (rs.next()){
+            while (rs.next()) {
                 salt = rs.getString("Users_Salt");
             }
 
@@ -170,7 +171,18 @@ public class GeneralUserDAO implements IGeneralUser {
     }
 
     @Override
-    public void sendRequest(String request, int eventID) {
-        
+    public void sendRequest(String request, int eventID) throws SQLServerException {
+        try (Connection conn = db.getConnection()) {
+            String sql = "INSERT INTO Ticket_Request(Event_ID, Request) VALUES(?,?);";
+            PreparedStatement ps = conn.prepareStatement(sql);
+
+            ps.setInt(1,eventID);
+            ps.setString(2,request);
+
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
+
