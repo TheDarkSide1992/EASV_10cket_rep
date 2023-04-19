@@ -174,7 +174,7 @@ public class ManageTicketsController implements Initializable {
             String type = (String) newValue;
             if (type.equals("New Ticket")) {
                 clearTicketInfo();
-            } else { 
+            } else {
                 for (int i = 0; i < ticketsForSale.size(); i++) {
                     if (type == (ticketsForSale.get(i).getTicketContains())) {
                         txtAddExtras.setText(ticketsForSale.get(i).getTicketContains());
