@@ -28,7 +28,7 @@ public class TicketGenerator {
     }
     public void makeTicket(Event event, Ticket ticket) throws Exception{
         //setFilepath();
-        //TODO if posible make it posible to sellect ones own filepath
+        //TODO if possible make it possible to select ones own filepath
         generateCodeID(event, ticket);
 
         generateTicket(event, ticket);
