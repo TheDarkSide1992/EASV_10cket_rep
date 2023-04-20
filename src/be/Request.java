@@ -22,7 +22,7 @@ public class Request {
     private boolean paymentReceived;
     private boolean ticketSentToCustomer;
 
-    public Request(int requestID, String eventTitle, LocalDate eventDate, String customerName, String customerEmail, String customerPhone, int tickets, String typeOfTicket, int ticketPrice, boolean paymentReceived, boolean ticketSentToCustomer, int event_ID) {
+    public Request(int requestID, String eventTitle, LocalDate eventDate, String customerName, String customerEmail, String customerPhone, int tickets, String typeOfTicket, int ticketPrice, boolean paymentReceived, boolean ticketSentToCustomer, int ticketID) {
         this.requestID = requestID;
         this.eventTitle = eventTitle;
         this.eventDate = eventDate;
@@ -34,7 +34,7 @@ public class Request {
         this.ticketPrice = ticketPrice;
         this.paymentReceived = paymentReceived;
         this.ticketSentToCustomer = ticketSentToCustomer;
-        this.event_ID = event_ID;
+        this.ticketID = ticketID;
     }
 
     public Request(String customerName, int tickets, String typeOfTicket, String customerPhone, String customerEmail, int event_ID) {

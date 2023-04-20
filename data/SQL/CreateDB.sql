@@ -87,14 +87,14 @@ CREATE TABLE Ticket(
     Ticket_Event_ID                 INT                                     NOT NULL,
     Ticket_Contains                 NVARCHAR(100)                           NOT NULL,
     Ticket_Price                    INT                                     NOT NULL,
+    Ticket_is_Requested             BIT                                     NOT NULL,
+    Ticket_Is_Sold                  BIT                                     NOT NULL,
     Ticket_AmountOfThisTicketType   INT,
 
     CONSTRAINT PK_TICKET_CONTENT_ID PRIMARY KEY(Ticket_Content_ID),
 
     CONSTRAINT FK_TICKET_EVENT_ID FOREIGN KEY(Ticket_Event_ID)
     REFERENCES Event_(Event_ID),
-
-    CONSTRAINT UQ_Ticket_Contains UNIQUE(Ticket_Contains)
 )
 GO
 
@@ -131,17 +131,14 @@ CREATE TABLE Ticket_Request (
     Type_Of_Ticket             NVARCHAR(100)                          NOT NULL,
     Payment_Received           BIT,
     Tickets_Sent_To_Customer   BIT,
+    Ticket_ID                  INT,
 
 
     CONSTRAINT PK_TR_ID PRIMARY KEY(Request_ID),
     CONSTRAINT FK_TR_Event_ID FOREIGN KEY(Event_ID)
     REFERENCES Event_(Event_ID) ON DELETE CASCADE,
-    CONSTRAINT FK_Ticket_Contains FOREIGN KEY(Type_Of_Ticket)
-    REFERENCES Ticket(Ticket_Contains) ON DELETE CASCADE
+    CONSTRAINT FK_TR_TicketID FOREIGN KEY(Ticket_ID)
+    REFERENCES Ticket(Ticket_Content_ID) ON DELETE CASCADE
+
 );
-
-INSERT INTO User_Type VALUES ('Administrator');
-INSERT INTO User_Type VALUES ('Event Coordinator');
-GO
-
 

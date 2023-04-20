@@ -28,8 +28,8 @@ public class TicketManager {
         ticketDAO.saveTickets(ticketsForSale, eventID);
     }
 
-    public void sendRequest(Request request) throws SQLServerException {
-        ticketDAO.sendRequest(request);
+    public void sendRequest(Request request) throws SQLException {
+        ticketDAO.allocateTicketToRequest(request);
     }
 
     public List<Request> getRequests() throws SQLException {

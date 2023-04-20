@@ -16,6 +16,7 @@ import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -91,7 +92,8 @@ public class BuyTicketViewController implements Initializable {
 
         try {
             model.sendRequest(request);
-        } catch (SQLServerException e) {
+        } catch (SQLException e) {
+            e.printStackTrace();
             Alert alert = new Alert(Alert.AlertType.WARNING, "Could not process your request", ButtonType.CANCEL);
             alert.showAndWait();
             return;
