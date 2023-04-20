@@ -55,13 +55,13 @@ public class TicketGenerator {
         try {
             //Makes pdf file document
             doc = new Document();
-            PdfWriter.getInstance(doc, new FileOutputStream( "Ticket_" + event.getEventTitle() + ".PDF"));
+            PdfWriter.getInstance(doc, new FileOutputStream( "Ticket_" + event.getEventTitle().hashCode() + ".PDF"));
 
             doc.open();
 
             //Prints information into PDF
             var bold = new Font(Font.FontFamily.HELVETICA, 20, Font.NORMAL);
-            var paragraph1 = new Paragraph(" You have bought ticket " + event.getEventLocation() + "" +
+            var paragraph1 = new Paragraph(" You have bought ticket " + event.getEventTitle() + "" +
                     "\n congratulation \n \n" +
                     "Location: \n" + event.getEventLocation() +
                     "TIME: \n" + event.getEventDate() +" : "+ event.getEventStartTime() + "\n \n" +
