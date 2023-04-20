@@ -95,6 +95,7 @@ CREATE TABLE Ticket(
 
     CONSTRAINT FK_TICKET_EVENT_ID FOREIGN KEY(Ticket_Event_ID)
     REFERENCES Event_(Event_ID),
+
 )
 GO
 

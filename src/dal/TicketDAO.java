@@ -187,7 +187,7 @@ public class TicketDAO implements ITicketDAO {
         try (Connection conn = db.getConnection()) {
 
             String sql = """
-                    SELECT Request_ID, Event_Title, Event_Date, Customer_Name,
+                    SELECT DISTINCT Request_ID, Event_Title, Event_Date, Customer_Name,
                     Customer_Email, Customer_Phone, Number_Of_Tickets, Type_Of_Ticket,
                     Ticket_Price, Payment_Received, Tickets_Sent_To_Customer, Ticket_Content_ID
                     FROM Ticket_Request
@@ -218,6 +218,7 @@ public class TicketDAO implements ITicketDAO {
             e.printStackTrace();
             throw new SQLException();
         }
+        System.out.println(requests.size());
         return requests;
     }
 
