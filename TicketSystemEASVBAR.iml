@@ -11,5 +11,6 @@
     <orderEntry type="library" name="microsoft.sqlserver.mssql.jdbc" level="project" />
     <orderEntry type="library" name="charm-glisten-4.4.1" level="project" />
     <orderEntry type="library" name="itextpdf.maven.itextdoc" level="project" />
+    <orderEntry type="library" name="junit.jupiter" level="project" />
   </component>
 </module>

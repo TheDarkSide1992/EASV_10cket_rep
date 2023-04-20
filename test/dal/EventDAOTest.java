@@ -23,7 +23,7 @@ class EventDAOTest {
     void createEvent() {
 
         //Arrange
-        Event event = new Event("test", LocalDate.of(2023, 10,10), Time.valueOf("20:00"), "The Testment", "Test", true);
+        Event event = new Event(0,"test", LocalDate.of(2023, 10,10), Time.valueOf("20:00:00"), "The testment","The Testment", "Test", true, "Colab", "tester");
 
         try {
             EventDAO ed = new EventDAO();
