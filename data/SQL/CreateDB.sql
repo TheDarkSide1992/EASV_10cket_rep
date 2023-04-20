@@ -130,9 +130,11 @@ CREATE TABLE Ticket_Request (
     Payment_Received           BIT,
     Tickets_Sent_To_Customer   BIT,
 
+
     CONSTRAINT PK_TR_ID PRIMARY KEY(Request_ID),
     CONSTRAINT FK_TR_Event_ID FOREIGN KEY(Event_ID)
     REFERENCES Event_(Event_ID) ON DELETE CASCADE,
     CONSTRAINT FK_Ticket_Contains FOREIGN KEY(Type_Of_Ticket)
     REFERENCES Ticket(Ticket_Contains) ON DELETE CASCADE
 );
+
