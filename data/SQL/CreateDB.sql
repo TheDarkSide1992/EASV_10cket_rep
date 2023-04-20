@@ -92,7 +92,9 @@ CREATE TABLE Ticket(
     CONSTRAINT PK_TICKET_CONTENT_ID PRIMARY KEY(Ticket_Content_ID),
 
     CONSTRAINT FK_TICKET_EVENT_ID FOREIGN KEY(Ticket_Event_ID)
-    REFERENCES Event_(Event_ID)
+    REFERENCES Event_(Event_ID),
+
+    CONSTRAINT UQ_Ticket_Contains UNIQUE(Ticket_Contains)
 )
 GO
 
