@@ -1,7 +1,7 @@
 package dal;
 
 import be.Event;
-import com.microsoft.sqlserver.jdbc.SQLServerException;
+
 import dal.interfaces.IEventDAO;
 
 import java.io.IOException;
@@ -10,7 +10,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EventDAO implements IEventDAO{
+public class EventDAO implements IEventDAO {
     private DBConnector db;
 
     public EventDAO() throws IOException {
@@ -47,7 +47,7 @@ public class EventDAO implements IEventDAO{
 
                 Event event = new Event(id, title, date, startTime, location, locationURL, description, isActive, eventCollaborator, eventCoordinator);
 
-                if(data != null){
+                if (data != null) {
                     event.setByteImage(data);
                     event.setImageWithByte(data);
                 }
@@ -93,7 +93,7 @@ public class EventDAO implements IEventDAO{
 
                 Event event = new Event(id, title, date, startTime, location, locationURL, description, isActive, eventCollaborator, eventCoordinator);
 
-                if(data != null){
+                if (data != null) {
                     event.setByteImage(data);
                     event.setImageWithByte(data);
                 }
@@ -164,7 +164,7 @@ public class EventDAO implements IEventDAO{
     }
 
     @Override
-    public void cancelEvent(int id) throws SQLException{
+    public void cancelEvent(int id) throws SQLException {
 
         String sql = "UPDATE Event_ SET Event_Is_Active = '0' WHERE Event_ID = " + id + ";";
 
@@ -179,6 +179,7 @@ public class EventDAO implements IEventDAO{
         }
 
     }
+
     @Override
     public int requestToDeleteEventCoordinator(Event eventToBeDeleted) throws Exception {
         int id = 0;
@@ -203,5 +204,38 @@ public class EventDAO implements IEventDAO{
             throw new Exception("Could not submit Event for deletion" + ex);
         }
         return id;
+    }
+
+    @Override
+    public Event getEvent(String eventName, LocalDate eventDate) throws SQLException {
+        Event event = null;
+        try (Connection conn = db.getConnection()) {
+            String sql = "SELECT * From Event_ WHERE Event_Title = ? AND Event_Date = ?;";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, eventName);
+            ps.setDate(2, Date.valueOf(eventDate));
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()){
+                String location = rs.getString("Event_Location");
+                String locationURL = rs.getString("Event_LocationURL");
+                String eventCollaborator = rs.getString("Event_Authors");;
+                Time startTime = rs.getTime("Event_Start_Time");
+                String description = rs.getString("Event_Description");
+                int eventTicketTotal = rs.getInt("Event_Ticket_Total");
+                int eventTicketsSold = rs.getInt("Event_Ticket_Sold");
+                boolean isActive = true;
+                byte[] eventImage = rs.getBytes("Event_Img");
+
+
+
+                event = new Event(eventName, location, locationURL, eventCollaborator, eventDate, startTime, description, eventTicketTotal, eventTicketsSold, isActive, eventImage);
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            throw new SQLException("Could not submit Event for deletion" + ex);
+        }
+        return event;
     }
 }

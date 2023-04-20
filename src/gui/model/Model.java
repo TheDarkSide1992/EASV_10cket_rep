@@ -101,7 +101,11 @@ public class Model {
         //TODO USED FOR TESTING
         //event = getActiveEvents().get(2);
         //ticket = new Ticket(0, "string", 1);
-        ticketGenerator.makeTicket(event, ticket);
+
+        Event specificEvent = eventManager.getEvent(event.getEventTitle(), event.getEventDate());
+        Ticket specificTicket = ticketManager.getTicket(ticket.getTicketContains());
+
+        ticketGenerator.makeTicket(specificEvent, specificTicket);
     }
 
     public void saveTickets(List<Ticket> ticketsForSale, int eventID) throws SQLException {

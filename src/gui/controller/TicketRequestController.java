@@ -4,26 +4,18 @@ import be.Event;
 import be.Request;
 import be.Ticket;
 import gui.model.Model;
-import javafx.beans.binding.Bindings;
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.value.ObservableBooleanValue;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.ResourceBundle;
 
 public class TicketRequestController implements Initializable {
@@ -91,7 +83,6 @@ public class TicketRequestController implements Initializable {
         }
     }
 
-
     public void handleSentToCustomer(ActionEvent actionEvent) {
         if (tblViewTicketRequests.getSelectionModel().getSelectedItem() != null) {
             Request selectedItem = (Request) tblViewTicketRequests.getSelectionModel().getSelectedItem();
@@ -111,19 +102,22 @@ public class TicketRequestController implements Initializable {
     }
 
     public void handleGenerateTickets(ActionEvent actionEvent) {
-        Request request = (Request) tblViewTicketRequests.getSelectionModel().getSelectedItem();
-        String eventTitle = request.getEventTitle();
-        LocalDate date = request.getEventDate();
-        Event event = new Event(eventTitle, date);
-        String ticketType = request.getTypeOfTicket();
-        int ticketID = request.getTicketID();
-        int ticketPrice = request.getTicketPrice();
-        Ticket ticket = new Ticket(ticketID, ticketType, ticketPrice);
-        try {
-            model.makeTicket(event, ticket);
-        } catch (Exception e) {
-            Alert alert = new Alert(Alert.AlertType.WARNING, "Could not generate a ticket", ButtonType.CANCEL);
-            alert.showAndWait();
+        if (tblViewTicketRequests.getSelectionModel().getSelectedItem() != null) {
+            Request request = (Request) tblViewTicketRequests.getSelectionModel().getSelectedItem();
+            String eventTitle = request.getEventTitle();
+            LocalDate date = request.getEventDate();
+            Event event = new Event(eventTitle, date);
+            String ticketType = request.getTypeOfTicket();
+            int ticketID = request.getTicketID();
+            int ticketPrice = request.getTicketPrice();
+            Ticket ticket = new Ticket(ticketID, ticketType, ticketPrice);
+            try {
+                model.makeTicket(event, ticket);
+            } catch (Exception e) {
+                Alert alert = new Alert(Alert.AlertType.WARNING, "Could not generate a ticket", ButtonType.CANCEL);
+                alert.showAndWait();
+                e.printStackTrace();
+            }
         }
     }
 }

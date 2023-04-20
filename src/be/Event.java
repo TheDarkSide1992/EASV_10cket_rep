@@ -2,14 +2,7 @@ package be;
 
 import javafx.scene.image.Image;
 
-
-import javax.imageio.ImageIO;
-import javax.swing.*;
-import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
 import java.sql.Time;
 import java.time.LocalDate;
 
@@ -26,6 +19,7 @@ public class Event implements Comparable<Event>{
 
     private String eventCoordinator;
     private int eventTicketAmount;
+    private int ticketsSold;
     private boolean eventIsActive;
     private Image eventImage;
     private byte[]  imageBytes;
@@ -55,6 +49,20 @@ public class Event implements Comparable<Event>{
     public Event(String eventTitle, LocalDate eventDate) {
         this.eventTitle = eventTitle;
         this.eventDate = eventDate;
+    }
+
+    public Event(String title, String location, String locationURL, String eventCollaborator, LocalDate date, Time startTime, String description, int eventTicketTotal, int eventTicketsSold, boolean isActive, byte[] eventImage) {
+        this.eventTitle = title;
+        this.eventDate = date;
+        this.eventStartTime = startTime;
+        this.eventLocation = location;
+        this.eventLocationURL = locationURL;
+        this.eventDescription = description;
+        this.eventCollaborator = eventCollaborator;
+        this.eventIsActive = isActive;
+        this.eventTicketAmount = eventTicketTotal;
+        this.ticketsSold = eventTicketsSold;
+        this.imageBytes = eventImage;
     }
 
     public int getEventID() {
@@ -182,5 +190,13 @@ public class Event implements Comparable<Event>{
 
     public void setEventLocationURL(String eventLocationURL) {
         this.eventLocationURL = eventLocationURL;
+    }
+
+    public int getTicketsSold() {
+        return ticketsSold;
+    }
+
+    public void setTicketsSold(int ticketsSold) {
+        this.ticketsSold = ticketsSold;
     }
 }

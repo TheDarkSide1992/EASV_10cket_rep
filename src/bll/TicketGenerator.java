@@ -34,7 +34,7 @@ public class TicketGenerator {
         generateTicket(event, ticket);
         //TODO make pdf hold data of event
 
-        System.out.println("succes");
+        System.out.println("success");
     }
 
     private void generateCodeID(Event event, Ticket ticket){

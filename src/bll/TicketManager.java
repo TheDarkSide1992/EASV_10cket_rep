@@ -43,5 +43,9 @@ public class TicketManager {
     public void paymentProcessed(Request selectedItem) throws SQLException {
         ticketDAO.paymentProcessed(selectedItem);
     }
+
+    public Ticket getTicket(String ticketContains) throws SQLException {
+        return ticketDAO.getTicket(ticketContains);
+    }
 }
 

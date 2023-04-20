@@ -7,12 +7,10 @@ import dal.EventDAO;
 import dal.interfaces.IEventDAO;
 import gui.util.DateComparator;
 
-import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 public class EventManager {
@@ -66,5 +64,9 @@ public class EventManager {
         }
         Collections.sort(activeEvents,new DateComparator());
         return activeEvents;
+    }
+
+    public Event getEvent(String eventName, LocalDate eventDate) throws SQLException {
+        return eventDAO.getEvent(eventName, eventDate);
     }
 }

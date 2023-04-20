@@ -159,5 +159,31 @@ public class TicketDAO implements ITicketDAO {
 
     }
 
+    @Override
+    public Ticket getTicket(String ticketContains) throws SQLException {
+        Ticket ticket = null;
+        try (Connection conn = db.getConnection()) {
+            String sql = "Select * FROM Ticket WHERE Ticket_Contains = ?;";
+            PreparedStatement ps = conn.prepareStatement(sql);
+
+            ps.setString(1, ticketContains);
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                int ticketID = rs.getInt("Ticket_Content_ID");
+                int ticketPrice = rs.getInt("Ticket_Price");
+
+                ticket = new Ticket(ticketID, ticketContains, ticketPrice);
+
+            }
+        }catch (SQLException e) {
+            e.printStackTrace();
+            throw new SQLException();
+
+        }
+            return ticket;
+    }
+
 }
 
