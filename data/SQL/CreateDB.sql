@@ -129,3 +129,7 @@ CREATE TABLE Ticket_Request(
     REFERENCES Event_(Event_ID) ON DELETE CASCADE
 )
 GO
+
+INSERT INTO User_Type VALUES ('Administrator');
+INSERT INTO User_Type VALUES ('Event Coordinator');
+GO
