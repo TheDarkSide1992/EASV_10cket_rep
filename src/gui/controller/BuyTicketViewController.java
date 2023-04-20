@@ -1,6 +1,7 @@
 package gui.controller;
 
 import be.Event;
+import be.Request;
 import be.Ticket;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import gui.model.Model;
@@ -80,17 +81,18 @@ public class BuyTicketViewController implements Initializable {
     }
 
     public void handleSendRequest(ActionEvent actionEvent) {
-        String request = txtCustomerName.getText() + " wants to buy " + numOfTickets.getSelectionModel().getSelectedItem()
-                + " " + colTypeOfTicket.getCellObservableValue(tblViewTypeOfTickets.getSelectionModel().getSelectedItem()).getValue().toString()
-                + " tickets for " + event.getEventTitle() + " at " + event.getEventLocation() + " on " + event.getEventDate() + "."
-                + "\nPlease respond to " + txtCustomerName.getText() + " by calling " + txtCustomerTlf.getText() +
-                " and send the tickets to the email: " + txtCustomerEmail.getText() + ".";
+        String customerName = txtCustomerName.getText();
+        int tickets = Integer.parseInt((String) numOfTickets.getSelectionModel().getSelectedItem());
+        String type = colTypeOfTicket.getCellObservableValue(tblViewTypeOfTickets.getSelectionModel().getSelectedItem()).getValue().toString();
+        String customerPhone = txtCustomerTlf.getText();
+        String customerEmail = txtCustomerEmail.getText();
 
+        Request request = new Request(customerName,tickets,type,customerPhone,customerEmail, event.getEventID());
 
         try {
-            model.sendRequest(request, event.getEventID());
+            model.sendRequest(request);
         } catch (SQLServerException e) {
-            Alert alert = new Alert(Alert.AlertType.WARNING,"Could not process your request", ButtonType.CANCEL);
+            Alert alert = new Alert(Alert.AlertType.WARNING, "Could not process your request", ButtonType.CANCEL);
             alert.showAndWait();
             return;
         }
@@ -113,7 +115,8 @@ public class BuyTicketViewController implements Initializable {
         if (txtCustomerName.getText().isEmpty()) return;
         if (txtCustomerEmail.getText().isEmpty()) return;
         if (txtCustomerTlf.getText().isEmpty()) return;
-        if (tblViewTypeOfTickets.getSelectionModel().isEmpty() || tblViewTypeOfTickets.getSelectionModel().getSelectedItem() == null) return;
+        if (tblViewTypeOfTickets.getSelectionModel().isEmpty() || tblViewTypeOfTickets.getSelectionModel().getSelectedItem() == null)
+            return;
         btnSendRequest.setDisable(false);
     }
 

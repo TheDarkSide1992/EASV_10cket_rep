@@ -120,12 +120,19 @@ CREATE TABLE Submitted_For_Deletion(
 GO
 
 CREATE TABLE Ticket_Request(
-    RequestID                 INT IDENTITY(1,1)                       NOT NULL,
-    Event_ID                  INT                                     NOT NULL,
-    Request                   NVARCHAR(200)                           NOT NULL,
+    Request_ID                 INT IDENTITY(1,1)                      NOT NULL,
+    Event_ID                   INT                                    NOT NULL,
+    Customer_Name              NVARCHAR(200)                          NOT NULL,
+    Customer_Email             NVARCHAR(200)                          NOT NULL,
+    Customer_Phone             NVARCHAR(20)                           NOT NULL,
+    Number_Of_Tickets          INT                                    NOT NULL,
+    Type_Of_Ticket             NVARCHAR(50)                           NOT NULL,
+
 
     CONSTRAINT PK_SD_ID PRIMARY KEY(RequestID),
     CONSTRAINT FK_SD_Event_ID FOREIGN KEY(Event_ID)
     REFERENCES Event_(Event_ID) ON DELETE CASCADE
+    CONSTRAINT FK_SD_Ticket_Type FOREIGN KEY(Type_Of_Ticket)
+    REFERENCES Ticket(Ticket_Contains) ON DELETE CASCADE
 )
 GO

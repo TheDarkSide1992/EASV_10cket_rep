@@ -2,6 +2,7 @@ package bll;
 
 import be.Administrator;
 import be.EventCoordinator;
+import be.Request;
 import be.User;
 import bll.util.BCrypt;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
@@ -58,7 +59,7 @@ public class UserManager {
 
     }
 
-    public void sendRequest(String request, int eventID) throws SQLServerException {
-        generalUser.sendRequest(request,eventID);
+    public void sendRequest(Request request) throws SQLServerException {
+        generalUser.sendRequest(request);
     }
 }

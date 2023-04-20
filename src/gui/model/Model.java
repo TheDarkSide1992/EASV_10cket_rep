@@ -107,7 +107,7 @@ public class Model {
         ticketManager.saveTickets(ticketsForSale, eventID);
     }
 
-    public void sendRequest(String request, int eventID) throws SQLServerException {
-        userManager.sendRequest(request, eventID);
+    public void sendRequest(Request request) throws SQLServerException {
+        userManager.sendRequest(request);
     }
 }

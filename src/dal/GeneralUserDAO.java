@@ -2,6 +2,7 @@ package dal;
 
 import be.Administrator;
 import be.EventCoordinator;
+import be.Request;
 import be.User;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import dal.interfaces.IGeneralUser;
@@ -171,13 +172,11 @@ public class GeneralUserDAO implements IGeneralUser {
     }
 
     @Override
-    public void sendRequest(String request, int eventID) throws SQLServerException {
+    public void sendRequest(Request request) throws SQLServerException {
         try (Connection conn = db.getConnection()) {
             String sql = "INSERT INTO Ticket_Request(Event_ID, Request) VALUES(?,?);";
             PreparedStatement ps = conn.prepareStatement(sql);
 
-            ps.setInt(1,eventID);
-            ps.setString(2,request);
 
             ps.executeUpdate();
         } catch (SQLException e) {
