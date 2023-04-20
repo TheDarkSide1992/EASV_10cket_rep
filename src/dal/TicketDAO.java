@@ -99,12 +99,12 @@ public class TicketDAO implements ITicketDAO {
         List<Request> requests = new ArrayList<>();
         try (Connection conn = db.getConnection()) {
             String sql = """
-                    SELECT Request_ID, Event_Title, Event_Date, Customer_Name,
+                    SELECT DISTINCT Request_ID, Event_Title, Event_Date, Customer_Name,
                     Customer_Email, Customer_Phone, Number_Of_Tickets, Type_Of_Ticket,
                     Ticket_Price, Payment_Received, Tickets_Sent_To_Customer, Ticket_Content_ID
                     FROM Ticket_Request
-                    JOIN Event_ ON Ticket_Request.Event_ID = Event_.Event_ID
-                    JOIN Ticket ON Ticket.Ticket_Contains = Ticket_Request.Type_Of_Ticket;
+                    LEFT JOIN Event_ ON Ticket_Request.Event_ID = Event_.Event_ID
+                    LEFT JOIN Ticket ON Ticket.Ticket_Contains = Ticket_Request.Type_Of_Ticket;
                     """;
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
@@ -128,6 +128,7 @@ public class TicketDAO implements ITicketDAO {
         } catch (SQLException e) {
             throw new SQLException();
         }
+        System.out.println(requests.size());
         return requests;
     }
 

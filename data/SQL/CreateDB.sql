@@ -92,9 +92,7 @@ CREATE TABLE Ticket(
     CONSTRAINT PK_TICKET_CONTENT_ID PRIMARY KEY(Ticket_Content_ID),
 
     CONSTRAINT FK_TICKET_EVENT_ID FOREIGN KEY(Ticket_Event_ID)
-    REFERENCES Event_(Event_ID),
-
-    CONSTRAINT UQ_Ticket_Contains UNIQUE(Ticket_Contains)
+    REFERENCES Event_(Event_ID)
 )
 GO
 
@@ -135,9 +133,7 @@ CREATE TABLE Ticket_Request (
 
     CONSTRAINT PK_TR_ID PRIMARY KEY(Request_ID),
     CONSTRAINT FK_TR_Event_ID FOREIGN KEY(Event_ID)
-    REFERENCES Event_(Event_ID) ON DELETE CASCADE,
-    CONSTRAINT FK_Ticket_Contains FOREIGN KEY(Type_Of_Ticket)
-    REFERENCES Ticket(Ticket_Contains) ON DELETE CASCADE
+    REFERENCES Event_(Event_ID) ON DELETE CASCADE
 );
 
 INSERT INTO User_Type VALUES ('Administrator');

@@ -233,12 +233,14 @@ public class ManageTicketsController implements Initializable {
         }
         try {
             model.saveTickets(ticketsForSale, event.getEventID());
+
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "All tickets saved");
+            alert.show();
+
         } catch (SQLException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR, "Could not save tickets to Database", ButtonType.CANCEL);
             alert.showAndWait();
         }
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "All tickets saved");
-        alert.show();
     }
 
     public void handleRemoveTickets(ActionEvent event) {
