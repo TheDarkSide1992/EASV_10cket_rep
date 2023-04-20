@@ -21,6 +21,7 @@ public class Request {
     private int event_ID;
     private boolean paymentReceived;
     private boolean ticketSentToCustomer;
+
     public Request(int requestID, String eventTitle, LocalDate eventDate, String customerName, String customerEmail, String customerPhone, int tickets, String typeOfTicket, int ticketPrice, boolean paymentReceived, boolean ticketSentToCustomer, int event_ID) {
         this.requestID = requestID;
         this.eventTitle = eventTitle;
@@ -45,16 +46,26 @@ public class Request {
         this.event_ID = event_ID;
     }
 
-    public boolean isPaymentReceived() {
-        return paymentReceived;
+    public String getPaymentReceived() {
+        String yesOrNO = "";
+        if (paymentReceived) {
+            yesOrNO = "Yes";
+        } else
+            yesOrNO = "No";
+        return yesOrNO;
     }
 
     public void setPaymentReceived(boolean paymentReceived) {
         this.paymentReceived = paymentReceived;
     }
 
-    public boolean isTicketSentToCustomer() {
-        return ticketSentToCustomer;
+    public String getTicketSentToCustomer() {
+        String yesOrNO = "";
+        if (ticketSentToCustomer) {
+            yesOrNO = "Yes";
+        } else
+            yesOrNO = "No";
+        return yesOrNO;
     }
 
     public void setTicketSentToCustomer(boolean ticketSentToCustomer) {

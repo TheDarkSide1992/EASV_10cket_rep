@@ -35,5 +35,13 @@ public class TicketManager {
     public List<Request> getRequests() throws SQLException {
         return ticketDAO.getRequests();
     }
+
+    public void ticketSentToCustomer(Request selectedItem) throws SQLException {
+        ticketDAO.ticketSentToCustomer(selectedItem);
+    }
+
+    public void paymentProcessed(Request selectedItem) throws SQLException {
+        ticketDAO.paymentProcessed(selectedItem);
+    }
 }
 

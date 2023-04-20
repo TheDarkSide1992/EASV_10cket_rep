@@ -15,4 +15,8 @@ public interface ITicketDAO {
     void sendRequest(Request request) throws SQLServerException;
 
     List<Request> getRequests() throws SQLException;
+
+    void ticketSentToCustomer(Request selectedItem) throws SQLException;
+
+    void paymentProcessed(Request selectedItem) throws SQLException;
 }

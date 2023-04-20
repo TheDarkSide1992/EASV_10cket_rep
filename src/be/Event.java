@@ -52,6 +52,11 @@ public class Event implements Comparable<Event>{
         this.eventIsActive = eventIsActive;
     }
 
+    public Event(String eventTitle, LocalDate eventDate) {
+        this.eventTitle = eventTitle;
+        this.eventDate = eventDate;
+    }
+
     public int getEventID() {
         return eventID;
     }

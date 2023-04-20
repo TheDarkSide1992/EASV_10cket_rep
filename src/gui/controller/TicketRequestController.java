@@ -1,6 +1,8 @@
 package gui.controller;
 
+import be.Event;
 import be.Request;
+import be.Ticket;
 import gui.model.Model;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.BooleanProperty;
@@ -13,13 +15,12 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -65,19 +66,66 @@ public class TicketRequestController implements Initializable {
         colTypeOfTickets.setCellValueFactory(new PropertyValueFactory<>("typeOfTicket"));
         colTicketPrice.setCellValueFactory(new PropertyValueFactory<>("ticketPrice"));
         colTicketID.setCellValueFactory(new PropertyValueFactory<>("ticketID"));
+        colPaymentReceived.setCellValueFactory(new PropertyValueFactory<>("paymentReceived"));
+        colSentToCustomer.setCellValueFactory(new PropertyValueFactory<>("ticketSentToCustomer"));
 
 
         tblViewTicketRequests.setItems(requestsForTblView);
     }
 
     public void handlePaymentReceived(ActionEvent actionEvent) {
-        Request selectedItem = (Request) tblViewTicketRequests.getSelectionModel().getSelectedItem();
-        selectedItem.setPaymentReceived(true);
+        if (tblViewTicketRequests.getSelectionModel().getSelectedItem() != null) {
+            Request selectedItem = (Request) tblViewTicketRequests.getSelectionModel().getSelectedItem();
+            selectedItem.setPaymentReceived(true);
+            try {
+                model.paymentProcessed(selectedItem);
+                requests = model.getRequests();
+                requestsForTblView = FXCollections.observableArrayList();
+                requestsForTblView.addAll(requests);
+                tblViewTicketRequests.setItems(requestsForTblView);
+            } catch (Exception e) {
+                Alert alert = new Alert(Alert.AlertType.WARNING, "Could not mark this/these ticket as paid", ButtonType.CANCEL);
+                alert.showAndWait();
+                e.printStackTrace();
+            }
+        }
     }
 
+
     public void handleSentToCustomer(ActionEvent actionEvent) {
+        if (tblViewTicketRequests.getSelectionModel().getSelectedItem() != null) {
+            Request selectedItem = (Request) tblViewTicketRequests.getSelectionModel().getSelectedItem();
+            selectedItem.setTicketSentToCustomer(true);
+            try {
+                model.ticketSentToCustomer(selectedItem);
+                requests = model.getRequests();
+                requestsForTblView = FXCollections.observableArrayList();
+                requestsForTblView.addAll(requests);
+                tblViewTicketRequests.setItems(requestsForTblView);
+            } catch (Exception e) {
+                Alert alert = new Alert(Alert.AlertType.WARNING, "Could not mark this/these ticket as sent", ButtonType.CANCEL);
+                alert.showAndWait();
+                e.printStackTrace();
+            }
+        }
     }
 
     public void handleGenerateTickets(ActionEvent actionEvent) {
+        Request request = (Request) tblViewTicketRequests.getSelectionModel().getSelectedItem();
+        String eventTitle = request.getEventTitle();
+        LocalDate date = request.getEventDate();
+        Event event = new Event(eventTitle, date);
+        String ticketType = request.getTypeOfTicket();
+        int ticketID = request.getTicketID();
+        int ticketPrice = request.getTicketPrice();
+        Ticket ticket = new Ticket(ticketID, ticketType, ticketPrice);
+        try {
+            model.makeTicket(event, ticket);
+        } catch (Exception e) {
+            Alert alert = new Alert(Alert.AlertType.WARNING, "Could not generate a ticket", ButtonType.CANCEL);
+            alert.showAndWait();
+        }
     }
 }
+
+

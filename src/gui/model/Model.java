@@ -115,4 +115,12 @@ public class Model {
     public List<Request> getRequests() throws SQLException {
         return ticketManager.getRequests();
     }
+
+    public void ticketSentToCustomer(Request selectedItem) throws SQLException {
+        ticketManager.ticketSentToCustomer(selectedItem);
+    }
+
+    public void paymentProcessed(Request selectedItem) throws SQLException {
+        ticketManager.paymentProcessed(selectedItem);
+    }
 }

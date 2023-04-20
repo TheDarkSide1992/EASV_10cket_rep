@@ -131,5 +131,33 @@ public class TicketDAO implements ITicketDAO {
         return requests;
     }
 
+    @Override
+    public void ticketSentToCustomer(Request selectedItem) throws SQLException {
+        try (Connection conn = db.getConnection()) {
+            String sql = "UPDATE Ticket_Request SET Tickets_Sent_To_Customer = 1 WHERE Request_ID = ?;";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, selectedItem.getRequestID());
+            ps.executeUpdate();
+
+        }catch (SQLException e) {
+            throw new SQLException();
+        }
+
+    }
+
+    @Override
+    public void paymentProcessed(Request selectedItem) throws SQLException {
+        try (Connection conn = db.getConnection()) {
+            String sql = "UPDATE Ticket_Request SET Payment_Received = 1 WHERE Request_ID = ?;";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, selectedItem.getRequestID());
+            ps.executeUpdate();
+
+        }catch (SQLException e) {
+            throw new SQLException();
+        }
+
+    }
+
 }
 
