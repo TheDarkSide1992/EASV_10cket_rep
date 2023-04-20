@@ -59,7 +59,5 @@ public class UserManager {
 
     }
 
-    public void sendRequest(Request request) throws SQLServerException {
-        generalUser.sendRequest(request);
-    }
+
 }

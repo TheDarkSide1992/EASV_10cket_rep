@@ -12,6 +12,7 @@ import javafx.collections.ObservableList;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class Model {
     private ObservableList<Event> activeEvents;
@@ -108,6 +109,10 @@ public class Model {
     }
 
     public void sendRequest(Request request) throws SQLServerException {
-        userManager.sendRequest(request);
+        ticketManager.sendRequest(request);
+    }
+
+    public List<Request> getRequests() throws SQLException {
+        return ticketManager.getRequests();
     }
 }

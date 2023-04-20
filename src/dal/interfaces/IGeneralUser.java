@@ -14,5 +14,4 @@ public interface IGeneralUser {
     User IsLogInLegit(String username, String password) throws Exception;
     String getUserSalt(String userName) throws Exception;
 
-    void sendRequest(Request request) throws SQLServerException;
 }

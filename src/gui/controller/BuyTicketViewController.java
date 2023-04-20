@@ -87,7 +87,7 @@ public class BuyTicketViewController implements Initializable {
         String customerPhone = txtCustomerTlf.getText();
         String customerEmail = txtCustomerEmail.getText();
 
-        Request request = new Request(customerName,tickets,type,customerPhone,customerEmail, event.getEventID());
+        Request request = new Request(customerName, tickets, type, customerPhone, customerEmail, event.getEventID());
 
         try {
             model.sendRequest(request);

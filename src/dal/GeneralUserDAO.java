@@ -171,17 +171,5 @@ public class GeneralUserDAO implements IGeneralUser {
         return salt;
     }
 
-    @Override
-    public void sendRequest(Request request) throws SQLServerException {
-        try (Connection conn = db.getConnection()) {
-            String sql = "INSERT INTO Ticket_Request(Event_ID, Request) VALUES(?,?);";
-            PreparedStatement ps = conn.prepareStatement(sql);
-
-
-            ps.executeUpdate();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
 }
 

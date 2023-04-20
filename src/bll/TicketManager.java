@@ -1,12 +1,15 @@
 package bll;
 
+import be.Request;
 import be.Ticket;
+import com.microsoft.sqlserver.jdbc.SQLServerException;
 import dal.TicketDAO;
 import dal.interfaces.ITicketDAO;
 
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 public class TicketManager {
 
@@ -23,6 +26,14 @@ public class TicketManager {
 
     public void saveTickets(List<Ticket> ticketsForSale, int eventID) throws SQLException {
         ticketDAO.saveTickets(ticketsForSale, eventID);
+    }
+
+    public void sendRequest(Request request) throws SQLServerException {
+        ticketDAO.sendRequest(request);
+    }
+
+    public List<Request> getRequests() throws SQLException {
+        return ticketDAO.getRequests();
     }
 }
 
