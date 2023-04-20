@@ -1,6 +1,7 @@
 package gui.controller;
 
 import be.Event;
+import be.User;
 import com.gluonhq.charm.glisten.control.ExpansionPanel;
 import gui.model.Model;
 import javafx.collections.FXCollections;
@@ -33,6 +34,8 @@ public class AllEventController implements Initializable {
     public VBox vBoxAllEventView;
     private Model model;
     private static ObservableList<Event> allEvents;
+    private User user;
+    private ControllerAssistant controllerAssistant;
 
     public static boolean submitForDeletion = false;
 
@@ -43,10 +46,16 @@ public class AllEventController implements Initializable {
     private String editURL = "data/Images/Edit.png";
 
     private String eventURL = "data/Images/Event.png";
+    private String  deleteURL = "data/Images/Trash Can.png";
+
+    public AllEventController() {
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
+            controllerAssistant = ControllerAssistant.getInstance();
+            user = controllerAssistant.getLoggedInUser();
             model = new Model();
             allEvents = model.getAllEvents();
             displayAllEvents();
@@ -185,12 +194,25 @@ public class AllEventController implements Initializable {
                 outerPane.getChildren().add(month);
                 outerPane.getChildren().add(year);
 
+                if(user != null && user.getUserTypeId() == 1) {
+                    imageCxl.setOnMouseClicked(event -> cancelEvent(events));
+                    imageEdit.setOnMouseClicked(event -> deleteEvent(events));  //TODO change this image to a trashcan, and only visible if it is an Admin who logged in;
+                    imageCxl.setImage(loadImages(cxlURL));
+                    imageEdit.setImage(loadImages(deleteURL));
+                    imageEvent.setImage(loadImages(cxlURL));
 
-                imageCxl.setOnMouseClicked(event -> cancelEvent(events));
-                imageEdit.setOnMouseClicked(event -> deleteEvent(events));  //TODO change this image to a trashcan, and only visible if it is an Admin who logged in;
-                imageCxl.setImage(loadImages(cxlURL));
-                imageEdit.setImage(loadImages(editURL));
-                imageEvent.setImage(loadImages(cxlURL));
+                }
+                else if (user != null && user.getUserTypeId() == 2) {
+                    imageCxl.setOnMouseClicked(event -> cancelEvent(events));
+                    imageEdit.setOnMouseClicked(event -> editEvent(events));  //TODO change this image to a trashcan, and only visible if it is an Admin who logged in;
+                    imageCxl.setImage(loadImages(cxlURL));
+                    imageEdit.setImage(loadImages(editURL));
+                    imageEvent.setImage(loadImages(cxlURL));
+                }
+                else {
+                    imageCxl.setImage(null);
+                    imageEdit.setImage(null);
+                }
                 imageCxl.setScaleX(0.8);
                 imageCxl.setScaleY(0.8);
                 imageEdit.setScaleX(0.68);
@@ -265,6 +287,7 @@ public class AllEventController implements Initializable {
         } catch (Exception e) {
             Alert alert = new Alert(Alert.AlertType.ERROR, e.toString());
             alert.showAndWait();
+            e.printStackTrace();
         }
     }
 
@@ -355,6 +378,9 @@ public class AllEventController implements Initializable {
                 error.showAndWait();
             }
         }
+    }
+    private void editEvent(Event event){
+
     }
 
 }
