@@ -16,6 +16,10 @@ class EventDAOTest {
 
     }
 
+    /**
+     * This is not the best method to test but its the best method to test.
+     * but do to most classes never having any getters this is the best we could come up with
+     */
     @Test
     void createEvent() {
 

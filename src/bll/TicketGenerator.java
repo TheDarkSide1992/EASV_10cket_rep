@@ -27,17 +27,18 @@ public class TicketGenerator {
         codeID = "";
     }
     public void makeTicket(Event event, Ticket ticket) throws Exception{
-        //setFilepath();
-        //TODO if possible make it possible to select ones own filepath
-        generateCodeID(event, ticket);
+
+        codeID = generateCodeID(event, ticket);
 
         generateTicket(event, ticket);
-        //TODO make pdf hold data of event
-
-        System.out.println("success");
     }
 
-    private void generateCodeID(Event event, Ticket ticket){
+    /**
+     * Generate a uniq code bbased on indput
+     * @param event
+     * @param ticket
+     */
+    private String generateCodeID(Event event, Ticket ticket){
         int id = ticket.getTicketID();
         int date = event.getEventDate().hashCode();
         int name = event.getEventTitle().hashCode();
@@ -48,9 +49,15 @@ public class TicketGenerator {
         stb.append(date);
         stb.append(name);
 
-        codeID = stb.toString();
+        return stb.toString();
     }
 
+    /**
+     * Makkes andprints pdf with qr and bar code, and uniq data from event indput
+     * @param event
+     * @param ticket
+     * @throws Exception
+     */
     private void generateTicket(Event event, Ticket ticket) throws Exception{
         try {
             //Makes pdf file document
