@@ -55,15 +55,13 @@ public class CreateUserController implements Initializable {
         txtFieldPassword.textProperty().addListener(observable -> isEmpty());
 
     }
+
     private void displayError(Throwable t)
     {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("!!ERROR!!");
         alert.setHeaderText("Something went wrong, \n ERROR:      " + t.getMessage());
         alert.showAndWait();
-
-        System.out.println("error cured in CreateUserController.java");
-
         t.printStackTrace();
     }
 
@@ -74,6 +72,10 @@ public class CreateUserController implements Initializable {
         alert.showAndWait();
     }
 
+    /**
+     * Lets the admin choose an image from his computer of the Coordinator
+     * @param actionEvent
+     */
     public void handleChooseImage(ActionEvent actionEvent) {
         try {
             FileChooser fileChooser = new FileChooser();
@@ -98,12 +100,19 @@ public class CreateUserController implements Initializable {
             displayError(e);
         }
     }
+
+    /**
+     * Removes the border around the image when chosen
+     */
     private void imageChosen() {
         if (!imgUserProfilePicture.imageProperty().isBound()) {
             imagePane.setBorder(null);
         }
     }
 
+    /**
+     * Check to see if the input is empty, if not it enables the save user button
+     */
     private void isEmpty(){
         if (txtFieldUserFirstName.getText().isEmpty())  return;
 
@@ -120,12 +129,22 @@ public class CreateUserController implements Initializable {
         btnSaveUser.setDisable(false);
     }
 
+    /**
+     * Checks the data before it saves the user
+     * Removes the password if the data was not correct
+     * @param actionEvent
+     */
     public void handleSaveUser(ActionEvent actionEvent) {
         if (checkData() || validPassword(txtFieldPassword.getText())) saveUser();
 
         txtFieldPassword.setText("");
     }
 
+    /**
+     * Checks the data before enabling the button Save User
+     * Displays an alert if with what info is missing
+     * @return
+     */
     private boolean checkData(){
         if(txtFieldUserFirstName.getText() == null || txtFieldUserFirstName.getText().isEmpty()){
             displayAlert("Missing firstName");
@@ -145,6 +164,11 @@ public class CreateUserController implements Initializable {
 
     }
 
+    /**
+     * Checks to see if the password provided  is larger than 8 chars and if it contains specialchars
+     * @param password
+     * @return
+     */
     public boolean validPassword(String password){
         String specialChars = "!,.:;<>\\/()#%=+?'*";
         if (password.length() >= 8){
@@ -162,6 +186,9 @@ public class CreateUserController implements Initializable {
         return true;
     }
 
+    /**
+     * Finally saves the user with the input provided
+     */
     private void saveUser(){
         User user;
         if (comboBoxUserType.getValue().equals("Administrator")){
