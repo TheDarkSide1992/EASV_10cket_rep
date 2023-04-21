@@ -63,6 +63,9 @@ public class ContactController implements Initializable {
         t.printStackTrace();
     }
 
+    /**
+     * Sets up the panes and labels and their positioning
+     */
     private void setContactInfo() {
         FlowPane outerPane = new FlowPane();
 
@@ -119,6 +122,9 @@ public class ContactController implements Initializable {
     }
 
 
+    /**
+     * Populates the view with info of the admins
+     */
     private void setContactInfoAdmin() {
         for (Administrator admin : allAdmins) {
             ImageView profilePicture = new ImageView();
@@ -157,6 +163,9 @@ public class ContactController implements Initializable {
         }
     }
 
+    /**
+     * Populates the view with info of the coordinators
+     */
     private void setContactInfoCord() {
         for (EventCoordinator cord : allCoordinators) {
             ImageView profilePicture = new ImageView();
@@ -197,6 +206,9 @@ public class ContactController implements Initializable {
         }
     }
 
+    /**
+     * Allows the admin to navigate to the create user view when pressed
+     */
     private void addUser() {
         try {
             controllerAssistant.loadCenter("CreateUser.fxml");
