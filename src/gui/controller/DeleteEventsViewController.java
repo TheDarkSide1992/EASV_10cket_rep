@@ -301,7 +301,7 @@ public class DeleteEventsViewController implements Initializable {
         alert.showAndWait();
         if (alert.getResult() == ButtonType.YES) {
             try {
-                model.deleteEvent(event.getEventID()); //TODO get the event overview to update correctly
+                model.deleteEvent(event.getEventID()); 
             } catch (SQLException e) {
                 Alert error = new Alert(Alert.AlertType.ERROR, "Could not delete Event from Database" + "\n" + e, ButtonType.CANCEL);
                 error.showAndWait();
