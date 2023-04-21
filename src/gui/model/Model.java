@@ -98,10 +98,6 @@ public class Model {
 
 
     public void makeTicket(Event event, Ticket ticket) throws Exception{
-        //TODO USED FOR TESTING
-        //event = getActiveEvents().get(2);
-        //ticket = new Ticket(0, "string", 1);
-
         Event specificEvent = eventManager.getEvent(event.getEventTitle(), event.getEventDate());
         Ticket specificTicket = ticketManager.getTicket(ticket.getTicketContains());
 
