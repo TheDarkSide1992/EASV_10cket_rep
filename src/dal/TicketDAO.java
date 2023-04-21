@@ -119,67 +119,6 @@ public class TicketDAO implements ITicketDAO {
         }
     }
 
-//    @Override
-//    public List<Request> optimizeRequests() throws SQLException {
-//        Map<Integer, String[]> optimizedRequests = new HashMap<>();
-//        try (Connection conn = db.getConnection()) {
-//            String sql = "Select * FROM Ticket_Request;";
-//            Statement stmt = conn.createStatement();
-//            ResultSet rs = stmt.executeQuery(sql);
-//
-//            while (rs.next()) {
-//                int requestID = rs.getInt("Request_ID");
-//                String ticketIDs = rs.getString("Ticket_ID");
-//                String[] ticketIDArray = ticketIDs.split("-");
-//                optimizedRequests.putIfAbsent(requestID, ticketIDArray);
-//            }
-//
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//            throw new SQLException();
-//        }
-//        return getRequests(optimizedRequests);
-//    }
-
-//    public List<Request> getRequests(Map<Integer, String[]> optimizedRequests) throws SQLException {
-//        List<Request> requests = new ArrayList<>();
-//        try (Connection conn = db.getConnection()) {
-//            String sql = """
-//                    SELECT Request_ID, Event_Title, Event_Date, Customer_Name,
-//                    Customer_Email, Customer_Phone, Number_Of_Tickets, Type_Of_Ticket,
-//                    Ticket_Price, Payment_Received, Tickets_Sent_To_Customer, Ticket_Content_ID
-//                    FROM Ticket_Request
-//                    JOIN Event_ ON Ticket_Request.Event_ID = Event_.Event_ID
-//                    JOIN Ticket ON Ticket.Ticket_Contains = Ticket_Request.Type_Of_Ticket;
-//                    """;
-//            Statement stmt = conn.createStatement();
-//            ResultSet rs = stmt.executeQuery(sql);
-//            while (rs.next()) {
-//                int requestID = rs.getInt("Request_ID");
-//                String eventTitle = rs.getString("Event_Title");
-//                LocalDate eventDate = rs.getDate("Event_Date").toLocalDate();
-//                String customerName = rs.getString("Customer_Name");
-//                String customerEmail = rs.getString("Customer_Email");
-//                String customerPhone = rs.getString("Customer_Phone");
-//                int numOfTickets = rs.getInt("Number_Of_Tickets");
-//                String typeOfTicket = rs.getString("Type_Of_Ticket");
-//                int ticketPrice = rs.getInt("Ticket_Price");
-//                boolean paymentReceived = rs.getBoolean("Payment_Received");
-//                boolean ticketsSentToCustomer = rs.getBoolean("Tickets_Sent_To_Customer");
-//                String[] tickets = optimizedRequests.get(requestID);
-//                for (String ticket : tickets) {
-//                    int relevantTicketID = Integer.parseInt(ticket);
-//                    Request r = new Request(requestID, eventTitle, eventDate, customerName, customerEmail, customerPhone, numOfTickets, typeOfTicket, ticketPrice, paymentReceived, ticketsSentToCustomer, relevantTicketID);
-//                    requests.add(r);
-//                }
-//
-//            }
-//
-//        } catch (SQLException e) {
-//            throw new SQLException();
-//        }
-//        return requests;
-//    }
 
     @Override
     public List<Request> getRequests() throws SQLException {

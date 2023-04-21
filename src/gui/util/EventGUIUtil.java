@@ -74,7 +74,7 @@ public class EventGUIUtil {
         eventDescription.setPrefHeight(150);
     }
 
-    public void setExpandedPaneChildren(BorderPane expandedPane, Label eventTitleExpanded, Label eventStartTimeExpanded, Label eventLocationExpanded, Label eventDescription, ImageView imageEventExpanded, ImageView imageBuyTicketExpanded, Label eventOwner, Label eventCollaborator, Label lblOwner, Label lblCollaborator) {
+    public void setExpandedCustomerPaneChildren(BorderPane expandedPane, Label eventTitleExpanded, Label eventStartTimeExpanded, Label eventLocationExpanded, Label eventDescription, ImageView imageEventExpanded, ImageView imageBuyTicketExpanded, Label eventOwner, Label eventCollaborator, Label lblOwner, Label lblCollaborator) {
         BorderPane right = new BorderPane();
         imageBuyTicketExpanded.setFitWidth(192);
         imageBuyTicketExpanded.setFitHeight(75);
@@ -104,11 +104,108 @@ public class EventGUIUtil {
 
     }
 
-    public void setCollapsedPaneChildren(BorderPane collapsedPane, ImageView imageEvent, Label title, Label startTime, Label location, ImageView imageBuyTicket) {
+    public void setExpandedAdminPaneChildren(BorderPane expandedPane, Label eventTitleExpanded, Label eventStartTimeExpanded, Label eventLocationExpanded, Label eventDescription, ImageView imageEventExpanded, ImageView imageDeleteExpanded, ImageView imageCxlExpanded, Label eventOwner, Label eventCollaborator, Label lblOwner, Label lblCollaborator) {
+        BorderPane right = new BorderPane();
+        right.setLeft(imageDeleteExpanded);
+        right.setRight(imageCxlExpanded);
+        expandedPane.setRight(right);
+        expandedPane.setPrefWidth(1200);
+        expandedPane.setLeft(imageEventExpanded);
+        BorderPane left = new BorderPane();
+        left.setCenter(imageEventExpanded);
+        expandedPane.setLeft(left);
+        BorderPane titlePane = new BorderPane();
+        BorderPane startTimePane = new BorderPane();
+        BorderPane locationPane = new BorderPane();
+        BorderPane eventDescriptionPane = new BorderPane();
+        titlePane.setCenter(eventTitleExpanded);
+        startTimePane.setCenter(eventStartTimeExpanded);
+        locationPane.setCenter(eventLocationExpanded);
+        eventDescriptionPane.setCenter(eventDescription);
+        Pane bufferPane = new Pane();
+        bufferPane.setPrefHeight(30);
+        VBox eventDescriptionPaneRight = new VBox(bufferPane, lblOwner,eventOwner,lblCollaborator,eventCollaborator);
+        eventDescriptionPane.setRight(eventDescriptionPaneRight);
+        eventDescriptionPane.setPadding(new Insets(10,0, 10,0));
+        VBox center = new VBox(titlePane,startTimePane,locationPane,eventDescriptionPane);
+        expandedPane.setCenter(center);
+
+
+    }
+
+    public void setExpandedEventCoPaneChildren(BorderPane expandedPane, Label eventTitleExpanded, Label eventStartTimeExpanded, Label eventLocationExpanded, Label eventDescription, ImageView imageEventExpanded, ImageView imageEditExpanded, ImageView imageCxlExpanded, Label eventOwner, Label eventCollaborator, Label lblOwner, Label lblCollaborator) {
+        BorderPane right = new BorderPane();
+        right.setLeft(imageEditExpanded);
+        right.setRight(imageCxlExpanded);
+        expandedPane.setRight(right);
+        expandedPane.setPrefWidth(1200);
+        expandedPane.setLeft(imageEventExpanded);
+        BorderPane left = new BorderPane();
+        left.setCenter(imageEventExpanded);
+        expandedPane.setLeft(left);
+        BorderPane titlePane = new BorderPane();
+        BorderPane startTimePane = new BorderPane();
+        BorderPane locationPane = new BorderPane();
+        BorderPane eventDescriptionPane = new BorderPane();
+        titlePane.setCenter(eventTitleExpanded);
+        startTimePane.setCenter(eventStartTimeExpanded);
+        locationPane.setCenter(eventLocationExpanded);
+        eventDescriptionPane.setCenter(eventDescription);
+        Pane bufferPane = new Pane();
+        bufferPane.setPrefHeight(30);
+        VBox eventDescriptionPaneRight = new VBox(bufferPane, lblOwner,eventOwner,lblCollaborator,eventCollaborator);
+        eventDescriptionPane.setRight(eventDescriptionPaneRight);
+        eventDescriptionPane.setPadding(new Insets(10,0, 10,0));
+        VBox center = new VBox(titlePane,startTimePane,locationPane,eventDescriptionPane);
+        expandedPane.setCenter(center);
+
+
+    }
+
+
+    public void setCollapsedCustomerPaneChildren(BorderPane collapsedPane, ImageView imageEvent, Label title, Label startTime, Label location, ImageView imageBuyTicket) {
         BorderPane right = new BorderPane();
         imageBuyTicket.setFitWidth(192);
         imageBuyTicket.setFitHeight(75);
         right.setCenter(imageBuyTicket);
+        collapsedPane.setRight(right);
+        collapsedPane.setPrefWidth(1200);
+        BorderPane left = new BorderPane();
+        left.setCenter(imageEvent);
+        collapsedPane.setLeft(left);
+        BorderPane titlePane = new BorderPane();
+        BorderPane startTimePane = new BorderPane();
+        BorderPane locationPane = new BorderPane();
+        titlePane.setCenter(title);
+        startTimePane.setCenter(startTime);
+        locationPane.setCenter(location);
+        VBox center = new VBox(titlePane,startTimePane,locationPane);
+        collapsedPane.setCenter(center);
+    }
+
+    public void setCollapsedAdminPaneChildren(BorderPane collapsedPane, ImageView imageEvent, Label title, Label startTime, Label location, ImageView imageDelete, ImageView imageCxl) {
+        BorderPane right = new BorderPane();
+        right.setLeft(imageDelete);
+        right.setRight(imageCxl);
+        collapsedPane.setRight(right);
+        collapsedPane.setPrefWidth(1200);
+        BorderPane left = new BorderPane();
+        left.setCenter(imageEvent);
+        collapsedPane.setLeft(left);
+        BorderPane titlePane = new BorderPane();
+        BorderPane startTimePane = new BorderPane();
+        BorderPane locationPane = new BorderPane();
+        titlePane.setCenter(title);
+        startTimePane.setCenter(startTime);
+        locationPane.setCenter(location);
+        VBox center = new VBox(titlePane,startTimePane,locationPane);
+        collapsedPane.setCenter(center);
+    }
+
+    public void setCollapsedEventCoPaneChildren(BorderPane collapsedPane, ImageView imageEvent, Label title, Label startTime, Label location, ImageView imageEdit, ImageView imageCxl) {
+        BorderPane right = new BorderPane();
+        right.setRight(imageCxl);
+        right.setLeft(imageEdit);
         collapsedPane.setRight(right);
         collapsedPane.setPrefWidth(1200);
         BorderPane left = new BorderPane();
@@ -210,5 +307,21 @@ public class EventGUIUtil {
         eventCollaborator.setEffect(shadow2);
         eventOwner.getStyleClass().add("eventOwnerAndCollaborator");
         eventCollaborator.getStyleClass().add("eventOwnerAndCollaborator");
+    }
+
+    public void setImageDeletePlacement(ImageView imageDelete) {
+        imageDelete.setScaleX(0.6);
+        imageDelete.setScaleY(0.6);
+        imageDelete.setX(1100);
+        imageDelete.setY(10);
+        imageDelete.setEffect(shadow);
+    }
+
+    public void setImageDeleteExpandedPlacement(ImageView imageDeleteExpanded) {
+        imageDeleteExpanded.setScaleX(0.6);
+        imageDeleteExpanded.setScaleY(0.6);
+        imageDeleteExpanded.setX(1100);
+        imageDeleteExpanded.setY(10);
+        imageDeleteExpanded.setEffect(shadow);
     }
 }

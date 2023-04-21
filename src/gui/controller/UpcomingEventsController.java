@@ -92,6 +92,8 @@ public class UpcomingEventsController implements Initializable {
                 Label eventStartTimeExpanded = new Label(events.getEventStartTime().toString().substring(0, 5));
                 Label eventLocationExpanded = new Label(events.getEventLocation());
                 eventLocationExpanded.setOnMouseClicked(event -> handleLocation(events));
+                eventLocationExpanded.setOnMouseEntered(event -> hoverLocation(eventLocationExpanded));
+                eventLocationExpanded.setOnMouseExited(event -> unHoverLocation(eventLocationExpanded));
                 Label eventDescription = new Label(events.getEventDescription());
                 Label lblOwner = new Label("Event Coordinator:");
                 Label lblCollaborator = new Label("Event Collaborator:");
@@ -153,8 +155,8 @@ public class UpcomingEventsController implements Initializable {
                 imageCxlExpanded.setImage(loadImages(cxlURL));
                 egu.setImageCxlExpandedPlacement(imageCxlExpanded);
 
-                egu.setCollapsedPaneChildren(collapsedPane, imageEvent, title, startTime, location, imageBuyTicket);
-                egu.setExpandedPaneChildren(expandedPane, eventTitleExpanded, eventStartTimeExpanded, eventLocationExpanded, eventDescription, imageEventExpanded, imageBuyTicketExpanded, eventOwner, eventCollaborator, lblOwner, lblCollaborator);
+                egu.setCollapsedCustomerPaneChildren(collapsedPane, imageEvent, title, startTime, location, imageBuyTicket);
+                egu.setExpandedCustomerPaneChildren(expandedPane, eventTitleExpanded, eventStartTimeExpanded, eventLocationExpanded, eventDescription, imageEventExpanded, imageBuyTicketExpanded, eventOwner, eventCollaborator, lblOwner, lblCollaborator);
                 egu.setExpPanelPlacementAndChildren(expPanel, collapsedPane, expandedPane);
                 egu.setOuterPanePlacementAndChildren(outerPane, eventDay, monthAndYear, expPanel);
 

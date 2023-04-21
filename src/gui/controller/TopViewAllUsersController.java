@@ -87,28 +87,26 @@ public class TopViewAllUsersController implements Initializable {
         //Define ALL buttons possible having in the topView
         Button upcomingEvents = new Button("Upcoming Events");
         Button allEvents = new Button("All Events");
-        Button calender = new Button("Calender");
         Button contact = new Button("Contact");
-        Button prices = new Button("Prices");
         Button createEvent = new Button("Create Event");
         Button manageTickets = new Button("Manage Tickets");
         Button makeCoordinator = new Button("Create Event Coordinator");
+        Button ticketRequests = new Button("Ticket Requests");
 
         //Give the buttons action listeners
         upcomingEvents.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> upcomingEvents());
         allEvents.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> allEvents());
-        calender.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> calender());
         contact.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> contact());
-        prices.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> prices());
         createEvent.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> createEvent());
         manageTickets.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> manageTickets());
         makeCoordinator.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> createCoordinators());
+        ticketRequests.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> ticketRequests());
 
 
         //AssignButtons to all different users
-        Button[] eventCoordinator = {upcomingEvents, allEvents, calender, contact, prices, createEvent, manageTickets};
-        Button[] administrator = {upcomingEvents, allEvents, calender, contact, prices, makeCoordinator};
-        Button[] costumer = {upcomingEvents, allEvents, calender, contact, prices};
+        Button[] eventCoordinator = {upcomingEvents, allEvents, contact, createEvent, manageTickets, ticketRequests};
+        Button[] administrator = {upcomingEvents, allEvents, contact, makeCoordinator};
+        Button[] costumer = {upcomingEvents, allEvents, contact};
         if (user == null) {
             return costumer;
         } else if (user.equals("Event Coordinator")) {
@@ -142,7 +140,7 @@ public class TopViewAllUsersController implements Initializable {
         DropShadow shadow = new DropShadow(0, 4, 4, Color.color(0, 0, 0, 0.25));
         Label signInLbl = new Label();
         signInLbl.setEffect(shadow);
-        signInLbl.setText("Sig Up");
+        signInLbl.setText("Sign In");
         signInLbl.setAlignment(Pos.CENTER_RIGHT);
 
         //Add a listener to label
@@ -226,16 +224,8 @@ public class TopViewAllUsersController implements Initializable {
         controllerAssistant.openNewWindow("AllEventView.fxml");
     }
 
-    private void calender() {
-        controllerAssistant.openNewWindow("ManageTicketsView.fxml");
-    }
-
     private void contact() {
         controllerAssistant.openNewWindow("ContactView.fxml");
-    }
-
-    private void prices() {
-        controllerAssistant.openNewWindow("TicketRequestView.fxml");
     }
 
     private void createEvent() {
@@ -247,7 +237,9 @@ public class TopViewAllUsersController implements Initializable {
     }
 
     private void createCoordinators() {
-        controllerAssistant.openNewWindow("");
+        controllerAssistant.openNewWindow("CreateUser.fxml");
     }
+
+    private void ticketRequests() { controllerAssistant.openNewWindow("TicketRequestView");}
 
 }
