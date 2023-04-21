@@ -1,11 +1,13 @@
 package gui.controller;
 
 import be.User;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -37,9 +39,15 @@ public class TopViewAllUsersController implements Initializable {
 
     private ControllerAssistant controllerAssistant;
 
+    private DropShadow shadow = new DropShadow(0, -4, -4, Color.color(0, 0, 0, 1));
+
+    private DropShadow noShadow = new DropShadow(0, 0, 0, Color.color(0, 0, 0, 1));
+
     private String url = "data/Images/10cketshort.png";
     private String userType = null;
     private User loggedInUser = null;
+
+    private static Group group;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -52,6 +60,7 @@ public class TopViewAllUsersController implements Initializable {
         }
         Button[] buttons = assignButtonsToUsers(userType);
         addButtons(buttons);
+        buttons[0].getStyleClass().add("btnTopButtonsClicked");
         setLogo();
         if (userType == null) {
             signInLabelStyling();
@@ -90,8 +99,10 @@ public class TopViewAllUsersController implements Initializable {
         Button contact = new Button("Contact");
         Button createEvent = new Button("Create Event");
         Button manageTickets = new Button("Manage Tickets");
-        Button makeCoordinator = new Button("Create Event Coordinator");
+        Button makeCoordinator = new Button("Create New User");
         Button ticketRequests = new Button("Ticket Requests");
+
+        group = new Group(upcomingEvents,allEvents,contact,createEvent,manageTickets,makeCoordinator,ticketRequests);
 
         //Give the buttons action listeners
         upcomingEvents.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> upcomingEvents());
@@ -102,6 +113,36 @@ public class TopViewAllUsersController implements Initializable {
         makeCoordinator.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> createCoordinators());
         ticketRequests.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> ticketRequests());
 
+        EventHandler<MouseEvent> eventHandler = new EventHandler<MouseEvent>() {
+
+            @Override
+            public void handle(MouseEvent e) {
+                if (e.getEventType() == MouseEvent.MOUSE_CLICKED) {
+                    // Get the button that was clicked
+                    Button clickedButton = (Button) e.getSource();
+
+                    // Set the default style class for all buttons
+                    upcomingEvents.getStyleClass().setAll("btnTopButtons");
+                    allEvents.getStyleClass().setAll("btnTopButtons");
+                    contact.getStyleClass().setAll("btnTopButtons");
+                    createEvent.getStyleClass().setAll("btnTopButtons");
+                    manageTickets.getStyleClass().setAll("btnTopButtons");
+                    makeCoordinator.getStyleClass().setAll("btnTopButtons");
+                    ticketRequests.getStyleClass().setAll("btnTopButtons");
+
+                    // Set the new style class for the clicked button
+                    clickedButton.getStyleClass().setAll("btnTopButtonsClicked");
+                }
+            }
+        };
+
+        upcomingEvents.addEventHandler(MouseEvent.MOUSE_CLICKED, eventHandler);
+        allEvents.addEventHandler(MouseEvent.MOUSE_CLICKED, eventHandler);
+        contact.addEventHandler(MouseEvent.MOUSE_CLICKED, eventHandler);
+        createEvent.addEventHandler(MouseEvent.MOUSE_CLICKED, eventHandler);
+        manageTickets.addEventHandler(MouseEvent.MOUSE_CLICKED, eventHandler);
+        makeCoordinator.addEventHandler(MouseEvent.MOUSE_CLICKED, eventHandler);
+        ticketRequests.addEventHandler(MouseEvent.MOUSE_CLICKED, eventHandler);
 
         //AssignButtons to all different users
         Button[] eventCoordinator = {upcomingEvents, allEvents, contact, createEvent, manageTickets, ticketRequests};
@@ -116,6 +157,13 @@ public class TopViewAllUsersController implements Initializable {
         } else {
             return costumer;
         }
+    }
+
+    private void clearStyle() {
+        for (int i = 0; i < group.getChildren().size(); i++) {
+            group.getChildren().get(i).getStyleClass().add("btnTopButtons");
+        }
+
     }
 
     /**
@@ -216,9 +264,7 @@ public class TopViewAllUsersController implements Initializable {
         controllerAssistant.openNewWindow("LoginView.fxml");
     }
 
-    public void upcomingEvents() {
-        controllerAssistant.openNewWindow("UpcomingEventsView.fxml");
-    }
+    public void upcomingEvents() {controllerAssistant.openNewWindow("UpcomingEventsView.fxml");}
 
     private void allEvents() {
         controllerAssistant.openNewWindow("AllEventView.fxml");

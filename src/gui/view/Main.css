@@ -150,11 +150,25 @@
 .btnTopButtons {
     -fx-min-height: 50;
     -fx-min-width: 150;
+    -fx-text-fill: Black;
     -fx-border-radius: 20 20 0 0;
     -fx-background-radius: 22 22 0 0;
     -fx-background-color: rgba(243,218,218,1);
     -fx-border-color: black;
     -fx-border-width: 3;
+    -fx-alignment: CENTER;
+}
+
+.btnTopButtonsClicked {
+    -fx-min-height: 50;
+    -fx-min-width: 150;
+    -fx-text-fill: WHITE;
+    -fx-border-radius: 20 20 0 0;
+    -fx-background-radius: 22 22 0 0;
+    -fx-background-color: RED;
+    -fx-border-color: black;
+    -fx-border-width: 3;
+    -fx-alignment: CENTER;
 }
 
 .btnLogin {

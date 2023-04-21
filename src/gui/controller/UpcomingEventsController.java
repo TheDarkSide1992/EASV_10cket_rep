@@ -127,7 +127,7 @@ public class UpcomingEventsController implements Initializable {
                 imageCxl.setImage(loadImages(cxlURL));
                 egu.setImageCxlPlacement(imageCxl);
 
-                imageEdit.setOnMouseClicked(event -> deleteEvent(events));  //TODO change this image to a trashcan, and only visible if it is an Admin who logged in;
+                imageEdit.setOnMouseClicked(event -> deleteEvent(events));
                 imageEdit.setImage(loadImages(editURL));
                 egu.setImageEditPlacement(imageEdit);
 
