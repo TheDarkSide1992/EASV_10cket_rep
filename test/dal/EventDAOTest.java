@@ -14,9 +14,6 @@ class EventDAOTest {
     @Test
     void getAllEvents() {
 
-
-
-
     }
 
     @Test

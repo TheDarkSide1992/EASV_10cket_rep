@@ -322,8 +322,9 @@ public class AllEventController implements Initializable {
         alert.showAndWait();
         if (alert.getResult() == ButtonType.YES) {
             try {
-                model.deleteEvent(event.getEventID()); //TODO get the event overview to update correctly
-            } catch (SQLException e) {
+                model.deleteEvent(event.getEventID());
+                controllerAssistant.loadCenter("AllEventView.fxml");
+            } catch (Exception e) {
                 Alert error = new Alert(Alert.AlertType.ERROR, "Could not delete Event from Database" + "\n" + e, ButtonType.CANCEL);
                 error.showAndWait();
             }
