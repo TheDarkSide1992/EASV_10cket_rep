@@ -89,6 +89,10 @@ public class ManageTicketsController implements Initializable {
 
     }
 
+    /**
+     * Displays all info about the events in the appropriate text-fields
+     * @param value
+     */
     private void displayAllInfo(Object value) {
         for (Event event : coordinatorsEvents) {
             if (value.equals(event.getEventTitle())) {
@@ -104,6 +108,10 @@ public class ManageTicketsController implements Initializable {
 
     }
 
+    /**
+     * Populates the table view with the tickets which are for sale for given event
+     * @param event
+     */
     private void updateTableView(Event event) {
         ticketsForSale = FXCollections.observableArrayList();
         try {
@@ -158,6 +166,9 @@ public class ManageTicketsController implements Initializable {
 
     }
 
+    /**
+     * Updates the combo box to display the correct types of ticket in accordance with the ticket types in the tableview
+     */
     private void updateComboTicketTypes() {
         ObservableList<String> comboBoxTicketTypes = FXCollections.observableArrayList();
         for (Ticket t : ticketsForSale) {
@@ -169,6 +180,10 @@ public class ManageTicketsController implements Initializable {
         comboTypeOfTicket.getSelectionModel().select(0);
     }
 
+    /**
+     * Fills in the text-boxes with the info about the tickets
+     * @param newValue
+     */
     private void displayInfoOfTicket(Object newValue) {
         if (newValue != null) {
             String type = (String) newValue;
@@ -186,12 +201,19 @@ public class ManageTicketsController implements Initializable {
         }
     }
 
+    /**
+     * Clears the text-boxes info
+     */
     private void clearTicketInfo() {
         txtAddExtras.clear();
         txtNewPriceOfTicket.clear();
         txtNumberOfTickets.clear();
     }
 
+    /**
+     * Adds the ticket to the tableview with the input from the text-boxes
+     * @param actionEvent
+     */
     public void handleAdd(ActionEvent actionEvent) {
         boolean ticketTypeExists = false;
         int ticketTypeToReplace = 0;
@@ -223,6 +245,10 @@ public class ManageTicketsController implements Initializable {
 
     }
 
+    /**
+     * Saves all tickets to the database
+     * @param actionEvent
+     */
     public void handleSaveTickets(ActionEvent actionEvent) {
         List<Event> events = new ArrayList<>();
         events.addAll(coordinatorsEvents);
@@ -243,6 +269,10 @@ public class ManageTicketsController implements Initializable {
         }
     }
 
+    /**
+     * Removes the ticket from the tableview
+     * @param event
+     */
     public void handleRemoveTickets(ActionEvent event) {
         Ticket ticket = (Ticket) tblviewTypesOfTickets.getFocusModel().getFocusedItem();
         tblviewTypesOfTickets.getItems().remove(ticket);

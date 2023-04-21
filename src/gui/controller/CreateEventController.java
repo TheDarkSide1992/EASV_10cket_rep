@@ -210,6 +210,9 @@ public class CreateEventController implements Initializable {
     }
 
 
+    /**
+     * Removes the border around the image when the image has been chosen
+     */
     private void imageChosen() {
         if (!imgEventImage.imageProperty().isBound()) {
             imagePane.setBorder(null);

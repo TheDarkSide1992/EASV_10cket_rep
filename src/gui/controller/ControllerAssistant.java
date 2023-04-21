@@ -16,22 +16,51 @@ public class ControllerAssistant {
     private static ControllerAssistant controllerAssistant;
     private static User setLoggedInUser;
 
+    /**
+     * Controller constructor, only used once in get instance
+     */
     private ControllerAssistant() {
 
     }
 
+    /**
+     * Singleton, returns the instance of the Assistant
+     * @return
+     */
     public static ControllerAssistant getInstance(){
         if (controllerAssistant == null) controllerAssistant = new ControllerAssistant();
 
         return controllerAssistant;
     }
 
+    /**
+     * Takes a borderpane for and saves for general use.
+     * should be implemented the first time the class is called.
+     * @param borderPane
+     */
     public void setBorderPane(BorderPane borderPane){
         this.borderPane = borderPane;
     }
+
+    /**
+     * Saves a User that can be accessed in all other classes for static use.
+     * should be set to null after being logged out
+     * @param loggedInUser
+     */
     public void setLoggedInUser(User loggedInUser){this.setLoggedInUser = loggedInUser;}
+
+    /**
+     * Returns logged in user
+     * @return
+     */
     public User getLoggedInUser(){return this.setLoggedInUser;}
 
+    /**
+     * loads the given FXML window to center
+     * Takes the name of window as a parameter
+     * @param file
+     * @throws IOException
+     */
     public void loadCenter(String file) throws IOException {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/gui/view/" + file));
@@ -40,6 +69,12 @@ public class ControllerAssistant {
         borderPane.setCenter(newScene);
     }
 
+    /**
+     * loads the given FXML window to Top
+     * Takes the name of window as a parameter
+     * @param file
+     * @throws IOException
+     */
     public void loadTop(String file) throws IOException{
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/gui/view/" + file));
@@ -48,43 +83,16 @@ public class ControllerAssistant {
         borderPane.setTop(newScene);
     }
 
-    public void loadBottom(String file) throws IOException {
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/gui/view/" + file));
-        Pane newScene = loader.load();
-
-        borderPane.setBottom(newScene);
-    }
-
-    public void loadLeft(String file) throws IOException {
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/gui/view/" + file));
-        BorderPane newScene = loader.load();
-
-        borderPane.setLeft(newScene);
-    }
-
-    public void loadRight(String file) throws IOException {
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/gui/view/" + file));
-        BorderPane newScene = loader.load();
-
-        borderPane.setRight(newScene);
-    }
-
+    /**
+     * Loads center and takes file a parameter
+     * @param s
+     */
     public void openNewWindow(String s)  {
         try {
             loadCenter(s);
         } catch (IOException e) {
             e.printStackTrace();
-            //displayError(e);
         }
     }
 
-//    private void displayError(Throwable t) {
-//        Alert alert = new Alert(Alert.AlertType.ERROR);
-//        alert.setTitle("!!ERROR!!");
-//        alert.setHeaderText("Something went wrong, \n ERROR:      " + t.getMessage());
-//        alert.showAndWait();
-//    }
 }
