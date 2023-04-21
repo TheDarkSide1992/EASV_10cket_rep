@@ -71,17 +71,17 @@ public class CreateEventController implements Initializable {
      * Styles  the 2 labels with shadows
      */
     private void labelStyling() {
-        DropShadow shadow = new DropShadow(0,4,4, Color.color(0,0,0,0.25));
+        DropShadow shadow = new DropShadow(0, 4, 4, Color.color(0, 0, 0, 0.25));
         lblCreateEvent.setEffect(shadow);
         cbIsActive.setEffect(shadow);
     }
 
     /**
      * Creates an Alert which can be displayed as an error
+     *
      * @param t
      */
-    private void displayError(Throwable t)
-    {
+    private void displayError(Throwable t) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("!!ERROR!!");
         alert.setHeaderText("Something went wrong, \n ERROR:      " + t.getMessage());
@@ -93,10 +93,10 @@ public class CreateEventController implements Initializable {
     /**
      * Checks to see if the textboxes and datepicker have been filled in before enabling the Save Event Button
      */
-    private void isEmpty(){
+    private void isEmpty() {
         btnSaveEvent.setDisable(true);
 
-        if (txtTitleOfEvent.getText().isEmpty())  return;
+        if (txtTitleOfEvent.getText().isEmpty()) return;
 
         if (datePicker.getValue() == null) return;
 
@@ -109,6 +109,7 @@ public class CreateEventController implements Initializable {
 
     /**
      * Allows the user to browse his computer for an image to use as an event image
+     *
      * @param actionEvent
      */
     public void handleChooseImage(ActionEvent actionEvent) {
@@ -138,9 +139,10 @@ public class CreateEventController implements Initializable {
 
     /**
      * Another alert which can be used to show that something went wrong
+     *
      * @param message
      */
-    private void displayAlert(String message){
+    private void displayAlert(String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("!!Invaid!!");
         alert.setHeaderText("Something went wrong, \n" + message);
@@ -149,6 +151,7 @@ public class CreateEventController implements Initializable {
 
     /**
      * A small method that checks the date given before it saves the event;
+     *
      * @param event
      */
     public void handleSaveEvent(ActionEvent event) {
@@ -157,22 +160,26 @@ public class CreateEventController implements Initializable {
 
     /**
      * Checks data in the inputfields before it allows the user to save the event into the Database
+     *
      * @return
      */
-    private boolean checkData(){
-        if(txtTitleOfEvent.getText() == null || txtTitleOfEvent.getText().isEmpty()){
+    private boolean checkData() {
+        if (txtTitleOfEvent.getText() == null || txtTitleOfEvent.getText().isEmpty()) {
             displayAlert("Missing tittle");
             return false;
-        } else if (datePicker.getValue() == null || datePicker.getValue().isBefore(LocalDate.now())){
+        } else if (datePicker.getValue() == null || datePicker.getValue().isBefore(LocalDate.now())) {
             displayAlert("Date is either missing or not valid");
             return false;
-        } else if (!txtEventStartTime.getText().contains(":") || txtEventStartTime.getText().contains(" ") || Time.valueOf(txtEventStartTime.getText()+ ":00") == null) {
+        } else if (!txtEventStartTime.getText().contains(":") || txtEventStartTime.getText().contains(" ") || Time.valueOf(txtEventStartTime.getText() + ":00") == null) {
             displayAlert("Start time is missing or not valid");
             return false;
         } else if (txtLocation.getText() == null || txtLocation.getText().isEmpty()) {
             displayAlert("Missing a Location");
-            return false; //TODO add LocationURL.getText
-        } else if (txtEventDescription.getText() == null || txtEventDescription.getText().isEmpty()){
+            return false;
+        } else if (txtLocationURL.getText() == null || txtLocationURL.getText().isEmpty()) {
+            displayAlert("Missing a Location URL, Try google maps?");
+            return false;
+        } else if (txtEventDescription.getText() == null || txtEventDescription.getText().isEmpty()) {
             displayAlert("Missing a Description");
             return false;
         }
@@ -184,16 +191,16 @@ public class CreateEventController implements Initializable {
     /**
      * Creates an event from the input the user has made and sends it up the layers to the database
      */
-    private void saveEvent(){
+    private void saveEvent() {
         Event event1 = new Event(
                 txtTitleOfEvent.getText(),
                 datePicker.getValue(),
-                Time.valueOf(txtEventStartTime.getText()+ ":00"),
+                Time.valueOf(txtEventStartTime.getText() + ":00"),
                 txtLocation.getText(),
                 txtLocationURL.getText(),
                 txtEventDescription.getText(),
                 cbIsActive.isSelected());
-        if (imgEventImage != null){
+        if (imgEventImage != null) {
             event1.setEventImage(imgEventImage.getImage());
             event1.setByteImage(data);
         }

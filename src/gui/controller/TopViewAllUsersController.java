@@ -302,6 +302,6 @@ public class TopViewAllUsersController implements Initializable {
     /**
      * Opens the TicketRequestView
      */
-    private void ticketRequests() { controllerAssistant.openNewWindow("TicketRequestView");}
+    private void ticketRequests() { controllerAssistant.openNewWindow("TicketRequestView.fxml");}
 
 }
