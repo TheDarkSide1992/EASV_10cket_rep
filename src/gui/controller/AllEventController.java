@@ -76,6 +76,9 @@ public class AllEventController implements Initializable {
         }
     }
 
+    /**
+     * Displays all events on the main page to the user
+     */
     private void displayAllEvents() {
         try {
             for (Event events : allEvents) {
@@ -136,14 +139,14 @@ public class AllEventController implements Initializable {
                 imageCxl.setImage(loadImages(cxlURL));
                 egu.setImageCxlPlacement(imageCxl);
 
-                imageEdit.setOnMouseClicked(event -> deleteEvent(events));  //TODO change this image to a trashcan, and only visible if it is an Admin who logged in;
+                imageEdit.setOnMouseClicked(event -> deleteEvent(events));
                 imageEdit.setImage(loadImages(editURL));
                 egu.setImageEditPlacement(imageEdit);
 
                 if (events.getEventImage() == null || events.getImageByte().length < 10) {
                     imageEvent.setImage(loadImages(cxlURL));
                 } else imageEvent.setImage(events.getEventImage());
-                
+
                 imageEditExpanded.setImage(loadImages(editURL));
                 egu.setImageEditExpandedPlacement(imageEditExpanded);
 
@@ -205,6 +208,10 @@ public class AllEventController implements Initializable {
         }
     }
 
+    /**
+     * When the Buy Ticket image is clicked, this opens up a new window so that the user can request to buy ticket
+     * @param events
+     */
     private void buyTickets(Event events) {
         BuyTicketViewController buyTicketViewController = new BuyTicketViewController();
 
@@ -224,16 +231,28 @@ public class AllEventController implements Initializable {
         }
     }
 
-    private void unHoverLocation(Label location) {
-        location.setUnderline(false);
-        location.setTextFill(rgb(243, 218, 218));
-    }
-
+    /**
+     * When hovering over the Location of the event, the Event changes color to indicate it can be clicked on.
+     * @param location
+     */
     private void hoverLocation(Label location) {
         location.setUnderline(true);
         location.setTextFill(MEDIUMBLUE);
     }
 
+    /**
+     * When the location label no longer is hovered over, it should return to its normal color and not be underlined anymore
+     * @param location
+     */
+    private void unHoverLocation(Label location) {
+        location.setUnderline(false);
+        location.setTextFill(rgb(243, 218, 218));
+    }
+
+    /**
+     * When the location label is clicked open up the users browser and search for the attached URL
+     * @param events
+     */
     private void handleLocation(Event events) {
         try {
             Desktop desktop = java.awt.Desktop.getDesktop();
@@ -245,6 +264,11 @@ public class AllEventController implements Initializable {
         }
     }
 
+    /**
+     * Helps with loading images into the imageview
+     * @param url
+     * @return
+     */
     private Image loadImages(String url) {
         Image image = null;
         try {
@@ -258,9 +282,13 @@ public class AllEventController implements Initializable {
 
     }
 
+    /**
+     * When the Event Coordinator clicks the cancel button, he is promted with a dialog box asking if he is sure he wants to cancel the event
+     * Furthermore he can submit it for deletion so that the admin can erase the event from the Database if needed.
+     * @param event
+     */
     private void cancelEvent(Event event) {
         Alert alert = createAlertWithDelete(Alert.AlertType.CONFIRMATION, "Cancel Event?", null, "Are you sure you want to cancel:\n" + "'" + event.getEventTitle() + "'\n" + "'" + event.getEventDate().getDayOfMonth() + "-" + event.getEventDate().getMonth() + "-" + event.getEventDate().getYear() + " " + event.getEventStartTime() + "'", "Submit for deletion", param -> submitForDeletion = true, ButtonType.YES, ButtonType.NO);
-
         alert.getDialogPane().getStylesheets().add("/gui/view/Main.css");
         alert.getDialogPane().getStyleClass().add("alertPane");
         alert.showAndWait();
@@ -282,6 +310,17 @@ public class AllEventController implements Initializable {
         }
     }
 
+    /**
+     * Creates a customized Alert which is styled and adds a checkbox for submit deletion.
+     * @param type
+     * @param title
+     * @param headerText
+     * @param message
+     * @param deletionMessage
+     * @param deletionAction
+     * @param buttonTypes
+     * @return
+     */
     public static Alert createAlertWithDelete(Alert.AlertType type, String title, String headerText, String message, String deletionMessage, Consumer<Boolean> deletionAction, ButtonType... buttonTypes) {
         Alert alert = new Alert(type);
         // Need to force the alert to layout in order to grab the graphic,
@@ -315,6 +354,10 @@ public class AllEventController implements Initializable {
         return alert;
     }
 
+    /**
+     * When the trashcan is clicked by the admin this triggers an Alert which asks if he is sure he wants to delete the event from the Database
+     * @param event
+     */
     private void deleteEvent(Event event) {
         Alert alert = new Alert(Alert.AlertType.WARNING, "Are you sure you want to delete:\n" + "'" + event.getEventTitle() + "'\n" + "'" + event.getEventDate().getDayOfMonth() + "-" + event.getEventDate().getMonth() + "-" + event.getEventDate().getYear() + " " + event.getEventStartTime() + "'" + "\n WARNING: DELETING EVENTS WILL MAKE THEM INVISIBLE FOR CUSTOMERS", ButtonType.YES, ButtonType.NO);
         alert.getDialogPane().getStylesheets().add("/gui/view/Main.css");
@@ -330,6 +373,10 @@ public class AllEventController implements Initializable {
         }
     }
 
+    /**
+     * Missing implementation
+     * @param event
+     */
     private void editEvent(Event event) {
 
     }

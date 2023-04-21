@@ -46,14 +46,12 @@ public class BuyTicketViewController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
         try {
             model = new Model();
             ticketsForThisEvent = model.getTickets(event.getEventID());
         } catch (Exception e) {
             Alert alert = new Alert(Alert.AlertType.ERROR, "Could not get tickets from database", ButtonType.CANCEL);
             alert.showAndWait();
-            e.printStackTrace();
         }
         lblEventTitle.setText(event.getEventTitle());
         lblDateAndLocation.setText(event.getEventDate().toString() + " - " + event.getEventLocation());

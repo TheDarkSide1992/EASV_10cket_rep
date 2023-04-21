@@ -237,10 +237,7 @@ public class TopViewAllUsersController implements Initializable {
                 + controllerAssistant.getLoggedInUser().getUserName());
         userName.setAlignment(Pos.BOTTOM_RIGHT);
         userName.setPadding(new Insets(0,150,0,0));
-
-        //TODO Dosent Display name posibly to to the size of other labels. fix later
         userName.getStyleClass().add("lblMonthAndYear");
-
         return userName;
         /*
         namePane.getChildren().add(userName);
