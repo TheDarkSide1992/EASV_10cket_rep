@@ -93,7 +93,7 @@ public class DeleteEventsViewController implements Initializable {
 
     /**
      * Creates ImageViews for events that has been submitted for deletion
-     * 
+     * Styles imageviews with shadows
      * @param innerpane
      * @param events
      * @return
@@ -125,6 +125,11 @@ public class DeleteEventsViewController implements Initializable {
         return innerpane;
     }
 
+    /**
+     * Creates pane with events submitted for deletion with styling
+     * @param events
+     * @return
+     */
     private BorderPane createEventPane(Event events) {
         BorderPane innerPane = new BorderPane();
 
@@ -181,6 +186,12 @@ public class DeleteEventsViewController implements Initializable {
         return innerPane;
     }
 
+    /**
+     * Creates pane with event dates
+     * @param events
+     * @param updatedPane
+     * @return
+     */
     private BorderPane createDatePane(Event events, BorderPane updatedPane) {
 
         String day1 = "";
@@ -228,6 +239,11 @@ public class DeleteEventsViewController implements Initializable {
         return updatedPane;
     }
 
+    /**
+     * loads in event images
+     * @param url
+     * @return
+     */
     private Image loadImages(String url) {
         Image image = null;
         try {
@@ -241,6 +257,10 @@ public class DeleteEventsViewController implements Initializable {
 
     }
 
+    /**
+     * Opens alert box to check if you wish to cancel event and submit it for deletion
+     * @param event
+     */
     private void cancelEvent(Event event) {
         Alert alert = createAlertWithDelete(Alert.AlertType.CONFIRMATION, "Cancel Event?", null,
                 "Are you sure you want to cancel:\n" + "'" + event.getEventTitle() + "'\n" + "'" + event.getEventDate().getDayOfMonth() + "-" + event.getEventDate().getMonth() + "-" + event.getEventDate().getYear() + " " + event.getEventStartTime() + "'", "Submit for deletion",
@@ -294,6 +314,10 @@ public class DeleteEventsViewController implements Initializable {
         return alert;
     }
 
+    /**
+     * Opens alert box to secure the user wants to delete this event
+     * @param event
+     */
     private void deleteEvent(Event event) {
         Alert alert = new Alert(Alert.AlertType.WARNING, "Are you sure you want to delete:\n" + "'" + event.getEventTitle() + "'\n" + "'" + event.getEventDate().getDayOfMonth() + "-" + event.getEventDate().getMonth() + "-" + event.getEventDate().getYear() + " " + event.getEventStartTime() + "'" + "\n WARNING: DELETING EVENTS WILL MAKE THEM INVISIBLE FOR CUSTOMERS", ButtonType.YES, ButtonType.NO);
         alert.getDialogPane().getStylesheets().add("/gui/view/Main.css");
