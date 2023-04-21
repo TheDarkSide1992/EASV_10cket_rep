@@ -48,30 +48,6 @@ public class ControllerAssistant {
         borderPane.setTop(newScene);
     }
 
-    public void loadBottom(String file) throws IOException {
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/gui/view/" + file));
-        Pane newScene = loader.load();
-
-        borderPane.setBottom(newScene);
-    }
-
-    public void loadLeft(String file) throws IOException {
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/gui/view/" + file));
-        BorderPane newScene = loader.load();
-
-        borderPane.setLeft(newScene);
-    }
-
-    public void loadRight(String file) throws IOException {
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/gui/view/" + file));
-        BorderPane newScene = loader.load();
-
-        borderPane.setRight(newScene);
-    }
-
     public void openNewWindow(String s)  {
         try {
             loadCenter(s);
@@ -81,10 +57,4 @@ public class ControllerAssistant {
         }
     }
 
-//    private void displayError(Throwable t) {
-//        Alert alert = new Alert(Alert.AlertType.ERROR);
-//        alert.setTitle("!!ERROR!!");
-//        alert.setHeaderText("Something went wrong, \n ERROR:      " + t.getMessage());
-//        alert.showAndWait();
-//    }
 }

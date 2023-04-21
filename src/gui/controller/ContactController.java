@@ -51,6 +51,10 @@ public class ContactController implements Initializable {
         }
     }
 
+    /**
+     * Displays a nice Alert when called
+     * @param t
+     */
     private void displayError(Throwable t) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("!!ERROR!!");
