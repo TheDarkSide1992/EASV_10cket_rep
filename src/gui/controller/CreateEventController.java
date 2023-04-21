@@ -56,9 +56,7 @@ public class CreateEventController implements Initializable {
             displayError(e);
         }
         labelStyling();
-
         btnSaveEvent.setDisable(true);
-
         txtTitleOfEvent.textProperty().addListener(observable -> isEmpty());
         txtEventDescription.textProperty().addListener(observable -> isEmpty());
         txtEventStartTime.textProperty().addListener(observable -> isEmpty());
@@ -69,12 +67,19 @@ public class CreateEventController implements Initializable {
         imgEventImage.imageProperty().addListener(observable -> imageChosen());
     }
 
+    /**
+     * Styles  the 2 labels with shadows
+     */
     private void labelStyling() {
         DropShadow shadow = new DropShadow(0,4,4, Color.color(0,0,0,0.25));
         lblCreateEvent.setEffect(shadow);
         cbIsActive.setEffect(shadow);
     }
 
+    /**
+     * Creates an Alert which can be displayed as an error
+     * @param t
+     */
     private void displayError(Throwable t)
     {
         Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -85,6 +90,9 @@ public class CreateEventController implements Initializable {
         t.printStackTrace();
     }
 
+    /**
+     * Checks to see if the textboxes and datepicker have been filled in before enabling the Save Event Button
+     */
     private void isEmpty(){
         btnSaveEvent.setDisable(true);
 
@@ -99,6 +107,10 @@ public class CreateEventController implements Initializable {
         btnSaveEvent.setDisable(false);
     }
 
+    /**
+     * Allows the user to browse his computer for an image to use as an event image
+     * @param actionEvent
+     */
     public void handleChooseImage(ActionEvent actionEvent) {
         try {
             FileChooser fileChooser = new FileChooser();
@@ -124,6 +136,10 @@ public class CreateEventController implements Initializable {
 
     }
 
+    /**
+     * Another alert which can be used to show that something went wrong
+     * @param message
+     */
     private void displayAlert(String message){
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("!!Invaid!!");
@@ -131,9 +147,18 @@ public class CreateEventController implements Initializable {
         alert.showAndWait();
     }
 
+    /**
+     * A small method that checks the date given before it saves the event;
+     * @param event
+     */
     public void handleSaveEvent(ActionEvent event) {
         if (checkData()) saveEvent();
     }
+
+    /**
+     * Checks data in the inputfields before it allows the user to save the event into the Database
+     * @return
+     */
     private boolean checkData(){
         if(txtTitleOfEvent.getText() == null || txtTitleOfEvent.getText().isEmpty()){
             displayAlert("Missing tittle");
@@ -156,6 +181,9 @@ public class CreateEventController implements Initializable {
 
     }
 
+    /**
+     * Creates an event from the input the user has made and sends it up the layers to the database
+     */
     private void saveEvent(){
         Event event1 = new Event(
                 txtTitleOfEvent.getText(),

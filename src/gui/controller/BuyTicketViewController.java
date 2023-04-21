@@ -73,12 +73,15 @@ public class BuyTicketViewController implements Initializable {
         txtCustomerName.textProperty().addListener(observable -> isEmpty());
         txtCustomerEmail.textProperty().addListener(observable -> isEmpty());
         txtCustomerTlf.textProperty().addListener(observable -> isEmpty());
-        numOfTickets.selectionModelProperty().addListener(observable -> isEmpty());
         tblViewTypeOfTickets.selectionModelProperty().addListener(observable -> isEmpty());
         tblViewTypeOfTickets.setPlaceholder(new Label("No Tickets available for this event"));
         updateTableView();
     }
 
+    /**
+     * Creates a new request based on the users input and sends it up the layers
+     * @param actionEvent
+     */
     public void handleSendRequest(ActionEvent actionEvent) {
         String customerName = txtCustomerName.getText();
         int tickets = Integer.parseInt((String) numOfTickets.getSelectionModel().getSelectedItem());
@@ -100,26 +103,41 @@ public class BuyTicketViewController implements Initializable {
         alert.showAndWait();
     }
 
+    /**
+     * Closes the buyticket stage;
+     * @param actionEvent
+     */
     public void handleCancel(ActionEvent actionEvent) {
         Stage stage = (Stage) btnCancel.getScene().getWindow();
         stage.close();
 
     }
 
+    /**
+     * The event which is chosen by clicking the Buy Ticket image is stored in the controller for future use
+     * @param event
+     */
     public void setBuyTicketEvent(Event event) {
         this.event = event;
     }
 
+
+    /**
+     * Checks to see if input fields are filled in before it enables the Send Request button
+     */
     private void isEmpty() { //TODO need to fix this so it doesn't enable Send Request before all 4 criteria are filled in
         btnSendRequest.setDisable(true);
+        if (tblViewTypeOfTickets.getSelectionModel().isEmpty() || tblViewTypeOfTickets.getSelectionModel().getSelectedItem() == null)
+            return;
         if (txtCustomerName.getText().isEmpty()) return;
         if (txtCustomerEmail.getText().isEmpty()) return;
         if (txtCustomerTlf.getText().isEmpty()) return;
-        if (tblViewTypeOfTickets.getSelectionModel().isEmpty() || tblViewTypeOfTickets.getSelectionModel().getSelectedItem() == null)
-            return;
         btnSendRequest.setDisable(false);
     }
 
+    /**
+     * Populates the tableview with types of tickets available for given Event
+     */
     private void updateTableView() {
         ticketsForSale = FXCollections.observableArrayList();
         if (ticketsForThisEvent.size() > 0) {
