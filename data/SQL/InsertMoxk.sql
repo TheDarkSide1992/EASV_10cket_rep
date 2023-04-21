@@ -1,6 +1,3 @@
-INSERT INTO User_Type VALUES ('Administrator');
-INSERT INTO User_Type VALUES ('Event Coordinator');
-
 INSERT INTO User_ VALUES('Def_EV_Cord', 'DEFAULT', (SELECT DISTINCT User_Type_ID FROM User_Type WHERE USER_TYPE_TYPE = 'Event Coordinator'), 'N/A@EASV.dk', 'TLF = N/A', null)
 INSERT INTO User_ VALUES('Def_EV_Adm', 'DEFAULT', (SELECT DISTINCT User_Type_ID FROM User_Type WHERE USER_TYPE_TYPE = 'Administrator'), 'N/A@EASV.dk', 'TLF = N/A', null)
 GO

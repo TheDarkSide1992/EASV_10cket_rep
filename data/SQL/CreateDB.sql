@@ -143,3 +143,6 @@ CREATE TABLE Ticket_Request (
 
 );
 
+INSERT INTO User_Type VALUES ('Administrator');
+INSERT INTO User_Type VALUES ('Event Coordinator');
+
