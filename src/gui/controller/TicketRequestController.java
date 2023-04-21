@@ -45,6 +45,9 @@ public class TicketRequestController implements Initializable {
         }
     }
 
+    /**
+     * Updates the tableview with requests
+     */
     private void updateTblView() {
         requestsForTblView = FXCollections.observableArrayList();
         requestsForTblView.addAll(requests);
@@ -60,11 +63,13 @@ public class TicketRequestController implements Initializable {
         colTicketID.setCellValueFactory(new PropertyValueFactory<>("ticketID"));
         colPaymentReceived.setCellValueFactory(new PropertyValueFactory<>("paymentReceived"));
         colSentToCustomer.setCellValueFactory(new PropertyValueFactory<>("ticketSentToCustomer"));
-
-
         tblViewTicketRequests.setItems(requestsForTblView);
     }
 
+    /**
+     * When clicked this button updates the request to show that the payment has been received for these tickets
+     * @param actionEvent
+     */
     public void handlePaymentReceived(ActionEvent actionEvent) {
         if (tblViewTicketRequests.getSelectionModel().getSelectedItem() != null) {
             Request selectedItem = (Request) tblViewTicketRequests.getSelectionModel().getSelectedItem();
@@ -83,6 +88,10 @@ public class TicketRequestController implements Initializable {
         }
     }
 
+    /**
+     * When clicked this button updates the request to show that the tickets have been sent to the customer
+     * @param actionEvent
+     */
     public void handleSentToCustomer(ActionEvent actionEvent) {
         if (tblViewTicketRequests.getSelectionModel().getSelectedItem() != null) {
             Request selectedItem = (Request) tblViewTicketRequests.getSelectionModel().getSelectedItem();
@@ -101,6 +110,10 @@ public class TicketRequestController implements Initializable {
         }
     }
 
+    /**
+     * When clicked this button creates a PDF of the requested ticket
+     * @param actionEvent
+     */
     public void handleGenerateTickets(ActionEvent actionEvent) {
         if (tblViewTicketRequests.getSelectionModel().getSelectedItem() != null) {
             Request request = (Request) tblViewTicketRequests.getSelectionModel().getSelectedItem();

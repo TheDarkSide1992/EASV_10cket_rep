@@ -221,7 +221,6 @@ public class CreateUserController implements Initializable {
             alert.showAndWait();
 
         } catch (Exception e) {
-            //TODO if fail try to delete user
             e.printStackTrace();
             displayError(e);
         }
