@@ -56,11 +56,13 @@ public class UpcomingEventsController implements Initializable {
     private String eventURL = "data/Images/Event.png";
 
     private String buyTicket = "data/Images/Buy Ticket.png";
+    private ControllerAssistant controllerAssistant;
 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
+            controllerAssistant = ControllerAssistant.getInstance();
             model = new Model();
             activeEvents = model.getActiveEvents();
             displayActiveEvents();
@@ -315,8 +317,9 @@ public class UpcomingEventsController implements Initializable {
         alert.showAndWait();
         if (alert.getResult() == ButtonType.YES) {
             try {
-                model.deleteEvent(event.getEventID()); //TODO get the event overview to update correctly
-            } catch (SQLException e) {
+                model.deleteEvent(event.getEventID());
+                controllerAssistant.loadCenter("UpcomingEventsView.fxml");
+            } catch (Exception e) {
                 Alert error = new Alert(Alert.AlertType.ERROR, "Could not delete Event from Database" + "\n" + e, ButtonType.CANCEL);
                 error.showAndWait();
             }
