@@ -70,6 +70,9 @@ public class UpcomingEventsController implements Initializable {
         }
     }
 
+    /**
+     * Gets  all events that are still active and inserts event data and buttons based on user type
+     */
     private void displayActiveEvents() {
         try {
             for (Event events : activeEvents) {
@@ -169,6 +172,10 @@ public class UpcomingEventsController implements Initializable {
         }
     }
 
+    /**
+     * Loads the buy ticket controller
+     * @param event
+     */
     private void buyTickets(Event event) {
         BuyTicketViewController buyTicketViewController = new BuyTicketViewController();
 
@@ -188,17 +195,29 @@ public class UpcomingEventsController implements Initializable {
         }
     }
 
+    /**
+     * Sets the text color when the mouse is not over the label
+     * @param location
+     */
     private void unHoverLocation(Label location) {
         location.setUnderline(false);
         location.setTextFill(rgb(243, 218, 218));
     }
 
+    /**
+     * Sets the text color and underlines when the mouse is over the label
+     * @param location
+     */
     private void hoverLocation(Label location) {
         location.setUnderline(true);
         location.setTextFill(MEDIUMBLUE);
 
     }
 
+    /**
+     * Sends user to the website for the URL
+     * @param events
+     */
     private void handleLocation(Event events) {
         try {
             Desktop desktop = java.awt.Desktop.getDesktop();
@@ -211,6 +230,11 @@ public class UpcomingEventsController implements Initializable {
 
     }
 
+    /**
+     * Inputs given image based on url
+     * @param url
+     * @return
+     */
     private Image loadImages(String url) {
         Image image = null;
         try {
@@ -224,6 +248,10 @@ public class UpcomingEventsController implements Initializable {
 
     }
 
+    /**
+     * Opens alert box to confirm user wish to cancel event and weather or not the user wish to send delete request
+     * @param event
+     */
     private void cancelEvent(Event event) {
         Alert alert = createAlertWithDelete(Alert.AlertType.CONFIRMATION, "Cancel Event?", null, "Are you sure you want to cancel:\n" + "'" + event.getEventTitle() + "'\n" + "'" + event.getEventDate().getDayOfMonth() + "-" + event.getEventDate().getMonth() + "-" + event.getEventDate().getYear() + " " + event.getEventStartTime() + "'", "Submit for deletion", param -> submitForDeletion = true, ButtonType.YES, ButtonType.NO);
 
@@ -239,6 +267,7 @@ public class UpcomingEventsController implements Initializable {
             }
         }
     }
+
 
     public static Alert createAlertWithDelete(Alert.AlertType type, String title, String headerText, String
             message, String deletionMessage, Consumer<Boolean> deletionAction, ButtonType... buttonTypes) {
@@ -274,6 +303,11 @@ public class UpcomingEventsController implements Initializable {
         return alert;
     }
 
+    /**
+     * Checks if user wish to delete event
+     * calls deleteEvent method from model class.
+     * @param event
+     */
     private void deleteEvent(Event event) {
         Alert alert = new Alert(Alert.AlertType.WARNING, "Are you sure you want to delete:\n" + "'" + event.getEventTitle() + "'\n" + "'" + event.getEventDate().getDayOfMonth() + "-" + event.getEventDate().getMonth() + "-" + event.getEventDate().getYear() + " " + event.getEventStartTime() + "'" + "\n WARNING: DELETING EVENTS WILL MAKE THEM INVISIBLE FOR CUSTOMERS", ButtonType.YES, ButtonType.NO);
         alert.getDialogPane().getStylesheets().add("/gui/view/Main.css");

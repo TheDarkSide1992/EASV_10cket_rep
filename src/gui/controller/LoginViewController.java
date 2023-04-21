@@ -31,6 +31,11 @@ public class LoginViewController implements Initializable {
             e.printStackTrace();
         }
     }
+
+    /**
+     * Creates alert box with error message
+     * @param t
+     */
     private void displayError(Throwable t)
     {
         Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -40,6 +45,11 @@ public class LoginViewController implements Initializable {
 
         t.printStackTrace();
     }
+
+    /**
+     * Displays alerts box with alert information
+     * @param alert
+     */
     private void displayAlert(String alert){
         Alert alertMessage = new Alert(Alert.AlertType.INFORMATION);
         alertMessage.setTitle("Alert");
@@ -47,6 +57,12 @@ public class LoginViewController implements Initializable {
         alertMessage.showAndWait();
     }
 
+    /**
+     * Checks if username and password has been filled out
+     * Checks if password matches username and if it contains illegal characters
+     * Checks if the username exists
+     * @param actionEvent
+     */
     public void handleLogIn(ActionEvent actionEvent) {
         if (txtUserName.getText().isEmpty() || txtPassword.getText().isEmpty()) {
             displayAlert("Missing Username or Password.");
@@ -94,6 +110,12 @@ public class LoginViewController implements Initializable {
         }
     }
 
+    /**
+     * Checks if special chars has been used
+     * Checks password length
+     * @param password
+     * @return
+     */
     public boolean validPassword(String password){
         String specialChars = "!,.:;<>\\/()#%=+?'*";
         if (password.length() >= 8){
@@ -111,6 +133,9 @@ public class LoginViewController implements Initializable {
         return true;
     }
 
+    /**
+     * Check if user is logged in
+     */
     private void loadInUsers(){
         try {
             if (controllerAssistant.getLoggedInUser().getUserStringType().equals("Administrator")) {
@@ -127,6 +152,10 @@ public class LoginViewController implements Initializable {
         }
     }
 
+    /**
+     * If button is pressed user is directed to UpcomingEventsView
+     * @param actionEvent
+     */
     public void handleCancel(ActionEvent actionEvent) {
         controllerAssistant.openNewWindow("UpcomingEventsView.fxml");
     }

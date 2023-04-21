@@ -33,6 +33,10 @@ public class IndexController implements Initializable {
         }
     }
 
+    /**
+     * Creates alert box with error message
+     * @param t
+     */
     private void displayError(Throwable t)
     {
         Alert alert = new Alert(Alert.AlertType.ERROR);

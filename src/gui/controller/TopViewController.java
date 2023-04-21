@@ -41,17 +41,26 @@ public class TopViewController implements Initializable {
         controllerAssistant = ControllerAssistant.getInstance();
     }
 
+    /**
+     * Styling of labels with shadows
+     * Gets style class from css file
+     */
     private void signInLabelStyling() {
         DropShadow shadow = new DropShadow(0, 4, 4, Color.color(0, 0, 0, 0.25));
         lblSignIn.setEffect(shadow);
         lblSignIn.getStyleClass().add("lblSignIn");
     }
-
+    /**
+     * Styling of labels with shadows
+     */
     private void setStyles() {
         DropShadow shadow = new DropShadow(0, 4, 4, Color.color(0, 0, 0, 0.25));
         lblSignIn.setEffect(shadow);
     }
 
+    /**
+     * Inserts the logo in the imgLogo Imageview
+     */
     private void setLogo() {
 
         try {
@@ -65,26 +74,42 @@ public class TopViewController implements Initializable {
 
     }
 
+    /**
+     * Opens the CreateEventView when button is clicked
+     * @param actionEvent
+     */
     public void handleNewEvent(ActionEvent actionEvent) {
         controllerAssistant.openNewWindow("CreateEventView.fxml");
     }
 
+    /**
+     * Opens the UpcomingEventView when button is clicked
+     * @param actionEvent
+     */
     public void handleUpcomingEvents(ActionEvent actionEvent) {
         controllerAssistant.openNewWindow("UpcomingEventsView.fxml");
     }
 
+    /**
+     * Opens the LoginView when button is clicked
+     * @param mouseEvent
+     */
     public void handleSignIn(MouseEvent mouseEvent) {
         controllerAssistant.openNewWindow("LoginView.fxml");
     }
 
-    public void handleCalendar(ActionEvent actionEvent) {
-        controllerAssistant.openNewWindow("CalendarView.fxml");
-    }
-
+    /**
+     * Opens the ContactView when button is clicked
+     * @param actionEvent
+     */
     public void handleContact(ActionEvent actionEvent) {
         controllerAssistant.openNewWindow("ContactView.fxml");
     }
 
+    /**
+     * Opens the AllEventView when button is clicked
+     * @param actionEvent
+     */
     public void handleAllEvents(ActionEvent actionEvent) {
         controllerAssistant.openNewWindow("AllEventView.fxml");
     }

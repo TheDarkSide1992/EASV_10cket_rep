@@ -183,7 +183,10 @@ public class TopViewAllUsersController implements Initializable {
 
         }
     }
-
+    /**
+     * Styling of labels with shadows
+     * Gets style class from css file
+     */
     private void signInLabelStyling() {
         DropShadow shadow = new DropShadow(0, 4, 4, Color.color(0, 0, 0, 0.25));
         Label signInLbl = new Label();
@@ -199,6 +202,10 @@ public class TopViewAllUsersController implements Initializable {
         btnHolderHBox.getChildren().add(signInLbl);
     }
 
+    /**
+     * Styling of labels with shadows
+     * Gets style class from css file
+     */
     private Label logoutLabel() {
         DropShadow shadow = new DropShadow(0, 4, 4, Color.color(0, 0, 0, 0.25));
         Label logout = new Label();
@@ -222,14 +229,11 @@ public class TopViewAllUsersController implements Initializable {
         logout.getStyleClass().add("lblSignIn");
 
         return logout;
-        /*
-        FlowPane logOutPane = new FlowPane();
-        logOutPane.getChildren().add(logout);
-        logOutPane.setAlignment(Pos.TOP_RIGHT);
-
-        btnHolderHBox.getChildren().add(logOutPane);*/
     }
-
+    /**
+     * Inserts username in label
+     * Gets style class from css file
+     */
     private Label setUserName(){
         Label userName = new Label();
         FlowPane namePane = new FlowPane();
@@ -239,13 +243,10 @@ public class TopViewAllUsersController implements Initializable {
         userName.setPadding(new Insets(0,150,0,0));
         userName.getStyleClass().add("lblMonthAndYear");
         return userName;
-        /*
-        namePane.getChildren().add(userName);
-        namePane.setAlignment(Pos.BOTTOM_RIGHT);
-        btnHolderHBox.getChildren().add(namePane);
-        */
     }
-
+    /**
+     * Inserts the logo in the imgLogo Imageview
+     */
     private void setLogo() {
         try {
             InputStream stream = null;
@@ -257,32 +258,50 @@ public class TopViewAllUsersController implements Initializable {
         }
     }
 
+    /**
+     * Opens the LoginView when button is clicked
+     * @param mouseEvent
+     */
     public void handleSignIn(MouseEvent mouseEvent) {
         controllerAssistant.openNewWindow("LoginView.fxml");
     }
-
+    /**
+     * Opens the UpcomingEventView
+     */
     public void upcomingEvents() {controllerAssistant.openNewWindow("UpcomingEventsView.fxml");}
-
+    /**
+     * Opens the AllEventView
+     */
     private void allEvents() {
         controllerAssistant.openNewWindow("AllEventView.fxml");
     }
-
+    /**
+     * Opens the ContactView
+     */
     private void contact() {
         controllerAssistant.openNewWindow("ContactView.fxml");
     }
-
+    /**
+     * Opens the CreateEventView
+     */
     private void createEvent() {
         controllerAssistant.openNewWindow("CreateEventView.fxml");
     }
-
+    /**
+     * Opens the ManageTicketsView
+     */
     private void manageTickets() {
         controllerAssistant.openNewWindow("ManageTicketsView.fxml");
     }
-
+    /**
+     * Opens the CreateUser
+     */
     private void createCoordinators() {
         controllerAssistant.openNewWindow("CreateUser.fxml");
     }
-
+    /**
+     * Opens the TicketRequestView
+     */
     private void ticketRequests() { controllerAssistant.openNewWindow("TicketRequestView");}
 
 }

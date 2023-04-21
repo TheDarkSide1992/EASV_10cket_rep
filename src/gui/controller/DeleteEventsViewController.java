@@ -56,10 +56,12 @@ public class DeleteEventsViewController implements Initializable {
         }
     }
 
+    /**
+     * Displays all events that has been submitted for deletion
+     */
     private void displayActiveEvents() {
         try {
             for (Event events : eventsForDeletion) {
-                System.out.println(eventsForDeletion);
 
                 //Outer pane contains datePane, and the "blue" inner-pane, with info about the event
                 BorderPane outerPane = new BorderPane();
@@ -72,7 +74,7 @@ public class DeleteEventsViewController implements Initializable {
                 innerpane = setImages(innerpane, events);
                 //Add eventPane to center of this pane
                 outerPane.setCenter(innerpane);
-
+                //if event isn't active background color is changed
                 if (!events.isEventIsActive()) {
                     outerPane.setOpacity(1);
                     outerPane.setStyle("-fx-background-color: #a886b0");
@@ -89,6 +91,13 @@ public class DeleteEventsViewController implements Initializable {
         }
     }
 
+    /**
+     * Creates ImageViews for events that has been submitted for deletion
+     * 
+     * @param innerpane
+     * @param events
+     * @return
+     */
     private BorderPane setImages(BorderPane innerpane, Event events) {
 
         imageEvent = new ImageView();
@@ -97,8 +106,8 @@ public class DeleteEventsViewController implements Initializable {
 
         //Image cancel event
         imageCxl.setOnMouseClicked(event -> cancelEvent(events));
-        //Image edit event
-        imageEdit.setOnMouseClicked(event -> deleteEvent(events));  //TODO change this image to a trashcan, and only visible if it is an Admin who logged in;
+        //Image delete event
+        imageEdit.setOnMouseClicked(event -> deleteEvent(events));
 
         imageCxl.setImage(loadImages(cxlURL));
         imageEdit.setImage(loadImages(deleteURL));
