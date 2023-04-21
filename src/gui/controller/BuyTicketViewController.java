@@ -125,7 +125,7 @@ public class BuyTicketViewController implements Initializable {
     /**
      * Checks to see if input fields are filled in before it enables the Send Request button
      */
-    private void isEmpty() { //TODO need to fix this so it doesn't enable Send Request before all 4 criteria are filled in
+    private void isEmpty() {
         btnSendRequest.setDisable(true);
         if (tblViewTypeOfTickets.getSelectionModel().isEmpty() || tblViewTypeOfTickets.getSelectionModel().getSelectedItem() == null)
             return;
